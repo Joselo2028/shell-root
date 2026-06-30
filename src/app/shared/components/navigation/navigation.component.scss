@@ -66,3 +66,25 @@
     color: var(--brand-yellow);
   }
 }
+
+@media (max-width: 1024px) {
+  .navigation {
+    height: auto;
+  }
+
+  .navigation__container {
+    padding: 0 1rem;
+    overflow-x: auto;
+  }
+
+  .navigation__menu {
+    width: max-content;
+    gap: 1.25rem;
+    justify-content: flex-start;
+  }
+
+  .navigation__link {
+    height: 3.25rem;
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,14 @@
+:root {
+  --tk-tinka-primary: #006820;
+  --tk-tinka-accent: #ffed00;
+  --tk-kabala-primary: #e95a0c;
+  --tk-ganadiario-primary: #55d5f4;
+  --tk-kinelo-primary: #0168a6;
+
+  --tk-gray-900: #1c1b1f;
+
+  --tk-radius-pill: 999px;
+
+  --tk-font-display: 'Yolo Text', 'Aller Display', Arial, sans-serif;
+  --tk-font-body: 'Duplet', 'Aller', Arial, sans-serif;
+}
