@@ -1,0 +1,20 @@
+.promo-banner {
+  width: 100%;
+
+  padding: 0;
+}
+
+.promo-banner__container {
+  max-width: var(--container-width);
+
+  margin: 0 auto;
+
+  padding: 0 1.5rem;
+}
+
+.promo-banner__image {
+  display: block;
+
+  width: 100%;
+  height: auto;
+}

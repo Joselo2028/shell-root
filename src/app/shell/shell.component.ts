@@ -1,11 +1,23 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet, RouterLink, } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
+import {
+  FooterComponent,
+  HeaderComponent,
+  NavigationComponent,
+  PromoBannerComponent,
+} from '../shared/components';
 
 @Component({
   selector: 'shell-root',
-  imports: [RouterOutlet, RouterLink],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    NavigationComponent,
+    PromoBannerComponent,
+  ],
   templateUrl: './shell.component.html',
-  styleUrl: './shell.component.scss'
+  styleUrl: './shell.component.scss',
 })
 export class ShellComponent {
   protected readonly title = signal('shell-root');

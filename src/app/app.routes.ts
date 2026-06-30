@@ -14,7 +14,7 @@ export const routes: Routes = [
       }).then((m) => m.LandingComponent),
   },
 
-  {
+  /*  {
     path: 'auth',
     loadComponent: () =>
       loadRemoteModule({
@@ -132,7 +132,7 @@ export const routes: Routes = [
         remoteEntry: environment.remotes.videoloterias,
         exposedModule: './Videoloterias',
       }).then((m) => m.VideoloteriasComponent),
-  },
+  }, */
 
   {
     path: '**',
