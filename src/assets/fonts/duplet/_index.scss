@@ -5,10 +5,27 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Duplet';
   src: url('./Duplet-Bold.woff') format('woff');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Duplet';
+  src: url('./Duplet-Semibold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Duplet';
+  src: url('./Duplet-Semibold.woff') format('woff');
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -20,6 +37,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Duplet';
   src: url('./Duplet-Regular.woff') format('woff');
@@ -35,6 +53,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Duplet';
   src: url('./Duplet-Light.woff') format('woff');

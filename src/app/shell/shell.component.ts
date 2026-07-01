@@ -5,7 +5,7 @@ import {
   HeaderComponent,
   NavigationComponent,
   PromoBannerComponent,
-} from '../shared/components';
+} from '@shared/components';
 
 @Component({
   selector: 'shell-root',

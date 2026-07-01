@@ -18,7 +18,34 @@
      LAYOUT
      ======================================================= */
 
-  --container-width: 94.5rem; /* 1512px */
+  --container-width: 94.5rem;
+  /* 1512px */
+  --footer-content-width: 72.75rem;
+  /* 1164px */
+  --footer-column-gap: 4rem;
+  /* 78.25px */
+
+
+  /* =======================================================
+     BOTONES
+     ======================================================= */
+
+  --button-width: 7.0625rem;
+  /* 113px */
+  --button-height: 2.5rem;
+  /* 40px */
+
+  --button-radius: 0.625rem;
+  /* 10px */
+
+  --button-border-width: 0.0625rem;
+  /* 1px */
+
+  --button-gap: 0.9375rem;
+  /* 15px */
+
+  --button-font-size: 0.875rem;
+  /* 14px */
 
   /* =======================================================
      COLORES DE MARCA
@@ -32,6 +59,8 @@
   --brand-yellow: #ffde00;
 
   --brand-white: #ffffff;
+
+  --brand-black: #000000;
 
   /* =======================================================
      TEXTO

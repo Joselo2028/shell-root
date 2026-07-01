@@ -1,13 +1,15 @@
 <header class="w-full h-20 bg-[#FFDE00]">
   <div class="mx-auto flex h-full max-w-[1512px] items-center justify-between px-[160px]">
     <div>
-      <img src="assets/images/logo-tinka.svg" alt="" />
+      <img src="assets/images/logo-tinka.svg" alt="Logo La Tinka" />
     </div>
 
-    <div class="flex items-center gap-6">
-      <span>Iniciar</span>
-      <span>Registrarse</span>
-      <span>☰</span>
+    <div class="flex items-center" style="gap: var(--button-gap)">
+      <app-button label="Iniciar Sesión" variant="secondary"> </app-button>
+
+      <app-button label="Registrarme" variant="primary"> </app-button>
+
+      <app-hamburger-button></app-hamburger-button>
     </div>
   </div>
 </header>
