@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -6,11 +6,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() label = '';
+  readonly label = input.required<string>();
 
-  @Input() variant: 'primary' | 'secondary' = 'primary';
+  readonly variant = input<'primary' | 'secondary'>('primary');
 
-  @Input() type: 'button' | 'submit' = 'button';
+  readonly type = input<'button' | 'submit'>('button');
 
-  @Input() disabled = false;
+  readonly disabled = input(false);
 }
