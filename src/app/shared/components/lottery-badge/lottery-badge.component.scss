@@ -62,24 +62,21 @@
 .lottery-badge--result .lottery-badge__text {
 
   font-family: var(--font-primary);
-
   font-size: var(--lottery-result-badge-font-size);
-  /* 16px */
-
   font-weight: var(--font-weight-semibold);
-
   line-height: var(--lottery-result-badge-line-height);
-  /* 24px */
-
   letter-spacing: var(--lottery-result-badge-letter-spacing);
-  /* 0.4px */
 
-  color: #F29100;
+  color: inherit;
 
   text-align: center;
-
   white-space: nowrap;
 
+}
+
+
+.lottery-card__hero-right .lottery-badge--result .lottery-badge__text {
+  color: var(--brand-green);
 }
 
 /* =======================================================

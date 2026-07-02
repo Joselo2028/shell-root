@@ -10,7 +10,7 @@ export class LotteryBadgeComponent {
 
   readonly text = input.required<string>();
 
-  readonly variant = input<'default' | 'card' | 'card-light' | 'result' | 'result-purple'>(
-    'default',
-  );
+  readonly variant = input<
+    'default' | 'card' | 'card-light' | 'result' | 'result-hero' | 'result-purple'
+  >('default');
 }
