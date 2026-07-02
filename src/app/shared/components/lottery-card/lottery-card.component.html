@@ -64,7 +64,265 @@
 
       <a class="lottery-card__hero-results" href="#"> Ver resultados anteriores </a>
     </div>
-  } @else {
-    <ng-content></ng-content>
+  } @else if (variant() === 'kabala') {
+    <div class="lottery-card__kabala">
+      <div class="lottery-card__kabala-header">
+        <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+        <div class="lottery-card__kabala-jackpot">
+          <span class="lottery-card__kabala-title"> Pozo Buenazo </span>
+
+          <h2 class="lottery-card__kabala-amount">S/ 2'845,900</h2>
+        </div>
+      </div>
+
+      <div class="lottery-card__kabala-body">
+        <div class="lottery-card__kabala-result">
+          <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY">
+          </app-lottery-badge>
+        </div>
+
+        <div class="lottery-card__kabala-results">
+          <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="12"></app-lottery-ball>
+
+            <app-lottery-ball [number]="18"></app-lottery-ball>
+
+            <app-lottery-ball [number]="24"></app-lottery-ball>
+
+            <app-lottery-ball [number]="31"></app-lottery-ball>
+
+            <app-lottery-ball [number]="39"></app-lottery-ball>
+
+            <app-lottery-ball [number]="42"></app-lottery-ball>
+
+            <app-lottery-ball [number]="45"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__kabala-chauchamba">
+          <img src="assets/images/logo-chau-chamba.svg" alt="Chauchamba" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="04"></app-lottery-ball>
+
+            <app-lottery-ball [number]="11"></app-lottery-ball>
+
+            <app-lottery-ball [number]="19"></app-lottery-ball>
+
+            <app-lottery-ball [number]="27"></app-lottery-ball>
+
+            <app-lottery-ball [number]="33"></app-lottery-ball>
+
+            <app-lottery-ball [number]="41"></app-lottery-ball>
+
+            <app-lottery-ball [number]="48"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__kabala-results-link" href="#"> Ver resultados anteriores </a>
+
+        <app-button label="Jugar ahora" variant="danger"> </app-button>
+
+        <a class="lottery-card__kabala-how-to-play" href="#"> ¿Cómo jugar? </a>
+      </div>
+    </div>
+  } @else if (variant() === 'ganadiario') {
+    <div class="lottery-card__kabala">
+      <div class="lottery-card__kabala-header">
+        <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+        <div class="lottery-card__kabala-jackpot">
+          <span class="lottery-card__kabala-title"> Pozo Buenazo </span>
+
+          <h2 class="lottery-card__kabala-amount">S/ 2'845,900</h2>
+        </div>
+      </div>
+
+      <div class="lottery-card__kabala-body">
+        <div class="lottery-card__kabala-result">
+          <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY">
+          </app-lottery-badge>
+        </div>
+
+        <div class="lottery-card__kabala-results">
+          <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="12"></app-lottery-ball>
+
+            <app-lottery-ball [number]="18"></app-lottery-ball>
+
+            <app-lottery-ball [number]="24"></app-lottery-ball>
+
+            <app-lottery-ball [number]="31"></app-lottery-ball>
+
+            <app-lottery-ball [number]="39"></app-lottery-ball>
+
+            <app-lottery-ball [number]="42"></app-lottery-ball>
+
+            <app-lottery-ball [number]="45"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__kabala-chauchamba">
+          <img src="assets/images/logo-chau-chamba.svg" alt="Chauchamba" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="04"></app-lottery-ball>
+
+            <app-lottery-ball [number]="11"></app-lottery-ball>
+
+            <app-lottery-ball [number]="19"></app-lottery-ball>
+
+            <app-lottery-ball [number]="27"></app-lottery-ball>
+
+            <app-lottery-ball [number]="33"></app-lottery-ball>
+
+            <app-lottery-ball [number]="41"></app-lottery-ball>
+
+            <app-lottery-ball [number]="48"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__kabala-results-link" href="#"> Ver resultados anteriores </a>
+
+        <app-button label="Jugar ahora" variant="danger"> </app-button>
+
+        <a class="lottery-card__kabala-how-to-play" href="#"> ¿Cómo jugar? </a>
+      </div>
+    </div>
+  } @else if (variant() === 'kinelo') {
+    <div class="lottery-card__kabala">
+      <div class="lottery-card__kabala-header">
+        <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+        <div class="lottery-card__kabala-jackpot">
+          <span class="lottery-card__kabala-title"> Pozo Buenazo </span>
+
+          <h2 class="lottery-card__kabala-amount">S/ 2'845,900</h2>
+        </div>
+      </div>
+
+      <div class="lottery-card__kabala-body">
+        <div class="lottery-card__kabala-result">
+          <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY">
+          </app-lottery-badge>
+        </div>
+
+        <div class="lottery-card__kabala-results">
+          <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="12"></app-lottery-ball>
+
+            <app-lottery-ball [number]="18"></app-lottery-ball>
+
+            <app-lottery-ball [number]="24"></app-lottery-ball>
+
+            <app-lottery-ball [number]="31"></app-lottery-ball>
+
+            <app-lottery-ball [number]="39"></app-lottery-ball>
+
+            <app-lottery-ball [number]="42"></app-lottery-ball>
+
+            <app-lottery-ball [number]="45"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__kabala-chauchamba">
+          <img src="assets/images/logo-chau-chamba.svg" alt="Chauchamba" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="04"></app-lottery-ball>
+
+            <app-lottery-ball [number]="11"></app-lottery-ball>
+
+            <app-lottery-ball [number]="19"></app-lottery-ball>
+
+            <app-lottery-ball [number]="27"></app-lottery-ball>
+
+            <app-lottery-ball [number]="33"></app-lottery-ball>
+
+            <app-lottery-ball [number]="41"></app-lottery-ball>
+
+            <app-lottery-ball [number]="48"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__kabala-results-link" href="#"> Ver resultados anteriores </a>
+
+        <app-button label="Jugar ahora" variant="danger"> </app-button>
+
+        <a class="lottery-card__kabala-how-to-play" href="#"> ¿Cómo jugar? </a>
+      </div>
+    </div>
+  } @else if (variant() === 'rapitinka') {
+    <div class="lottery-card__kabala">
+      <div class="lottery-card__kabala-header">
+        <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+        <div class="lottery-card__kabala-jackpot">
+          <span class="lottery-card__kabala-title"> Pozo Buenazo </span>
+
+          <h2 class="lottery-card__kabala-amount">S/ 2'845,900</h2>
+        </div>
+      </div>
+
+      <div class="lottery-card__kabala-body">
+        <div class="lottery-card__kabala-result">
+          <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY">
+          </app-lottery-badge>
+        </div>
+
+        <div class="lottery-card__kabala-results">
+          <img src="assets/images/logo-kabala.svg" alt="Kábala" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="12"></app-lottery-ball>
+
+            <app-lottery-ball [number]="18"></app-lottery-ball>
+
+            <app-lottery-ball [number]="24"></app-lottery-ball>
+
+            <app-lottery-ball [number]="31"></app-lottery-ball>
+
+            <app-lottery-ball [number]="39"></app-lottery-ball>
+
+            <app-lottery-ball [number]="42"></app-lottery-ball>
+
+            <app-lottery-ball [number]="45"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__kabala-chauchamba">
+          <img src="assets/images/logo-chau-chamba.svg" alt="Chauchamba" />
+
+          <div class="lottery-card__kabala-balls">
+            <app-lottery-ball [number]="04"></app-lottery-ball>
+
+            <app-lottery-ball [number]="11"></app-lottery-ball>
+
+            <app-lottery-ball [number]="19"></app-lottery-ball>
+
+            <app-lottery-ball [number]="27"></app-lottery-ball>
+
+            <app-lottery-ball [number]="33"></app-lottery-ball>
+
+            <app-lottery-ball [number]="41"></app-lottery-ball>
+
+            <app-lottery-ball [number]="48"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__kabala-results-link" href="#"> Ver resultados anteriores </a>
+
+        <app-button label="Jugar ahora" variant="danger"> </app-button>
+
+        <a class="lottery-card__kabala-how-to-play" href="#"> ¿Cómo jugar? </a>
+      </div>
+    </div>
   }
 </div>

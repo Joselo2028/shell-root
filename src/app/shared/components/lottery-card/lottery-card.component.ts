@@ -10,5 +10,5 @@ import { LotteryBallComponent } from '../lottery-ball/lottery-ball.component';
   imports: [LotteryBadgeComponent, ButtonComponent, LotteryBallComponent],
 })
 export class LotteryCardComponent {
-  readonly variant = input<'default' | 'hero'>('default');
+  readonly variant = input<'hero' | 'kabala' | 'ganadiario' | 'kinelo' | 'rapitinka'>('hero');
 }

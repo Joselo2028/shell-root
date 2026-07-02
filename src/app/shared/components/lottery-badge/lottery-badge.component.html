@@ -1,4 +1,8 @@
-<div class="lottery-badge" [class.lottery-badge--result]="variant() === 'result'">
+<div
+  class="lottery-badge"
+  [class.lottery-badge--card]="variant() === 'card'"
+  [class.lottery-badge--result]="variant() === 'result'"
+>
   @if (icon()) {
     <img class="lottery-badge__icon" [src]="icon()!" alt="" />
   }
