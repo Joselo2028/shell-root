@@ -1,0 +1,239 @@
+.lottery-card {
+  width: 100%;
+
+  padding: var(--lottery-card-padding-y) var(--lottery-card-padding-x);
+
+  background: var(--brand-white);
+
+  border-radius: var(--lottery-card-radius);
+
+  box-shadow: var(--lottery-card-shadow);
+}
+
+.lottery-card--hero {
+  display: grid;
+
+  grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
+
+  gap: 1.5rem;
+
+  align-items: center;
+
+  width: 100%;
+
+  height: var(--lottery-hero-height);
+
+  padding: var(--lottery-card-padding-y) var(--lottery-card-padding-x);
+
+  background-image: url('/assets/images/bg-tinka.svg');
+
+  background-repeat: no-repeat;
+
+  background-position: center;
+
+  background-size: cover;
+
+  border-radius: var(--lottery-card-radius);
+
+  box-shadow: none;
+}
+
+.lottery-card__hero {
+  display: contents;
+}
+
+.lottery-card__hero-left {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  height: 100%;
+}
+
+.lottery-card__hero-center {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100%;
+  min-width: 0;
+}
+
+.lottery-card__hero-right {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1rem;
+
+  height: 100%;
+
+  min-width: 0;
+}
+
+.lottery-card__hero-balls {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  width: 100%;
+}
+
+.lottery-card__hero-results {
+  font-family: var(--font-primary);
+
+  color: var(--brand-green);
+
+  text-decoration: underline;
+
+  font-weight: var(--font-weight-semibold);
+
+  font-size: 1.125rem;
+}
+
+.lottery-card__hero-jackpot {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.lottery-card__hero-link {
+  margin-top: var(--lottery-link-margin-top);
+
+  font-family: var(--font-primary);
+
+  font-size: var(--lottery-link-font-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--lottery-link-line-height);
+
+  letter-spacing: var(--lottery-link-letter-spacing);
+
+  color: var(--lottery-link-color);
+
+  text-decoration: underline;
+
+  text-decoration-style: solid;
+
+  text-underline-offset: 0.125rem;
+
+  text-align: center;
+
+  cursor: pointer;
+}
+
+.lottery-card__hero-title {
+  font-family: var(--font-primary);
+
+  font-size: var(--lottery-jackpot-title-font-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--lottery-jackpot-title-line-height);
+
+  letter-spacing: var(--lottery-jackpot-title-letter-spacing);
+
+  color: var(--brand-green);
+
+  text-align: center;
+  margin-bottom: 0.438rem;
+}
+
+.lottery-card__hero-amount {
+  margin: 0;
+
+  font-family: var(--font-secondary);
+
+  font-size: var(--lottery-jackpot-amount-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--lottery-jackpot-amount-line-height);
+
+  letter-spacing: var(--lottery-jackpot-amount-letter-spacing);
+
+  color: var(--brand-green);
+
+  text-align: center;
+}
+
+.lottery-card__hero-main-balls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.lottery-card__hero-boliyapa {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.125rem;
+
+  transform: translate(-0.4375rem, -0.69rem);
+}
+
+.lottery-card__hero-siosi {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin-left: -5.0rem;
+}
+
+.lottery-card__hero-siosi img {
+  display: block;
+}
+
+.lottery-card__hero-extra-balls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.lottery-card__hero-plus {
+  font-family: var(--font-primary);
+
+  font-size: 1.25rem;
+
+  font-weight: var(--font-weight-bold);
+
+  color: #CCCCCC;
+
+  line-height: 1;
+}
+
+.lottery-card__hero-boliyapa-title {
+  font-family: var(--font-primary);
+
+  font-weight: var(--font-weight-regular);
+
+  color: var(--brand-green-dark);
+}

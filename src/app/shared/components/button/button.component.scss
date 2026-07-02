@@ -1,5 +1,4 @@
 .btn {
-
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -21,23 +20,62 @@
 
   cursor: pointer;
 
-  transition: opacity .2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .btn--secondary {
-
   background: var(--brand-white);
   color: var(--brand-green);
-
 }
 
 .btn--primary {
-
   background: var(--brand-green);
   color: var(--brand-white);
-
 }
 
 .btn:hover {
-  opacity: .92;
+  opacity: 0.92;
+}
+
+.button--danger {
+  min-width: var(--play-button-width);
+
+  max-width: var(--play-button-max-width);
+
+  height: var(--play-button-height);
+
+  padding: var(--play-button-padding-y) var(--play-button-padding-x);
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: var(--play-button-gap);
+
+  border: none;
+
+  border-radius: var(--play-button-radius);
+
+  background: var(--play-button-color);
+
+  color: var(--brand-white);
+
+  font-family: var(--font-primary);
+
+  font-size: var(--play-button-font-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--play-button-line-height);
+
+  letter-spacing: var(--play-button-letter-spacing);
+  margin-top: var(--play-button-margin-top);
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  cursor: pointer;
 }

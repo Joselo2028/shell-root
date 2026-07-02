@@ -1,0 +1,103 @@
+.lottery-section {
+
+  width: 100%;
+
+  margin-top: 2rem;
+
+  color: var(--brand-black);
+
+}
+
+.lottery-section__container {
+
+  max-width: var(--container-width);
+
+  margin: 0 auto;
+
+  padding: 0 var(--section-padding-inline);
+
+}
+
+.lottery-section__title {
+
+  margin-bottom: 1.375rem;
+
+  text-align: center;
+
+  font-family: var(--font-secondary);
+
+  font-size: var(--lottery-title-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--lottery-title-line-height);
+
+  letter-spacing: var(--lottery-title-letter-spacing);
+
+  color: var(--brand-black);
+
+}
+
+.lottery-section__title--highlight {
+
+  color: var(--brand-green);
+
+}
+
+.lottery-section__hero {
+
+  max-width: var(--lottery-hero-width);
+
+  width: 100%;
+
+  height: var(--lottery-hero-height);
+
+  margin: 0 auto var(--lottery-section-gap);
+
+  background-image: url('/assets/images/bg-tinka.svg');
+
+  background-repeat: no-repeat;
+
+  background-position: center;
+
+  background-size: 100% 100%;
+
+  border-radius: var(--lottery-card-radius);
+
+}
+
+.lottery-section__hero app-lottery-card {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+}
+
+.lottery-section__hero app-lottery-card .lottery-card {
+
+  height: 100%;
+
+  background: transparent;
+
+  box-shadow: none;
+
+}
+
+.lottery-section__cards {
+
+  max-width: var(--lottery-hero-width);
+
+  width: 100%;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: var(--lottery-card-gap);
+
+}

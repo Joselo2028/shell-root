@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import {
   FooterComponent,
   HeaderComponent,
+  LotterySectionComponent,
   NavigationComponent,
   PromoBannerComponent,
 } from '@shared/components';
@@ -10,11 +11,12 @@ import {
 @Component({
   selector: 'shell-root',
   imports: [
-    RouterOutlet,
+    //RouterOutlet,
     HeaderComponent,
     FooterComponent,
     NavigationComponent,
     PromoBannerComponent,
+    LotterySectionComponent,
   ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',

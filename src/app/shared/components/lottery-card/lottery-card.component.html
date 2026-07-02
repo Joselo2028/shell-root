@@ -1,0 +1,70 @@
+<div class="lottery-card" [class.lottery-card--hero]="variant() === 'hero'">
+  @if (variant() === 'hero') {
+    <div class="lottery-card__hero-left mt-4">
+      <img
+        src="assets/images/logo-tinka.svg"
+        alt="Tinka"
+        class="w-64 h-[5.375rem] object-contain"
+      />
+
+      <app-lottery-badge icon="assets/images/ico-calendar.svg" text="Próx. sorteo: Mié. 21/05">
+      </app-lottery-badge>
+    </div>
+
+    <div class="lottery-card__hero-center">
+      <div class="lottery-card__hero-jackpot">
+        <span class="lottery-card__hero-title"> Pozo Millonario </span>
+
+        <h2 class="lottery-card__hero-amount">S/10'653,373</h2>
+      </div>
+
+      <app-button label="Jugar ahora" variant="danger"> </app-button>
+
+      <a class="lottery-card__hero-link" href="#"> ¿Cómo jugar? </a>
+    </div>
+
+    <div class="lottery-card__hero-right">
+      <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY"> </app-lottery-badge>
+
+      <div class="lottery-card__hero-main-balls">
+        <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+
+        <app-lottery-ball [number]="19" variant="white"></app-lottery-ball>
+
+        <app-lottery-ball [number]="29" variant="white"></app-lottery-ball>
+
+        <app-lottery-ball [number]="12" variant="white"></app-lottery-ball>
+
+        <app-lottery-ball [number]="13" variant="white"></app-lottery-ball>
+
+        <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+
+        <span class="lottery-card__hero-plus">+</span>
+
+        <div class="lottery-card__hero-boliyapa">
+          <span class="lottery-card__hero-boliyapa-title"> Boliyapa </span>
+
+          <app-lottery-ball [number]="21" variant="green"> </app-lottery-ball>
+        </div>
+      </div>
+
+      <div class="lottery-card__hero-siosi">
+        <img src="assets/images/si-o-si.svg" alt="Sí o Sí" />
+
+        <div class="lottery-card__hero-extra-balls">
+          <app-lottery-ball [number]="14" variant="white"></app-lottery-ball>
+
+          <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+
+          <app-lottery-ball [number]="21" variant="white"></app-lottery-ball>
+
+          <app-lottery-ball [number]="45" variant="white"></app-lottery-ball>
+        </div>
+      </div>
+
+      <a class="lottery-card__hero-results" href="#"> Ver resultados anteriores </a>
+    </div>
+  } @else {
+    <ng-content></ng-content>
+  }
+</div>

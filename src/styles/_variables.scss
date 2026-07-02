@@ -4,10 +4,12 @@
      ======================================================= */
 
   --font-primary: 'Duplet', sans-serif;
+  --font-secondary: 'Yolo', sans-serif;
 
   /* =======================================================
      PESOS
      ======================================================= */
+
   --font-weight-light: 300;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
@@ -20,11 +22,149 @@
 
   --container-width: 94.5rem;
   /* 1512px */
+
   --footer-content-width: 72.75rem;
   /* 1164px */
-  --footer-column-gap: 4rem;
-  /* 78.25px */
 
+  --footer-column-gap: 4rem;
+  /* 64px */
+
+  /* =======================================================
+     COMPONENTES
+     ======================================================= */
+
+  --section-padding-inline: 1.5rem;
+  /* 24px */
+
+  /* =======================================================
+     LOTTERY
+     ======================================================= */
+
+  --lottery-hero-width: 70.125rem;
+  /* 1122px */
+
+  --lottery-hero-height: 17.3125rem;
+  /* 277px */
+
+  --lottery-card-width: 32.8125rem;
+  /* 525px */
+
+  --lottery-card-min-height: 32.8125rem;
+  /* 525px */
+
+  --lottery-section-gap: 2.5rem;
+  /* 40px */
+
+  --lottery-card-gap: 4.5625rem;
+  /* 73px */
+
+  --lottery-card-radius: 1.25rem;
+  /* 20px */
+
+  --lottery-card-padding-x: 1.969rem;
+  /* 20px */
+
+  --lottery-card-padding-y: 0.625rem;
+  /* 10px */
+
+  --lottery-card-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.15);
+
+  --lottery-title-font-size: 2.625rem;
+  /* 42px */
+
+  --lottery-title-line-height: 3.875rem;
+  /* 62px */
+
+  --lottery-title-letter-spacing: 0.016rem;
+  /* 0.25px */
+
+  /* =======================================================
+   JACKPOT
+   ======================================================= */
+
+  --lottery-jackpot-title-font-size: 2.25rem;
+  /* 36px */
+
+  --lottery-jackpot-title-line-height: 1.5rem;
+  /* 24px */
+
+  --lottery-jackpot-title-letter-spacing: 0.009375rem;
+  /* 0.15px */
+
+  --lottery-jackpot-amount-font-size: 4rem;
+  /* 64px */
+
+  --lottery-jackpot-amount-line-height: 2.5rem;
+  /* 40px */
+
+  --lottery-jackpot-amount-letter-spacing: 0.015625rem;
+  /* 0.25px */
+
+  /* =======================================================
+   HOW TO PLAY LINK
+   ======================================================= */
+
+  --lottery-link-font-size: 0.875rem;
+  /* 14px */
+
+  --lottery-link-line-height: 1rem;
+  /* 16px = 100% de 14px */
+
+  --lottery-link-letter-spacing: 0rem;
+  /* 0px */
+
+  --lottery-link-color: #6b7280;
+
+  --lottery-link-margin-top: 0.75rem;
+  /* 12px */
+
+  --lottery-result-badge-width: 15.125rem;
+  /* 242px */
+
+  --lottery-result-badge-height: 2.125rem;
+  /* 34px */
+
+  --lottery-result-badge-radius: 1.25rem;
+  /* 20px */
+
+  --lottery-result-badge-font-size: 1rem;
+  /* 16px */
+
+  --lottery-result-badge-line-height: 1.5rem;
+  /* 24px */
+
+  --lottery-result-badge-letter-spacing: 0.025rem;
+  /* 0.4px */
+
+  /* =======================================================
+   LOTTERY BALL
+   ======================================================= */
+
+  --lottery-ball-white-size: 1.875rem;
+  /* 30px */
+
+  --lottery-ball-green-size: 2rem;
+  /* 32px */
+
+  --lottery-ball-white-border-width: 0.075rem;
+  /* 1.2px */
+
+  --lottery-ball-green-border-width: 0.125rem;
+  /* 2px */
+
+  --lottery-ball-white-border-color: #E0DDD5;
+
+  --lottery-ball-font-size: 1rem;
+  /* 16px */
+
+  --lottery-ball-line-height: 1rem;
+  /* 16px */
+
+  --lottery-ball-letter-spacing: 0rem;
+
+  --lottery-ball-white-border-width: 0.075rem;
+  /* 1.2px */
+  --lottery-ball-white-border-color: #E0DDD5;
 
   /* =======================================================
      BOTONES
@@ -32,6 +172,7 @@
 
   --button-width: 7.0625rem;
   /* 113px */
+
   --button-height: 2.5rem;
   /* 40px */
 
@@ -48,12 +189,50 @@
   /* 14px */
 
   /* =======================================================
+   PLAY BUTTON
+   ======================================================= */
+
+  --play-button-width: 11.4375rem;
+  /* 183px */
+
+  --play-button-max-width: 18.625rem;
+  /* 298px */
+
+  --play-button-height: 2.75rem;
+  /* 44px */
+
+  --play-button-radius: 3.125rem;
+  /* 50px */
+
+  --play-button-padding-y: 0.625rem;
+  /* 10px */
+
+  --play-button-padding-x: 1rem;
+  /* 16px */
+
+  --play-button-gap: 1rem;
+  /* 16px */
+
+  --play-button-font-size: 1.25rem;
+  /* 20px */
+
+  --play-button-line-height: 1.5rem;
+  /* 24px */
+
+  --play-button-letter-spacing: 0rem;
+  /* 0px */
+  --play-button-margin-top: 1.25rem;
+  /* 20px */
+
+  --play-button-color: #e63a28;
+  /* =======================================================
      COLORES DE MARCA
      ======================================================= */
 
   --brand-green: #006820;
 
   --brand-green-dark: #115533;
+
   --brand-green-light: #01954b;
 
   --brand-yellow: #ffde00;

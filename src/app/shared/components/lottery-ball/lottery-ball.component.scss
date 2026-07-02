@@ -1,0 +1,97 @@
+.lottery-ball {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  background: transparent;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  transition: transform .15s ease;
+
+}
+
+/* .lottery-ball:hover {
+
+  transform: scale(1.05);
+
+}
+
+.lottery-ball:active {
+
+  transform: scale(.96);
+
+} */
+
+.lottery-ball:focus-visible {
+
+  outline: 2px solid var(--brand-green);
+
+  outline-offset: 2px;
+
+}
+
+.lottery-ball--white {
+
+  width: var(--lottery-ball-white-size);
+
+  height: var(--lottery-ball-white-size);
+
+  background: var(--brand-white);
+
+  border: var(--lottery-ball-white-border-width) solid var(--lottery-ball-white-border-color);
+
+}
+
+.lottery-ball--green {
+
+  width: var(--lottery-ball-green-size);
+
+  height: var(--lottery-ball-green-size);
+
+  background: var(--brand-green);
+
+  border: var(--lottery-ball-green-border-width) solid var(--brand-green);
+
+}
+
+.lottery-ball__number {
+
+  font-family: var(--font-primary);
+
+  font-size: var(--lottery-ball-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--lottery-ball-line-height);
+
+  letter-spacing: var(--lottery-ball-letter-spacing);
+
+}
+
+.lottery-ball--white .lottery-ball__number {
+
+  color: var(--brand-black);
+
+}
+
+.lottery-ball--green .lottery-ball__number {
+
+  color: var(--brand-white);
+
+}
