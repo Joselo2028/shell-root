@@ -1,4 +1,4 @@
-.btn {
+.button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -23,17 +23,17 @@
   transition: opacity 0.2s ease;
 }
 
-.btn--secondary {
+.button--secondary {
   background: var(--brand-white);
   color: var(--brand-green);
 }
 
-.btn--primary {
+.button--primary {
   background: var(--brand-green);
   color: var(--brand-white);
 }
 
-.btn:hover {
+.button:hover {
   opacity: 0.92;
 }
 
