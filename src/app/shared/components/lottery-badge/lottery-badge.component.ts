@@ -3,7 +3,7 @@ import { Component, input } from '@angular/core';
 @Component({
   selector: 'app-lottery-badge',
   templateUrl: './lottery-badge.component.html',
-  styleUrls: ['./lottery-badge.component.scss'],
+  styleUrl: './lottery-badge.component.scss',
 })
 export class LotteryBadgeComponent {
   readonly icon = input<string>();

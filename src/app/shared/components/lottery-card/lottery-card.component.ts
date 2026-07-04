@@ -6,7 +6,7 @@ import { LotteryBallComponent } from '../lottery-ball/lottery-ball.component';
 @Component({
   selector: 'app-lottery-card',
   templateUrl: './lottery-card.component.html',
-  styleUrls: ['./lottery-card.component.scss'],
+  styleUrl: './lottery-card.component.scss',
   imports: [LotteryBadgeComponent, ButtonComponent, LotteryBallComponent],
 })
 export class LotteryCardComponent {

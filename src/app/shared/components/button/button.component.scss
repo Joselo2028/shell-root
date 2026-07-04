@@ -78,3 +78,45 @@
 
   cursor: pointer;
 }
+
+.button--outline {
+
+  width: var(--outline-button-width);
+
+  height: var(--outline-button-height);
+
+  display: inline-flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: var(--outline-button-gap);
+
+  border: var(--outline-button-border-width) solid var(--brand-green);
+
+  border-radius: var(--outline-button-radius);
+
+  background: var(--brand-white);
+
+  color: var(--brand-green);
+
+  font-family: var(--font-primary);
+
+  font-size: var(--outline-button-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  cursor: pointer;
+
+}
+
+.button--outline .button__icon {
+
+  width: 0.875rem;
+
+  height: 0.875rem;
+
+  object-fit: contain;
+
+}

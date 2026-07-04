@@ -43,6 +43,7 @@
   --lottery-hero-width: 70.125rem;
   /* 1122px */
 
+
   --lottery-hero-height: 17.3125rem;
   /* 277px */
 
@@ -225,6 +226,28 @@
   /* 20px */
 
   --play-button-color: #e63a28;
+
+  /* =======================================================
+   OUTLINE BUTTON
+   ======================================================= */
+
+  --outline-button-width: 6.9375rem;
+  /* 111px */
+
+  --outline-button-height: 2.3644rem;
+  /* 37.83px */
+
+  --outline-button-radius: 1.25rem;
+  /* 20px */
+
+  --outline-button-border-width: 0.0625rem;
+  /* 1px */
+
+  --outline-button-gap: 0.5rem;
+  /* 8px */
+
+  --outline-button-font-size: 1rem;
+  /* 16px */
   /* =======================================================
      COLORES DE MARCA
      ======================================================= */
@@ -246,4 +269,199 @@
      ======================================================= */
 
   --text-primary: #ffffff;
+
+
+  /* =======================================================
+   LOTTERY BANNER
+   ======================================================= */
+
+  --lottery-banner-width: 80.8125rem;
+  /* 1293px */
+  --lottery-banner-height: 7.8125rem;
+  /* 125px */
+  --lottery-banner-radius: 1.5rem;
+  /* 24px */
+  --lottery-banner-padding-x: 2rem;
+  /* 32px */
+  --lottery-banner-padding-y: 1.5rem;
+  /* 24px */
+
+
+  --lottery-video-padding-left: 3.5rem;
+  --lottery-video-padding-right: 3.5rem;
+
+  /* =======================================================
+   WINNERS
+   ======================================================= */
+
+  --winners-container-width: 94.5625rem;
+  /* 1513px */
+
+  --winners-content-width: 79.5rem;
+  /* 1272px */
+
+  --winners-section-margin-top: 1.875rem;
+  /* 30px */
+
+  --winners-title-font-size: 2.625rem;
+  /* 42px */
+
+  --winners-title-line-height: 3.875rem;
+  /* 62px */
+
+  --winners-title-letter-spacing: 0.01875rem;
+  /* 0.3px */
+
+  --winners-description-font-size: 1rem;
+  /* 16px */
+
+  --winners-description-line-height: 1.5rem;
+  /* 24px */
+
+  --winners-card-width: 25.5rem;
+  /* 408px */
+
+  --winners-card-height: 14.25rem;
+  /* 228px */
+
+  --winners-card-radius: 1rem;
+  /* 16px */
+
+  --winners-card-gap: 1.5rem;
+  /* 24px */
+
+  --winners-card-border-width: 0.0625rem;
+  /* 1px */
+
+  --winners-image-size: 10.5625rem;
+  /* 169px */
+
+  --winners-name-font-size: 1.75rem;
+  /* 28px */
+
+  --winners-name-line-height: 3rem;
+  /* 48px */
+
+  --winners-prize-font-size: 2.70625rem;
+  /* 43.3px */
+
+  --winners-prize-line-height: 4.059375rem;
+  /* 64.95px */
+
+  --winners-city-width: 7.875rem;
+  /* 126px */
+
+  --winners-city-height: 1.375rem;
+  /* 22px */
+
+  --winners-city-radius: 62.4375rem;
+  /* 999px */
+
+  --winners-city-font-size: 0.75rem;
+  /* 12px */
+
+  --winners-city-line-height: 1rem;
+  /* 16px */
+
+  --winners-tag-width: 7.25rem;
+  /* 116px */
+
+  --winners-tag-height: 2.1875rem;
+  /* 35px */
+
+  --winners-tag-radius: 1rem;
+  /* 16px */
+
+  --winners-tag-padding-x: 1rem;
+  /* 16px */
+
+  --winners-tag-padding-y: 0.5rem;
+  /* 8px */
+
+  --winners-tag-gap: 0.625rem;
+  /* 10px */
+
+  /* Colores */
+
+  --winners-prize-color: #006820;
+
+  --winners-city-background: #FF5F00;
+
+  --winners-kabala-background: rgba(250, 185, 0, 0.08);
+
+  --winners-kabala-border: #FAB900;
+
+  --winners-tinka-background: rgba(255, 237, 0, 0.10);
+
+  --winners-tinka-border: #FFED00;
+
+  --winners-ganadiario-background: rgba(11, 132, 199, 0.04);
+
+  --winners-ganadiario-border: #0B84C7;
+
+  /* =======================================================
+   CONTRIBUTING
+   ======================================================= */
+
+  --contributing-container-width: 85.25rem;
+  /* 1364px */
+
+  --contributing-content-width: 85.25rem;
+  /* 1364px */
+
+  --contributing-section-margin-top: 1.875rem;
+  /* 30px */
+
+  --contributing-title-font-size: 2.625rem;
+  /* 42px */
+
+  --contributing-title-line-height: 3.875rem;
+  /* 62px */
+
+  --contributing-title-letter-spacing: 0.01875rem;
+  /* 0.3px */
+
+  --contributing-cards-gap: 2rem;
+  /* 32px */
+
+  --contributing-card-width: 21.3125rem;
+  /* 341px */
+
+  --contributing-card-height: 11.0625rem;
+  /* 177px */
+
+  --contributing-card-padding-y: 0.875rem;
+  /* 14px */
+
+  --contributing-card-padding-x: 1.5rem;
+  /* 24px */
+
+  --contributing-card-radius: 1.875rem;
+  /* 30px */
+
+  --contributing-card-background: rgba(255, 222, 0, 0.20);
+
+  --contributing-card-gap: 1rem;
+  /* 16px */
+
+  --contributing-icon-size: 3rem;
+  /* 48px */
+
+  --contributing-title-font-size-card: 1.1875rem;
+  /* 19px */
+
+  --contributing-title-line-height-card: 1.425rem;
+  /* 22.8px */
+
+  --contributing-description-font-size: 0.875rem;
+  /* 14px */
+
+  --contributing-description-line-height: 1.3125rem;
+  /* 21px */
+
+  --contributing-link-font-size: 0.8125rem;
+  /* 13px */
+
+  --contributing-link-line-height: 1rem;
+  /* 16px */
 }

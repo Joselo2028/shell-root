@@ -1,0 +1,207 @@
+.winner-card {
+
+  position: relative;
+
+  width: var(--winners-card-width);
+
+  height: var(--winners-card-height);
+
+  border-radius: var(--winners-card-radius);
+
+  border: var(--winners-card-border-width) solid transparent;
+
+  overflow: hidden;
+
+}
+
+.winner-card__tag {
+
+  position: absolute;
+
+  top: 0;
+
+  right: 0;
+
+  width: var(--winners-tag-width);
+
+  height: var(--winners-tag-height);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: var(--winners-tag-padding-y) var(--winners-tag-padding-x);
+
+  border-top-right-radius: var(--winners-tag-radius);
+
+  border-bottom-left-radius: var(--winners-tag-radius);
+
+  font-family: var(--font-primary);
+
+  font-size: 0.875rem;
+
+  font-weight: var(--font-weight-semibold);
+
+  color: var(--brand-black);
+
+  z-index: 2;
+
+}
+
+.winner-card__content {
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding: 1.5rem;
+
+}
+
+.winner-card__image {
+
+  flex-shrink: 0;
+
+  width: var(--winners-image-size);
+
+  height: var(--winners-image-size);
+
+}
+
+.winner-card__image img {
+
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: contain;
+
+}
+
+.winner-card__info {
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  flex: 1;
+
+}
+
+.winner-card__name {
+
+  margin: 0;
+
+  font-family: var(--font-primary);
+
+  font-size: var(--winners-name-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--winners-name-line-height);
+
+  color: var(--brand-green);
+
+}
+
+.winner-card__prize {
+
+  margin: 0.25rem 0 1rem;
+
+  font-family: var(--font-primary);
+
+  font-size: var(--winners-prize-font-size);
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: var(--winners-prize-line-height);
+
+  color: var(--winners-prize-color);
+
+}
+
+.winner-card__city {
+
+  width: var(--winners-city-width);
+
+  height: var(--winners-city-height);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: var(--winners-city-radius);
+
+  background: var(--winners-city-background);
+
+  color: var(--brand-white);
+
+  font-family: var(--font-primary);
+
+  font-size: var(--winners-city-font-size);
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: var(--winners-city-line-height);
+
+}
+
+/* =======================================================
+   VARIANTES
+   ======================================================= */
+
+.winner-card--kabala {
+
+  background: var(--winners-kabala-background);
+
+  border-color: var(--winners-kabala-border);
+
+}
+
+.winner-card--kabala .winner-card__tag {
+
+  background: var(--winners-kabala-border);
+
+}
+
+.winner-card--tinka {
+
+  background: var(--winners-tinka-background);
+
+  border-color: var(--winners-tinka-border);
+
+}
+
+.winner-card--tinka .winner-card__tag {
+
+  background: var(--winners-tinka-border);
+
+}
+
+.winner-card--ganadiario {
+
+  background: var(--winners-ganadiario-background);
+
+  border-color: var(--winners-ganadiario-border);
+
+}
+
+.winner-card--ganadiario .winner-card__tag {
+
+  background: var(--winners-ganadiario-border);
+
+  color: var(--brand-white);
+
+}

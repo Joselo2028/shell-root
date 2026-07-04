@@ -5,6 +5,11 @@
   [class.button--primary]="variant() === 'primary'"
   [class.button--secondary]="variant() === 'secondary'"
   [class.button--danger]="variant() === 'danger'"
+  [class.button--outline]="variant() === 'outline'"
 >
-  {{ label() }}
+  <span>{{ label() }}</span>
+
+  @if (variant() === 'outline') {
+    <img class="button__icon" src="assets/images/arrow-right.svg" alt="" />
+  }
 </button>

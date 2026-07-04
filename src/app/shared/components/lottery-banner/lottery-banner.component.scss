@@ -1,0 +1,61 @@
+.lottery-banner {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  width: 100%;
+
+  height: var(--lottery-banner-height);
+
+  padding: 1.5rem 2rem;
+
+  border-radius: 3.313rem;
+
+  background: linear-gradient(90deg,
+      #066236 0%,
+      #0B7C45 55%,
+      #0A8F52 100%);
+
+  box-shadow:
+    0 12px 28px rgba(17, 85, 51, 0.18),
+    0 2px 8px rgba(17, 85, 51, 0.1);
+
+  overflow: hidden;
+}
+
+.lottery-banner__left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  flex: 1;
+}
+
+.lottery-banner__icon {
+  width: 3rem;
+
+  height: 3rem;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+.lottery-banner__title {
+  margin: 0;
+
+  font-family: var(--font-primary);
+
+  font-size: 1.875rem;
+
+  font-weight: var(--font-weight-bold);
+
+  line-height: 1.15;
+
+  color: var(--brand-white);
+  letter-spacing: 0.023rem;
+}

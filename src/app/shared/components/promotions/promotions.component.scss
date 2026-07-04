@@ -1,0 +1,146 @@
+.promotions {
+  width: 100%;
+
+  margin-top: 1.875rem;
+  /* 30px */
+}
+
+.promotions__container {
+  position: relative;
+
+  max-width: 94.5625rem;
+  /* 1513px */
+
+  margin: 0 auto;
+
+  padding: 1.75rem 2.5rem 2.25rem;
+
+  background: rgba(245, 240, 212, 0.5);
+
+  overflow: hidden;
+}
+
+.promotions__ball {
+  position: absolute;
+
+  top: 0;
+
+  left: -2.5rem;
+
+  width: 6.25rem;
+
+  height: auto;
+
+  pointer-events: none;
+}
+
+.promotions__header {
+  position: relative;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  margin-bottom: 1.875rem;
+}
+
+.promotions__header app-button {
+  position: absolute;
+
+  right: 0;
+}
+
+.promotions__title {
+  margin: 0;
+
+  font-family: var(--font-secondary);
+
+  font-size: 2rem;
+
+  font-weight: var(--font-weight-semibold);
+
+  line-height: 1;
+
+  color: var(--brand-black);
+}
+
+.promotions__cards {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 1.5rem;
+  /* 24px */
+}
+
+.promotion-card {
+  position: relative;
+
+  flex: 0 0 25.5rem;
+
+  width: 25.5rem;
+
+  height: 25.5rem;
+
+  border-radius: var(--lottery-card-radius);
+
+  background-image: url('/assets/images/bg_promociones.svg');
+
+  background-repeat: no-repeat;
+
+  background-position: center;
+
+  background-size: cover;
+
+  box-shadow: var(--lottery-card-shadow);
+}
+
+.promotion-card__content {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 2rem;
+}
+
+.promotion-card__title {
+  margin: 0 0 2rem;
+
+  font-family: var(--font-secondary);
+
+  font-weight: var(--font-weight-semibold);
+
+  font-size: 3.235rem;
+  /* 51.76px */
+
+  line-height: 0.98;
+
+  letter-spacing: 0;
+
+  text-align: center;
+
+  color: var(--brand-green);
+}
+
+.promotion-card__title--large {
+  font-size: 6.8125rem;
+  /* 109px */
+
+  line-height: 1;
+
+  letter-spacing: 0.020625rem;
+}
+
+.promotion-card app-button {
+  margin-top: 0;
+}

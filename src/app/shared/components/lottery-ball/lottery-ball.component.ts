@@ -3,7 +3,7 @@ import { Component, input } from '@angular/core';
 @Component({
   selector: 'app-lottery-ball',
   templateUrl: './lottery-ball.component.html',
-  styleUrls: ['./lottery-ball.component.scss'],
+  styleUrl: './lottery-ball.component.scss',
 })
 export class LotteryBallComponent {
   readonly number = input.required<number | string>();

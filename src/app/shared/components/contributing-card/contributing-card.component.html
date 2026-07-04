@@ -1,0 +1,23 @@
+<div
+  class="contributing-card"
+  [class.contributing-card--first]="variant() === 'first'"
+  [class.contributing-card--last]="variant() === 'last'"
+>
+  <div class="contributing-card__icon">
+    <img src="assets/images/manos.svg" alt="Contribución" />
+  </div>
+
+  <div class="contributing-card__content">
+    <h3 class="contributing-card__title">
+      {{ title() }}
+    </h3>
+
+    <p class="contributing-card__description">
+      {{ description() }}
+    </p>
+
+    <a href="#" class="contributing-card__link">
+      {{ linkLabel() }}
+    </a>
+  </div>
+</div>

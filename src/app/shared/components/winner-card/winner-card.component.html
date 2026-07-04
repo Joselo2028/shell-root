@@ -1,0 +1,30 @@
+<div
+  class="winner-card"
+  [class.winner-card--kabala]="variant() === 'kabala'"
+  [class.winner-card--tinka]="variant() === 'tinka'"
+  [class.winner-card--ganadiario]="variant() === 'ganadiario'"
+>
+  <div class="winner-card__tag">
+    {{ lottery() }}
+  </div>
+
+  <div class="winner-card__content">
+    <div class="winner-card__image">
+      <img src="assets/images/imagen_conoce.png" alt="Ganador" />
+    </div>
+
+    <div class="winner-card__info">
+      <p class="winner-card__name">
+        {{ winnerName() }}
+      </p>
+
+      <h3 class="winner-card__prize">
+        {{ prize() }}
+      </h3>
+
+      <div class="winner-card__city">
+        {{ city() }}
+      </div>
+    </div>
+  </div>
+</div>

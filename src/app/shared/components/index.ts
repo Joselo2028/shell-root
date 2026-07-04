@@ -3,11 +3,8 @@ export * from './footer/footer.component';
 export * from './navigation/navigation.component';
 export * from './promo-banner/promo-banner.component';
 export * from './lottery-section/lottery-section.component';
-/*export * from './hero/hero.component';
-export * from './lottery-card/lottery-card.component';
-export * from './results-banner/results-banner.component';
-export * from './game-carousel/game-carousel.component';
 export * from './promotions/promotions.component';
 export * from './winners/winners.component';
+export * from './winner-card/winner-card.component';
 export * from './contributing/contributing.component';
-export * from './button/button.component'; */
+export * from './contributing-card/contributing-card.component';
