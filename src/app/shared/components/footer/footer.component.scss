@@ -9,7 +9,6 @@
 
 .footer__container {
   max-width: var(--container-width);
-
   margin: 0 auto;
   padding: 3rem 7.5rem;
 }
@@ -20,9 +19,7 @@
 
 .footer__top {
   max-width: var(--footer-content-width);
-
   margin: 0 auto;
-
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -31,7 +28,6 @@
 
 .footer__left {
   flex: 1;
-
   display: flex;
   align-items: flex-start;
   gap: var(--footer-column-gap);
@@ -43,9 +39,16 @@
 
 .footer__menus {
   flex: 1;
-
   display: flex;
   gap: var(--footer-column-gap);
+}
+
+.footer__menus-desktop {
+  display: flex;
+}
+
+.footer__menus-mobile {
+  display: none;
 }
 
 .footer__column {
@@ -56,50 +59,40 @@
 
 .footer__column--info {
   width: 10rem;
-  /* 160px */
   flex: 0 0 10rem;
 }
 
 .footer__column--games {
   width: 7.375rem;
-  /* 118px */
   flex: 0 0 7.375rem;
 }
 
 .footer__column--tinka {
   width: 10.3125rem;
-  /* 165px */
   flex: 0 0 10.3125rem;
 }
 
 .footer__column--legal {
   width: 14.625rem;
-  /* 234px */
   flex: 0 0 14.625rem;
 }
 
 .footer__title {
   margin: 0 0 0.375rem 0;
-
   letter-spacing: 0.009rem;
   font-family: var(--font-primary);
   font-size: 0.9375rem;
-  /* 15px */
   font-weight: var(--font-weight-bold);
-
   color: var(--text-primary);
 }
 
 .footer__list {
   margin: 0;
   padding: 0;
-
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
   letter-spacing: 0.016rem;
-  /* 6px entre ítems */
-
   list-style: none;
 }
 
@@ -111,14 +104,10 @@
 .footer__link {
   font-family: var(--font-primary);
   font-size: 0.875rem;
-  /* 14px */
   font-weight: var(--font-weight-regular);
   line-height: 1.25rem;
-
   color: var(--text-primary);
-
   text-decoration: none;
-
   transition: opacity 0.2s ease;
 
   &:hover {
@@ -128,17 +117,14 @@
 
 .footer__right {
   flex: 0 0 13.75rem;
-
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
   align-self: stretch;
 }
 
 .footer__social {
   margin-top: 0.375rem;
-
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
@@ -160,19 +146,13 @@
 
 .footer__payments {
   margin-top: 1.563rem;
-
   background: var(--brand-white);
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 1.875rem;
-
   height: 4.25rem;
-
   flex-wrap: wrap;
-
   border-radius: 0.625rem;
 }
 
@@ -182,7 +162,6 @@
 
 .footer__copyright {
   margin-top: 2.5rem;
-
   text-align: center;
 
   .footer__copyright-company {
@@ -208,11 +187,9 @@
 
 .box {
   min-height: 3.5rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   text-align: center;
 }
 
@@ -237,13 +214,10 @@
 
 .footer__social-title {
   margin: 0;
-
   font-family: var(--font-primary);
   font-size: 0.875rem;
-  /* 14px */
   font-weight: var(--font-weight-bold);
   letter-spacing: 0.016rem;
-
   color: var(--text-primary);
 }
 
@@ -251,16 +225,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 2rem;
   height: 2rem;
-
   text-decoration: none;
-
-  transition: transform .2s ease, opacity .2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 
   &:hover {
-    opacity: .85;
+    opacity: 0.85;
     transform: scale(1.05);
   }
 
@@ -278,9 +249,7 @@
 .footer__certifications {
   max-width: 1005px;
   height: 180px;
-
   margin: 2rem auto 0;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -289,12 +258,9 @@
 .footer__cert {
   display: block;
   flex-shrink: 0;
-
   width: auto;
   object-fit: contain;
 }
-
-/* ISO */
 
 .footer__cert--iso9001 {
   height: 93px;
@@ -304,36 +270,30 @@
   height: 93px;
 }
 
-/* IQNET */
-
 .footer__cert--iqnet {
   height: 90px;
 }
-
-/* WLA */
 
 .footer__cert--wla {
   height: 55px;
   width: auto;
 }
 
-/* ZONA SEGURA */
-
 .footer__cert--zona {
   height: 29px;
 }
-
-/* +18 */
 
 .footer__cert--18 {
   height: 42px;
 }
 
-/* LIBRO */
-
 .footer__cert--libro {
   height: 50px;
 }
+
+/* =======================================================
+   TABLET LANDSCAPE 481px - 1024px
+   ======================================================= */
 
 @include bp.tabletLandscape {
   .footer__container {
@@ -354,6 +314,16 @@
     margin-bottom: 24px;
   }
 
+  .footer__menus-desktop {
+    display: none;
+  }
+
+  .footer__menus-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   .footer__column,
   .footer__column--info,
   .footer__column--games,
@@ -371,7 +341,6 @@
     justify-content: space-between;
     list-style: none;
     cursor: pointer;
-
     font-size: 15px;
     font-weight: var(--font-weight-bold);
     line-height: 20px;
@@ -435,7 +404,6 @@
     align-items: center;
     column-gap: 22px;
     row-gap: 18px;
-
     height: auto;
     min-height: 116px;
     margin-top: 24px;
@@ -461,6 +429,10 @@
     gap: 24px 32px;
   }
 }
+
+/* =======================================================
+   MOBILE <= 480px
+   ======================================================= */
 
 @include bp.mobile {
   .footer {
@@ -495,7 +467,21 @@
     height: auto;
   }
 
-  .footer__column {
+  .footer__menus-desktop {
+    display: none;
+  }
+
+  .footer__menus-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .footer__column,
+  .footer__column--info,
+  .footer__column--games,
+  .footer__column--tinka,
+  .footer__column--legal {
     width: 100%;
     flex: initial;
     border: 0;
@@ -509,7 +495,6 @@
     justify-content: space-between;
     list-style: none;
     cursor: pointer;
-
     font-size: 15px;
     font-weight: var(--font-weight-bold);
     line-height: 20px;
@@ -535,6 +520,7 @@
   }
 
   .footer__list {
+    display: flex;
     padding-bottom: 16px;
     gap: 8px;
   }
@@ -565,13 +551,17 @@
   }
 
   .footer__payments {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    align-items: center;
     height: auto;
     min-height: 110px;
     margin-top: 24px;
     padding: 14px 12px;
-    gap: 10px 16px;
+    column-gap: 10px;
+    row-gap: 16px;
     border-radius: 16px;
-    justify-content: center;
   }
 
   .footer__payments .box {
@@ -580,20 +570,20 @@
 
   .footer__payments img {
     max-height: 24px;
-    max-width: 82px;
+    max-width: 55px;
   }
 
   .footer__certifications {
+    max-width: 100%;
+    height: auto;
+    margin-top: 28px;
     display: grid;
     grid-template-columns: repeat(4, auto);
     justify-content: center;
     align-items: center;
-
     column-gap: 24px;
     row-gap: 28px;
   }
-
-  /* Centrar la última fila (3 elementos) */
 
   .footer__cert:nth-child(5) {
     grid-column: 1 / 2;
