@@ -1,3 +1,32 @@
+@use 'breakpoints' as bp;
+
 .header {
   background: var(--brand-yellow);
+}
+
+@include bp.mobile {
+
+  header {
+
+    height: 4.125rem;
+    /* 66px */
+
+  }
+
+  header>div {
+
+    max-width: 100%;
+
+    padding: 0 1rem;
+
+  }
+
+  header img {
+
+    width: 4.5rem;
+
+    height: auto;
+
+  }
+
 }

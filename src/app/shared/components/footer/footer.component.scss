@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .footer {
   width: 100%;
   margin-top: 3.125rem;
@@ -331,4 +333,195 @@
 
 .footer__cert--libro {
   height: 50px;
+}
+
+@include bp.mobile {
+  .footer {
+    margin-top: 2rem;
+  }
+
+  .footer__container {
+    padding: 24px 16px 28px;
+  }
+
+  .footer__top,
+  .footer__left,
+  .footer__menus {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    gap: 0;
+  }
+
+  .footer__brand {
+    margin-bottom: 24px;
+  }
+
+  .box--logo {
+    width: 174px;
+    height: auto;
+  }
+
+  .box--logo img {
+    width: 174px;
+    height: auto;
+  }
+
+  .footer__column {
+    width: 100%;
+    flex: initial;
+    border: 0;
+  }
+
+  .footer__title {
+    min-height: 55px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: var(--font-weight-bold);
+    line-height: 20px;
+    color: var(--brand-white);
+  }
+
+  .footer__title::-webkit-details-marker {
+    display: none;
+  }
+
+  .footer__title::after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--brand-white);
+    border-bottom: 2px solid var(--brand-white);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .footer__column[open] .footer__title::after {
+    transform: rotate(225deg);
+  }
+
+  .footer__list {
+    padding-bottom: 16px;
+    gap: 8px;
+  }
+
+  .footer__link {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .footer__social {
+    margin-top: 12px;
+    gap: 16px;
+  }
+
+  .footer__social-title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .footer__social-icons {
+    gap: 12px;
+  }
+
+  .footer__social-link,
+  .footer__social-link img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer__payments {
+    height: auto;
+    min-height: 110px;
+    margin-top: 24px;
+    padding: 14px 12px;
+    gap: 10px 16px;
+    border-radius: 16px;
+    justify-content: center;
+  }
+
+  .footer__payments .box {
+    min-height: auto;
+  }
+
+  .footer__payments img {
+    max-height: 24px;
+    max-width: 82px;
+  }
+
+  .footer__certifications {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    justify-content: center;
+    align-items: center;
+
+    column-gap: 24px;
+    row-gap: 28px;
+  }
+
+  /* Centrar la última fila (3 elementos) */
+
+  .footer__cert:nth-child(5) {
+    grid-column: 1 / 2;
+    justify-self: end;
+  }
+
+  .footer__cert:nth-child(6) {
+    grid-column: 2 / 4;
+    justify-self: center;
+  }
+
+  .footer__cert:nth-child(7) {
+    grid-column: 4 / 5;
+    justify-self: start;
+  }
+
+  .footer__cert--iso9001,
+  .footer__cert--iso37001 {
+    height: 66px;
+  }
+
+  .footer__cert--iqnet {
+    height: 66px;
+  }
+
+  .footer__cert--18 {
+    height: 58px;
+  }
+
+  .footer__cert--zona {
+    height: 34px;
+  }
+
+  .footer__cert--wla {
+    height: 34px;
+  }
+
+  .footer__cert--libro {
+    height: 46px;
+  }
+
+  .footer__copyright {
+    margin-top: 28px;
+  }
+
+  .footer__copyright .footer__copyright-company {
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 2px;
+  }
+
+  .footer__copyright .footer__copyright-disclaimer {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0;
+  }
 }

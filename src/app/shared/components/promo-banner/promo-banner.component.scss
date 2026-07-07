@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .promo-banner {
   width: 100%;
 
@@ -17,4 +19,36 @@
 
   width: 100%;
   height: auto;
+}
+
+.promo-banner__image--mobile {
+  display: none;
+}
+
+@include bp.mobile {
+
+  .promo-banner__container {
+
+    max-width: 100%;
+
+    padding: 0;
+
+  }
+
+  .promo-banner__image--desktop {
+
+    display: none;
+
+  }
+
+  .promo-banner__image--mobile {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+  }
+
 }

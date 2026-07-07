@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .winners {
 
   width: 100%;
@@ -103,4 +105,64 @@
 
   gap: var(--winners-card-gap);
 
+}
+
+@include bp.mobile {
+  .winners {
+    margin-top: 1.5rem;
+  }
+
+  .winners__container {
+    padding: 0 0 0 24px;
+    overflow: hidden;
+  }
+
+  .winners__heading {
+    padding-right: 24px;
+  }
+
+  .winners__title {
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0;
+  }
+
+  .winners__description {
+    margin-top: 1rem;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .winners__actions {
+    justify-content: flex-end;
+    padding-right: 24px;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  :host ::ng-deep .winners__actions app-button button,
+  :host ::ng-deep .winners__actions .button {
+    width: 111px;
+    min-width: 111px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+  }
+
+  .winners__cards {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    max-width: none;
+    margin: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: 24px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .winners__cards::-webkit-scrollbar {
+    display: none;
+  }
 }

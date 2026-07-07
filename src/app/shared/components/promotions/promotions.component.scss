@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .promotions {
   width: 100%;
 
@@ -143,4 +145,92 @@
 
 .promotion-card app-button {
   margin-top: 0;
+}
+
+@include bp.mobile {
+  .promotions {
+    margin-top: 1.5rem;
+  }
+
+  .promotions__container {
+    padding: 1.5rem 0 1.5rem 24px;
+    background: rgba(245, 240, 212, 0.5);
+    overflow: hidden;
+  }
+
+  .promotions__ball {
+    display: none;
+  }
+
+  .promotions__header {
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    padding-right: 24px;
+  }
+
+  .promotions__title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+
+  .promotions__header app-button {
+    right: 24px;
+  }
+
+  .promotions__cards {
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: 24px;
+    padding-bottom: 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .promotions__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .promotion-card {
+    flex: 0 0 250px;
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+  }
+
+  .promotion-card__content {
+    padding: 24px;
+  }
+
+  .promotion-card__title {
+    margin-bottom: 28px;
+    font-size: 31px;
+    line-height: 31px;
+  }
+
+  .promotion-card__title--large {
+    font-size: 64px;
+    line-height: 64px;
+  }
+
+  :host ::ng-deep .promotions__header app-button button,
+  :host ::ng-deep .promotions__header .button {
+    width: 111px;
+    min-width: 111px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+  }
+
+  :host ::ng-deep .promotion-card app-button button,
+  :host ::ng-deep .promotion-card .button {
+    width: 138px;
+    min-width: 138px;
+    height: 34px;
+    min-height: 34px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }

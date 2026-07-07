@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .contributing-card {
 
   width: 100%;
@@ -118,4 +120,109 @@
 
   border-bottom-right-radius: var(--contributing-card-radius);
 
+}
+
+@include bp.mobile {
+  .contributing {
+    margin-top: 1.5rem;
+  }
+
+  .contributing__container {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .contributing__title {
+    margin: 0 0 24px;
+    font-family: var(--font-secondary);
+    font-size: 24px !important;
+    font-weight: var(--font-weight-semibold);
+    line-height: 32px !important;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .contributing__title span {
+    color: var(--brand-green);
+  }
+
+  .contributing__cards {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-left: 24px;
+    padding-right: 24px;
+    background: var(--contributing-card-background);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .contributing__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contributing-card {
+    flex: 0 0 390px;
+    width: 390px;
+    max-width: 390px;
+    min-height: 177px;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    padding: 24px;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .contributing-card--first {
+    border-top-left-radius: 28px;
+    border-bottom-left-radius: 28px;
+  }
+
+  .contributing-card--last {
+    border-top-right-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .contributing-card__icon {
+    width: 48px;
+    height: 48px;
+    flex: 0 0 48px;
+  }
+
+  .contributing-card__icon img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  .contributing-card__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .contributing-card__title {
+    margin: 0 0 8px;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 24px;
+  }
+
+  .contributing-card__description {
+    margin: 0;
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 22px;
+  }
+
+  .contributing-card__link {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 18px;
+  }
 }

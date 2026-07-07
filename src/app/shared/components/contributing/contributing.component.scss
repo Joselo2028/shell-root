@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .contributing {
 
   width: 100%;
@@ -72,4 +74,43 @@
 
   border-bottom-right-radius: var(--contributing-card-radius);
 
+}
+
+@include bp.mobile {
+  .contributing {
+    margin-top: 1.5rem;
+  }
+
+  .contributing__container {
+    padding: 0 24px;
+    overflow: hidden;
+  }
+
+  .contributing__title {
+    margin: 0 0 24px;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0;
+  }
+
+  .contributing__cards {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .contributing__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .contributing__cards app-contributing-card {
+    flex: 0 0 390px;
+    width: 390px;
+  }
 }

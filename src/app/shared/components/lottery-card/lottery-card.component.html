@@ -1,68 +1,123 @@
 <div class="lottery-card" [class.lottery-card--hero]="variant() === 'hero'">
   @if (variant() === 'hero') {
-    <div class="lottery-card__hero-left mt-4">
-      <img
-        src="assets/images/logo-tinka.svg"
-        alt="Tinka"
-        class="w-64 h-[5.375rem] object-contain"
-      />
+    <div class="lottery-card__hero-desktop">
+      <div class="lottery-card__hero-left mt-4">
+        <img
+          src="assets/images/logo-tinka.svg"
+          alt="Tinka"
+          class="w-64 h-[5.375rem] object-contain"
+        />
 
-      <app-lottery-badge icon="assets/images/ico-calendar.svg" text="Próx. sorteo: Mié. 21/05">
-      </app-lottery-badge>
-    </div>
-
-    <div class="lottery-card__hero-center">
-      <div class="lottery-card__hero-jackpot">
-        <span class="lottery-card__hero-title"> Pozo Millonario </span>
-
-        <h2 class="lottery-card__hero-amount">S/10'653,373</h2>
+        <app-lottery-badge icon="assets/images/ico-calendar.svg" text="Próx. sorteo: Mié. 21/05">
+        </app-lottery-badge>
       </div>
 
-      <app-button label="Jugar ahora" variant="danger"> </app-button>
-
-      <a class="lottery-card__hero-link" href="#"> ¿Cómo jugar? </a>
-    </div>
-
-    <div class="lottery-card__hero-right">
-      <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY"> </app-lottery-badge>
-
-      <div class="lottery-card__hero-main-balls">
-        <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
-
-        <app-lottery-ball [number]="19" variant="white"></app-lottery-ball>
-
-        <app-lottery-ball [number]="29" variant="white"></app-lottery-ball>
-
-        <app-lottery-ball [number]="12" variant="white"></app-lottery-ball>
-
-        <app-lottery-ball [number]="13" variant="white"></app-lottery-ball>
-
-        <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
-
-        <span class="lottery-card__hero-plus">+</span>
-
-        <div class="lottery-card__hero-boliyapa">
-          <span class="lottery-card__hero-boliyapa-title"> Boliyapa </span>
-
-          <app-lottery-ball [number]="21" variant="green"> </app-lottery-ball>
+      <div class="lottery-card__hero-center">
+        <div class="lottery-card__hero-jackpot">
+          <span class="lottery-card__hero-title"> Pozo Millonario </span>
+          <h2 class="lottery-card__hero-amount">S/10'653,373</h2>
         </div>
+
+        <app-button label="Jugar ahora" variant="danger"></app-button>
+
+        <a class="lottery-card__hero-link" href="#"> ¿Cómo jugar? </a>
       </div>
 
-      <div class="lottery-card__hero-siosi">
-        <img src="assets/images/si-o-si.svg" alt="Sí o Sí" />
+      <div class="lottery-card__hero-right">
+        <app-lottery-badge
+          variant="result"
+          text="Último resultado: Sáb. 10 MAY"
+        ></app-lottery-badge>
 
-        <div class="lottery-card__hero-extra-balls">
-          <app-lottery-ball [number]="14" variant="white"></app-lottery-ball>
-
+        <div class="lottery-card__hero-main-balls">
+          <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="19" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="29" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="12" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="13" variant="white"></app-lottery-ball>
           <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
 
-          <app-lottery-ball [number]="21" variant="white"></app-lottery-ball>
+          <span class="lottery-card__hero-plus">+</span>
 
-          <app-lottery-ball [number]="45" variant="white"></app-lottery-ball>
+          <div class="lottery-card__hero-boliyapa">
+            <span class="lottery-card__hero-boliyapa-title"> Boliyapa </span>
+            <app-lottery-ball [number]="21" variant="green"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__hero-siosi">
+          <img src="assets/images/si-o-si.svg" alt="Sí o Sí" />
+
+          <div class="lottery-card__hero-extra-balls">
+            <app-lottery-ball [number]="14" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="21" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="45" variant="white"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__hero-results" href="#"> Ver resultados anteriores </a>
+      </div>
+    </div>
+
+    <div class="lottery-card__tinka-mobile">
+      <div class="lottery-card__tinka-header">
+        <img src="assets/images/logo-tinka.svg" alt="Tinka" />
+
+        <app-lottery-badge
+          variant="card"
+          icon="assets/images/ico-calendar.svg"
+          text="Próx. sorteo: Mié. 21/05"
+        >
+        </app-lottery-badge>
+
+        <div class="lottery-card__tinka-jackpot">
+          <span class="lottery-card__tinka-title">Pozo Millonario</span>
+          <h2 class="lottery-card__tinka-amount">S/10'653,373</h2>
         </div>
       </div>
 
-      <a class="lottery-card__hero-results" href="#"> Ver resultados anteriores </a>
+      <div class="lottery-card__tinka-body">
+        <div class="lottery-card__tinka-result">
+          <app-lottery-badge
+            variant="result"
+            text="Último resultado: Sáb. 10 MAY"
+          ></app-lottery-badge>
+        </div>
+
+        <div class="lottery-card__tinka-main-balls">
+          <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="19" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="29" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="12" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="13" variant="white"></app-lottery-ball>
+          <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+
+          <span class="lottery-card__tinka-plus">+</span>
+
+          <div class="lottery-card__tinka-boliyapa">
+            <span>Boliyapa</span>
+            <app-lottery-ball [number]="21" variant="green"></app-lottery-ball>
+          </div>
+        </div>
+
+        <div class="lottery-card__tinka-siosi">
+          <img src="assets/images/si-o-si.svg" alt="Sí o Sí" />
+
+          <div class="lottery-card__tinka-extra-balls">
+            <app-lottery-ball [number]="14" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="18" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="21" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="45" variant="white"></app-lottery-ball>
+          </div>
+        </div>
+
+        <a class="lottery-card__tinka-results" href="#">Ver resultados anteriores</a>
+
+        <app-button label="Jugar ahora" variant="danger"></app-button>
+
+        <a class="lottery-card__tinka-how-to-play" href="#">¿Cómo jugar?</a>
+      </div>
     </div>
   } @else if (variant() === 'kabala') {
     <div class="lottery-card__kabala">
@@ -78,15 +133,16 @@
 
         <div class="lottery-card__kabala-jackpot">
           <span class="lottery-card__kabala-title"> Pozo Buenazo </span>
-
           <h2 class="lottery-card__kabala-amount">S/ 2'845,900</h2>
         </div>
       </div>
 
       <div class="lottery-card__kabala-body">
         <div class="lottery-card__kabala-result">
-          <app-lottery-badge variant="result" text="Último resultado: Sáb. 10 MAY">
-          </app-lottery-badge>
+          <app-lottery-badge
+            variant="result"
+            text="Último resultado: Sáb. 10 MAY"
+          ></app-lottery-badge>
         </div>
 
         <div class="lottery-card__kabala-results">
@@ -94,17 +150,11 @@
 
           <div class="lottery-card__kabala-balls">
             <app-lottery-ball [number]="12"></app-lottery-ball>
-
             <app-lottery-ball [number]="18"></app-lottery-ball>
-
             <app-lottery-ball [number]="24"></app-lottery-ball>
-
             <app-lottery-ball [number]="31"></app-lottery-ball>
-
             <app-lottery-ball [number]="39"></app-lottery-ball>
-
             <app-lottery-ball [number]="42"></app-lottery-ball>
-
             <app-lottery-ball [number]="45"></app-lottery-ball>
           </div>
         </div>
@@ -114,24 +164,18 @@
 
           <div class="lottery-card__kabala-balls">
             <app-lottery-ball [number]="04"></app-lottery-ball>
-
             <app-lottery-ball [number]="11"></app-lottery-ball>
-
             <app-lottery-ball [number]="19"></app-lottery-ball>
-
             <app-lottery-ball [number]="27"></app-lottery-ball>
-
             <app-lottery-ball [number]="33"></app-lottery-ball>
-
             <app-lottery-ball [number]="41"></app-lottery-ball>
-
             <app-lottery-ball [number]="48"></app-lottery-ball>
           </div>
         </div>
 
         <a class="lottery-card__kabala-results-link" href="#"> Ver resultados anteriores </a>
 
-        <app-button label="Jugar ahora" variant="danger"> </app-button>
+        <app-button label="Jugar ahora" variant="danger"></app-button>
 
         <a class="lottery-card__kabala-how-to-play" href="#"> ¿Cómo jugar? </a>
       </div>
@@ -150,34 +194,31 @@
 
         <div class="lottery-card__ganadiario-jackpot">
           <span class="lottery-card__ganadiario-title"> Pozo Diario </span>
-
           <h2 class="lottery-card__ganadiario-amount">S/ 200,000</h2>
         </div>
       </div>
 
       <div class="lottery-card__ganadiario-body">
         <div class="lottery-card__ganadiario-result">
-          <app-lottery-badge variant="result-purple" text="Último resultado: Sáb. 10 MAY">
-          </app-lottery-badge>
+          <app-lottery-badge
+            variant="result-purple"
+            text="Último resultado: Sáb. 10 MAY"
+          ></app-lottery-badge>
         </div>
 
         <div class="lottery-card__ganadiario-results">
           <div class="lottery-card__ganadiario-balls">
-            <app-lottery-ball [number]="8" variant="white"> </app-lottery-ball>
-
-            <app-lottery-ball [number]="15" variant="white"> </app-lottery-ball>
-
-            <app-lottery-ball [number]="22" variant="white"> </app-lottery-ball>
-
-            <app-lottery-ball [number]="31" variant="white"> </app-lottery-ball>
-
-            <app-lottery-ball [number]="44" variant="white"> </app-lottery-ball>
+            <app-lottery-ball [number]="8" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="15" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="22" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="31" variant="white"></app-lottery-ball>
+            <app-lottery-ball [number]="44" variant="white"></app-lottery-ball>
           </div>
         </div>
 
         <a class="lottery-card__ganadiario-results-link" href="#"> Ver resultados anteriores </a>
 
-        <app-button label="Jugar ahora" variant="danger"> </app-button>
+        <app-button label="Jugar ahora" variant="danger"></app-button>
 
         <a class="lottery-card__ganadiario-how-to-play" href="#"> ¿Cómo jugar? </a>
       </div>
@@ -196,14 +237,12 @@
 
         <div class="lottery-card__kinelo-jackpot">
           <span class="lottery-card__kinelo-title"> Jugada cada 5 minutos y gana hasta </span>
-
           <h2 class="lottery-card__kinelo-amount">S/ 1'000,000</h2>
         </div>
       </div>
 
       <div class="lottery-card__kinelo-body">
-        <app-button label="Jugar ahora" variant="danger"> </app-button>
-
+        <app-button label="Jugar ahora" variant="danger"></app-button>
         <a class="lottery-card__kinelo-how-to-play" href="#"> ¿Cómo jugar? </a>
       </div>
     </div>
@@ -214,13 +253,12 @@
 
         <div class="lottery-card__rapitinka-jackpot">
           <span class="lottery-card__rapitinka-title"> Raspa y gana al instante hasta </span>
-
           <h2 class="lottery-card__rapitinka-amount">S/ 120,000</h2>
         </div>
       </div>
 
       <div class="lottery-card__rapitinka-body">
-        <app-button label="Jugar ahora" variant="danger"> </app-button>
+        <app-button label="Jugar ahora" variant="danger"></app-button>
       </div>
     </div>
   }

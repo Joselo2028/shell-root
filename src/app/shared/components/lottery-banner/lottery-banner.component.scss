@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .lottery-banner {
   display: flex;
 
@@ -58,4 +60,52 @@
 
   color: var(--brand-white);
   letter-spacing: 0.023rem;
+}
+
+@include bp.mobile {
+  .lottery-banner {
+    width: 100%;
+    max-width: 432px;
+    min-height: 94px;
+    height: 94px;
+    padding: 0 16px 0 24px;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .lottery-banner__left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .lottery-banner__icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .lottery-banner__title {
+    max-width: 207px;
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: var(--font-weight-bold);
+    line-height: 20px;
+    letter-spacing: 0;
+    color: var(--brand-white);
+    text-align: center;
+  }
+
+  .lottery-banner app-button {
+    flex-shrink: 0;
+  }
 }

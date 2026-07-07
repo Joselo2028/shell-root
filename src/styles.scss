@@ -1,5 +1,7 @@
 @use './assets/fonts';
 @use './styles/variables';
+@use './styles/breakpoints';
+
 
 @tailwind base;
 @tailwind components;

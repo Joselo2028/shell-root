@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .lottery-section {
 
   width: 100%;
@@ -137,5 +139,72 @@
   justify-content: center;
 
   margin-top: 1.875rem;
+
+}
+
+@include bp.mobile {
+  .lottery-section {
+    margin-top: 1.5rem;
+  }
+
+  .lottery-section__container {
+    padding: 0 1rem;
+  }
+
+  .lottery-section__title {
+    margin-bottom: 1.5rem;
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0;
+  }
+
+  .lottery-section__hero {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    margin: 0 auto 1rem;
+    background-image: none;
+    background: transparent;
+    border-radius: 20px;
+  }
+
+  .lottery-section__hero app-lottery-card {
+    height: auto;
+  }
+
+  .lottery-section__cards {
+    max-width: 390px;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .lottery-section__banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .lottery-section__banner app-lottery-banner {
+    width: 100%;
+    max-width: 432px;
+  }
+
+  .lottery-section__video {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding-inline: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .lottery-section__video app-lottery-video-section {
+    width: 100%;
+    max-width: 432px;
+  }
+
 
 }

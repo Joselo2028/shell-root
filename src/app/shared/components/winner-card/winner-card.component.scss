@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .winner-card {
 
   position: relative;
@@ -204,4 +206,59 @@
 
   color: var(--brand-white);
 
+}
+
+@include bp.mobile {
+  .winner-card {
+    width: 300px;
+    height: 234px;
+    border-radius: 14px;
+    flex: 0 0 300px;
+  }
+
+  .winner-card__tag {
+    display: none;
+  }
+
+  .winner-card__content {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    align-items: center;
+    gap: 22px;
+    padding: 28px 16px;
+  }
+
+  .winner-card__image {
+    width: 76px;
+    height: 76px;
+  }
+
+  .winner-card__info {
+    align-items: flex-start;
+  }
+
+  .winner-card__name {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: var(--brand-green);
+  }
+
+  .winner-card__prize {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+  }
+
+  .winner-card__city {
+    width: auto;
+    min-width: 76px;
+    height: 22px;
+    padding: 0 14px;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 16px;
+  }
 }

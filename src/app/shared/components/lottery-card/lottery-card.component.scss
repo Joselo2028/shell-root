@@ -1,370 +1,233 @@
+@use 'breakpoints' as bp;
+
 .lottery-card {
   display: flex;
-
   flex-direction: column;
-
   width: 100%;
-
   background: var(--brand-white);
-
   border-radius: var(--lottery-card-radius);
-
   box-shadow: var(--lottery-card-shadow);
-
   overflow: hidden;
 }
 
 .lottery-card--hero {
   display: grid;
-
   grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
-
   gap: 1.5rem;
-
   align-items: center;
-
   width: 100%;
-
   height: var(--lottery-hero-height);
-
   padding: var(--lottery-card-padding-y) var(--lottery-card-padding-x);
-
   background-image: url('/assets/images/bg-tinka.svg');
-
   background-repeat: no-repeat;
-
   background-position: center;
-
   background-size: cover;
-
   border-radius: var(--lottery-card-radius);
-
   box-shadow: none;
 }
 
-.lottery-card__hero {
+.lottery-card__hero-desktop {
   display: contents;
+}
+
+.lottery-card__tinka-mobile {
+  display: none;
 }
 
 .lottery-card__hero-left {
   display: flex;
-
   flex-direction: column;
-
   justify-content: space-between;
-
   align-items: flex-start;
-
   height: 100%;
 }
 
 .lottery-card__hero-center {
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
   align-items: center;
-
   height: 100%;
   min-width: 0;
 }
 
 .lottery-card__hero-right {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 1rem;
-
   height: 100%;
-
   min-width: 0;
-}
-
-.lottery-card__hero-balls {
-  display: flex;
-
-  justify-content: center;
-
-  align-items: center;
-
-  width: 100%;
 }
 
 .lottery-card__hero-results {
   font-family: var(--font-primary);
-
   color: var(--brand-green);
-
   text-decoration: underline;
-
   font-weight: var(--font-weight-semibold);
-
   font-size: 1.125rem;
 }
 
 .lottery-card__hero-jackpot {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   gap: 0.5rem;
   margin-bottom: 1.25rem;
 }
 
 .lottery-card__hero-link {
   margin-top: var(--lottery-link-margin-top);
-
   font-family: var(--font-primary);
-
   font-size: var(--lottery-link-font-size);
-
   font-weight: var(--font-weight-bold);
-
   line-height: var(--lottery-link-line-height);
-
   letter-spacing: var(--lottery-link-letter-spacing);
-
   color: var(--lottery-link-color);
-
   text-decoration: underline;
-
-  text-decoration-style: solid;
-
   text-underline-offset: 0.125rem;
-
   text-align: center;
-
   cursor: pointer;
 }
 
 .lottery-card__hero-title {
   font-family: var(--font-primary);
-
   font-size: var(--lottery-jackpot-title-font-size);
-
   font-weight: var(--font-weight-bold);
-
   line-height: var(--lottery-jackpot-title-line-height);
-
   letter-spacing: var(--lottery-jackpot-title-letter-spacing);
-
   color: var(--brand-green);
-
   text-align: center;
   margin-bottom: 0.438rem;
 }
 
 .lottery-card__hero-amount {
   margin: 0;
-
   font-family: var(--font-secondary);
-
   font-size: var(--lottery-jackpot-amount-font-size);
-
   font-weight: var(--font-weight-semibold);
-
   line-height: var(--lottery-jackpot-amount-line-height);
-
   letter-spacing: var(--lottery-jackpot-amount-letter-spacing);
-
   color: var(--brand-green);
-
   text-align: center;
 }
 
-.lottery-card__hero-main-balls {
+.lottery-card__hero-main-balls,
+.lottery-card__hero-extra-balls {
   display: flex;
-
   align-items: center;
-
   gap: 0.5rem;
 }
 
 .lottery-card__hero-boliyapa {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   gap: 0.125rem;
-
   transform: translate(-0.4375rem, -0.69rem);
 }
 
 .lottery-card__hero-siosi {
   display: flex;
-
   align-items: center;
-
   gap: 0.75rem;
-
-  margin-left: -5.0rem;
+  margin-left: -5rem;
 }
 
 .lottery-card__hero-siosi img {
   display: block;
 }
 
-.lottery-card__hero-extra-balls {
-  display: flex;
-
-  align-items: center;
-
-  gap: 0.5rem;
-}
-
 .lottery-card__hero-plus {
   font-family: var(--font-primary);
-
   font-size: 1.25rem;
-
   font-weight: var(--font-weight-bold);
-
-  color: #CCCCCC;
-
+  color: #cccccc;
   line-height: 1;
 }
 
 .lottery-card__hero-boliyapa-title {
   font-family: var(--font-primary);
-
   font-weight: var(--font-weight-regular);
-
   color: var(--brand-green-dark);
 }
-
-/* =======================================================
-   KABALA
-   ======================================================= */
 
 .lottery-card__kabala,
 .lottery-card__ganadiario,
 .lottery-card__kinelo,
 .lottery-card__rapitinka {
-
   display: flex;
-
   flex-direction: column;
-
   flex: 1;
-
   width: calc(100% + (var(--lottery-card-padding-x) * 2));
-
   margin-left: calc(var(--lottery-card-padding-x) * -1);
-
   margin-right: calc(var(--lottery-card-padding-x) * -1);
-
 }
 
 .lottery-card__kabala-header,
 .lottery-card__ganadiario-header,
 .lottery-card__kinelo-header,
 .lottery-card__rapitinka-header {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   justify-content: flex-start;
-
   width: 100%;
-
   height: 14.25rem;
-
   padding-top: 1.3125rem;
-
   border-top-left-radius: var(--lottery-card-radius);
-
   border-top-right-radius: var(--lottery-card-radius);
-
   overflow: hidden;
-
 }
 
 .lottery-card__kabala-header {
-  background: #FAB900;
+  background: #fab900;
 }
 
 .lottery-card__ganadiario-header {
-  background: #0B84C7;
+  background: #0b84c7;
 }
 
 .lottery-card__kinelo-header {
-  background: #9B3389;
+  background: #9b3389;
 }
 
 .lottery-card__rapitinka-header {
-  background: #FFDD00;
+  background: #ffdd00;
 }
-
 
 .lottery-card__kabala-header img,
 .lottery-card__ganadiario-header img,
 .lottery-card__kinelo-header img,
 .lottery-card__rapitinka-header img {
-
   width: 10.2406rem;
-  /* 163.85px */
-
   height: 3.3rem;
-  /* 52.8px */
-
   object-fit: contain;
-
   margin-bottom: 0.75rem;
-  /* 12px */
-
 }
 
 .lottery-card__kabala-jackpot,
 .lottery-card__ganadiario-jackpot,
 .lottery-card__kinelo-jackpot,
 .lottery-card__rapitinka-jackpot {
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   gap: 0.375rem;
-  /* 6px */
-
 }
 
 .lottery-card__kabala-title,
 .lottery-card__ganadiario-title,
 .lottery-card__kinelo-title,
 .lottery-card__rapitinka-title {
-
   font-family: var(--font-primary);
-
   font-size: 1.25rem;
-  /* 20px */
-
   font-weight: var(--font-weight-bold);
-
   line-height: 1;
-
   letter-spacing: 0.125rem;
-  /* 2px */
-
   color: var(--brand-black);
-
   text-align: center;
-
 }
 
 .lottery-card__ganadiario-title,
@@ -380,25 +243,14 @@
 .lottery-card__ganadiario-amount,
 .lottery-card__kinelo-amount,
 .lottery-card__rapitinka-amount {
-
   margin: 0;
-
   font-family: var(--font-secondary);
-
   font-size: 3rem;
-  /* 48px */
-
   font-weight: var(--font-weight-bold);
-
   line-height: 1;
-
   letter-spacing: 0.125rem;
-  /* 2px */
-
   color: var(--brand-black);
-
   text-align: center;
-
 }
 
 .lottery-card__ganadiario-amount,
@@ -414,50 +266,25 @@
 .lottery-card__ganadiario-body,
 .lottery-card__kinelo-body,
 .lottery-card__rapitinka-body {
-
   position: relative;
-
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
   flex: 1;
-
   background: var(--brand-white);
-
   padding-top: 2.125rem;
-
-}
-
-.lottery-card__kabala-body app-button {
-
-  margin-top: 0;
-
 }
 
 .lottery-card__kabala-result,
 .lottery-card__ganadiario-result,
 .lottery-card__kinelo-result,
 .lottery-card__rapitinka-result {
-
   position: absolute;
-
   top: -1.0625rem;
-  /* -17px = la mitad de la altura del badge (34px) */
-
   left: 50%;
-
   transform: translateX(-50%);
-
   z-index: 10;
-
 }
-
-/* =======================================================
-   KABALA - RESULTADOS
-   ======================================================= */
 
 .lottery-card__kabala-results,
 .lottery-card__kabala-chauchamba {
@@ -478,25 +305,23 @@
 
 .lottery-card__kabala-results img {
   width: 4.1875rem;
-  /* 67px */
   height: 2.375rem;
-  /* 38px */
   object-fit: contain;
   flex-shrink: 0;
 }
 
 .lottery-card__kabala-chauchamba img {
   width: 4.625rem;
-  /* 74px */
   height: 2.375rem;
-  /* 38px */
   object-fit: contain;
   flex-shrink: 0;
 }
 
-.lottery-card__kabala-balls {
+.lottery-card__kabala-balls,
+.lottery-card__ganadiario-balls {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -504,88 +329,40 @@
 .lottery-card__ganadiario-results-link,
 .lottery-card__kinelo-results-link,
 .lottery-card__rapitinka-results-link {
-
   margin-top: 1.5rem;
-  /* 24px */
-
   margin-bottom: 1.5rem;
-  /* 24px entre el link y el botón */
-
   font-family: var(--font-primary);
-
   font-size: 1rem;
-  /* 16px */
-
   font-weight: var(--font-weight-bold);
-
-  color: #6B7280;
-
+  color: #6b7280;
   text-decoration: underline;
-
   text-align: center;
-
 }
 
 .lottery-card__kabala-how-to-play,
 .lottery-card__ganadiario-how-to-play,
 .lottery-card__kinelo-how-to-play,
 .lottery-card__rapitinka-how-to-play {
-
   margin-top: 0.75rem;
-  /* 12px */
-
   margin-bottom: 1.5rem;
-
   font-family: var(--font-primary);
-
   font-size: 0.875rem;
-  /* 14px */
-
   font-weight: var(--font-weight-bold);
-
   line-height: 1rem;
-
-  letter-spacing: 0;
-
-  color: #6B7280;
-
+  color: #6b7280;
   text-decoration: underline;
-
   text-underline-offset: 0.125rem;
-
   text-align: center;
-
   cursor: pointer;
-
 }
 
 .lottery-card__ganadiario-results {
-
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
   width: 100%;
-
   min-height: 6.35rem;
-
-
   margin-top: 1rem;
-
-}
-
-.lottery-card__ganadiario-balls {
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  gap: 0.5rem;
-
 }
 
 .lottery-card__ganadiario-header .lottery-badge__text {
@@ -593,7 +370,7 @@
 }
 
 .lottery-card__ganadiario-result .lottery-badge__text {
-  color: #5A2F80;
+  color: #5a2f80;
 }
 
 .lottery-card__hero-right {
@@ -601,9 +378,332 @@
 }
 
 .lottery-card__kabala-result {
-  color: #F29100;
+  color: #f29100;
 }
 
 .lottery-card__ganadiario-result {
-  color: #5A2F80;
+  color: #5a2f80;
+}
+
+@include bp.mobile {
+  .lottery-card {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    margin-inline: auto;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px 0 #00000026;
+    overflow: hidden;
+  }
+
+  .lottery-card--hero {
+    display: block;
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    min-height: 0;
+    padding: 0;
+    background-image: none !important;
+    background-color: #ffffff !important;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px 0 #00000026;
+    overflow: hidden;
+  }
+
+  .lottery-card__hero-desktop {
+    display: none;
+  }
+
+  .lottery-card__tinka-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #ffffff;
+  }
+
+  .lottery-card__tinka-header,
+  .lottery-card__kabala-header,
+  .lottery-card__ganadiario-header,
+  .lottery-card__kinelo-header,
+  .lottery-card__rapitinka-header {
+    width: 100%;
+    height: 228px;
+    min-height: 228px;
+    padding: 28px 16px 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+  }
+
+  .lottery-card__tinka-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--brand-yellow);
+  }
+
+  .lottery-card__kabala-header,
+  .lottery-card__ganadiario-header,
+  .lottery-card__kinelo-header,
+  .lottery-card__rapitinka-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .lottery-card__tinka-header>img,
+  .lottery-card__kabala-header img,
+  .lottery-card__ganadiario-header img,
+  .lottery-card__kinelo-header img,
+  .lottery-card__rapitinka-header img {
+    width: 120px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 14px;
+  }
+
+  .lottery-card__tinka-jackpot,
+  .lottery-card__kabala-jackpot,
+  .lottery-card__ganadiario-jackpot,
+  .lottery-card__kinelo-jackpot,
+  .lottery-card__rapitinka-jackpot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-inline: 0;
+  }
+
+  .lottery-card__tinka-title,
+  .lottery-card__kabala-title,
+  .lottery-card__ganadiario-title,
+  .lottery-card__kinelo-title,
+  .lottery-card__rapitinka-title {
+    font-family: var(--font-primary);
+    font-size: 23px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .lottery-card__tinka-title {
+    color: var(--brand-green);
+  }
+
+  .lottery-card__tinka-amount,
+  .lottery-card__kabala-amount,
+  .lottery-card__ganadiario-amount,
+  .lottery-card__kinelo-amount,
+  .lottery-card__rapitinka-amount {
+    margin: 0;
+    font-family: var(--font-secondary);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .lottery-card__tinka-amount {
+    color: var(--brand-green);
+  }
+
+  .lottery-card__tinka-body,
+  .lottery-card__kabala-body,
+  .lottery-card__ganadiario-body,
+  .lottery-card__kinelo-body,
+  .lottery-card__rapitinka-body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 34px 16px 24px;
+    background: #ffffff;
+  }
+
+  .lottery-card__tinka-result,
+  .lottery-card__kabala-result,
+  .lottery-card__ganadiario-result,
+  .lottery-card__kinelo-result,
+  .lottery-card__rapitinka-result {
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+  }
+
+  .lottery-card__kabala,
+  .lottery-card__ganadiario,
+  .lottery-card__kinelo,
+  .lottery-card__rapitinka {
+    width: 100%;
+    max-width: 390px;
+    height: auto;
+    margin-inline: auto;
+    flex: initial;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px 0 #00000026;
+    overflow: hidden;
+  }
+
+  .lottery-card__tinka-main-balls,
+  .lottery-card__tinka-extra-balls,
+  .lottery-card__tinka-siosi,
+  .lottery-card__kabala-results,
+  .lottery-card__kabala-chauchamba,
+  .lottery-card__kabala-balls,
+  .lottery-card__ganadiario-balls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .lottery-card__tinka-main-balls {
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .lottery-card__tinka-plus {
+    font-family: var(--font-primary);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    color: #cccccc;
+  }
+
+  .lottery-card__tinka-boliyapa {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-left: 2px;
+    transform: translateY(-12px);
+  }
+
+  .lottery-card__tinka-boliyapa span {
+    font-family: var(--font-primary);
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 14px;
+    color: var(--brand-green);
+  }
+
+  .lottery-card__tinka-siosi {
+    margin-top: 14px;
+  }
+
+  .lottery-card__tinka-siosi>img {
+    width: 54px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lottery-card__tinka-results,
+  .lottery-card__kabala-results-link,
+  .lottery-card__ganadiario-results-link,
+  .lottery-card__kinelo-results-link,
+  .lottery-card__rapitinka-results-link {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    font-family: var(--font-primary);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: var(--brand-green);
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lottery-card__tinka-how-to-play,
+  .lottery-card__kabala-how-to-play,
+  .lottery-card__ganadiario-how-to-play,
+  .lottery-card__kinelo-how-to-play,
+  .lottery-card__rapitinka-how-to-play {
+    margin-top: 14px;
+    margin-bottom: 0;
+    font-family: var(--font-primary);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #6b7280;
+    text-align: center;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .lottery-card__kabala-results {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .lottery-card__kabala-chauchamba {
+    width: 100%;
+    margin-top: 14px;
+  }
+
+  .lottery-card__kabala-results img {
+    width: 48px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lottery-card__kabala-chauchamba img {
+    width: 54px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .lottery-card__ganadiario-results {
+    width: 100%;
+    min-height: auto;
+    margin-top: 8px;
+  }
+
+  .lottery-card__kinelo-body,
+  .lottery-card__rapitinka-body {
+    padding-top: 34px;
+    padding-bottom: 24px;
+  }
+
+  app-lottery-ball {
+    transform: scale(0.82);
+    transform-origin: center;
+    margin-inline: -2px;
+  }
+
+  :host ::ng-deep app-button button,
+  :host ::ng-deep .button {
+    min-height: 44px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+  }
+
+  :host ::ng-deep .lottery-badge {
+    min-height: 28px;
+    padding: 5px 14px;
+    border-radius: 999px;
+  }
+
+  :host ::ng-deep .lottery-badge__text {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+
+  :host ::ng-deep .lottery-badge__icon {
+    width: 14px;
+    height: 14px;
+  }
 }

@@ -1,3 +1,5 @@
+@use 'breakpoints' as bp;
+
 .lottery-video-section {
 
   width: 100%;
@@ -137,4 +139,73 @@
 
   border-radius: 0.75rem;
 
+}
+
+@include bp.mobile {
+  .lottery-video-section__title {
+    margin: 0 0 1.5rem;
+    font-size: 24px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 32px;
+    letter-spacing: 0;
+    text-align: center;
+  }
+
+  .lottery-video-section__card {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 20px;
+    border-bottom: 16px solid var(--brand-yellow);
+  }
+
+  .lottery-video-section__logo {
+    width: 70.81px;
+    height: 45px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .lottery-video-section__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .lottery-video-section__subtitle {
+    margin-left: 0;
+    flex: 1;
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
+    line-height: 16px;
+    letter-spacing: 0;
+  }
+
+  .lottery-video-section__subtitle span {
+    display: block;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .lottery-video-section__header app-button {
+    margin-right: 0;
+    flex-shrink: 0;
+  }
+
+  :host ::ng-deep .lottery-video-section__header app-button button,
+  :host ::ng-deep .lottery-video-section__header .button {
+    width: 96px;
+    min-width: 96px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0;
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .lottery-video-section__mock {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
 }
