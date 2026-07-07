@@ -142,6 +142,19 @@
 
 }
 
+@include bp.tabletLandscape {
+
+  .lottery-section__container {
+    padding-inline: 2rem;
+  }
+
+  .lottery-section__hero,
+  .lottery-section__cards {
+    max-width: 100%;
+  }
+
+}
+
 @include bp.mobile {
   .lottery-section {
     margin-top: 1.5rem;

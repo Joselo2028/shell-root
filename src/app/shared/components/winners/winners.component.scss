@@ -107,6 +107,14 @@
 
 }
 
+@include bp.tabletLandscape {
+
+  .winners__container {
+    padding-inline: 2rem;
+  }
+
+}
+
 @include bp.mobile {
   .winners {
     margin-top: 1.5rem;

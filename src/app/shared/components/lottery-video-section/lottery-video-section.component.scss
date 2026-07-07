@@ -141,6 +141,18 @@
 
 }
 
+@include bp.tabletLandscape {
+
+  .lottery-video-section {
+    padding-inline: 2rem;
+  }
+
+  .lottery-video-section__card {
+    padding: 1.5rem;
+  }
+
+}
+
 @include bp.mobile {
   .lottery-video-section__title {
     margin: 0 0 1.5rem;

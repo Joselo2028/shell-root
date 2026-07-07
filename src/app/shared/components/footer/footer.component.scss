@@ -335,6 +335,133 @@
   height: 50px;
 }
 
+@include bp.tabletLandscape {
+  .footer__container {
+    padding: 32px;
+  }
+
+  .footer__top,
+  .footer__left,
+  .footer__menus {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: none;
+    gap: 0;
+  }
+
+  .footer__brand {
+    margin-bottom: 24px;
+  }
+
+  .footer__column,
+  .footer__column--info,
+  .footer__column--games,
+  .footer__column--tinka,
+  .footer__column--legal {
+    width: 100%;
+    flex: initial;
+  }
+
+  .footer__title {
+    min-height: 55px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    list-style: none;
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: var(--font-weight-bold);
+    line-height: 20px;
+    color: var(--brand-white);
+    white-space: nowrap;
+  }
+
+  .footer__title::-webkit-details-marker {
+    display: none;
+  }
+
+  .footer__title::after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--brand-white);
+    border-bottom: 2px solid var(--brand-white);
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .footer__column[open] .footer__title::after {
+    transform: rotate(225deg);
+  }
+
+  .footer__list {
+    display: flex;
+    padding-bottom: 16px;
+    gap: 8px;
+  }
+
+  .footer__link {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .footer__social {
+    margin-top: 12px;
+    gap: 16px;
+  }
+
+  .footer__social-title {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .footer__social-icons {
+    gap: 12px;
+  }
+
+  .footer__social-link,
+  .footer__social-link img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .footer__payments {
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    justify-content: center;
+    align-items: center;
+    column-gap: 22px;
+    row-gap: 18px;
+
+    height: auto;
+    min-height: 116px;
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-radius: 16px;
+  }
+
+  .footer__payments .box {
+    min-height: auto;
+  }
+
+  .footer__payments img {
+    max-height: 26px;
+    max-width: 92px;
+  }
+
+  .footer__certifications {
+    height: auto;
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px 32px;
+  }
+}
+
 @include bp.mobile {
   .footer {
     margin-top: 2rem;

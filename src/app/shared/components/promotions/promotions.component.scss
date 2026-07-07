@@ -204,9 +204,13 @@
   }
 
   .promotion-card__title {
-    margin-bottom: 28px;
-    font-size: 31px;
-    line-height: 31px;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .promotion-card app-button {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .promotion-card__title--large {

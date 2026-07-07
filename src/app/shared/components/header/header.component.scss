@@ -4,6 +4,26 @@
   background: var(--brand-yellow);
 }
 
+@include bp.tabletLandscape {
+  header>div {
+    padding-inline: 2rem;
+  }
+
+  nav,
+  .header__nav,
+  .header__menu {
+    gap: 1rem;
+  }
+
+  nav a,
+  .header__nav a,
+  .header__menu a {
+    font-size: 24px;
+    line-height: 32px;
+    white-space: nowrap;
+  }
+}
+
 @include bp.mobile {
 
   header {
@@ -27,6 +47,20 @@
 
     height: auto;
 
+  }
+
+  .header__logo img {
+    width: 92px;
+    height: auto;
+  }
+
+  .header__actions {
+    gap: .5rem;
+  }
+
+  .header__actions app-button {
+    transform: scale(.88);
+    transform-origin: center;
   }
 
 }

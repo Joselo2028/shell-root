@@ -139,6 +139,12 @@
   display: block;
 }
 
+.lottery-card__hero-extra-balls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .lottery-card__hero-plus {
   font-family: var(--font-primary);
   font-size: 1.25rem;
@@ -383,6 +389,123 @@
 
 .lottery-card__ganadiario-result {
   color: #5a2f80;
+}
+
+@include bp.tabletLandscape {
+  .lottery-card--hero {
+    display: grid;
+    grid-template-columns: 26% 34% 40%;
+    gap: 0;
+    height: 240px;
+    min-height: 240px;
+    padding: 18px 20px;
+    overflow: hidden;
+  }
+
+  .lottery-card__hero-desktop {
+    display: contents;
+  }
+
+  .lottery-card__tinka-mobile {
+    display: none;
+  }
+
+  .lottery-card__hero-left {
+    justify-content: space-between;
+  }
+
+  .lottery-card__hero-left img {
+    width: 135px !important;
+    height: auto !important;
+  }
+
+  .lottery-card__hero-title,
+  .lottery-card__kabala-title,
+  .lottery-card__ganadiario-title,
+  .lottery-card__kinelo-title,
+  .lottery-card__rapitinka-title {
+    font-size: 1rem;
+    line-height: 1.1;
+    letter-spacing: 0;
+  }
+
+  .lottery-card__hero-amount,
+  .lottery-card__kabala-amount,
+  .lottery-card__ganadiario-amount,
+  .lottery-card__kinelo-amount,
+  .lottery-card__rapitinka-amount {
+    font-size: 2.6rem;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .lottery-card__hero-center {
+    justify-content: center;
+  }
+
+  .lottery-card__hero-center app-button {
+    transform: scale(0.78);
+  }
+
+  .lottery-card__hero-link,
+  .lottery-card__hero-results {
+    font-size: 13px;
+    line-height: 16px;
+  }
+
+  .lottery-card__hero-right {
+    gap: 2px;
+    overflow: hidden;
+  }
+
+  .lottery-card__hero-main-balls,
+  .lottery-card__hero-extra-balls {
+    gap: 6px;
+  }
+
+  app-lottery-ball {
+    transform: scale(0.7);
+    margin-inline: -4px;
+  }
+
+  .lottery-card__hero-boliyapa {
+    transform: translate(-2px, -8px);
+  }
+
+  .lottery-card__hero-siosi {
+    gap: 4px;
+    margin-left: 0;
+  }
+
+  .lottery-card__hero-siosi img {
+    width: 42px;
+  }
+
+  :host ::ng-deep .lottery-badge {
+    min-height: 24px;
+    padding: 4px 12px;
+  }
+
+  @include bp.tabletLandscape {
+
+    :host ::ng-deep app-lottery-badge .lottery-badge__text,
+    :host ::ng-deep .lottery-badge__text {
+      font-size: 15px !important;
+      line-height: 12px !important;
+      letter-spacing: 0 !important;
+    }
+
+    :host ::ng-deep app-lottery-badge .lottery-badge,
+    :host ::ng-deep .lottery-badge {
+      min-height: 22px !important;
+      padding: 3px 10px !important;
+    }
+
+    :host ::ng-deep .lottery-badge__icon {
+      width: 12px !important;
+      height: 12px !important;
+    }
+  }
 }
 
 @include bp.mobile {

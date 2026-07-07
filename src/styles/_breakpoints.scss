@@ -26,3 +26,9 @@ $desktop: 1280px;
     @content;
   }
 }
+
+@mixin tabletLandscape {
+  @media (min-width: 481px) and (max-width: 1024px) {
+    @content;
+  }
+}

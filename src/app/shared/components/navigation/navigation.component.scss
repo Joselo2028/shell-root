@@ -67,6 +67,23 @@
   }
 }
 
+@include bp.tabletLandscape {
+  .navigation__container {
+    padding: 0 2rem;
+  }
+
+  .navigation__menu {
+    justify-content: center;
+    gap: 1.25rem;
+  }
+
+  .navigation__link {
+    font-size: 1.25rem;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+}
+
 @include bp.mobile {
 
   .navigation {
