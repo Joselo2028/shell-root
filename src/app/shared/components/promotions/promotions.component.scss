@@ -4,14 +4,12 @@
   width: 100%;
 
   margin-top: 1.875rem;
-  /* 30px */
 }
 
 .promotions__container {
   position: relative;
 
   max-width: 94.5625rem;
-  /* 1513px */
 
   margin: 0 auto;
 
@@ -74,7 +72,6 @@
   justify-content: center;
 
   gap: 1.5rem;
-  /* 24px */
 }
 
 .promotion-card {
@@ -123,7 +120,6 @@
   font-weight: var(--font-weight-semibold);
 
   font-size: 3.235rem;
-  /* 51.76px */
 
   line-height: 0.98;
 
@@ -136,7 +132,6 @@
 
 .promotion-card__title--large {
   font-size: 6.8125rem;
-  /* 109px */
 
   line-height: 1;
 
@@ -153,7 +148,7 @@
   }
 
   .promotions__container {
-    padding: 1.5rem 0 1.5rem 24px;
+    padding: 1.5rem 0 1.5rem 1.5rem;
     background: rgba(245, 240, 212, 0.5);
     overflow: hidden;
   }
@@ -163,26 +158,32 @@
   }
 
   .promotions__header {
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    justify-content: initial;
+    column-gap: 0.75rem;
+    padding-right: 1.5rem;
     margin-bottom: 1.5rem;
-    padding-right: 24px;
   }
 
   .promotions__title {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    text-align: left;
   }
 
   .promotions__header app-button {
-    right: 24px;
+    position: static;
+    justify-self: end;
   }
 
   .promotions__cards {
     justify-content: flex-start;
-    gap: 16px;
+    gap: 1rem;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-right: 24px;
+    padding-right: 1.5rem;
     padding-bottom: 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -193,18 +194,18 @@
   }
 
   .promotion-card {
-    flex: 0 0 250px;
-    width: 250px;
-    height: 250px;
-    border-radius: 10px;
+    flex: 0 0 15.625rem;
+    width: 15.625rem;
+    height: 15.625rem;
+    border-radius: 0.625rem;
   }
 
   .promotion-card__content {
-    padding: 24px;
+    padding: 1.5rem;
   }
 
   .promotion-card__title {
-    font-size: 28px;
+    font-size: 1.75rem;
     line-height: 1;
   }
 
@@ -214,27 +215,27 @@
   }
 
   .promotion-card__title--large {
-    font-size: 64px;
-    line-height: 64px;
+    font-size: 4rem;
+    line-height: 4rem;
   }
 
   :host ::ng-deep .promotions__header app-button button,
   :host ::ng-deep .promotions__header .button {
-    width: 111px;
-    min-width: 111px;
-    height: 38px;
-    min-height: 38px;
+    width: 6.9375rem;
+    min-width: 6.9375rem;
+    height: 2.375rem;
+    min-height: 2.375rem;
     padding: 0;
   }
 
   :host ::ng-deep .promotion-card app-button button,
   :host ::ng-deep .promotion-card .button {
-    width: 138px;
-    min-width: 138px;
-    height: 34px;
-    min-height: 34px;
+    width: 8.625rem;
+    min-width: 8.625rem;
+    height: 2.125rem;
+    min-height: 2.125rem;
     padding: 0;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 }

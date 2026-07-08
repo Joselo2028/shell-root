@@ -169,7 +169,7 @@ npm start
 o
 
 ```bash
-ng serve
+npx ng serve
 ```
 
 ---

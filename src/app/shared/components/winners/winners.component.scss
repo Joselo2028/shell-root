@@ -1,21 +1,17 @@
 @use 'breakpoints' as bp;
 
 .winners {
-
   width: 100%;
 
   margin-top: var(--winners-section-margin-top);
-
 }
 
 .winners__container {
-
   max-width: var(--winners-container-width);
 
   margin: 0 auto;
 
   padding: 0 var(--section-padding-inline);
-
 }
 
 /* =======================================================
@@ -23,13 +19,10 @@
    ======================================================= */
 
 .winners__heading {
-
   text-align: center;
-
 }
 
 .winners__title {
-
   margin: 0;
 
   font-family: var(--font-secondary);
@@ -43,19 +36,14 @@
   letter-spacing: var(--winners-title-letter-spacing);
 
   color: var(--brand-black);
-
 }
 
 .winners__title span {
-
   color: var(--brand-green);
-
 }
 
 .winners__description {
-
   margin: 0.5rem 0 0;
-  /* 8px */
 
   text-align: center;
 
@@ -68,7 +56,6 @@
   line-height: var(--winners-description-line-height);
 
   color: var(--brand-black);
-
 }
 
 /* =======================================================
@@ -76,7 +63,6 @@
    ======================================================= */
 
 .winners__actions {
-
   display: flex;
 
   justify-content: flex-end;
@@ -84,7 +70,6 @@
   margin-top: 1rem;
 
   margin-bottom: 1.5rem;
-
 }
 
 /* =======================================================
@@ -92,7 +77,6 @@
    ======================================================= */
 
 .winners__cards {
-
   max-width: var(--winners-content-width);
 
   margin: 0 auto;
@@ -104,15 +88,12 @@
   justify-content: center;
 
   gap: var(--winners-card-gap);
-
 }
 
 @include bp.tabletLandscape {
-
   .winners__container {
     padding-inline: 2rem;
   }
-
 }
 
 @include bp.mobile {
@@ -121,51 +102,51 @@
   }
 
   .winners__container {
-    padding: 0 0 0 24px;
+    padding: 0 0 0 1.5rem;
     overflow: hidden;
   }
 
   .winners__heading {
-    padding-right: 24px;
+    padding-right: 1.5rem;
   }
 
   .winners__title {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 1.5rem;
+    line-height: 2rem;
     letter-spacing: 0;
   }
 
   .winners__description {
     margin-top: 1rem;
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .winners__actions {
     justify-content: flex-end;
-    padding-right: 24px;
+    padding-right: 1.5rem;
     margin-top: 1rem;
     margin-bottom: 3rem;
   }
 
   :host ::ng-deep .winners__actions app-button button,
   :host ::ng-deep .winners__actions .button {
-    width: 111px;
-    min-width: 111px;
-    height: 38px;
-    min-height: 38px;
+    width: 6.9375rem;
+    min-width: 6.9375rem;
+    height: 2.375rem;
+    min-height: 2.375rem;
     padding: 0;
   }
 
   .winners__cards {
     display: flex;
     justify-content: flex-start;
-    gap: 16px;
+    gap: 1rem;
     max-width: none;
     margin: 0;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-right: 24px;
+    padding-right: 1.5rem;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }

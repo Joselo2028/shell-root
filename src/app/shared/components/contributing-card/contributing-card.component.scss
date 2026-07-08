@@ -1,7 +1,6 @@
 @use 'breakpoints' as bp;
 
 .contributing-card {
-
   width: 100%;
 
   height: var(--contributing-card-height);
@@ -17,21 +16,17 @@
   background: var(--contributing-card-background);
 
   border-radius: 0;
-
 }
 
 .contributing-card__icon {
-
   flex-shrink: 0;
 
   width: var(--contributing-icon-size);
 
   height: var(--contributing-icon-size);
-
 }
 
 .contributing-card__icon img {
-
   display: block;
 
   width: 100%;
@@ -39,11 +34,9 @@
   height: 100%;
 
   object-fit: contain;
-
 }
 
 .contributing-card__content {
-
   flex: 1;
 
   display: flex;
@@ -51,11 +44,9 @@
   flex-direction: column;
 
   justify-content: center;
-
 }
 
 .contributing-card__title {
-
   margin: 0 0 0.5rem;
 
   font-family: var(--font-primary);
@@ -67,11 +58,9 @@
   line-height: var(--contributing-title-line-height-card);
 
   color: var(--brand-black);
-
 }
 
 .contributing-card__description {
-
   margin: 0;
 
   font-family: var(--font-primary);
@@ -83,11 +72,9 @@
   line-height: var(--contributing-description-line-height);
 
   color: var(--brand-black);
-
 }
 
 .contributing-card__link {
-
   margin-top: 0.75rem;
 
   width: fit-content;
@@ -103,52 +90,47 @@
   color: var(--brand-green);
 
   text-decoration: underline;
-
 }
 
 .contributing-card--first {
-
   border-top-left-radius: var(--contributing-card-radius);
 
   border-bottom-left-radius: var(--contributing-card-radius);
-
 }
 
 .contributing-card--last {
-
   border-top-right-radius: var(--contributing-card-radius);
 
   border-bottom-right-radius: var(--contributing-card-radius);
-
 }
 
 @include bp.tabletLandscape {
   .contributing-card {
-    width: 341px;
-    height: 177px;
-    padding: 20px;
-    gap: 16px;
+    width: 21.3125rem;
+    height: 11.0625rem;
+    padding: 1.25rem;
+    gap: 1rem;
   }
 
   .contributing-card__icon {
-    width: 48px;
-    height: 48px;
-    flex: 0 0 48px;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 3rem;
   }
 
   .contributing-card__title {
-    font-size: 19px;
-    line-height: 24px;
+    font-size: 1.1875rem;
+    line-height: 1.5rem;
   }
 
   .contributing-card__description {
-    font-size: 14px;
-    line-height: 21px;
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
   }
 
   .contributing-card__link {
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 0.8125rem;
+    line-height: 1rem;
   }
 }
 
@@ -163,11 +145,11 @@
   }
 
   .contributing__title {
-    margin: 0 0 24px;
+    margin: 0 0 1.5rem;
     font-family: var(--font-secondary);
-    font-size: 24px !important;
+    font-size: 1.5rem !important;
     font-weight: var(--font-weight-semibold);
-    line-height: 32px !important;
+    line-height: 2rem !important;
     letter-spacing: 0;
     text-align: center;
   }
@@ -182,8 +164,8 @@
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     background: var(--contributing-card-background);
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -194,39 +176,39 @@
   }
 
   .contributing-card {
-    flex: 0 0 390px;
-    width: 390px;
-    max-width: 390px;
-    min-height: 177px;
+    flex: 0 0 24.375rem;
+    width: 24.375rem;
+    max-width: 24.375rem;
+    min-height: 11.0625rem;
     height: auto;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 24px;
-    padding: 24px;
+    gap: 1.5rem;
+    padding: 1.5rem;
     background: transparent;
     border-radius: 0;
   }
 
   .contributing-card--first {
-    border-top-left-radius: 28px;
-    border-bottom-left-radius: 28px;
+    border-top-left-radius: 1.75rem;
+    border-bottom-left-radius: 1.75rem;
   }
 
   .contributing-card--last {
-    border-top-right-radius: 28px;
-    border-bottom-right-radius: 28px;
+    border-top-right-radius: 1.75rem;
+    border-bottom-right-radius: 1.75rem;
   }
 
   .contributing-card__icon {
-    width: 48px;
-    height: 48px;
-    flex: 0 0 48px;
+    width: 3rem;
+    height: 3rem;
+    flex: 0 0 3rem;
   }
 
   .contributing-card__icon img {
-    width: 48px;
-    height: 48px;
+    width: 3rem;
+    height: 3rem;
     object-fit: contain;
   }
 
@@ -236,23 +218,23 @@
   }
 
   .contributing-card__title {
-    margin: 0 0 8px;
-    font-size: 19px;
+    margin: 0 0 0.5rem;
+    font-size: 1.1875rem;
     font-weight: 900;
-    line-height: 24px;
+    line-height: 1.5rem;
   }
 
   .contributing-card__description {
     margin: 0;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: var(--font-weight-semibold);
-    line-height: 22px;
+    line-height: 1.375rem;
   }
 
   .contributing-card__link {
-    margin-top: 12px;
-    font-size: 13px;
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
     font-weight: 800;
-    line-height: 18px;
+    line-height: 1.125rem;
   }
 }

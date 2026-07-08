@@ -5,11 +5,17 @@
     </div>
 
     <div class="flex items-center" style="gap: var(--button-gap)">
-      <app-button label="Iniciar Sesión" variant="secondary"> </app-button>
+      <app-button label="Iniciar Sesión" variant="secondary"></app-button>
 
-      <app-button label="Registrarme" variant="primary"> </app-button>
+      <app-button label="Registrarme" variant="primary"></app-button>
 
-      <app-hamburger-button></app-hamburger-button>
+      <app-hamburger-button (click)="openMobileMenu()"></app-hamburger-button>
     </div>
   </div>
+
+  <app-mobile-sidebar
+    [isOpen]="isMobileMenuOpen()"
+    [isLoggedIn]="isLoggedIn()"
+    (closeSidebar)="closeMobileMenu()"
+  ></app-mobile-sidebar>
 </header>

@@ -8,3 +8,4 @@ export * from './winners/winners.component';
 export * from './winner-card/winner-card.component';
 export * from './contributing/contributing.component';
 export * from './contributing-card/contributing-card.component';
+export * from './mobile-sidebar/mobile-sidebar.component';

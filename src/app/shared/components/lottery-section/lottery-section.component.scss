@@ -1,27 +1,22 @@
 @use 'breakpoints' as bp;
 
 .lottery-section {
-
   width: 100%;
 
   margin-top: 2rem;
 
   color: var(--brand-black);
-
 }
 
 .lottery-section__container {
-
   max-width: var(--container-width);
 
   margin: 0 auto;
 
   padding: 0 var(--section-padding-inline);
-
 }
 
 .lottery-section__title {
-
   margin-bottom: 1.375rem;
 
   text-align: center;
@@ -37,17 +32,13 @@
   letter-spacing: var(--lottery-title-letter-spacing);
 
   color: var(--brand-black);
-
 }
 
 .lottery-section__title--highlight {
-
   color: var(--brand-green);
-
 }
 
 .lottery-section__hero {
-
   max-width: var(--lottery-hero-width);
 
   width: 100%;
@@ -65,31 +56,25 @@
   background-size: 100% 100%;
 
   border-radius: var(--lottery-card-radius);
-
 }
 
 .lottery-section__hero app-lottery-card {
-
   display: block;
 
   width: 100%;
 
   height: 100%;
-
 }
 
 .lottery-section__hero app-lottery-card .lottery-card {
-
   height: 100%;
 
   background: transparent;
 
   box-shadow: none;
-
 }
 
 .lottery-section__cards {
-
   max-width: var(--lottery-hero-width);
 
   width: 100%;
@@ -105,33 +90,25 @@
   align-items: stretch;
 
   margin-bottom: 1.875rem;
-
 }
 
 .lottery-section__cards app-lottery-card {
-
   display: flex;
-
 }
 
 .lottery-section__cards app-lottery-card .lottery-card {
-
   flex: 1;
-
 }
 
 .lottery-section__banner {
-
   max-width: var(--lottery-banner-width);
 
   width: 100%;
 
   margin: 2rem auto 0;
-
 }
 
 .lottery-section__video {
-
   width: 100%;
 
   display: flex;
@@ -139,11 +116,19 @@
   justify-content: center;
 
   margin-top: 1.875rem;
+}
 
+.lottery-section,
+.promotions,
+.winners {
+  scroll-margin-top: 7.5rem;
+}
+
+.lottery-section__video {
+  scroll-margin-top: 7.5rem;
 }
 
 @include bp.tabletLandscape {
-
   .lottery-section__container {
     padding-inline: 2rem;
   }
@@ -152,7 +137,6 @@
   .lottery-section__cards {
     max-width: 100%;
   }
-
 }
 
 @include bp.mobile {
@@ -166,20 +150,20 @@
 
   .lottery-section__title {
     margin-bottom: 1.5rem;
-    font-size: 23px;
+    font-size: 1.4375rem;
     font-weight: 700;
-    line-height: 32px;
+    line-height: 2rem;
     letter-spacing: 0;
   }
 
   .lottery-section__hero {
     width: 100%;
-    max-width: 390px;
+    max-width: 24.375rem;
     height: auto;
     margin: 0 auto 1rem;
     background-image: none;
     background: transparent;
-    border-radius: 20px;
+    border-radius: 1.25rem;
   }
 
   .lottery-section__hero app-lottery-card {
@@ -187,7 +171,7 @@
   }
 
   .lottery-section__cards {
-    max-width: 390px;
+    max-width: 24.375rem;
     grid-template-columns: 1fr;
     gap: 1rem;
     margin-bottom: 1.5rem;
@@ -203,21 +187,19 @@
 
   .lottery-section__banner app-lottery-banner {
     width: 100%;
-    max-width: 432px;
+    max-width: 27rem;
   }
 
   .lottery-section__video {
     width: 100%;
     margin-top: 1.5rem;
-    padding-inline: 24px;
+    padding-inline: 1.5rem;
     display: flex;
     justify-content: center;
   }
 
   .lottery-section__video app-lottery-video-section {
     width: 100%;
-    max-width: 432px;
+    max-width: 27rem;
   }
-
-
 }

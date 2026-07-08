@@ -65,41 +65,41 @@
 @include bp.mobile {
   .lottery-banner {
     width: 100%;
-    max-width: 432px;
-    min-height: 94px;
-    height: 94px;
-    padding: 0 16px 0 24px;
-    border-radius: 20px;
+    max-width: 27rem;
+    min-height: 5.875rem;
+    height: 5.875rem;
+    padding: 0 1rem 0 1.5rem;
+    border-radius: 1.25rem;
 
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
+    gap: 1rem;
   }
 
   .lottery-banner__left {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 1.125rem;
     flex: 1;
     min-width: 0;
   }
 
   .lottery-banner__icon {
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     object-fit: contain;
     flex-shrink: 0;
   }
 
   .lottery-banner__title {
-    max-width: 207px;
+    max-width: 12.9375rem;
     margin: 0;
     font-family: var(--font-primary);
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: var(--font-weight-bold);
-    line-height: 20px;
+    line-height: 1.25rem;
     letter-spacing: 0;
     color: var(--brand-white);
     text-align: center;

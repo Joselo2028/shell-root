@@ -5,12 +5,12 @@
 
   gap: 0.313rem;
 
-  padding: 0.60rem;
+  padding: 0.6rem;
 
   background-color: rgba(255, 255, 255, 0.25);
 
   border-radius: 1.25rem;
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   height: 2.625rem;
 }
 
@@ -36,7 +36,6 @@
 }
 
 .lottery-badge--result {
-
   display: flex;
 
   justify-content: center;
@@ -56,11 +55,9 @@
   flex-shrink: 0;
 
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-
 }
 
 .lottery-badge--result .lottery-badge__text {
-
   font-family: var(--font-primary);
   font-size: var(--lottery-result-badge-font-size);
   font-weight: var(--font-weight-semibold);
@@ -71,9 +68,7 @@
 
   text-align: center;
   white-space: nowrap;
-
 }
-
 
 .lottery-card__hero-right .lottery-badge--result .lottery-badge__text {
   color: var(--brand-green);
@@ -84,43 +79,31 @@
    ======================================================= */
 
 .lottery-badge--card {
-
   width: 16.5625rem;
-  /* 265px */
 
   height: 1.375rem;
-  /* 22px */
 
   padding: 0 0.75rem;
 
   margin-bottom: 0;
-
 }
 
 .lottery-badge--card .lottery-badge__icon {
-
   width: 0.75rem;
-  /* 12px */
 
   height: 0.75rem;
-  /* 12px */
-
 }
 
 .lottery-badge--card .lottery-badge__text {
-
   font-size: 0.875rem;
 
   font-weight: var(--font-weight-bold);
 
   line-height: 0.75rem;
-  /* 12px */
 
   letter-spacing: 0.125rem;
-  /* 2px */
 
   color: var(--brand-black);
-
 }
 
 .lottery-badge--card-light {
@@ -128,7 +111,6 @@
   height: 1.375rem;
   padding: 0 0.75rem;
   margin-bottom: 0;
-
 }
 
 .lottery-badge--card-light .lottery-badge__text {
@@ -141,7 +123,6 @@
 }
 
 .lottery-badge--result-purple {
-
   display: flex;
 
   justify-content: center;
@@ -152,7 +133,7 @@
 
   height: var(--lottery-result-badge-height);
 
-  background: rgba(255, 255, 255, .92);
+  background: rgba(255, 255, 255, 0.92);
 
   border-radius: var(--lottery-result-badge-radius);
 
@@ -160,12 +141,10 @@
 
   flex-shrink: 0;
 
-  box-shadow: 0 0 15px rgba(0, 0, 0, .15);
-
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 
 .lottery-badge--result-purple .lottery-badge__text {
-
   font-family: var(--font-primary);
 
   font-size: var(--lottery-result-badge-font-size);
@@ -181,5 +160,4 @@
   text-align: center;
 
   white-space: nowrap;
-
 }

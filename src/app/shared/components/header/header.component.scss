@@ -18,49 +18,40 @@
   nav a,
   .header__nav a,
   .header__menu a {
-    font-size: 24px;
-    line-height: 32px;
+    font-size: 1.5rem;
+    line-height: 2rem;
     white-space: nowrap;
   }
 }
 
 @include bp.mobile {
-
   header {
-
     height: 4.125rem;
-    /* 66px */
-
   }
 
   header>div {
-
     max-width: 100%;
 
     padding: 0 1rem;
-
   }
 
   header img {
-
     width: 4.5rem;
 
     height: auto;
-
   }
 
   .header__logo img {
-    width: 92px;
+    width: 5.75rem;
     height: auto;
   }
 
   .header__actions {
-    gap: .5rem;
+    gap: 0.5rem;
   }
 
   .header__actions app-button {
-    transform: scale(.88);
+    transform: scale(0.88);
     transform-origin: center;
   }
-
 }

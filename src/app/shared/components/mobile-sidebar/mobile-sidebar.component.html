@@ -1,0 +1,211 @@
+<div class="mobile-sidebar" [class.mobile-sidebar--open]="isOpen()">
+  <button
+    class="mobile-sidebar__overlay"
+    type="button"
+    aria-label="Cerrar menú"
+    (click)="close()"
+  ></button>
+
+  <aside class="mobile-sidebar__panel">
+    <div class="mobile-sidebar__header">
+      <img src="assets/images/logo-tinka.svg" alt="Tinka" />
+
+      <button
+        class="mobile-sidebar__close"
+        type="button"
+        aria-label="Cerrar menú"
+        (click)="close()"
+      >
+        ×
+      </button>
+    </div>
+
+    @if (!isLoggedIn()) {
+      <div class="mobile-sidebar__actions">
+        <a class="mobile-sidebar__button" href="#">
+          <img src="assets/icons/menu-login.svg" alt="" />
+          <span>Ingresa</span>
+        </a>
+
+        <a class="mobile-sidebar__button" href="#">
+          <img src="assets/icons/menu-register.svg" alt="" />
+          <span>Regístrate</span>
+        </a>
+      </div>
+
+      <nav class="mobile-sidebar__menu">
+        <a href="#promociones" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-promotions.svg" alt="" />
+          </span>
+          <span>Promociones</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-help.svg" alt="" />
+          </span>
+          <span>Ayuda</span>
+          <img class="mobile-sidebar__arrow" src="assets/icons/menu-chevron.svg" alt="" />
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-casino.svg" alt="" />
+          </span>
+          <span>Casino Te Apuesto</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-location.svg" alt="" />
+          </span>
+          <span>Dónde Comprar</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-contact.svg" alt="" />
+          </span>
+          <span>Contáctanos</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-luck.svg" alt="" />
+          </span>
+          <span>Mira Tu Suerte</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-results.svg" alt="" />
+          </span>
+          <span>Ver Resultados</span>
+          <img class="mobile-sidebar__arrow" src="assets/icons/menu-chevron.svg" alt="" />
+        </a>
+      </nav>
+    } @else {
+      <div class="mobile-sidebar__profile">
+        <div class="mobile-sidebar__avatar">R</div>
+
+        <div>
+          <p class="mobile-sidebar__welcome">Bienvenido</p>
+          <p class="mobile-sidebar__name">Hola, Roy</p>
+        </div>
+      </div>
+
+      <div class="mobile-sidebar__wallet">
+        <div class="mobile-sidebar__wallet-row">
+          <div class="mobile-sidebar__wallet-info">
+            <span>Saldo Disponible</span>
+            <strong>S/ 0.00</strong>
+          </div>
+
+          <div class="mobile-sidebar__wallet-info">
+            <span>Bonos</span>
+            <strong>S/ 0.00</strong>
+          </div>
+        </div>
+
+        <div class="mobile-sidebar__wallet-actions">
+          <button type="button">
+            <img src="assets/icons/menu-plus.svg" alt="" />
+            Recargar
+          </button>
+
+          <button type="button">Retirar</button>
+        </div>
+      </div>
+
+      <nav class="mobile-sidebar__menu mobile-sidebar__menu--logged">
+        <a href="#" class="mobile-sidebar__item mobile-sidebar__item--plain" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-notifications.svg" alt="" />
+          </span>
+          <span>Notificaciones</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item mobile-sidebar__item--bonus" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-bonus.svg" alt="" />
+          </span>
+          <span>Bonos</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item mobile-sidebar__item--prizes" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-prizes.svg" alt="" />
+          </span>
+          <span>Retirar Mis Premios</span>
+        </a>
+
+        <a
+          href="#promociones"
+          class="mobile-sidebar__item mobile-sidebar__item--promotions"
+          (click)="close()"
+        >
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-promotions.svg" alt="" />
+          </span>
+          <span>Promociones</span>
+          <img class="mobile-sidebar__arrow" src="assets/icons/menu-chevron.svg" alt="" />
+        </a>
+
+        <a href="#" class="mobile-sidebar__item mobile-sidebar__item--movements" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-movements.svg" alt="" />
+          </span>
+          <span>Mis Movimientos</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item mobile-sidebar__item--plays" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-subscriptions.svg" alt="" />
+          </span>
+          <span>Mis Jugadas</span>
+        </a>
+
+        <a
+          href="#"
+          class="mobile-sidebar__item mobile-sidebar__item--subscriptions"
+          (click)="close()"
+        >
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-subscriptions.svg" alt="" />
+          </span>
+          <span>Mis Suscripciones</span>
+        </a>
+      </nav>
+
+      <nav class="mobile-sidebar__menu mobile-sidebar__menu--bottom">
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-help.svg" alt="" />
+          </span>
+          <span>Ayuda</span>
+          <img class="mobile-sidebar__arrow" src="assets/icons/menu-chevron.svg" alt="" />
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-casino.svg" alt="" />
+          </span>
+          <span>Casino Te Apuesto</span>
+        </a>
+
+        <a href="#" class="mobile-sidebar__item" (click)="close()">
+          <span class="mobile-sidebar__icon">
+            <img src="assets/icons/menu-location.svg" alt="" />
+          </span>
+          <span>Dónde Comprar</span>
+        </a>
+      </nav>
+
+      <button class="mobile-sidebar__logout" type="button" (click)="close()">
+        <img src="assets/icons/menu-logout.svg" alt="" />
+        Cerrar Sesión
+      </button>
+    }
+  </aside>
+</div>

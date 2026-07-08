@@ -1,13 +1,10 @@
 @use 'breakpoints' as bp;
 
 .lottery-video-section {
-
   width: 100%;
-
 }
 
 .lottery-video-section__title {
-
   margin: 0 0 1.5rem;
 
   text-align: center;
@@ -23,15 +20,12 @@
   letter-spacing: 0.015625rem;
 
   color: var(--brand-black);
-
 }
 
 .lottery-video-section__card {
-
   width: 100%;
 
   max-width: 79.5rem;
-  /*1272*/
 
   margin: 0 auto;
 
@@ -44,39 +38,29 @@
   border-bottom: 1.313rem solid var(--brand-yellow);
 
   padding: 2rem;
-
 }
 
 .lottery-video-section__container {
-
   width: 100%;
-
 }
 
 .lottery-video-section__logo {
-
   display: block;
 
   width: 6.6875rem;
-  /* 107px */
 
   height: 4.25rem;
-  /* 68px */
 
   margin: 0 auto 1.5rem;
 
   object-fit: contain;
-
 }
 
 .lottery-video-section__body {
-
   width: 100%;
-
 }
 
 .lottery-video-section__header {
-
   display: flex;
 
   justify-content: space-between;
@@ -84,17 +68,13 @@
   align-items: center;
 
   margin-bottom: 1.5rem;
-
 }
 
 .lottery-video-section__header app-button {
-
   margin-right: var(--lottery-video-padding-right);
-
 }
 
 .lottery-video-section__subtitle {
-
   margin-left: var(--lottery-video-padding-left);
 
   flex: 1;
@@ -110,27 +90,21 @@
   letter-spacing: 0.015625rem;
 
   color: var(--brand-black);
-
 }
 
 .lottery-video-section__subtitle span {
-
   color: var(--brand-green);
 
   font-weight: var(--font-weight-bold);
-
 }
 
 .lottery-video-section__content {
-
   width: 100%;
 
   margin: 0;
-
 }
 
 .lottery-video-section__mock {
-
   display: block;
 
   width: 100%;
@@ -138,11 +112,9 @@
   height: auto;
 
   border-radius: 0.75rem;
-
 }
 
 @include bp.tabletLandscape {
-
   .lottery-video-section {
     padding-inline: 2rem;
   }
@@ -150,15 +122,14 @@
   .lottery-video-section__card {
     padding: 1.5rem;
   }
-
 }
 
 @include bp.mobile {
   .lottery-video-section__title {
     margin: 0 0 1.5rem;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: var(--font-weight-semibold);
-    line-height: 32px;
+    line-height: 2rem;
     letter-spacing: 0;
     text-align: center;
   }
@@ -166,13 +137,13 @@
   .lottery-video-section__card {
     width: 100%;
     padding: 1rem;
-    border-radius: 20px;
-    border-bottom: 16px solid var(--brand-yellow);
+    border-radius: 1.25rem;
+    border-bottom: 1rem solid var(--brand-yellow);
   }
 
   .lottery-video-section__logo {
-    width: 70.81px;
-    height: 45px;
+    width: 4.425625rem;
+    height: 2.8125rem;
     margin: 0 auto 1.25rem;
   }
 
@@ -187,16 +158,16 @@
   .lottery-video-section__subtitle {
     margin-left: 0;
     flex: 1;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: var(--font-weight-semibold);
-    line-height: 16px;
+    line-height: 1rem;
     letter-spacing: 0;
   }
 
   .lottery-video-section__subtitle span {
     display: block;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.25rem;
+    line-height: 1.5rem;
   }
 
   .lottery-video-section__header app-button {
@@ -206,18 +177,18 @@
 
   :host ::ng-deep .lottery-video-section__header app-button button,
   :host ::ng-deep .lottery-video-section__header .button {
-    width: 96px;
-    min-width: 96px;
-    height: 32px;
-    min-height: 32px;
+    width: 6rem;
+    min-width: 6rem;
+    height: 2rem;
+    min-height: 2rem;
     padding: 0;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 0.75rem;
+    line-height: 1rem;
   }
 
   .lottery-video-section__mock {
     width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 0.5rem;
   }
 }

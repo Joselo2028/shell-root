@@ -1,25 +1,20 @@
 @use 'breakpoints' as bp;
 
 .contributing {
-
   width: 100%;
 
   margin-top: var(--contributing-section-margin-top);
-
 }
 
 .contributing__container {
-
   max-width: var(--contributing-container-width);
 
   margin: 0 auto;
 
   padding: 0 var(--section-padding-inline);
-
 }
 
 .contributing__title {
-
   margin: 0 0 2rem;
 
   text-align: center;
@@ -35,17 +30,13 @@
   letter-spacing: var(--contributing-title-letter-spacing);
 
   color: var(--brand-black);
-
 }
 
 .contributing__title--highlight {
-
   color: var(--brand-green);
-
 }
 
 .contributing__cards {
-
   width: var(--contributing-content-width);
 
   max-width: 100%;
@@ -57,23 +48,18 @@
   grid-template-columns: repeat(4, 1fr);
 
   gap: 0;
-
 }
 
 .contributing__cards app-contributing-card:first-child .contributing-card {
-
   border-top-left-radius: var(--contributing-card-radius);
 
   border-bottom-left-radius: var(--contributing-card-radius);
-
 }
 
 .contributing__cards app-contributing-card:last-child .contributing-card {
-
   border-top-right-radius: var(--contributing-card-radius);
 
   border-bottom-right-radius: var(--contributing-card-radius);
-
 }
 
 @include bp.tabletLandscape {
@@ -82,14 +68,14 @@
   }
 
   .contributing__container {
-    padding: 0 24px;
+    padding: 0 1.5rem;
     overflow: hidden;
   }
 
   .contributing__title {
-    margin: 0 0 24px;
-    font-size: 32px;
-    line-height: 40px;
+    margin: 0 0 1.5rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
     letter-spacing: 0;
   }
 
@@ -108,8 +94,8 @@
   }
 
   .contributing__cards app-contributing-card {
-    flex: 0 0 341px;
-    width: 341px;
+    flex: 0 0 21.3125rem;
+    width: 21.3125rem;
   }
 }
 
@@ -119,14 +105,14 @@
   }
 
   .contributing__container {
-    padding: 0 24px;
+    padding: 0 1.5rem;
     overflow: hidden;
   }
 
   .contributing__title {
-    margin: 0 0 24px;
-    font-size: 24px;
-    line-height: 32px;
+    margin: 0 0 1.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     letter-spacing: 0;
   }
 
@@ -147,7 +133,7 @@
   }
 
   .contributing__cards app-contributing-card {
-    flex: 0 0 390px;
-    width: 390px;
+    flex: 0 0 24.375rem;
+    width: 24.375rem;
   }
 }

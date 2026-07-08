@@ -51,7 +51,7 @@
   font-size: 1.836rem;
   font-weight: var(--font-weight-semibold);
   line-height: 1;
-  letter-spacing: 0.37px;
+  letter-spacing: 0.023125rem;
 
   color: var(--text-primary);
 
@@ -85,11 +85,7 @@
 }
 
 @include bp.mobile {
-
   .navigation {
-
     display: none;
-
   }
-
 }
