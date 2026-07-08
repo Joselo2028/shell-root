@@ -23,6 +23,7 @@
           "options": {
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "allowedCommonJsDependencies": ["@angular-architects/module-federation"],
 
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
