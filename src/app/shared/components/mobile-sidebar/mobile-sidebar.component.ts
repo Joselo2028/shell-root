@@ -1,9 +1,8 @@
 import { Component, input, output } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-mobile-sidebar',
-  imports: [ButtonComponent],
+  imports: [],
   templateUrl: './mobile-sidebar.component.html',
   styleUrl: './mobile-sidebar.component.scss',
 })

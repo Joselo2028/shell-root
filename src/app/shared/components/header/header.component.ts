@@ -11,7 +11,7 @@ import { MobileSidebarComponent } from '../mobile-sidebar/mobile-sidebar.compone
 })
 export class HeaderComponent {
   isMobileMenuOpen = signal(false);
-  isLoggedIn = signal(true);
+  isLoggedIn = signal(false);
 
   openMobileMenu(): void {
     this.isMobileMenuOpen.set(true);
