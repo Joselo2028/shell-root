@@ -9,10 +9,22 @@ import { Component, input, output } from '@angular/core';
 export class MobileSidebarComponent {
   isOpen = input(false);
   isLoggedIn = input(false);
+  userName = input('');
+  isStartingLogin = input(false);
 
   closeSidebar = output<void>();
+  login = output<void>();
+  logout = output<void>();
 
   close(): void {
     this.closeSidebar.emit();
+  }
+
+  startLogin(): void {
+    this.login.emit();
+  }
+
+  closeSession(): void {
+    this.logout.emit();
   }
 }

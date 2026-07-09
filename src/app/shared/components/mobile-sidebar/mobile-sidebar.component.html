@@ -22,10 +22,10 @@
 
     @if (!isLoggedIn()) {
       <div class="mobile-sidebar__actions">
-        <a class="mobile-sidebar__button" href="#">
+        <button class="mobile-sidebar__button" type="button" (click)="startLogin()">
           <img src="assets/icons/menu-login.svg" alt="" />
-          <span>Ingresa</span>
-        </a>
+          <span>{{ isStartingLogin() ? 'Espere...' : 'Ingresa' }}</span>
+        </button>
 
         <a class="mobile-sidebar__button" href="#">
           <img src="assets/icons/menu-register.svg" alt="" />
@@ -91,7 +91,7 @@
 
         <div>
           <p class="mobile-sidebar__welcome">Bienvenido</p>
-          <p class="mobile-sidebar__name">Hola, Roy</p>
+          <p class="mobile-sidebar__name">Hola, {{ userName() }}</p>
         </div>
       </div>
 
@@ -202,7 +202,7 @@
         </a>
       </nav>
 
-      <button class="mobile-sidebar__logout" type="button" (click)="close()">
+      <button class="mobile-sidebar__logout" type="button" (click)="closeSession()">
         <img src="assets/icons/menu-logout.svg" alt="" />
         Cerrar Sesión
       </button>

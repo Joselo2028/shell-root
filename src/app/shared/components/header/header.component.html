@@ -5,9 +5,25 @@
     </div>
 
     <div class="flex items-center" style="gap: var(--button-gap)">
-      <app-button label="Iniciar Sesión" variant="secondary"></app-button>
+      <div class="desktop-auth-actions flex items-center" style="gap: var(--button-gap)">
+        @if (!isLoggedIn()) {
+          <app-button
+            [label]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
+            variant="secondary"
+            (click)="startLogin()"
+          >
+          </app-button>
 
-      <app-button label="Registrarme" variant="primary"></app-button>
+          <app-button label="Registrarme" variant="primary"></app-button>
+        } @else {
+          <app-user-session
+            class="desktop-user-session"
+            [userName]="userName()"
+            (logout)="logout()"
+          >
+          </app-user-session>
+        }
+      </div>
 
       <app-hamburger-button (click)="openMobileMenu()"></app-hamburger-button>
     </div>
@@ -16,6 +32,10 @@
   <app-mobile-sidebar
     [isOpen]="isMobileMenuOpen()"
     [isLoggedIn]="isLoggedIn()"
+    [userName]="userName()"
+    [isStartingLogin]="isStartingLogin()"
     (closeSidebar)="closeMobileMenu()"
+    (login)="startLogin()"
+    (logout)="logout()"
   ></app-mobile-sidebar>
 </header>
