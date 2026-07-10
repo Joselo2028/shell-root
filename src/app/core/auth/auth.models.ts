@@ -60,3 +60,20 @@ export interface BackfrontLoginResponse {
   responseTitle: string;
   responseButton: string;
 }
+
+export interface RefreshRequest {
+  refreshToken: string;
+  username: string;
+}
+
+export interface AuthRefreshResponse {
+  accessToken: string;
+  refreshToken: string;
+  idToken: string;
+  expiresIn: number;
+  tokenType: 'Bearer';
+}
+
+export interface LogoutRequest {
+  refreshToken: string;
+}

@@ -36,6 +36,8 @@ export class ShellComponent implements OnInit {
 
   isProcessingLogin = signal(false);
 
+  isLoggingOut = this.authService.isLoggingOut;
+
   ngOnInit(): void {
     console.log('ShellComponent iniciado');
     console.log('URL actual:', window.location.href);

@@ -2,6 +2,9 @@
   <app-loading-overlay message="Iniciando sesión..."></app-loading-overlay>
 }
 
+@if (isLoggingOut()) {
+  <app-loading-overlay message="Cerrando sesión..."></app-loading-overlay>
+}
 <app-header></app-header>
 <app-navigation></app-navigation>
 <app-promo-banner></app-promo-banner>
