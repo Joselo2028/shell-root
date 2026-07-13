@@ -1,14 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
-import {
-  FooterComponent,
-  HeaderComponent,
-  LotterySectionComponent,
-  NavigationComponent,
-  PromoBannerComponent,
-  PromotionsComponent,
-} from '@shared/components';
+import { TkHomeDesktopComponent } from '@kindryl/tinka-ui';
+
+import { FooterComponent, HeaderComponent, NavigationComponent } from '@shared/components';
+
 import { ContributingComponent } from '@shared/components/contributing/contributing.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 import { WinnersComponent } from '@shared/components/winners/winners.component';
@@ -17,13 +13,11 @@ import { WinnersComponent } from '@shared/components/winners/winners.component';
   selector: 'shell-root',
   imports: [
     HeaderComponent,
-    FooterComponent,
     NavigationComponent,
-    PromoBannerComponent,
-    LotterySectionComponent,
-    PromotionsComponent,
+    TkHomeDesktopComponent,
     WinnersComponent,
     ContributingComponent,
+    FooterComponent,
     LoadingOverlayComponent,
   ],
   templateUrl: './shell.component.html',
@@ -32,10 +26,10 @@ import { WinnersComponent } from '@shared/components/winners/winners.component';
 export class ShellComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly authService = inject(AuthService);
+
   protected readonly title = signal('shell-root');
 
   isProcessingLogin = signal(false);
-
   isLoggingOut = this.authService.isLoggingOut;
 
   ngOnInit(): void {

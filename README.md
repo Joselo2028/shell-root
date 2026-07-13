@@ -227,3 +227,27 @@ mfe-landing
 # 👥 Equipo
 
 Plataforma Frontend SPA basada en Angular, Module Federation y Microfrontends para la modernización digital de La Tinka.
+
+---
+
+# 🧩 Integración de Componentes UI
+
+Esta rama corresponde a una integración visual de la librería **@kindryl/tinka-ui** dentro del proyecto **shell-root**, con el objetivo de validar la incorporación progresiva de los componentes compartidos sin afectar la implementación funcional existente.
+
+## Alcance
+
+Se realizó el reemplazo visual de los componentes disponibles en la librería, manteniendo la arquitectura y la lógica de negocio implementadas en el proyecto principal.
+
+## Observaciones Técnicas
+
+Durante la integración se identificaron los siguientes aspectos:
+
+- Algunos componentes de la librería actualmente no exponen eventos (`@Output`) para conectar acciones como autenticación, registro, cierre de sesión u otras interacciones con la lógica del proyecto.
+- La integración funcional existente permanece implementada en la rama principal del proyecto y podrá reutilizarse cuando los componentes de la librería incorporen dichos puntos de extensión.
+- Algunos componentes requieren recursos adicionales (imágenes, logos y fuentes) para visualizarse correctamente dentro del proyecto consumidor.
+- Se identificaron diferencias visuales entre algunos componentes de la librería y el diseño aprobado en Figma. Estas diferencias incluyen aspectos como distribución de elementos, espaciados, proporciones, tamaños de algunos componentes y determinados detalles de la interfaz. Dichas diferencias corresponden a la implementación actual de la librería y no al proceso de integración realizado en este proyecto.
+- Algunos componentes de la librería agrupan múltiples secciones funcionales dentro de un único componente, mientras que la implementación original del proyecto utiliza una arquitectura modular basada en componentes independientes. Ambas aproximaciones son válidas, pero será conveniente definir una estrategia única para mantener consistencia en la arquitectura del frontend y reducir retrabajos en futuras integraciones.
+
+## Estado
+
+Esta rama tiene como finalidad validar la integración visual de los componentes disponibles en la librería y documentar los aspectos identificados durante dicho proceso. La implementación funcional completa permanece disponible en la rama principal del proyecto.

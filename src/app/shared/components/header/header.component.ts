@@ -1,18 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { HamburgerButtonComponent } from '../hamburger-button/hamburger-button.component';
-import { MobileSidebarComponent } from '../mobile-sidebar/mobile-sidebar.component';
-import { UserSessionComponent } from '../user-session/user-session.component';
+import { TkHeaderComponent } from '@kindryl/tinka-ui';
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    ButtonComponent,
-    HamburgerButtonComponent,
-    MobileSidebarComponent,
-    UserSessionComponent,
-  ],
+  imports: [TkHeaderComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -23,7 +15,6 @@ export class HeaderComponent {
 
   isLoggedIn = this.authService.isLoggedIn;
   userName = this.authService.userName;
-
   isStartingLogin = this.authService.isStartingLogin;
 
   openMobileMenu(): void {
@@ -33,9 +24,11 @@ export class HeaderComponent {
   closeMobileMenu(): void {
     this.isMobileMenuOpen.set(false);
   }
+
   startLogin(): void {
     this.authService.startPamLogin();
   }
+
   logout(): void {
     this.authService.logout();
   }

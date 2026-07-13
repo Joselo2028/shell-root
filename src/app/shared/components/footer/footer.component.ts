@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { TkFooterComponent } from '@kindryl/tinka-ui';
 
 @Component({
   selector: 'app-footer',
-  imports: [],
+  imports: [TkFooterComponent],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })

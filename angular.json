@@ -41,7 +41,10 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/styles.scss"],
+            "styles": [
+              "node_modules/@kindryl/tinka-ui/src/lib/tokens/design-tokens.css",
+              "src/styles.scss"
+            ],
             "main": "src/main.ts",
             "outputPath": "dist/shell-root",
             "index": "src\\index.html",
