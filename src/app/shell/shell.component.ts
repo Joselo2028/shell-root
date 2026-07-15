@@ -1,22 +1,17 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
-import { TkHomeDesktopComponent } from '@kindryl/tinka-ui';
 
 import { FooterComponent, HeaderComponent, NavigationComponent } from '@shared/components';
 
-import { ContributingComponent } from '@shared/components/contributing/contributing.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
-import { WinnersComponent } from '@shared/components/winners/winners.component';
 
 @Component({
   selector: 'shell-root',
   imports: [
     HeaderComponent,
     NavigationComponent,
-    TkHomeDesktopComponent,
-    WinnersComponent,
-    ContributingComponent,
+    RouterOutlet,
     FooterComponent,
     LoadingOverlayComponent,
   ],
