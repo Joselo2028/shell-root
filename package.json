@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js"
+    "run:all": "node node_modules/@angular-architects/module-federation/src/server/mf-dev-server.js",
+    "update:tinka-ui": "npm install @kindryl/tinka-ui@latest"
   },
   "private": true,
   "packageManager": "npm@10.8.2",
@@ -19,7 +20,7 @@
     "@angular/forms": "^21.2.0",
     "@angular/platform-browser": "^21.2.0",
     "@angular/router": "^21.2.0",
-    "@kindryl/tinka-ui": "^0.1.5",
+    "@kindryl/tinka-ui": "^0.1.6",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
