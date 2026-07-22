@@ -19,18 +19,42 @@
           <app-button label="Ver más" variant="outline"> </app-button>
         </div>
 
-        <div class="lottery-video-section__content">
-          <!--
-            TODO:
-            Reemplazar este bloque por el iframe cuando
-            el proveedor entregue la URL definitiva.
-          -->
+        <div class="lottery-video-section__carousel">
+          <button
+            type="button"
+            class="lottery-video-section__arrow lottery-video-section__arrow--left"
+            aria-label="Ver juegos anteriores"
+            (click)="scrollPrevious()"
+          >
+            ‹
+          </button>
 
-          <img
-            src="assets/images/video-loterias.png"
-            alt="Video Loterías"
-            class="lottery-video-section__mock"
-          />
+          <div #carousel class="lottery-video-section__viewport">
+            <div class="lottery-video-section__track">
+              @for (game of games; track $index) {
+                <button
+                  type="button"
+                  class="lottery-video-section__game"
+                  [attr.aria-label]="'Abrir ' + game.name"
+                >
+                  <img
+                    [src]="game.image"
+                    [alt]="game.name"
+                    class="lottery-video-section__game-image"
+                  />
+                </button>
+              }
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="lottery-video-section__arrow lottery-video-section__arrow--right"
+            aria-label="Ver más juegos"
+            (click)="scrollNext()"
+          >
+            ›
+          </button>
         </div>
       </div>
     </div>
