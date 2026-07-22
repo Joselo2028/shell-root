@@ -1,10 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
-import { HamburgerButtonComponent } from '../hamburger-button/hamburger-button.component';
+
 import { MobileSidebarComponent } from '../mobile-sidebar/mobile-sidebar.component';
 import { UserSessionComponent } from '../user-session/user-session.component';
 import { AuthService } from '../../../core/auth/auth.service';
-
+import { HamburgerButtonComponent } from '../hamburger-button/hamburger-button.component';
 @Component({
   selector: 'app-header',
   imports: [
