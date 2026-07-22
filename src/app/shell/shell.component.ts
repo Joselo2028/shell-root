@@ -2,7 +2,12 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 
-import { FooterComponent, HeaderComponent, NavigationComponent } from '@shared/components';
+import {
+  FooterComponent,
+  HeaderComponent,
+  NavigationComponent,
+  LotterySectionComponent,
+} from '@shared/components';
 
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
 
@@ -14,6 +19,7 @@ import { LoadingOverlayComponent } from '@shared/components/loading-overlay/load
     RouterOutlet,
     FooterComponent,
     LoadingOverlayComponent,
+    LotterySectionComponent,
   ],
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss',
