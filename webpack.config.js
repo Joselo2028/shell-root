@@ -17,6 +17,7 @@ const moduleFederationConfig = withModuleFederationPlugin({
   },
 });
 
-moduleFederationConfig.output.publicPath = process.env.PUBLIC_PATH;
+// Para GitHub Pages
+moduleFederationConfig.output.publicPath = 'auto';
 
 module.exports = moduleFederationConfig;

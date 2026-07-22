@@ -21,7 +21,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const appConfig = {
-  providers: [(0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.provideBrowserGlobalErrorListeners)(), (0,_angular_router__WEBPACK_IMPORTED_MODULE_1__.provideRouter)(_app_routes__WEBPACK_IMPORTED_MODULE_3__.routes), (0,_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.provideHttpClient)((0,_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.withInterceptors)([_core_auth_interceptors_auth_interceptor__WEBPACK_IMPORTED_MODULE_4__.authInterceptor]))]
+  providers: [(0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.provideBrowserGlobalErrorListeners)(), (0,_angular_router__WEBPACK_IMPORTED_MODULE_1__.provideRouter)(_app_routes__WEBPACK_IMPORTED_MODULE_3__.routes, (0,_angular_router__WEBPACK_IMPORTED_MODULE_1__.withHashLocation)()), (0,_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.provideHttpClient)((0,_angular_common_http__WEBPACK_IMPORTED_MODULE_2__.withInterceptors)([_core_auth_interceptors_auth_interceptor__WEBPACK_IMPORTED_MODULE_4__.authInterceptor]))]
 };
 
 /***/ },
