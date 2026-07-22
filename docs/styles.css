@@ -1,0 +1,969 @@
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].rules[0].oneOf[0].use[2]!./node_modules/resolve-url-loader/index.js??ruleSet[1].rules[6].rules[1].use[0]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[6].rules[1].use[1]!./src/styles.scss?ngGlobalStyle ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Bold.woff2') format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Bold.woff') format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Semibold.woff2') format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Semibold.woff') format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Regular.woff2') format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Regular.woff') format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Light.woff2') format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Duplet";
+  src: url('Duplet-Light.woff') format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Yolo";
+  src: url('Yolo-Bold.woff2') format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Yolo";
+  src: url('Yolo-Bold.woff') format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Yolo";
+  src: url('Yolo-Semibold.woff2') format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Yolo";
+  src: url('Yolo-Semibold.woff') format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  /* =======================================================
+     TIPOGRAFÍAS
+     ======================================================= */
+  --font-primary: 'Duplet', sans-serif;
+  --font-secondary: 'Yolo', sans-serif;
+  /* =======================================================
+     PESOS
+     ======================================================= */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  /* =======================================================
+     LAYOUT
+     ======================================================= */
+  --container-width: 94.5rem;
+  /* 1512px */
+  --footer-content-width: 72.75rem;
+  /* 1164px */
+  --footer-column-gap: 4rem;
+  /* 64px */
+  /* =======================================================
+     COMPONENTES
+     ======================================================= */
+  --section-padding-inline: 1.5rem;
+  /* 24px */
+  /* =======================================================
+     LOTTERY
+     ======================================================= */
+  --lottery-hero-width: 70.125rem;
+  /* 1122px */
+  --lottery-hero-height: 17.3125rem;
+  /* 277px */
+  --lottery-card-width: 32.8125rem;
+  /* 525px */
+  --lottery-card-min-height: 32.8125rem;
+  /* 525px */
+  --lottery-section-gap: 2.5rem;
+  /* 40px */
+  --lottery-card-gap: 4.5625rem;
+  /* 73px */
+  --lottery-card-radius: 1.25rem;
+  /* 20px */
+  --lottery-card-padding-x: 1.969rem;
+  /* 20px */
+  --lottery-card-padding-y: 0.625rem;
+  /* 10px */
+  --lottery-card-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.15);
+  --lottery-title-font-size: 2.625rem;
+  /* 42px */
+  --lottery-title-line-height: 3.875rem;
+  /* 62px */
+  --lottery-title-letter-spacing: 0.016rem;
+  /* 0.25px */
+  /* =======================================================
+   JACKPOT
+   ======================================================= */
+  --lottery-jackpot-title-font-size: 2.25rem;
+  /* 36px */
+  --lottery-jackpot-title-line-height: 1.5rem;
+  /* 24px */
+  --lottery-jackpot-title-letter-spacing: 0.009375rem;
+  /* 0.15px */
+  --lottery-jackpot-amount-font-size: 4rem;
+  /* 64px */
+  --lottery-jackpot-amount-line-height: 2.5rem;
+  /* 40px */
+  --lottery-jackpot-amount-letter-spacing: 0.015625rem;
+  /* 0.25px */
+  /* =======================================================
+   HOW TO PLAY LINK
+   ======================================================= */
+  --lottery-link-font-size: 0.875rem;
+  /* 14px */
+  --lottery-link-line-height: 1rem;
+  /* 16px = 100% de 14px */
+  --lottery-link-letter-spacing: 0rem;
+  /* 0px */
+  --lottery-link-color: #6b7280;
+  --lottery-link-margin-top: 0.75rem;
+  /* 12px */
+  --lottery-result-badge-width: 15.125rem;
+  /* 242px */
+  --lottery-result-badge-height: 2.125rem;
+  /* 34px */
+  --lottery-result-badge-radius: 1.25rem;
+  /* 20px */
+  --lottery-result-badge-font-size: 1rem;
+  /* 16px */
+  --lottery-result-badge-line-height: 1.5rem;
+  /* 24px */
+  --lottery-result-badge-letter-spacing: 0.025rem;
+  /* 0.4px */
+  /* =======================================================
+   LOTTERY BALL
+   ======================================================= */
+  --lottery-ball-white-size: 1.875rem;
+  /* 30px */
+  --lottery-ball-green-size: 2rem;
+  /* 32px */
+  /* 1.2px */
+  --lottery-ball-green-border-width: 0.125rem;
+  /* 2px */
+  --lottery-ball-font-size: 1rem;
+  /* 16px */
+  --lottery-ball-line-height: 1rem;
+  /* 16px */
+  --lottery-ball-letter-spacing: 0rem;
+  --lottery-ball-white-border-width: 0.075rem;
+  /* 1.2px */
+  --lottery-ball-white-border-color: #E0DDD5;
+  /* =======================================================
+     BOTONES
+     ======================================================= */
+  --button-width: 7.0625rem;
+  /* 113px */
+  --button-height: 2.5rem;
+  /* 40px */
+  --button-radius: 0.625rem;
+  /* 10px */
+  --button-border-width: 0.0625rem;
+  /* 1px */
+  --button-gap: 0.9375rem;
+  /* 15px */
+  --button-font-size: 0.875rem;
+  /* 14px */
+  /* =======================================================
+   PLAY BUTTON
+   ======================================================= */
+  --play-button-width: 11.4375rem;
+  /* 183px */
+  --play-button-max-width: 18.625rem;
+  /* 298px */
+  --play-button-height: 2.75rem;
+  /* 44px */
+  --play-button-radius: 3.125rem;
+  /* 50px */
+  --play-button-padding-y: 0.625rem;
+  /* 10px */
+  --play-button-padding-x: 1rem;
+  /* 16px */
+  --play-button-gap: 1rem;
+  /* 16px */
+  --play-button-font-size: 1.25rem;
+  /* 20px */
+  --play-button-line-height: 1.5rem;
+  /* 24px */
+  --play-button-letter-spacing: 0rem;
+  /* 0px */
+  --play-button-margin-top: 1.25rem;
+  /* 20px */
+  --play-button-color: #e63a28;
+  /* =======================================================
+   OUTLINE BUTTON
+   ======================================================= */
+  --outline-button-width: 6.9375rem;
+  /* 111px */
+  --outline-button-height: 2.3644rem;
+  /* 37.83px */
+  --outline-button-radius: 1.25rem;
+  /* 20px */
+  --outline-button-border-width: 0.0625rem;
+  /* 1px */
+  --outline-button-gap: 0.5rem;
+  /* 8px */
+  --outline-button-font-size: 1rem;
+  /* 16px */
+  /* =======================================================
+     COLORES DE MARCA
+     ======================================================= */
+  --brand-green: #006820;
+  --brand-green-dark: #115533;
+  --brand-green-light: #01954b;
+  --brand-yellow: #ffde00;
+  --brand-white: #ffffff;
+  --brand-black: #000000;
+  /* =======================================================
+     TEXTO
+     ======================================================= */
+  --text-primary: #ffffff;
+  /* =======================================================
+   LOTTERY BANNER
+   ======================================================= */
+  --lottery-banner-width: 80.8125rem;
+  /* 1293px */
+  --lottery-banner-height: 7.8125rem;
+  /* 125px */
+  --lottery-banner-radius: 1.5rem;
+  /* 24px */
+  --lottery-banner-padding-x: 2rem;
+  /* 32px */
+  --lottery-banner-padding-y: 1.5rem;
+  /* 24px */
+  --lottery-video-padding-left: 3.5rem;
+  --lottery-video-padding-right: 3.5rem;
+  /* =======================================================
+   WINNERS
+   ======================================================= */
+  --winners-container-width: 94.5625rem;
+  /* 1513px */
+  --winners-content-width: 79.5rem;
+  /* 1272px */
+  --winners-section-margin-top: 1.875rem;
+  /* 30px */
+  --winners-title-font-size: 2.625rem;
+  /* 42px */
+  --winners-title-line-height: 3.875rem;
+  /* 62px */
+  --winners-title-letter-spacing: 0.01875rem;
+  /* 0.3px */
+  --winners-description-font-size: 1rem;
+  /* 16px */
+  --winners-description-line-height: 1.5rem;
+  /* 24px */
+  --winners-card-width: 25.5rem;
+  /* 408px */
+  --winners-card-height: 14.25rem;
+  /* 228px */
+  --winners-card-radius: 1rem;
+  /* 16px */
+  --winners-card-gap: 1.5rem;
+  /* 24px */
+  --winners-card-border-width: 0.0625rem;
+  /* 1px */
+  --winners-image-size: 10.5625rem;
+  /* 169px */
+  --winners-name-font-size: 1.75rem;
+  /* 28px */
+  --winners-name-line-height: 3rem;
+  /* 48px */
+  --winners-prize-font-size: 2.70625rem;
+  /* 43.3px */
+  --winners-prize-line-height: 4.059375rem;
+  /* 64.95px */
+  --winners-city-width: 7.875rem;
+  /* 126px */
+  --winners-city-height: 1.375rem;
+  /* 22px */
+  --winners-city-radius: 62.4375rem;
+  /* 999px */
+  --winners-city-font-size: 0.75rem;
+  /* 12px */
+  --winners-city-line-height: 1rem;
+  /* 16px */
+  --winners-tag-width: 7.25rem;
+  /* 116px */
+  --winners-tag-height: 2.1875rem;
+  /* 35px */
+  --winners-tag-radius: 1rem;
+  /* 16px */
+  --winners-tag-padding-x: 1rem;
+  /* 16px */
+  --winners-tag-padding-y: 0.5rem;
+  /* 8px */
+  --winners-tag-gap: 0.625rem;
+  /* 10px */
+  /* Colores */
+  --winners-prize-color: #006820;
+  --winners-city-background: #FF5F00;
+  --winners-kabala-background: rgba(250, 185, 0, 0.08);
+  --winners-kabala-border: #FAB900;
+  --winners-tinka-background: rgba(255, 237, 0, 0.10);
+  --winners-tinka-border: #FFED00;
+  --winners-ganadiario-background: rgba(11, 132, 199, 0.04);
+  --winners-ganadiario-border: #0B84C7;
+  /* =======================================================
+   CONTRIBUTING
+   ======================================================= */
+  --contributing-container-width: 85.25rem;
+  /* 1364px */
+  --contributing-content-width: 85.25rem;
+  /* 1364px */
+  --contributing-section-margin-top: 1.875rem;
+  /* 30px */
+  --contributing-title-font-size: 2.625rem;
+  /* 42px */
+  --contributing-title-line-height: 3.875rem;
+  /* 62px */
+  --contributing-title-letter-spacing: 0.01875rem;
+  /* 0.3px */
+  --contributing-cards-gap: 2rem;
+  /* 32px */
+  --contributing-card-width: 21.3125rem;
+  /* 341px */
+  --contributing-card-height: 11.0625rem;
+  /* 177px */
+  --contributing-card-padding-y: 0.875rem;
+  /* 14px */
+  --contributing-card-padding-x: 1.5rem;
+  /* 24px */
+  --contributing-card-radius: 1.875rem;
+  /* 30px */
+  --contributing-card-background: rgba(255, 222, 0, 0.20);
+  --contributing-card-gap: 1rem;
+  /* 16px */
+  --contributing-icon-size: 3rem;
+  /* 48px */
+  --contributing-title-font-size-card: 1.1875rem;
+  /* 19px */
+  --contributing-title-line-height-card: 1.425rem;
+  /* 22.8px */
+  --contributing-description-font-size: 0.875rem;
+  /* 14px */
+  --contributing-description-line-height: 1.3125rem;
+  /* 21px */
+  --contributing-link-font-size: 0.8125rem;
+  /* 13px */
+  --contributing-link-line-height: 1rem;
+  /* 16px */
+}
+
+*, ::before, ::after{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+::backdrop{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x:  ;
+  --tw-pan-y:  ;
+  --tw-pinch-zoom:  ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position:  ;
+  --tw-gradient-via-position:  ;
+  --tw-gradient-to-position:  ;
+  --tw-ordinal:  ;
+  --tw-slashed-zero:  ;
+  --tw-numeric-figure:  ;
+  --tw-numeric-spacing:  ;
+  --tw-numeric-fraction:  ;
+  --tw-ring-inset:  ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgb(59 130 246 / 0.5);
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+  --tw-shadow: 0 0 #0000;
+  --tw-shadow-colored: 0 0 #0000;
+  --tw-blur:  ;
+  --tw-brightness:  ;
+  --tw-contrast:  ;
+  --tw-grayscale:  ;
+  --tw-hue-rotate:  ;
+  --tw-invert:  ;
+  --tw-saturate:  ;
+  --tw-sepia:  ;
+  --tw-drop-shadow:  ;
+  --tw-backdrop-blur:  ;
+  --tw-backdrop-brightness:  ;
+  --tw-backdrop-contrast:  ;
+  --tw-backdrop-grayscale:  ;
+  --tw-backdrop-hue-rotate:  ;
+  --tw-backdrop-invert:  ;
+  --tw-backdrop-opacity:  ;
+  --tw-backdrop-saturate:  ;
+  --tw-backdrop-sepia:  ;
+  --tw-contain-size:  ;
+  --tw-contain-layout:  ;
+  --tw-contain-paint:  ;
+  --tw-contain-style:  ;
+}
+
+/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
+
+/*
+1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
+2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
+*/
+
+*,
+::before,
+::after {
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+/*
+1. Use a consistent sensible line-height in all browsers.
+2. Prevent adjustments of font size after orientation changes in iOS.
+3. Use a more readable tab size.
+4. Use the user's configured `sans` font-family by default.
+5. Use the user's configured `sans` font-feature-settings by default.
+6. Use the user's configured `sans` font-variation-settings by default.
+7. Disable tap highlights on iOS
+*/
+
+html,
+:host {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */ /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
+}
+
+/*
+1. Remove the margin in all browsers.
+2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
+*/
+
+body {
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
+}
+
+/*
+1. Add the correct height in Firefox.
+2. Correct the inheritance of border color in Firefox. (https://bugzilla.mozilla.org/show_bug.cgi?id=190655)
+3. Ensure horizontal rules are visible by default.
+*/
+
+hr {
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
+}
+
+/*
+Add the correct text decoration in Chrome, Edge, and Safari.
+*/
+
+abbr:where([title]) {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+/*
+Remove the default font size and weight for headings.
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/*
+Reset links to optimize for opt-in styling instead of opt-out.
+*/
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+Add the correct font weight in Edge and Safari.
+*/
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/*
+1. Use the user's configured `mono` font-family by default.
+2. Use the user's configured `mono` font-feature-settings by default.
+3. Use the user's configured `mono` font-variation-settings by default.
+4. Correct the odd `em` font sizing in all browsers.
+*/
+
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
+}
+
+/*
+Add the correct font size in all browsers.
+*/
+
+small {
+  font-size: 80%;
+}
+
+/*
+Prevent `sub` and `sup` elements from affecting the line height in all browsers.
+*/
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/*
+1. Remove text indentation from table contents in Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=999088, https://bugs.webkit.org/show_bug.cgi?id=201297)
+2. Correct table border color inheritance in all Chrome and Safari. (https://bugs.chromium.org/p/chromium/issues/detail?id=935729, https://bugs.webkit.org/show_bug.cgi?id=195016)
+3. Remove gaps between table borders by default.
+*/
+
+table {
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
+}
+
+/*
+1. Change the font styles in all browsers.
+2. Remove the margin in Firefox and Safari.
+3. Remove default padding in all browsers.
+*/
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
+}
+
+/*
+Remove the inheritance of text transform in Edge and Firefox.
+*/
+
+button,
+select {
+  text-transform: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Remove default button styles.
+*/
+
+button,
+input:where([type='button']),
+input:where([type='reset']),
+input:where([type='submit']) {
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
+}
+
+/*
+Use the modern Firefox focus style for all focusable elements.
+*/
+
+:-moz-focusring {
+  outline: auto;
+}
+
+/*
+Remove the additional `:invalid` styles in Firefox. (https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737)
+*/
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/*
+Add the correct vertical alignment in Chrome and Firefox.
+*/
+
+progress {
+  vertical-align: baseline;
+}
+
+/*
+Correct the cursor style of increment and decrement buttons in Safari.
+*/
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/*
+1. Correct the odd appearance in Chrome and Safari.
+2. Correct the outline style in Safari.
+*/
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/*
+Remove the inner padding in Chrome and Safari on macOS.
+*/
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/*
+1. Correct the inability to style clickable types in iOS and Safari.
+2. Change font properties to `inherit` in Safari.
+*/
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/*
+Add the correct display in Chrome and Safari.
+*/
+
+summary {
+  display: list-item;
+}
+
+/*
+Removes the default spacing and border for appropriate elements.
+*/
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+  margin: 0;
+}
+
+fieldset {
+  margin: 0;
+  padding: 0;
+}
+
+legend {
+  padding: 0;
+}
+
+ol,
+ul,
+menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+Reset default styling for dialogs.
+*/
+
+dialog {
+  padding: 0;
+}
+
+/*
+Prevent resizing textareas horizontally by default.
+*/
+
+textarea {
+  resize: vertical;
+}
+
+/*
+1. Reset the default placeholder opacity in Firefox. (https://github.com/tailwindlabs/tailwindcss/issues/3300)
+2. Set the default placeholder color to the user's configured gray 400 color.
+*/
+
+input::placeholder,
+textarea::placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
+/*
+Set the default cursor for buttons.
+*/
+
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+/*
+Make sure disabled buttons don't get the pointer cursor.
+*/
+
+:disabled {
+  cursor: default;
+}
+
+/*
+1. Make replaced elements `display: block` by default. (https://github.com/mozdevs/cssremedy/issues/14)
+2. Add `vertical-align: middle` to align replaced elements more sensibly by default. (https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210)
+   This can trigger a poorly considered lint error in some tools but is included by design.
+*/
+
+img,
+svg,
+video,
+canvas,
+audio,
+iframe,
+embed,
+object {
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
+}
+
+/*
+Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
+*/
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make elements with the HTML hidden attribute stay hidden by default */
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none;
+}
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
+.mt-4{
+  margin-top: 1rem;
+}
+.flex{
+  display: flex;
+}
+.h-20{
+  height: 5rem;
+}
+.h-\[5\.375rem\]{
+  height: 5.375rem;
+}
+.h-full{
+  height: 100%;
+}
+.w-64{
+  width: 16rem;
+}
+.w-full{
+  width: 100%;
+}
+.max-w-\[1512px\]{
+  max-width: 1512px;
+}
+.items-center{
+  align-items: center;
+}
+.justify-between{
+  justify-content: space-between;
+}
+.bg-\[\#FFDE00\]{
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 222 0 / var(--tw-bg-opacity, 1));
+}
+.object-contain{
+  object-fit: contain;
+}
+.px-\[160px\]{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+.outline{
+  outline-style: solid;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*# sourceMappingURL=styles.css.map*/
