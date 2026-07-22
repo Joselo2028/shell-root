@@ -4,7 +4,7 @@ import { loadRemoteModule } from '@angular-architects/module-federation';
 import { environment } from '../environments/environment';
 
 export const routes: Routes = [
-  {
+  /*  {
     path: '',
     loadComponent: () =>
       loadRemoteModule({
@@ -12,8 +12,7 @@ export const routes: Routes = [
         remoteEntry: environment.remotes.landing,
         exposedModule: './Landing',
       }).then((m) => m.LandingComponent),
-  },
-
+  }, */
   /*  {
     path: 'auth',
     loadComponent: () =>
@@ -133,9 +132,8 @@ export const routes: Routes = [
         exposedModule: './Videoloterias',
       }).then((m) => m.VideoloteriasComponent),
   }, */
-
-  {
+  /*  {
     path: '**',
     redirectTo: '',
-  },
+  }, */
 ];
