@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { loadRemoteModule } from '@angular-architects/module-federation';
 
 import { environment } from '../environments/environment';
+import { ShellComponent } from './shell/shell.component';
 
 export const routes: Routes = [
   /*  {
@@ -136,4 +137,13 @@ export const routes: Routes = [
     path: '**',
     redirectTo: '',
   }, */
+
+  {
+    path: '',
+    component: ShellComponent,
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  },
 ];
