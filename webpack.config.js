@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const {
   shareAll,
   withModuleFederationPlugin,
@@ -8,9 +9,16 @@ const moduleFederationConfig = withModuleFederationPlugin({
   remotes: {},
 
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({
+      singleton: true,
+      strictVersion: true,
+      requiredVersion: 'auto',
+    }),
   },
 });
 
-moduleFederationConfig.output.publicPath = process.env.PUBLIC_PATH;
+// Permite que Webpack detecte automáticamente la URL
+// (localhost en desarrollo y GitHub Pages en producción)
+moduleFederationConfig.output.publicPath = 'auto';
+
 module.exports = moduleFederationConfig;
