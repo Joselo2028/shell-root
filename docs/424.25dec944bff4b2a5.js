@@ -1,1 +1,2728 @@
-(self.webpackChunkshell_root=self.webpackChunkshell_root||[]).push([[424],{424(mt,dt,c){var y=c(1228),t=c(1913),_=c(3367),p=c(8993),l=c(4866);const h="auth-session";let C=(()=>{class e{saveSession(r){localStorage.setItem(h,JSON.stringify(r))}getSession(){const r=localStorage.getItem(h);return r?JSON.parse(r):null}clearSession(){localStorage.removeItem(h)}hasSession(){return null!==this.getSession()}getAccessToken(){return this.getSession()?.accessToken??null}getRefreshToken(){return this.getSession()?.refreshToken??null}getUserName(){return this.getSession()?.user.name??null}static \u0275fac=function(n){return new(n||e)};static \u0275prov=t.\u0275\u0275defineInjectable({token:e,factory:e.\u0275fac,providedIn:"root"})}return e})();const m_auth_authBaseUrl="https://api.ec-qas.latinka.com.pe",m_auth_pamBaseUrl="http://uat.pam.seekdev.com",m_auth_pamFastTokenPath="/auth/pam/token/fast",m_auth_pamTokenExchangePath="/auth/pam/token/exchange",m_auth_refreshPath="/auth/refresh",m_auth_logoutPath="/auth/logout",m_auth_backfrontLoginPath="/backfront-identity/api/v1/identity/login";let b=(()=>{class e{http=(0,t.inject)(p.HttpClient);authStorage=(0,t.inject)(C);authBaseUrl=m_auth_authBaseUrl;pamBaseUrl=m_auth_pamBaseUrl;pamFastTokenUrl=`${this.authBaseUrl}${m_auth_pamFastTokenPath}`;pamTokenExchangeUrl=`${this.authBaseUrl}${m_auth_pamTokenExchangePath}`;backfrontLoginUrl=`${this.pamBaseUrl}${m_auth_backfrontLoginPath}`;refreshUrl=`${this.authBaseUrl}${m_auth_refreshPath}`;logoutUrl=`${this.authBaseUrl}${m_auth_logoutPath}`;session=(0,t.signal)(this.authStorage.getSession());isLoggedIn=(0,t.computed)(()=>null!==this.session());currentUser=(0,t.computed)(()=>this.session()?.user??null);userName=(0,t.computed)(()=>this.session()?.user.name??"");isStartingLogin=(0,t.signal)(!1);isLoggingOut=(0,t.signal)(!1);getAccessToken(){return this.session()?.accessToken??null}startPamLogin(){this.isStartingLogin.set(!0),this.getPamFastToken().pipe((0,l.finalize)(()=>this.isStartingLogin.set(!1))).subscribe({next:r=>{console.log("Respuesta PAM:",r),r.redirect&&window.open(r.redirect,"_blank","noopener,noreferrer")},error:r=>{console.error("Error iniciando login PAM",r)}})}getPamFastToken(){return this.http.get(this.pamFastTokenUrl)}loginBackfront(r){return this.http.post(this.backfrontLoginUrl,r)}loginBackfrontAndExchange(r){return this.loginBackfront(r).pipe((0,l.tap)(n=>console.log("Login Backfront OK:",n)),(0,l.switchMap)(n=>this.exchangePamToken(n.token)))}exchangePamToken(r){return this.http.post(this.pamTokenExchangeUrl,{securityToken:r}).pipe((0,l.tap)(o=>this.setSession(o)))}refreshSession(){const r=this.session();return r?this.http.post(this.refreshUrl,{refreshToken:r.refreshToken,username:r.user.clientId}).pipe((0,l.map)(o=>{const a={...r,accessToken:o.accessToken,refreshToken:o.refreshToken,idToken:o.idToken,tokenType:o.tokenType,expiresIn:o.expiresIn};return this.setSession(a),a})):(0,l.throwError)(()=>new Error("No existe sesi\xf3n para refrescar"))}logout(){const r=this.session();r?(this.isLoggingOut.set(!0),this.http.post(this.logoutUrl,{refreshToken:r.refreshToken}).pipe((0,l.finalize)(()=>{this.clearSession(),this.isLoggingOut.set(!1)})).subscribe({next:()=>console.log("Logout backend OK"),error:o=>console.error("Error ejecutando logout backend",o)})):this.clearSession()}clearSession(){this.authStorage.clearSession(),this.session.set(null)}setSession(r){this.authStorage.saveSession(r),this.session.set(r)}static \u0275fac=function(n){return new(n||e)};static \u0275prov=t.\u0275\u0275defineInjectable({token:e,factory:e.\u0275fac,providedIn:"root"})}return e})();function w(e,i){if(1&e&&(t.\u0275\u0275domElementStart(0,"span"),t.\u0275\u0275text(1),t.\u0275\u0275domElementEnd()),2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275advance(),t.\u0275\u0275textInterpolate(r.label())}}function M(e,i){1&e&&t.\u0275\u0275domElement(0,"img",1)}let d=(()=>{class e{label=t.input.required();variant=(0,t.input)("primary");type=(0,t.input)("button");disabled=(0,t.input)(!1);static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-button"]],inputs:{label:[1,"label"],variant:[1,"variant"],type:[1,"type"],disabled:[1,"disabled"]},decls:3,vars:14,consts:[[1,"button",3,"type","disabled"],["src","assets/images/arrow-right.svg","alt","","aria-hidden","true",1,"button__icon"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"button",0),t.\u0275\u0275conditionalCreate(1,w,2,1,"span"),t.\u0275\u0275conditionalCreate(2,M,1,0,"img",1),t.\u0275\u0275domElementEnd()),2&n&&(t.\u0275\u0275classProp("button--primary","primary"===o.variant())("button--secondary","secondary"===o.variant())("button--danger","danger"===o.variant())("button--outline","outline"===o.variant())("button--outline-circle","outline-circle"===o.variant()),t.\u0275\u0275domProperty("type",o.type())("disabled",o.disabled()),t.\u0275\u0275advance(),t.\u0275\u0275conditional("outline-circle"!==o.variant()?1:-1),t.\u0275\u0275advance(),t.\u0275\u0275conditional("outline"===o.variant()||"outline-circle"===o.variant()?2:-1))},styles:[".button[_ngcontent-%COMP%]{display:inline-flex;justify-content:center;align-items:center;width:var(--button-width);height:var(--button-height);padding:0;border:var(--button-border-width) solid var(--brand-black);border-radius:var(--button-radius);font-family:var(--font-primary);font-size:var(--button-font-size);font-weight:var(--font-weight-semibold);line-height:1;cursor:pointer;transition:opacity .2s ease}.button--secondary[_ngcontent-%COMP%]{background:var(--brand-white);color:var(--brand-green)}.button--primary[_ngcontent-%COMP%]{background:var(--brand-green);color:var(--brand-white)}.button[_ngcontent-%COMP%]:hover{opacity:.92}.button--danger[_ngcontent-%COMP%]{min-width:var(--play-button-width);max-width:var(--play-button-max-width);height:var(--play-button-height);padding:var(--play-button-padding-y) var(--play-button-padding-x);display:inline-flex;justify-content:center;align-items:center;gap:var(--play-button-gap);border:none;border-radius:var(--play-button-radius);background:var(--play-button-color);color:var(--brand-white);font-family:var(--font-primary);font-size:var(--play-button-font-size);font-weight:var(--font-weight-bold);line-height:var(--play-button-line-height);letter-spacing:var(--play-button-letter-spacing);text-align:center;white-space:nowrap;cursor:pointer}.button--outline[_ngcontent-%COMP%]{width:var(--outline-button-width);height:var(--outline-button-height);display:inline-flex;justify-content:center;align-items:center;gap:var(--outline-button-gap);border:var(--outline-button-border-width) solid #cb2f1f;border-radius:var(--outline-button-radius);background:var(--brand-white);color:#cb2f1f;font-family:var(--font-primary);font-size:var(--outline-button-font-size);font-weight:var(--font-weight-semibold);cursor:pointer}.button--outline[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.875rem;height:.875rem;object-fit:contain;flex-shrink:0}.button--outline-circle[_ngcontent-%COMP%]{width:2.75rem;height:2.75rem;min-width:2.75rem;padding:0;display:inline-flex;justify-content:center;align-items:center;border:1px solid #cb2f1f;border-radius:50%;background:var(--brand-white);color:#cb2f1f;cursor:pointer}.button--outline-circle[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.875rem;height:.875rem;object-fit:contain;flex-shrink:0}@media(max-width:480px){.button[_ngcontent-%COMP%]{width:5.75rem;height:2.25rem;font-size:.75rem}.button--danger[_ngcontent-%COMP%]{min-width:8.625rem;height:2.125rem;padding:0 1rem;font-size:.75rem;line-height:1rem}.button--outline[_ngcontent-%COMP%]{width:6.5rem;height:2.25rem;font-size:.875rem}.button--outline[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.75rem;height:.75rem}.button--outline-circle[_ngcontent-%COMP%]{width:2.25rem;height:2.25rem;min-width:2.25rem}.button--outline-circle[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.75rem;height:.75rem}}"]})}return e})();function x(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275domElementStart(0,"div",6)(1,"button",7),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.startLogin())}),t.\u0275\u0275domElement(2,"img",8),t.\u0275\u0275domElementStart(3,"span"),t.\u0275\u0275text(4),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(5,"a",9),t.\u0275\u0275domElement(6,"img",10),t.\u0275\u0275domElementStart(7,"span"),t.\u0275\u0275text(8,"Reg\xedstrate"),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(9,"nav",11)(10,"a",12),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(11,"span",13),t.\u0275\u0275domElement(12,"img",14),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(13,"span"),t.\u0275\u0275text(14,"Promociones"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(15,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(16,"span",13),t.\u0275\u0275domElement(17,"img",16),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(18,"span"),t.\u0275\u0275text(19,"Ayuda"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElement(20,"img",17),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(21,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(22,"span",13),t.\u0275\u0275domElement(23,"img",18),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(24,"span"),t.\u0275\u0275text(25,"Casino Te Apuesto"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(26,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(27,"span",13),t.\u0275\u0275domElement(28,"img",19),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(29,"span"),t.\u0275\u0275text(30,"D\xf3nde Comprar"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(31,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(32,"span",13),t.\u0275\u0275domElement(33,"img",20),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(34,"span"),t.\u0275\u0275text(35,"Cont\xe1ctanos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(36,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(37,"span",13),t.\u0275\u0275domElement(38,"img",21),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(39,"span"),t.\u0275\u0275text(40,"Mira Tu Suerte"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(41,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(42,"span",13),t.\u0275\u0275domElement(43,"img",22),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(44,"span"),t.\u0275\u0275text(45,"Ver Resultados"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElement(46,"img",17),t.\u0275\u0275domElementEnd()()}if(2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275advance(4),t.\u0275\u0275textInterpolate(r.isStartingLogin()?"Espere...":"Ingresa")}}function P(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275domElementStart(0,"div",23)(1,"div",24),t.\u0275\u0275text(2,"R"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(3,"div")(4,"p",25),t.\u0275\u0275text(5,"Bienvenido"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(6,"p",26),t.\u0275\u0275text(7),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(8,"div",27)(9,"div",28)(10,"div",29)(11,"span"),t.\u0275\u0275text(12,"Saldo Disponible"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(13,"strong"),t.\u0275\u0275text(14,"S/ 0.00"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(15,"div",29)(16,"span"),t.\u0275\u0275text(17,"Bonos"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(18,"strong"),t.\u0275\u0275text(19,"S/ 0.00"),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(20,"div",30)(21,"button",31),t.\u0275\u0275domElement(22,"img",32),t.\u0275\u0275text(23," Recargar "),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(24,"button",31),t.\u0275\u0275text(25,"Retirar"),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(26,"nav",33)(27,"a",34),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(28,"span",13),t.\u0275\u0275domElement(29,"img",35),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(30,"span"),t.\u0275\u0275text(31,"Notificaciones"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(32,"a",36),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(33,"span",13),t.\u0275\u0275domElement(34,"img",37),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(35,"span"),t.\u0275\u0275text(36,"Bonos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(37,"a",38),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(38,"span",13),t.\u0275\u0275domElement(39,"img",39),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(40,"span"),t.\u0275\u0275text(41,"Retirar Mis Premios"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(42,"a",40),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(43,"span",13),t.\u0275\u0275domElement(44,"img",14),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(45,"span"),t.\u0275\u0275text(46,"Promociones"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElement(47,"img",17),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(48,"a",41),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(49,"span",13),t.\u0275\u0275domElement(50,"img",42),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(51,"span"),t.\u0275\u0275text(52,"Mis Movimientos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(53,"a",43),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(54,"span",13),t.\u0275\u0275domElement(55,"img",44),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(56,"span"),t.\u0275\u0275text(57,"Mis Jugadas"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(58,"a",45),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(59,"span",13),t.\u0275\u0275domElement(60,"img",44),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(61,"span"),t.\u0275\u0275text(62,"Mis Suscripciones"),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(63,"nav",46)(64,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(65,"span",13),t.\u0275\u0275domElement(66,"img",16),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(67,"span"),t.\u0275\u0275text(68,"Ayuda"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElement(69,"img",17),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(70,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(71,"span",13),t.\u0275\u0275domElement(72,"img",18),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(73,"span"),t.\u0275\u0275text(74,"Casino Te Apuesto"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(75,"a",15),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.close())}),t.\u0275\u0275domElementStart(76,"span",13),t.\u0275\u0275domElement(77,"img",19),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(78,"span"),t.\u0275\u0275text(79,"D\xf3nde Comprar"),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(80,"button",47),t.\u0275\u0275domListener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.closeSession())}),t.\u0275\u0275domElement(81,"img",48),t.\u0275\u0275text(82," Cerrar Sesi\xf3n "),t.\u0275\u0275domElementEnd()}if(2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275advance(7),t.\u0275\u0275textInterpolate1("Hola, ",r.userName())}}let v=(()=>{class e{isOpen=(0,t.input)(!1);isLoggedIn=(0,t.input)(!1);userName=(0,t.input)("");isStartingLogin=(0,t.input)(!1);closeSidebar=(0,t.output)();login=(0,t.output)();logout=(0,t.output)();close(){this.closeSidebar.emit()}startLogin(){this.login.emit()}closeSession(){this.logout.emit()}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-mobile-sidebar"]],inputs:{isOpen:[1,"isOpen"],isLoggedIn:[1,"isLoggedIn"],userName:[1,"userName"],isStartingLogin:[1,"isStartingLogin"]},outputs:{closeSidebar:"closeSidebar",login:"login",logout:"logout"},decls:9,vars:3,consts:[[1,"mobile-sidebar"],["type","button","aria-label","Cerrar men\xfa",1,"mobile-sidebar__overlay",3,"click"],[1,"mobile-sidebar__panel"],[1,"mobile-sidebar__header"],["src","assets/images/logo-tinka.svg","alt","Tinka"],["type","button","aria-label","Cerrar men\xfa",1,"mobile-sidebar__close",3,"click"],[1,"mobile-sidebar__actions"],["type","button",1,"mobile-sidebar__button",3,"click"],["src","assets/icons/menu-login.svg","alt",""],["href","#",1,"mobile-sidebar__button"],["src","assets/icons/menu-register.svg","alt",""],[1,"mobile-sidebar__menu"],["href","#promociones",1,"mobile-sidebar__item",3,"click"],[1,"mobile-sidebar__icon"],["src","assets/icons/menu-promotions.svg","alt",""],["href","#",1,"mobile-sidebar__item",3,"click"],["src","assets/icons/menu-help.svg","alt",""],["src","assets/icons/menu-chevron.svg","alt","",1,"mobile-sidebar__arrow"],["src","assets/icons/menu-casino.svg","alt",""],["src","assets/icons/menu-location.svg","alt",""],["src","assets/icons/menu-contact.svg","alt",""],["src","assets/icons/menu-luck.svg","alt",""],["src","assets/icons/menu-results.svg","alt",""],[1,"mobile-sidebar__profile"],[1,"mobile-sidebar__avatar"],[1,"mobile-sidebar__welcome"],[1,"mobile-sidebar__name"],[1,"mobile-sidebar__wallet"],[1,"mobile-sidebar__wallet-row"],[1,"mobile-sidebar__wallet-info"],[1,"mobile-sidebar__wallet-actions"],["type","button"],["src","assets/icons/menu-plus.svg","alt",""],[1,"mobile-sidebar__menu","mobile-sidebar__menu--logged"],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--plain",3,"click"],["src","assets/icons/menu-notifications.svg","alt",""],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--bonus",3,"click"],["src","assets/icons/menu-bonus.svg","alt",""],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--prizes",3,"click"],["src","assets/icons/menu-prizes.svg","alt",""],["href","#promociones",1,"mobile-sidebar__item","mobile-sidebar__item--promotions",3,"click"],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--movements",3,"click"],["src","assets/icons/menu-movements.svg","alt",""],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--plays",3,"click"],["src","assets/icons/menu-subscriptions.svg","alt",""],["href","#",1,"mobile-sidebar__item","mobile-sidebar__item--subscriptions",3,"click"],[1,"mobile-sidebar__menu","mobile-sidebar__menu--bottom"],["type","button",1,"mobile-sidebar__logout",3,"click"],["src","assets/icons/menu-logout.svg","alt",""]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0)(1,"button",1),t.\u0275\u0275domListener("click",function(){return o.close()}),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(2,"aside",2)(3,"div",3),t.\u0275\u0275domElement(4,"img",4),t.\u0275\u0275domElementStart(5,"button",5),t.\u0275\u0275domListener("click",function(){return o.close()}),t.\u0275\u0275text(6," \xd7 "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275conditionalCreate(7,x,47,1)(8,P,83,1),t.\u0275\u0275domElementEnd()()),2&n&&(t.\u0275\u0275classProp("mobile-sidebar--open",o.isOpen()),t.\u0275\u0275advance(7),t.\u0275\u0275conditional(o.isLoggedIn()?8:7))},styles:[".mobile-sidebar[_ngcontent-%COMP%]{display:none}@media(max-width:480px){.mobile-sidebar[_ngcontent-%COMP%]{position:fixed;inset:0;z-index:1000;display:block;pointer-events:none}.mobile-sidebar--open[_ngcontent-%COMP%]{pointer-events:auto}.mobile-sidebar__overlay[_ngcontent-%COMP%]{position:absolute;inset:0;padding:0;border:0;background:#0000008c;opacity:0;transition:opacity .25s ease}.mobile-sidebar--open[_ngcontent-%COMP%]   .mobile-sidebar__overlay[_ngcontent-%COMP%]{opacity:1}.mobile-sidebar__panel[_ngcontent-%COMP%]{position:relative;z-index:1;width:21.25rem;max-width:21.25rem;height:100vh;min-height:0;padding:.9375rem 0;background:#fefefe;transform:translate(-100%);transition:transform .28s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}.mobile-sidebar__panel[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.mobile-sidebar--open[_ngcontent-%COMP%]   .mobile-sidebar__panel[_ngcontent-%COMP%]{transform:translate(0)}.mobile-sidebar__header[_ngcontent-%COMP%]{width:21.25rem;height:3.3125rem;padding:0 .9375rem .9375rem;display:flex;align-items:center;justify-content:space-between;background:#fefefe;border-bottom:1px solid #e5e7eb}.mobile-sidebar__header[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:6.829375rem;height:2.3125rem;object-fit:contain}.mobile-sidebar__close[_ngcontent-%COMP%]{width:1.5rem;height:1.5rem;border:0;background:transparent;font-size:1.5rem;line-height:1;color:#6b7280;cursor:pointer}.mobile-sidebar__actions[_ngcontent-%COMP%]{width:19.25rem;margin:.9375rem auto 1.25rem;display:flex;flex-direction:column;gap:.5rem}.mobile-sidebar__button[_ngcontent-%COMP%]{width:19.25rem;height:2.75rem;padding:.75rem 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;border-radius:.75rem;background:#006820;color:#fff;text-decoration:none;font-family:var(--font-primary);font-size:.75rem;font-weight:600;line-height:1;text-transform:uppercase}.mobile-sidebar__button[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}.mobile-sidebar__menu[_ngcontent-%COMP%]{width:19.375rem;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem;padding-bottom:1.5rem}.mobile-sidebar__item[_ngcontent-%COMP%]{width:19.375rem;height:2.25rem;display:flex;align-items:center;gap:.9375rem;border-radius:.5rem;color:#374151;text-decoration:none;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.5rem;letter-spacing:.03125rem}.mobile-sidebar__icon[_ngcontent-%COMP%]{width:2.25rem;height:2.25rem;flex-shrink:0}.mobile-sidebar__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:2.25rem;height:2.25rem;object-fit:contain}.mobile-sidebar__item[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:last-of-type{flex:1}.mobile-sidebar__arrow[_ngcontent-%COMP%]{width:1.25rem;height:1.25rem;margin-left:auto;object-fit:contain;transform:rotate(90deg)}.mobile-sidebar__profile[_ngcontent-%COMP%]{width:19.375rem;height:3rem;margin:.9375rem auto;display:flex;align-items:center;gap:.75rem}.mobile-sidebar__avatar[_ngcontent-%COMP%]{width:3rem;height:3rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:#006820;color:#fff;font-family:Segoe UI Symbol,sans-serif;font-size:1.125rem;line-height:1.75rem}.mobile-sidebar__welcome[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.5rem;letter-spacing:.03125rem;text-transform:uppercase;color:#6b7280}.mobile-sidebar__name[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:1.5rem;font-weight:700;line-height:1.5rem;letter-spacing:.03125rem;text-transform:capitalize;color:#111827}.mobile-sidebar__wallet[_ngcontent-%COMP%]{width:19.375rem;height:9rem;margin:0 auto .9375rem;padding:.75rem .9375rem;border-radius:.75rem;background:linear-gradient(115.67deg,#ffde00 1.21%,#fff 153.45%);box-shadow:0 4px 6px -4px #064e3b33,0 10px 15px -3px #064e3b33}.mobile-sidebar__wallet-row[_ngcontent-%COMP%]{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:.75rem}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:.25rem}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:400;line-height:1.25rem;color:#006820}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:1.75rem;font-weight:400;line-height:2rem;color:#006820}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]{width:17.5rem;height:3.375rem;display:grid;grid-template-columns:repeat(2,8.375rem);gap:.75rem;padding-top:.75rem}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]{height:2.625rem;padding:.6875rem 1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;border:0;border-radius:.5rem;background:#fff;color:#006820;font-family:var(--font-primary);font-size:.875rem;font-weight:400;line-height:1.25rem;cursor:pointer}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}.mobile-sidebar__menu--logged[_ngcontent-%COMP%]{gap:.5rem;margin-bottom:.9375rem}.mobile-sidebar__menu--bottom[_ngcontent-%COMP%]{gap:.5rem;padding-top:.9375rem;border-top:1px solid #e5e7eb}.mobile-sidebar__menu--logged[_ngcontent-%COMP%]   .mobile-sidebar__item[_ngcontent-%COMP%], .mobile-sidebar__menu--bottom[_ngcontent-%COMP%]   .mobile-sidebar__item[_ngcontent-%COMP%]{height:3.25rem;padding:.5rem}.mobile-sidebar__item--bonus[_ngcontent-%COMP%]{background:#e5f6eb}.mobile-sidebar__item--prizes[_ngcontent-%COMP%]{background:#eff2fb}.mobile-sidebar__item--promotions[_ngcontent-%COMP%]{background:#f5f4f7}.mobile-sidebar__item--movements[_ngcontent-%COMP%]{background:#f4f1fb}.mobile-sidebar__item--plays[_ngcontent-%COMP%]{background:#fff4dc}.mobile-sidebar__item--subscriptions[_ngcontent-%COMP%]{background:#fff0f4}.mobile-sidebar__logout[_ngcontent-%COMP%]{position:sticky;bottom:-.9375rem;width:calc(100% + 1.875rem);height:3.5rem;margin-left:-.9375rem;margin-right:-.9375rem;margin-top:.9375rem;padding:1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;border:0;border-top:1px solid #e5e7eb;background:#ff1938;color:#fff;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.25rem;cursor:pointer}.mobile-sidebar__logout[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}}"]})}return e})(),O=(()=>{class e{userName=(0,t.input)("Usuario");logout=(0,t.output)();onLogout(){this.logout.emit()}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-user-session"]],inputs:{userName:[1,"userName"]},outputs:{logout:"logout"},decls:8,vars:1,consts:[[1,"user-sesion"],["type","button",1,"user-sesion__button"],[1,"user-sesion__avatar"],[1,"user-sesion__name"],["type","button",1,"user-sesion__logout",3,"click"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0)(1,"button",1)(2,"span",2),t.\u0275\u0275text(3,"\u{1f464}"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(4,"span",3),t.\u0275\u0275text(5),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(6,"button",4),t.\u0275\u0275domListener("click",function(){return o.onLogout()}),t.\u0275\u0275text(7,"Logout"),t.\u0275\u0275domElementEnd()()),2&n&&(t.\u0275\u0275advance(5),t.\u0275\u0275textInterpolate(o.userName()))},styles:[".user-sesion[_ngcontent-%COMP%]{display:flex;align-items:center;gap:var(--button-gap)}.user-sesion__button[_ngcontent-%COMP%], .user-sesion__logout[_ngcontent-%COMP%]{height:2.5rem;padding:0 1rem;border:1px solid #002b21;border-radius:.5rem;background:#0b6b3a;color:#fff;border:none;font-weight:600;cursor:pointer}.user-sesion__button[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem;background:#fff;color:#0b6b3a;border:1px solid #0B6B3A}.user-sesion__avatar[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center}.user-sesion__name[_ngcontent-%COMP%]{white-space:nowrap}"]})}return e})(),E=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-hamburger-button"]],decls:4,vars:0,consts:[["type","button","aria-label","Abrir men\xfa",1,"hamburger-button"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"button",0),t.\u0275\u0275domElement(1,"span")(2,"span")(3,"span"),t.\u0275\u0275domElementEnd())},styles:[".hamburger-button[_ngcontent-%COMP%]{width:var(--button-height);height:var(--button-height);display:flex;justify-content:center;align-items:center;flex-direction:column;gap:.25rem;padding:0;background:transparent;border:none;cursor:pointer}.hamburger-button[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{width:1.5rem;height:.125rem;border-radius:999px;background:var(--brand-green)}"]})}return e})();function k(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275elementStart(0,"app-button",10),t.\u0275\u0275listener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.startLogin())}),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(1,"app-button",11)}if(2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275property("label",r.isStartingLogin()?"Espere...":"Iniciar Sesi\xf3n")}}function S(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275elementStart(0,"app-user-session",12),t.\u0275\u0275listener("logout",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.logout())}),t.\u0275\u0275elementEnd()}if(2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275property("userName",r.userName())}}function z(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275elementStart(0,"app-button",10),t.\u0275\u0275listener("click",function(){t.\u0275\u0275restoreView(r);const o=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(o.startLogin())}),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(1,"app-button",11)}if(2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275property("label",r.isStartingLogin()?"Espere...":"Ingresar")}}let j=(()=>{class e{authService=(0,t.inject)(b);isMobileMenuOpen=(0,t.signal)(!1);isLoggedIn=this.authService.isLoggedIn;userName=this.authService.userName;isStartingLogin=this.authService.isStartingLogin;openMobileMenu(){this.isMobileMenuOpen.set(!0)}closeMobileMenu(){this.isMobileMenuOpen.set(!1)}startLogin(){this.authService.startPamLogin()}logout(){this.authService.logout()}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-header"]],decls:12,vars:6,consts:[[1,"header"],[1,"header__inner"],[1,"header__logo"],["src","assets/images/logo-tinka.svg","alt","Logo La Tinka"],[1,"header__actions"],[1,"desktop-auth-actions"],[1,"desktop-user-session",3,"userName"],[1,"mobile-auth-actions"],[1,"header__hamburger",3,"click"],[3,"closeSidebar","login","logout","isOpen","isLoggedIn","userName","isStartingLogin"],["variant","secondary",3,"click","label"],["label","Registrarse","variant","primary"],[1,"desktop-user-session",3,"logout","userName"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"header",0)(1,"div",1)(2,"div",2),t.\u0275\u0275element(3,"img",3),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(4,"div",4)(5,"div",5),t.\u0275\u0275conditionalCreate(6,k,2,1)(7,S,1,1,"app-user-session",6),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(8,"div",7),t.\u0275\u0275conditionalCreate(9,z,2,1),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(10,"app-hamburger-button",8),t.\u0275\u0275listener("click",function(){return o.openMobileMenu()}),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(11,"app-mobile-sidebar",9),t.\u0275\u0275listener("closeSidebar",function(){return o.closeMobileMenu()})("login",function(){return o.startLogin()})("logout",function(){return o.logout()}),t.\u0275\u0275elementEnd()()),2&n&&(t.\u0275\u0275advance(6),t.\u0275\u0275conditional(o.isLoggedIn()?7:6),t.\u0275\u0275advance(3),t.\u0275\u0275conditional(o.isLoggedIn()?-1:9),t.\u0275\u0275advance(2),t.\u0275\u0275property("isOpen",o.isMobileMenuOpen())("isLoggedIn",o.isLoggedIn())("userName",o.userName())("isStartingLogin",o.isStartingLogin()))},dependencies:[d,E,v,O],styles:['@charset "UTF-8";.header[_ngcontent-%COMP%]{width:100%;height:5rem;background:var(--brand-yellow)}.header__inner[_ngcontent-%COMP%]{width:100%;max-width:90rem;height:100%;display:flex;align-items:center;justify-content:space-between;margin:0 auto;padding:0 10rem;box-sizing:border-box}.header__logo[_ngcontent-%COMP%]{display:flex;align-items:center;flex-shrink:0}.header__logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:8.8125rem;height:3rem;object-fit:contain}.header__actions[_ngcontent-%COMP%], .desktop-auth-actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:var(--button-gap)}.mobile-auth-actions[_ngcontent-%COMP%]{display:none}@media(min-width:481px)and (max-width:1024px){.header__inner[_ngcontent-%COMP%]{padding-inline:2rem}nav[_ngcontent-%COMP%], .header__nav[_ngcontent-%COMP%], .header__menu[_ngcontent-%COMP%]{gap:1rem}nav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], .header__nav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], .header__menu[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;white-space:nowrap}}@media(max-width:480px){.header[_ngcontent-%COMP%]{width:100%;height:4rem}.header__inner[_ngcontent-%COMP%]{width:100%;max-width:24.375rem;height:4rem;display:flex;align-items:center;justify-content:flex-start;margin:0 auto;padding:0 1.5rem;box-sizing:border-box}.header__logo[_ngcontent-%COMP%]{width:6.25rem;height:2.125rem;display:flex;align-items:center;flex:0 0 6.25rem}.header__logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:6.25rem;height:2.125rem;object-fit:contain}.header__actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:0;margin-left:2.125rem}.desktop-auth-actions[_ngcontent-%COMP%], .desktop-user-session[_ngcontent-%COMP%]{display:none}.mobile-auth-actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem}.mobile-auth-actions[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{display:block;width:5rem;height:2rem;flex:0 0 5rem;transform:none}.mobile-auth-actions[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]  button{width:5rem;min-width:5rem;height:2rem;min-height:2rem;padding:0;font-size:.75rem;line-height:.75rem;box-sizing:border-box}.header__hamburger[_ngcontent-%COMP%]{display:block;width:1.375rem;height:.875rem;flex:0 0 1.375rem;margin-left:.8125rem}.header__hamburger[_ngcontent-%COMP%]  button{width:1.375rem;height:.875rem;min-width:1.375rem;min-height:.875rem;padding:0}}']})}return e})(),T=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-footer"]],decls:231,vars:0,consts:[[1,"footer"],[1,"footer__main"],[1,"footer__container"],[1,"footer__top"],[1,"footer__brand"],["src","assets/images/logo-tinka-blanco.svg","alt","La Tinka",1,"footer__logo"],[1,"footer__menus","footer__menus--desktop"],[1,"footer__column"],[1,"footer__title"],[1,"footer__list"],["href","#",1,"footer__link"],[1,"footer__column","footer__column--company"],[1,"footer__social"],[1,"footer__social-title"],[1,"footer__social-icons"],["href","#","aria-label","Facebook",1,"footer__social-link"],["src","assets/images/facebook.svg","alt",""],["href","#","aria-label","Instagram",1,"footer__social-link"],["src","assets/images/instagram.svg","alt",""],["href","#","aria-label","TikTok",1,"footer__social-link"],["src","assets/images/tiktok.svg","alt",""],["href","#","aria-label","YouTube",1,"footer__social-link"],["src","assets/images/youtube.svg","alt",""],[1,"footer__menus-mobile"],[1,"footer__accordion"],[1,"footer__accordion-title"],[1,"footer__social","footer__social--mobile"],[1,"footer__section"],[1,"footer__section-title"],[1,"footer__payments"],[1,"footer__payment"],["src","assets/images/visa.svg","alt","Visa"],["src","assets/images/mastercard.svg","alt","Mastercard"],["src","assets/images/yape.svg","alt","Yape"],["src","assets/images/plin.svg","alt","Plin"],["src","assets/images/bcp.svg","alt","BCP"],["src","assets/images/ibk.svg","alt","Interbank"],["src","assets/images/pago-efectivo.svg","alt","PagoEfectivo"],["src","assets/images/bbva.svg","alt","BBVA"],["src","assets/images/tupay.svg","alt","TuPay"],["src","assets/images/sip.svg","alt","SIP"],[1,"footer__section","footer__section--certifications"],[1,"footer__certifications"],[1,"footer__certification"],["src","assets/images/37001.svg","alt","Certificaci\xf3n ISO 37001",1,"footer__certification-image","footer__certification-image--37001"],["src","assets/images/9001.svg","alt","Certificaci\xf3n ISO 9001",1,"footer__certification-image","footer__certification-image--9001"],["src","assets/images/icontec.svg","alt","ICONTEC",1,"footer__certification-image","footer__certification-image--icontec"],["src","assets/images/18.svg","alt","Solo para mayores de 18 a\xf1os",1,"footer__certification-image","footer__certification-image--18"],["src","assets/images/zona-segura.svg","alt","Zona segura",1,"footer__certification-image","footer__certification-image--safe"],["src","assets/images/wla.svg","alt","World Lottery Association",1,"footer__certification-image","footer__certification-image--wla"],["src","assets/images/libro-reclamaciones.png","alt","Libro de Reclamaciones",1,"footer__certification-image","footer__certification-image--book"],[1,"footer__bottom"],[1,"footer__bottom-container"],[1,"footer__bottom-brands"],["src","assets/images/logo-tinka.svg","alt","La Tinka",1,"footer__bottom-logo","footer__bottom-logo--tinka"],["src","assets/images/logo-te-apuesto.svg","alt","Te Apuesto",1,"footer__bottom-logo","footer__bottom-logo--te-apuesto"],[1,"footer__copyright"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"footer",0)(1,"div",1)(2,"div",2)(3,"div",3)(4,"div",4),t.\u0275\u0275domElement(5,"img",5),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(6,"div",6)(7,"div",7)(8,"h3",8),t.\u0275\u0275text(9,"Informaci\xf3n"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(10,"ul",9)(11,"li")(12,"a",10),t.\u0275\u0275text(13,"Aprende a jugar"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(14,"li")(15,"a",10),t.\u0275\u0275text(16,"Cont\xe1ctanos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(17,"li")(18,"a",10),t.\u0275\u0275text(19,"Reclama tu premio"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(20,"li")(21,"a",10),t.\u0275\u0275text(22," T\xe9rminos y condiciones "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(23,"li")(24,"a",10),t.\u0275\u0275text(25," Pol\xedtica de Datos Personales "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(26,"li")(27,"a",10),t.\u0275\u0275text(28,"Derechos ARCO"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(29,"li")(30,"a",10),t.\u0275\u0275text(31,"Reglamentos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(32,"li")(33,"a",10),t.\u0275\u0275text(34," Registro de Personas Prohibidas "),t.\u0275\u0275domElementEnd()()()(),t.\u0275\u0275domElementStart(35,"div",7)(36,"h3",8),t.\u0275\u0275text(37,"Juegos"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(38,"ul",9)(39,"li")(40,"a",10),t.\u0275\u0275text(41,"Tinka"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(42,"li")(43,"a",10),t.\u0275\u0275text(44,"K\xe1bala"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(45,"li")(46,"a",10),t.\u0275\u0275text(47,"Gana Diario"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(48,"li")(49,"a",10),t.\u0275\u0275text(50,"Kinelo"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(51,"li")(52,"a",10),t.\u0275\u0275text(53,"Ganagol"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(54,"li")(55,"a",10),t.\u0275\u0275text(56,"Te Apuesto"),t.\u0275\u0275domElementEnd()()()(),t.\u0275\u0275domElementStart(57,"div",11)(58,"h3",8),t.\u0275\u0275text(59,"La Tinka S.A."),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(60,"ul",9)(61,"li")(62,"a",10),t.\u0275\u0275text(63,"\xbfQui\xe9nes somos?"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(64,"li")(65,"a",10),t.\u0275\u0275text(66,"Prop\xf3sito"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(67,"li")(68,"a",10),t.\u0275\u0275text(69,"Valores"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(70,"li")(71,"a",10),t.\u0275\u0275text(72," Preguntas frecuentes "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(73,"li")(74,"a",10),t.\u0275\u0275text(75,"Juega Bien"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(76,"li")(77,"a",10),t.\u0275\u0275text(78," Trabaja con nosotros "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(79,"li")(80,"a",10),t.\u0275\u0275text(81," Canal de Integridad "),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(82,"div",12)(83,"p",13),t.\u0275\u0275text(84,"Encu\xe9ntranos en:"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(85,"div",14)(86,"a",15),t.\u0275\u0275domElement(87,"img",16),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(88,"a",17),t.\u0275\u0275domElement(89,"img",18),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(90,"a",19),t.\u0275\u0275domElement(91,"img",20),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(92,"a",21),t.\u0275\u0275domElement(93,"img",22),t.\u0275\u0275domElementEnd()()()()(),t.\u0275\u0275domElementStart(94,"div",23)(95,"details",24)(96,"summary",25),t.\u0275\u0275text(97,"Informaci\xf3n"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(98,"ul",9)(99,"li")(100,"a",10),t.\u0275\u0275text(101,"Aprende a jugar"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(102,"li")(103,"a",10),t.\u0275\u0275text(104,"Cont\xe1ctanos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(105,"li")(106,"a",10),t.\u0275\u0275text(107,"Reclama tu premio"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(108,"li")(109,"a",10),t.\u0275\u0275text(110," T\xe9rminos y condiciones "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(111,"li")(112,"a",10),t.\u0275\u0275text(113," Pol\xedtica de Datos Personales "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(114,"li")(115,"a",10),t.\u0275\u0275text(116,"Derechos ARCO"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(117,"li")(118,"a",10),t.\u0275\u0275text(119,"Reglamentos"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(120,"li")(121,"a",10),t.\u0275\u0275text(122," Registro de Personas Prohibidas "),t.\u0275\u0275domElementEnd()()()(),t.\u0275\u0275domElementStart(123,"details",24)(124,"summary",25),t.\u0275\u0275text(125,"Juegos"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(126,"ul",9)(127,"li")(128,"a",10),t.\u0275\u0275text(129,"Tinka"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(130,"li")(131,"a",10),t.\u0275\u0275text(132,"K\xe1bala"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(133,"li")(134,"a",10),t.\u0275\u0275text(135,"Gana Diario"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(136,"li")(137,"a",10),t.\u0275\u0275text(138,"Kinelo"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(139,"li")(140,"a",10),t.\u0275\u0275text(141,"Ganagol"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(142,"li")(143,"a",10),t.\u0275\u0275text(144,"Te Apuesto"),t.\u0275\u0275domElementEnd()()()(),t.\u0275\u0275domElementStart(145,"details",24)(146,"summary",25),t.\u0275\u0275text(147,"La Tinka S.A."),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(148,"ul",9)(149,"li")(150,"a",10),t.\u0275\u0275text(151,"\xbfQui\xe9nes somos?"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(152,"li")(153,"a",10),t.\u0275\u0275text(154,"Prop\xf3sito"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(155,"li")(156,"a",10),t.\u0275\u0275text(157,"Valores"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(158,"li")(159,"a",10),t.\u0275\u0275text(160," Preguntas frecuentes "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(161,"li")(162,"a",10),t.\u0275\u0275text(163,"Juega Bien"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(164,"li")(165,"a",10),t.\u0275\u0275text(166," Trabaja con nosotros "),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(167,"li")(168,"a",10),t.\u0275\u0275text(169," Canal de Integridad "),t.\u0275\u0275domElementEnd()()()(),t.\u0275\u0275domElementStart(170,"div",26)(171,"p",13),t.\u0275\u0275text(172,"Encu\xe9ntranos en:"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(173,"div",14)(174,"a",15),t.\u0275\u0275domElement(175,"img",16),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(176,"a",17),t.\u0275\u0275domElement(177,"img",18),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(178,"a",19),t.\u0275\u0275domElement(179,"img",20),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(180,"a",21),t.\u0275\u0275domElement(181,"img",22),t.\u0275\u0275domElementEnd()()()()(),t.\u0275\u0275domElementStart(182,"section",27)(183,"h3",28),t.\u0275\u0275text(184,"M\xe9todos de pago:"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(185,"div",29)(186,"div",30),t.\u0275\u0275domElement(187,"img",31),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(188,"div",30),t.\u0275\u0275domElement(189,"img",32),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(190,"div",30),t.\u0275\u0275domElement(191,"img",33),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(192,"div",30),t.\u0275\u0275domElement(193,"img",34),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(194,"div",30),t.\u0275\u0275domElement(195,"img",35),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(196,"div",30),t.\u0275\u0275domElement(197,"img",36),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(198,"div",30),t.\u0275\u0275domElement(199,"img",37),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(200,"div",30),t.\u0275\u0275domElement(201,"img",38),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(202,"div",30),t.\u0275\u0275domElement(203,"img",39),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(204,"div",30),t.\u0275\u0275domElement(205,"img",40),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(206,"section",41)(207,"h3",28),t.\u0275\u0275text(208,"Certificaciones:"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(209,"div",42)(210,"div",43),t.\u0275\u0275domElement(211,"img",44),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(212,"div",43),t.\u0275\u0275domElement(213,"img",45),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(214,"div",43),t.\u0275\u0275domElement(215,"img",46),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(216,"div",43),t.\u0275\u0275domElement(217,"img",47),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(218,"div",43),t.\u0275\u0275domElement(219,"img",48),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(220,"div",43),t.\u0275\u0275domElement(221,"img",49),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(222,"div",43),t.\u0275\u0275domElement(223,"img",50),t.\u0275\u0275domElementEnd()()()()(),t.\u0275\u0275domElementStart(224,"div",51)(225,"div",52)(226,"div",53),t.\u0275\u0275domElement(227,"img",54)(228,"img",55),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(229,"p",56),t.\u0275\u0275text(230,"La Tinka S.A. RUC 20506035121."),t.\u0275\u0275domElementEnd()()()())},styles:['@charset "UTF-8";.footer[_ngcontent-%COMP%]{width:100%;max-width:90rem;margin:3.125rem auto 0;font-family:var(--font-primary);color:var(--brand-white)}.footer__main[_ngcontent-%COMP%]{width:100%;background:var(--brand-green)}.footer__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:2rem 0 2.25rem;box-sizing:border-box}.footer__top[_ngcontent-%COMP%]{display:grid;grid-template-columns:14rem minmax(0,1fr);align-items:start;column-gap:5.25rem}.footer__brand[_ngcontent-%COMP%]{min-width:0}.footer__logo[_ngcontent-%COMP%]{display:block;width:10.875rem;height:auto;object-fit:contain}.footer__menus[_ngcontent-%COMP%]{min-width:0}.footer__menus--desktop[_ngcontent-%COMP%]{display:grid;grid-template-columns:minmax(12rem,1.25fr) minmax(7rem,.75fr) minmax(12rem,1fr);column-gap:4rem}.footer__menus-mobile[_ngcontent-%COMP%]{display:none}.footer__column[_ngcontent-%COMP%]{min-width:0}.footer__title[_ngcontent-%COMP%], .footer__section-title[_ngcontent-%COMP%], .footer__social-title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-bold);line-height:1rem;letter-spacing:0;color:var(--brand-white)}.footer__title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__list[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:.25rem;margin:0;padding:0;list-style:none}.footer__list[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]{margin:0;padding:0}.footer__link[_ngcontent-%COMP%]{display:inline-block;font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-regular);line-height:.875rem;letter-spacing:0;color:var(--brand-white);text-decoration:none;transition:opacity .2s ease}.footer__link[_ngcontent-%COMP%]:hover{opacity:.8}.footer__social[_ngcontent-%COMP%]{margin-top:1.5rem}.footer__social-title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__social-icons[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.625rem}.footer__social-link[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;width:1.625rem;height:1.625rem;text-decoration:none;transition:opacity .2s ease,transform .2s ease}.footer__social-link[_ngcontent-%COMP%]:hover{opacity:.85;transform:scale(1.05)}.footer__social-link[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:contain}.footer__section[_ngcontent-%COMP%]{width:100%;margin-top:1.25rem}.footer__section--certifications[_ngcontent-%COMP%]{margin-top:2.688rem}.footer__section-title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__payments[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));align-items:center;column-gap:2.125rem}.footer__payment[_ngcontent-%COMP%]{min-width:0;display:flex;align-items:center;justify-content:flex-start}.footer__payment[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:3.75rem;height:2rem;max-width:100%;object-fit:contain}.footer__certifications[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:5.25rem 5.25rem 5.75rem 7.75rem 9rem minmax(8rem,1fr) 8rem;align-items:center;column-gap:2.75rem}.footer__certification[_ngcontent-%COMP%]{min-width:0;min-height:4.5rem;display:flex;align-items:center;justify-content:flex-start}.footer__certification-image[_ngcontent-%COMP%]{display:block;width:auto;max-width:100%;height:auto;object-fit:contain}.footer__certification-image--37001[_ngcontent-%COMP%], .footer__certification-image--9001[_ngcontent-%COMP%]{max-height:4.375rem}.footer__certification-image--icontec[_ngcontent-%COMP%]{max-height:4rem}.footer__certification-image--18[_ngcontent-%COMP%]{max-height:3.5rem}.footer__certification-image--safe[_ngcontent-%COMP%]{max-width:8.25rem;max-height:2.5rem}.footer__certification-image--wla[_ngcontent-%COMP%]{max-width:8.938rem;max-height:3.063rem;transform:scale(1.3)}.footer__certification-image--book[_ngcontent-%COMP%]{max-width:3.5rem;max-height:2.25rem}.footer__bottom[_ngcontent-%COMP%]{width:100%;background:var(--brand-white);color:#646464}.footer__bottom-container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:1.5rem 0 .75rem;box-sizing:border-box;text-align:center}.footer__bottom-logo[_ngcontent-%COMP%]{display:block;width:auto;height:auto;object-fit:contain}.footer__bottom-brands[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:1rem}.footer__bottom-logo--tinka[_ngcontent-%COMP%]{display:block;width:6.875rem;height:2.3125rem;flex:0 0 auto;object-fit:contain}.footer__bottom-logo--te-apuesto[_ngcontent-%COMP%]{display:block;width:6.8125rem;height:1.875rem;flex:0 0 auto;padding-left:1rem;border-left:1px solid rgb(190,190,190);box-sizing:content-box;object-fit:contain}.footer__copyright[_ngcontent-%COMP%]{padding:0;border:0;color:#8c8c8c;margin:.75rem 0 0;font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-light);line-height:1rem;letter-spacing:.1rem;color:#646464}@media(min-width:481px)and (max-width:1024px){.footer[_ngcontent-%COMP%]{max-width:none}.footer__container[_ngcontent-%COMP%], .footer__bottom-container[_ngcontent-%COMP%]{max-width:none;padding-right:2rem;padding-left:2rem}.footer__top[_ngcontent-%COMP%]{grid-template-columns:11rem minmax(0,1fr);column-gap:2.5rem}.footer__menus--desktop[_ngcontent-%COMP%]{column-gap:2rem}.footer__payments[_ngcontent-%COMP%]{grid-template-columns:repeat(5,minmax(0,1fr));column-gap:1.5rem;row-gap:1rem}.footer__payment[_ngcontent-%COMP%]{justify-content:center}.footer__certifications[_ngcontent-%COMP%]{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:2rem;row-gap:1.5rem}.footer__certification[_ngcontent-%COMP%]{justify-content:center}.footer__certification[_ngcontent-%COMP%]:nth-child(5){grid-column:1/2}.footer__certification[_ngcontent-%COMP%]:nth-child(6){grid-column:2/4}.footer__certification[_ngcontent-%COMP%]:nth-child(7){grid-column:4/5}}@media(max-width:480px){.footer[_ngcontent-%COMP%]{margin-top:2rem}.footer__container[_ngcontent-%COMP%]{padding:1.5rem 1rem 1.75rem}.footer__top[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:1.5rem}.footer__logo[_ngcontent-%COMP%]{width:9.5rem}.footer__menus--desktop[_ngcontent-%COMP%]{display:none}.footer__menus-mobile[_ngcontent-%COMP%]{width:100%;display:flex;flex-direction:column}.footer__accordion[_ngcontent-%COMP%]{width:100%;border:0}.footer__accordion-title[_ngcontent-%COMP%]{min-height:3.25rem;display:flex;align-items:center;justify-content:space-between;margin:0;font-family:var(--font-primary);font-size:.9375rem;font-weight:var(--font-weight-bold);line-height:1.25rem;color:var(--brand-white);list-style:none;cursor:pointer}.footer__accordion-title[_ngcontent-%COMP%]::-webkit-details-marker{display:none}.footer__accordion-title[_ngcontent-%COMP%]:after{content:"";width:.5rem;height:.5rem;border-right:.125rem solid var(--brand-white);border-bottom:.125rem solid var(--brand-white);transform:rotate(45deg);transition:transform .2s ease}.footer__accordion[open][_ngcontent-%COMP%]   .footer__accordion-title[_ngcontent-%COMP%]:after{transform:rotate(225deg)}.footer__accordion[_ngcontent-%COMP%]   .footer__list[_ngcontent-%COMP%]{gap:.5rem;padding-bottom:1rem}.footer__link[_ngcontent-%COMP%]{font-size:.75rem;line-height:1rem}.footer__social--mobile[_ngcontent-%COMP%]{margin-top:1rem}.footer__social-title[_ngcontent-%COMP%], .footer__section-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1rem}.footer__social-icons[_ngcontent-%COMP%]{gap:.75rem}.footer__social-link[_ngcontent-%COMP%]{width:2rem;height:2rem}.footer__section[_ngcontent-%COMP%]{margin-top:1.75rem}.footer__payments[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;align-items:center;column-gap:0;row-gap:1rem}.footer__payment[_ngcontent-%COMP%]{width:fit-content;min-width:0;justify-self:start}.footer__payment[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:3.25rem;height:1.75rem}.footer__certifications[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:0;row-gap:1.5rem}.footer__certification[_ngcontent-%COMP%]{min-width:0;min-height:3.75rem;display:flex;align-items:center;justify-content:center;justify-self:stretch}.footer__certification[_ngcontent-%COMP%]:nth-child(1){grid-column:1/4}.footer__certification[_ngcontent-%COMP%]:nth-child(2){grid-column:4/7}.footer__certification[_ngcontent-%COMP%]:nth-child(3){grid-column:7/10}.footer__certification[_ngcontent-%COMP%]:nth-child(4){grid-column:10/13}.footer__certification[_ngcontent-%COMP%]:nth-child(5){grid-column:2/5}.footer__certification[_ngcontent-%COMP%]:nth-child(6){grid-column:5/9;transform:scale(1.1)}.footer__certification[_ngcontent-%COMP%]:nth-child(7){grid-column:9/12}.footer__certification-image--37001[_ngcontent-%COMP%], .footer__certification-image--9001[_ngcontent-%COMP%]{max-height:3.75rem}.footer__certification-image--icontec[_ngcontent-%COMP%]{max-height:3.5rem}.footer__certification-image--18[_ngcontent-%COMP%]{max-height:3.25rem}.footer__certification-image--safe[_ngcontent-%COMP%]{max-width:6.5rem;max-height:2rem}.footer__certification-image--wla[_ngcontent-%COMP%]{max-width:7rem;max-height:2rem}.footer__certification-image--book[_ngcontent-%COMP%]{max-width:5.5rem;max-height:2.5rem}.footer__bottom-container[_ngcontent-%COMP%]{padding:1.25rem 1rem .75rem}.footer__bottom-brands[_ngcontent-%COMP%]{gap:.75rem}.footer__bottom-logo--tinka[_ngcontent-%COMP%]{width:6.875rem;height:2.3125rem}.footer__bottom-logo--te-apuesto[_ngcontent-%COMP%]{width:6.8125rem;height:1.875rem;padding-left:.75rem}.footer__copyright[_ngcontent-%COMP%]{margin-top:.625rem;font-size:.625rem;line-height:1rem;letter-spacing:.075rem}}']})}return e})(),L=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-navigation"]],decls:18,vars:0,consts:[[1,"navigation"],[1,"navigation__container"],[1,"navigation__menu"],[1,"navigation__item"],["href","#loterias",1,"navigation__link","active"],["href","#videoloterias",1,"navigation__link"],["href","#promociones",1,"navigation__link"],["href","#ganadores",1,"navigation__link"],["href","#",1,"navigation__link"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"nav",0)(1,"div",1)(2,"ul",2)(3,"li",3)(4,"a",4),t.\u0275\u0275text(5,"Loter\xedas"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(6,"li",3)(7,"a",5),t.\u0275\u0275text(8,"Videoloterias"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(9,"li",3)(10,"a",6),t.\u0275\u0275text(11,"Promociones"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(12,"li",3)(13,"a",7),t.\u0275\u0275text(14,"Ganadores"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(15,"li",3)(16,"a",8),t.\u0275\u0275text(17,"Casino"),t.\u0275\u0275domElementEnd()()()()())},styles:[".navigation[_ngcontent-%COMP%]{width:100%;height:3.75rem;background:linear-gradient(90deg,var(--brand-green-dark),var(--brand-green-light));border-top:1px solid rgba(255,255,255,.08)}.navigation__container[_ngcontent-%COMP%]{max-width:var(--container-width);height:100%;margin:0 auto;padding:0 10rem;display:flex;align-items:center}.navigation__menu[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:space-between;margin:0;padding:0;list-style:none}.navigation__item[_ngcontent-%COMP%]{display:flex;align-items:center;height:100%}.navigation__link[_ngcontent-%COMP%]{height:3.75rem;display:flex;align-items:center;font-family:var(--font-primary);font-size:1.125rem;font-weight:var(--font-weight-bold);line-height:1;letter-spacing:.023125rem;color:var(--text-primary);text-decoration:none;white-space:nowrap;position:relative;transition:color .2s ease}.navigation__link[_ngcontent-%COMP%]:hover{color:var(--brand-yellow)}@media(min-width:481px)and (max-width:1024px){.navigation__container[_ngcontent-%COMP%]{padding:0 2rem}.navigation__menu[_ngcontent-%COMP%]{justify-content:center;gap:1.25rem}.navigation__link[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1;letter-spacing:0}}@media(max-width:480px){.navigation[_ngcontent-%COMP%]{display:none}}"]})}return e})();function D(e,i){if(1&e&&(t.\u0275\u0275domElementStart(0,"div",4)(1,"picture",7),t.\u0275\u0275domElement(2,"source",8)(3,"img",9),t.\u0275\u0275domElementEnd()()),2&e){const r=i.$implicit;t.\u0275\u0275advance(2),t.\u0275\u0275attribute("srcset",r.mobileImage),t.\u0275\u0275advance(),t.\u0275\u0275domProperty("src",r.image,t.\u0275\u0275sanitizeUrl)("alt",r.alt)}}function F(e,i){if(1&e){const r=t.\u0275\u0275getCurrentView();t.\u0275\u0275domElementStart(0,"button",10),t.\u0275\u0275domListener("click",function(){const o=t.\u0275\u0275restoreView(r).$index,a=t.\u0275\u0275nextContext();return t.\u0275\u0275resetView(a.goToSlide(o))}),t.\u0275\u0275domElementEnd()}if(2&e){const r=i.$index,n=t.\u0275\u0275nextContext();t.\u0275\u0275classProp("active",n.currentIndex()===r),t.\u0275\u0275attribute("aria-label","Mostrar banner "+(r+1))("aria-current",n.currentIndex()===r?"true":null)}}let I=(()=>{class e{autoplayDelay=5e3;currentIndex=(0,t.signal)(0);banners=[{image:"assets/images/promo-combo-lotero.png",mobileImage:"assets/images/promo-combo-lotero-mobile.png",alt:"Combo Lotero, promoci\xf3n 1"},{image:"assets/images/promo-combo-lotero.png",mobileImage:"assets/images/promo-combo-lotero-mobile.png",alt:"Combo Lotero, promoci\xf3n 2"},{image:"assets/images/promo-combo-lotero.png",mobileImage:"assets/images/promo-combo-lotero-mobile.png",alt:"Combo Lotero, promoci\xf3n 3"}];autoplayId=null;ngOnInit(){this.startAutoplay()}ngOnDestroy(){this.stopAutoplay()}goToSlide(r){r<0||r>=this.banners.length||(this.currentIndex.set(r),this.restartAutoplay())}nextSlide(){this.banners.length<=1||this.currentIndex.update(r=>(r+1)%this.banners.length)}startAutoplay(){this.banners.length<=1||null!==this.autoplayId||(this.autoplayId=setInterval(()=>{this.nextSlide()},this.autoplayDelay))}stopAutoplay(){null!==this.autoplayId&&(clearInterval(this.autoplayId),this.autoplayId=null)}restartAutoplay(){this.stopAutoplay(),this.startAutoplay()}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-promo-banner"]],decls:9,vars:2,consts:[[1,"promo-banner"],[1,"promo-banner__background"],[1,"promo-banner__viewport"],[1,"promo-banner__track"],[1,"promo-banner__slide"],[1,"promo-banner__bullets"],["type","button",1,"promo-banner__bullet",3,"active"],[1,"promo-banner__picture"],["media","(max-width: 767px)"],[1,"promo-banner__image",3,"src","alt"],["type","button",1,"promo-banner__bullet",3,"click"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"section",0)(1,"div",1)(2,"div",2)(3,"div",3),t.\u0275\u0275repeaterCreate(4,D,4,3,"div",4,t.\u0275\u0275repeaterTrackByIndex),t.\u0275\u0275domElementEnd()()(),t.\u0275\u0275domElementStart(6,"div",5),t.\u0275\u0275repeaterCreate(7,F,1,4,"button",6,t.\u0275\u0275repeaterTrackByIndex),t.\u0275\u0275domElementEnd()()),2&n&&(t.\u0275\u0275advance(3),t.\u0275\u0275styleProp("transform","translateX(-"+100*o.currentIndex()+"%)"),t.\u0275\u0275advance(),t.\u0275\u0275repeater(o.banners),t.\u0275\u0275advance(3),t.\u0275\u0275repeater(o.banners))},styles:['@charset "UTF-8";.promo-banner[_ngcontent-%COMP%]{width:100%;max-width:var(--container-width);display:flex;flex-direction:column;align-items:center;margin:0 auto}.promo-banner__background[_ngcontent-%COMP%]{width:100%;height:12.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffee28}.promo-banner__viewport[_ngcontent-%COMP%]{width:100%;max-width:68.3125rem;overflow:hidden}.promo-banner__track[_ngcontent-%COMP%]{width:100%;display:flex;transition:transform .6s ease-in-out;will-change:transform}.promo-banner__slide[_ngcontent-%COMP%]{min-width:100%;flex:0 0 100%;display:flex;align-items:center;justify-content:center}.promo-banner__picture[_ngcontent-%COMP%]{display:block;width:100%;max-width:68.3125rem}.promo-banner__image[_ngcontent-%COMP%]{display:block;width:100%;max-width:68.3125rem;height:auto;flex-shrink:0;object-fit:contain}.promo-banner__bullets[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.75rem}.promo-banner__bullet[_ngcontent-%COMP%]{width:.5rem;height:.5rem;margin:0;padding:0;border:0;border-radius:50%;background:#d9d9d9;cursor:pointer;transition:background-color .2s ease,transform .2s ease}.promo-banner__bullet[_ngcontent-%COMP%]:hover{transform:scale(1.15)}.promo-banner__bullet.active[_ngcontent-%COMP%]{background:var(--brand-green-dark)}@media(max-width:480px){.promo-banner[_ngcontent-%COMP%]{width:100%;max-width:24.375rem}.promo-banner__background[_ngcontent-%COMP%]{width:100%;height:12.5rem}.promo-banner__viewport[_ngcontent-%COMP%]{width:100%;max-width:24.375rem}.promo-banner__slide[_ngcontent-%COMP%]{align-items:center;justify-content:flex-start;padding-left:.4375rem;box-sizing:border-box}.promo-banner__picture[_ngcontent-%COMP%]{width:calc(100% - .4375rem);max-width:23.9375rem}.promo-banner__image[_ngcontent-%COMP%]{width:100%;max-width:23.9375rem;height:auto;object-fit:contain}.promo-banner__bullets[_ngcontent-%COMP%]{margin-top:.75rem;gap:.5rem}.promo-banner__bullet[_ngcontent-%COMP%]{width:.5rem;height:.5rem}}']})}return e})();function N(e,i){if(1&e&&t.\u0275\u0275domElement(0,"img",1),2&e){const r=t.\u0275\u0275nextContext();t.\u0275\u0275domProperty("src",r.icon(),t.\u0275\u0275sanitizeUrl)}}let V=(()=>{class e{icon=(0,t.input)();text=t.input.required();variant=(0,t.input)("default");static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-badge"]],inputs:{icon:[1,"icon"],text:[1,"text"],variant:[1,"variant"]},decls:4,vars:18,consts:[[1,"lottery-badge"],["alt","",1,"lottery-badge__icon",3,"src"],[1,"lottery-badge__text"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0),t.\u0275\u0275conditionalCreate(1,N,1,1,"img",1),t.\u0275\u0275domElementStart(2,"span",2),t.\u0275\u0275text(3),t.\u0275\u0275domElementEnd()()),2&n&&(t.\u0275\u0275classProp("lottery-badge--card","card"===o.variant())("lottery-badge--card-light","card-light"===o.variant())("lottery-badge--kabala","kabala"===o.variant())("lottery-badge--ganadiario","ganadiario"===o.variant())("lottery-badge--kinelo","kinelo"===o.variant())("lottery-badge--result","result"===o.variant())("lottery-badge--result-hero","result-hero"===o.variant())("lottery-badge--result-purple","result-purple"===o.variant()),t.\u0275\u0275advance(),t.\u0275\u0275conditional(o.icon()?1:-1),t.\u0275\u0275advance(2),t.\u0275\u0275textInterpolate1(" ",o.text()," "))},styles:['@charset "UTF-8";[_nghost-%COMP%]{display:inline-flex;width:fit-content;max-width:100%}.lottery-badge[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;height:1.5rem;gap:.3125rem;padding:.25rem .75rem;margin:0;box-sizing:border-box;border-radius:10rem;opacity:1}.lottery-badge__icon[_ngcontent-%COMP%]{display:block;width:.75rem;height:.75rem;flex:0 0 .75rem;object-fit:contain}.lottery-badge__text[_ngcontent-%COMP%]{display:block;font-family:var(--font-primary);font-size:1.25rem;font-weight:700;font-style:normal;line-height:1rem;letter-spacing:.009375rem;color:#1f1f1f;white-space:nowrap}.lottery-badge--kabala[_ngcontent-%COMP%]{background:#fd0}.lottery-badge--ganadiario[_ngcontent-%COMP%]{background:#def3ff}.lottery-badge--kinelo[_ngcontent-%COMP%]{background:#ffe5fb}.lottery-badge--card[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]{width:fit-content;height:1.5rem;gap:.3125rem;padding:.25rem .75rem;margin:0;border-radius:10rem}.lottery-badge--card[_ngcontent-%COMP%]{background:#fd0}.lottery-badge--card-light[_ngcontent-%COMP%]{background:#def3ff}.lottery-badge--card[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%]{width:1rem;height:1rem;filter:none}.lottery-badge--card[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:700;font-style:normal;line-height:1rem;letter-spacing:.009375rem;color:#646464}.lottery-badge--result[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center;width:fit-content;min-width:0;height:1.875rem;padding:0 .875rem;margin:0;flex-shrink:0;border-radius:999px;box-shadow:0 .1875rem .625rem #0000001a}.lottery-badge--result[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]{background:#fffffff7}.lottery-badge--result-hero[_ngcontent-%COMP%]{background:#ffef80}.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-semibold);line-height:1;letter-spacing:0;text-align:center;white-space:nowrap}.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:var(--brand-green)}.lottery-badge--result-purple[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:#5a2f80}@media(max-width:480px){.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:var(--brand-black);box-shadow:0 0 15px #00000026}}']})}return e})(),B=(()=>{class e{number=t.input.required();variant=(0,t.input)("white");static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-ball"]],inputs:{number:[1,"number"],variant:[1,"variant"]},decls:3,vars:13,consts:[["type","button",1,"lottery-ball"],[1,"lottery-ball__number"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"button",0)(1,"span",1),t.\u0275\u0275text(2),t.\u0275\u0275domElementEnd()()),2&n&&(t.\u0275\u0275classProp("lottery-ball--white","white"===o.variant())("lottery-ball--green","green"===o.variant())("lottery-ball--yellow","yellow"===o.variant())("lottery-ball--blue","blue"===o.variant())("lottery-ball--orange","orange"===o.variant())("lottery-ball--purple","purple"===o.variant()),t.\u0275\u0275advance(2),t.\u0275\u0275textInterpolate1(" ",o.number()," "))},styles:['@charset "UTF-8";.lottery-ball[_ngcontent-%COMP%]{width:2.5rem;height:2.5rem;flex:0 0 2.5rem;display:inline-flex;justify-content:center;align-items:center;padding:0;border-radius:50%;cursor:pointer;-webkit-user-select:none;user-select:none;appearance:none;-webkit-appearance:none;box-sizing:border-box;background:transparent;transition:transform .15s ease}.lottery-ball[_ngcontent-%COMP%]:focus-visible{outline:.125rem solid var(--brand-green);outline-offset:.125rem}.lottery-ball--white[_ngcontent-%COMP%]{background:var(--brand-white);border:.125rem solid var(--lottery-ball-white-border-color)}.lottery-ball--green[_ngcontent-%COMP%]{background:var(--brand-green);border:.125rem solid var(--brand-green)}.lottery-ball--yellow[_ngcontent-%COMP%]{background:#ffdc00;border:.125rem solid #d9bb00}.lottery-ball--blue[_ngcontent-%COMP%]{background:#1389c7;border:.125rem solid #0e72a7}.lottery-ball--orange[_ngcontent-%COMP%]{background:#f79009;border:.125rem solid #dc6803}.lottery-ball--purple[_ngcontent-%COMP%]{background:#9c348c;border:.125rem solid #7c286f}.lottery-ball__number[_ngcontent-%COMP%]{display:block;font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-semibold);line-height:1rem;letter-spacing:0;text-align:center}.lottery-ball--white[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--yellow[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%]{color:var(--brand-black)}.lottery-ball--green[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--blue[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--orange[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--purple[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%]{color:var(--brand-white)}']})}return e})();function U(e,i){1&e&&(t.\u0275\u0275elementStart(0,"div",5)(1,"div",6),t.\u0275\u0275element(2,"img",7)(3,"app-lottery-badge",8),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(4,"div",9)(5,"div",10)(6,"span",11),t.\u0275\u0275text(7," Pozo Millonario "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(8,"h2",12),t.\u0275\u0275text(9,"S/10'653,373"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(10,"div",13),t.\u0275\u0275element(11,"app-button",14),t.\u0275\u0275elementStart(12,"span",15),t.\u0275\u0275text(13," (S/ 5) "),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(14,"a",16),t.\u0275\u0275text(15," \xbfC\xf3mo jugar? "),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(16,"div",17),t.\u0275\u0275element(17,"app-lottery-badge",18),t.\u0275\u0275elementStart(18,"div",19),t.\u0275\u0275element(19,"app-lottery-ball",20)(20,"app-lottery-ball",20)(21,"app-lottery-ball",20)(22,"app-lottery-ball",20)(23,"app-lottery-ball",20)(24,"app-lottery-ball",20),t.\u0275\u0275elementStart(25,"span",21),t.\u0275\u0275text(26," + "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(27,"div",22)(28,"span",23),t.\u0275\u0275text(29," Boliyapa "),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(30,"app-lottery-ball",24),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(31,"div",25),t.\u0275\u0275element(32,"img",26),t.\u0275\u0275elementStart(33,"div",27),t.\u0275\u0275element(34,"app-lottery-ball",20)(35,"app-lottery-ball",20)(36,"app-lottery-ball",20)(37,"app-lottery-ball",20),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(38,"a",28),t.\u0275\u0275text(39," Ver resultados anteriores "),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(40,"div",29)(41,"div",30),t.\u0275\u0275element(42,"img",31)(43,"app-lottery-badge",32),t.\u0275\u0275elementStart(44,"div",33)(45,"span",34),t.\u0275\u0275text(46," Pozo Millonario "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(47,"h2",35),t.\u0275\u0275text(48,"S/10'653,373"),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(49,"div",36)(50,"div",37),t.\u0275\u0275element(51,"app-lottery-badge",18),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(52,"div",38),t.\u0275\u0275element(53,"app-lottery-ball",20)(54,"app-lottery-ball",20)(55,"app-lottery-ball",20)(56,"app-lottery-ball",20)(57,"app-lottery-ball",20)(58,"app-lottery-ball",20),t.\u0275\u0275elementStart(59,"span",39),t.\u0275\u0275text(60," + "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(61,"div",40)(62,"span"),t.\u0275\u0275text(63,"Boliyapa"),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(64,"app-lottery-ball",24),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(65,"div",41),t.\u0275\u0275element(66,"img",26),t.\u0275\u0275elementStart(67,"div",42),t.\u0275\u0275element(68,"app-lottery-ball",20)(69,"app-lottery-ball",20)(70,"app-lottery-ball",20)(71,"app-lottery-ball",20),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(72,"a",43),t.\u0275\u0275text(73," Ver resultados anteriores "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(74,"div",13),t.\u0275\u0275element(75,"app-button",14),t.\u0275\u0275elementStart(76,"span",15),t.\u0275\u0275text(77," (S/ 5) "),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(78,"a",44),t.\u0275\u0275text(79," \xbfC\xf3mo jugar? "),t.\u0275\u0275elementEnd()()()),2&e&&(t.\u0275\u0275advance(19),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(),t.\u0275\u0275property("number",19),t.\u0275\u0275advance(),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(6),t.\u0275\u0275property("number",21),t.\u0275\u0275advance(4),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(16),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(),t.\u0275\u0275property("number",19),t.\u0275\u0275advance(),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(6),t.\u0275\u0275property("number",21),t.\u0275\u0275advance(4),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18))}function A(e,i){1&e&&(t.\u0275\u0275elementStart(0,"div",1)(1,"div",45),t.\u0275\u0275element(2,"img",46)(3,"app-lottery-badge",47),t.\u0275\u0275elementStart(4,"div",48)(5,"span",49),t.\u0275\u0275text(6," Pozo Millonario "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(7,"h2",50),t.\u0275\u0275text(8,"S/2'845,900"),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(9,"div",51)(10,"div",52),t.\u0275\u0275element(11,"app-lottery-badge",18),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(12,"div",53),t.\u0275\u0275element(13,"img",46),t.\u0275\u0275elementStart(14,"div",54),t.\u0275\u0275element(15,"app-lottery-ball",55)(16,"app-lottery-ball",55)(17,"app-lottery-ball",55)(18,"app-lottery-ball",55)(19,"app-lottery-ball",55)(20,"app-lottery-ball",55),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(21,"div",56),t.\u0275\u0275element(22,"img",57),t.\u0275\u0275elementStart(23,"div",54),t.\u0275\u0275element(24,"app-lottery-ball",55)(25,"app-lottery-ball",55)(26,"app-lottery-ball",55)(27,"app-lottery-ball",55)(28,"app-lottery-ball",55)(29,"app-lottery-ball",55),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(30,"a",58),t.\u0275\u0275text(31," Ver resultados anteriores "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(32,"div",59),t.\u0275\u0275element(33,"app-button",60),t.\u0275\u0275elementStart(34,"div",13),t.\u0275\u0275element(35,"app-button",14),t.\u0275\u0275elementStart(36,"span",15),t.\u0275\u0275text(37," (S/ 5) "),t.\u0275\u0275elementEnd()()()()()),2&e&&(t.\u0275\u0275advance(15),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(),t.\u0275\u0275property("number",19),t.\u0275\u0275advance(),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(4),t.\u0275\u0275property("number",18),t.\u0275\u0275advance(),t.\u0275\u0275property("number",19),t.\u0275\u0275advance(),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18))}function H(e,i){1&e&&(t.\u0275\u0275elementStart(0,"div",2)(1,"div",61),t.\u0275\u0275element(2,"img",62)(3,"app-lottery-badge",63),t.\u0275\u0275elementStart(4,"div",64)(5,"span",65),t.\u0275\u0275text(6," Pozo Millonario "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(7,"h2",66),t.\u0275\u0275text(8,"S/200,000"),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(9,"div",67)(10,"div",68),t.\u0275\u0275element(11,"app-lottery-badge",18),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(12,"div",69)(13,"div",70),t.\u0275\u0275element(14,"app-lottery-ball",20)(15,"app-lottery-ball",20)(16,"app-lottery-ball",20)(17,"app-lottery-ball",20),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(18,"a",71),t.\u0275\u0275text(19," Ver resultados anteriores "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(20,"div",59),t.\u0275\u0275element(21,"app-button",60),t.\u0275\u0275elementStart(22,"div",13),t.\u0275\u0275element(23,"app-button",14),t.\u0275\u0275elementStart(24,"span",15),t.\u0275\u0275text(25," (S/ 5) "),t.\u0275\u0275elementEnd()()()()()),2&e&&(t.\u0275\u0275advance(14),t.\u0275\u0275property("number",29),t.\u0275\u0275advance(),t.\u0275\u0275property("number",12),t.\u0275\u0275advance(),t.\u0275\u0275property("number",13),t.\u0275\u0275advance(),t.\u0275\u0275property("number",18))}function R(e,i){1&e&&(t.\u0275\u0275elementStart(0,"div",3)(1,"div",72),t.\u0275\u0275element(2,"img",73)(3,"app-lottery-badge",74),t.\u0275\u0275elementStart(4,"div",75)(5,"span",76),t.\u0275\u0275text(6," Juega cada 5 minutos y gana hasta "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(7,"h2",77),t.\u0275\u0275text(8,"S/10'653,373"),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(9,"div",78)(10,"div",59),t.\u0275\u0275element(11,"app-button",60),t.\u0275\u0275elementStart(12,"div",13),t.\u0275\u0275element(13,"app-button",14),t.\u0275\u0275elementStart(14,"span",15),t.\u0275\u0275text(15," (S/ 5) "),t.\u0275\u0275elementEnd()()()()())}function $(e,i){1&e&&(t.\u0275\u0275elementStart(0,"div",4)(1,"div",79),t.\u0275\u0275element(2,"img",80),t.\u0275\u0275elementStart(3,"div",81)(4,"span",82),t.\u0275\u0275text(5," Juega cada 5 minutos y gana hasta "),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(6,"h2",83),t.\u0275\u0275text(7,"S/120,000"),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(8,"div",84),t.\u0275\u0275element(9,"app-button",85),t.\u0275\u0275elementEnd()())}let J=(()=>{class e{variant=(0,t.input)("hero");static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-card"]],inputs:{variant:[1,"variant"]},decls:6,vars:3,consts:[[1,"lottery-card"],[1,"lottery-card__kabala"],[1,"lottery-card__ganadiario"],[1,"lottery-card__kinelo"],[1,"lottery-card__rapitinka"],[1,"lottery-card__hero-desktop"],[1,"lottery-card__hero-left"],["src","assets/images/logo-tinka.svg","alt","Tinka",1,"lottery-card__hero-logo"],["icon","assets/images/ico-calendar.svg","text","Pr\xf3x. sorteo: Mi\xe9. 21/05"],[1,"lottery-card__hero-center"],[1,"lottery-card__hero-jackpot"],[1,"lottery-card__hero-title"],[1,"lottery-card__hero-amount"],[1,"lottery-card__play-action"],["label","Jugar ahora","variant","danger"],[1,"lottery-card__play-price"],["href","#",1,"lottery-card__hero-link"],[1,"lottery-card__hero-right"],["variant","result","text","\xdaltimo resultado: S\xe1b. 10 MAY"],[1,"lottery-card__hero-main-balls"],["variant","white",3,"number"],[1,"lottery-card__hero-plus"],[1,"lottery-card__hero-boliyapa"],[1,"lottery-card__hero-boliyapa-title"],["variant","green",3,"number"],[1,"lottery-card__hero-siosi"],["src","assets/images/si-o-si.svg","alt","S\xed o S\xed"],[1,"lottery-card__hero-extra-balls"],["href","#",1,"lottery-card__hero-results"],[1,"lottery-card__tinka-mobile"],[1,"lottery-card__tinka-header"],["src","assets/images/logo-tinka.svg","alt","Tinka"],["variant","card","icon","assets/images/ico-calendar.svg","text","Pr\xf3x. sorteo: Mi\xe9. 21/05"],[1,"lottery-card__tinka-jackpot"],[1,"lottery-card__tinka-title"],[1,"lottery-card__tinka-amount"],[1,"lottery-card__tinka-body"],[1,"lottery-card__tinka-result"],[1,"lottery-card__tinka-main-balls"],[1,"lottery-card__tinka-plus"],[1,"lottery-card__tinka-boliyapa"],[1,"lottery-card__tinka-siosi"],[1,"lottery-card__tinka-extra-balls"],["href","#",1,"lottery-card__tinka-results"],["href","#",1,"lottery-card__how-to-play","lottery-card__tinka-how-to-play"],[1,"lottery-card__kabala-header"],["src","assets/images/logo-kabala.svg","alt","K\xe1bala"],["variant","kabala","icon","assets/images/ico-calendar.svg","text","Pr\xf3x. sorteo: Mi\xe9. 21/05"],[1,"lottery-card__kabala-jackpot"],[1,"lottery-card__kabala-title"],[1,"lottery-card__kabala-amount"],[1,"lottery-card__kabala-body"],[1,"lottery-card__kabala-result"],[1,"lottery-card__kabala-results"],[1,"lottery-card__kabala-balls"],[3,"number"],[1,"lottery-card__kabala-chauchamba"],["src","assets/images/logo-chau-chamba.svg","alt","Chau Chamba"],["href","#",1,"lottery-card__kabala-results-link"],[1,"lottery-card__card-actions"],["label","\xbfC\xf3mo jugar?","variant","outline",1,"lottery-card__how-to-play"],[1,"lottery-card__ganadiario-header"],["src","assets/images/logo-ganadiario.svg","alt","Gana Diario"],["variant","ganadiario","icon","assets/images/ico-calendar.svg","text","Pr\xf3x. sorteo: Mi\xe9. 21/05"],[1,"lottery-card__ganadiario-jackpot"],[1,"lottery-card__ganadiario-title"],[1,"lottery-card__ganadiario-amount"],[1,"lottery-card__ganadiario-body"],[1,"lottery-card__ganadiario-result"],[1,"lottery-card__ganadiario-results"],[1,"lottery-card__ganadiario-balls"],["href","#",1,"lottery-card__ganadiario-results-link"],[1,"lottery-card__kinelo-header"],["src","assets/images/logo-kinelo.svg","alt","Kinelo"],["variant","kinelo","icon","assets/images/ico-calendar.svg","text","Pr\xf3x. sorteo: Hoy 10:30 pm"],[1,"lottery-card__kinelo-jackpot"],[1,"lottery-card__kinelo-title"],[1,"lottery-card__kinelo-amount"],[1,"lottery-card__kinelo-body"],[1,"lottery-card__rapitinka-header"],["src","assets/images/logo-rapitinka.svg","alt","Rapi Tinka"],[1,"lottery-card__rapitinka-jackpot"],[1,"lottery-card__rapitinka-title"],[1,"lottery-card__rapitinka-amount"],[1,"lottery-card__rapitinka-body"],["label","M\xe1s informaci\xf3n","variant","danger"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"div",0),t.\u0275\u0275conditionalCreate(1,U,80,22)(2,A,38,12,"div",1)(3,H,26,4,"div",2)(4,R,16,0,"div",3)(5,$,10,0,"div",4),t.\u0275\u0275elementEnd()),2&n&&(t.\u0275\u0275classProp("lottery-card--hero","hero"===o.variant()),t.\u0275\u0275advance(),t.\u0275\u0275conditional("hero"===o.variant()?1:"kabala"===o.variant()?2:"ganadiario"===o.variant()?3:"kinelo"===o.variant()?4:"rapitinka"===o.variant()?5:-1))},dependencies:[V,d,B],styles:['@charset "UTF-8";.lottery-card[_ngcontent-%COMP%]{width:100%;min-width:0;display:flex;flex-direction:column;background:#fff;border-radius:1.5rem;box-shadow:0 .25rem 1rem #00000026;overflow:hidden;box-sizing:border-box}.lottery-card--hero[_ngcontent-%COMP%]{width:100%;height:17.5rem;display:block;padding:0;background-image:url(/assets/images/bg-tinka.svg);background-repeat:no-repeat;background-position:center;background-size:cover;border-radius:1.25rem;box-shadow:0 .25rem 1rem #0000002e;overflow:hidden}.lottery-card__tinka-mobile[_ngcontent-%COMP%]{display:none}.lottery-card__hero-desktop[_ngcontent-%COMP%]{width:100%;height:100%;padding:1.5rem 1rem .5rem 2.5rem;display:grid;grid-template-columns:17rem minmax(18rem,1fr) 23rem;align-items:stretch;column-gap:1.5rem;box-sizing:border-box}.lottery-card__hero-left[_ngcontent-%COMP%]{min-width:0;height:100%;padding-bottom:1.25rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;box-sizing:border-box}.lottery-card__hero-logo[_ngcontent-%COMP%]{display:block;width:14.25rem;height:5.5rem;object-fit:contain;object-position:left center}.lottery-card__hero-left[_ngcontent-%COMP%]   app-lottery-badge[_ngcontent-%COMP%]{margin-left:0}[_nghost-%COMP%]     .lottery-card__hero-left .lottery-badge{background:#ffef80}[_nghost-%COMP%]     .lottery-card__hero-left .lottery-badge__text{color:#1f1f1f}.lottery-card__hero-center[_ngcontent-%COMP%]{min-width:0;height:100%;padding-top:.75rem;padding-bottom:1.625rem;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}.lottery-card__hero-jackpot[_ngcontent-%COMP%]{margin-bottom:1rem;display:flex;flex-direction:column;align-items:center;gap:.375rem}.lottery-card__hero-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;text-align:center;color:#1f1f1f}.lottery-card__hero-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:3rem;font-weight:700;line-height:3.75rem;letter-spacing:.03125rem;text-align:center;white-space:nowrap;color:#006820}.lottery-card__hero-link[_ngcontent-%COMP%]{margin-top:1.5rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem;cursor:pointer}.lottery-card__hero-right[_ngcontent-%COMP%]{min-width:0;height:100%;padding-top:1.375rem;padding-bottom:1.625rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__hero-main-balls[_ngcontent-%COMP%]{width:100%;margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__hero-extra-balls[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem}.lottery-card__hero-plus[_ngcontent-%COMP%]{margin-inline:.125rem;font-family:"Duplet",var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1;color:#9e9e9e}.lottery-card__hero-boliyapa[_ngcontent-%COMP%]{position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;transform:translateY(-.625rem)}.lottery-card__hero-boliyapa-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.75rem;font-weight:700;line-height:1rem;letter-spacing:.009375rem;color:#006820;white-space:nowrap}.lottery-card__hero-siosi[_ngcontent-%COMP%]{width:100%;margin-top:.5rem;padding-left:3.25rem;display:flex;align-items:center;justify-content:flex-start;gap:.75rem;box-sizing:border-box}.lottery-card__hero-siosi[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:3.25rem;height:2rem;object-fit:contain}.lottery-card__hero-results[_ngcontent-%COMP%]{margin-top:1.125rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem;cursor:pointer}.lottery-card__play-action[_ngcontent-%COMP%]{position:relative;display:inline-flex;align-items:center;justify-content:center;width:fit-content}.lottery-card__play-price[_ngcontent-%COMP%]{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);min-width:3rem;height:2.125rem;padding-inline:.75rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:999px;background:#fff3;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:700;line-height:1.25rem;color:#fff;pointer-events:none}.lottery-card__kabala[_ngcontent-%COMP%], .lottery-card__ganadiario[_ngcontent-%COMP%], .lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{width:100%;height:100%;min-height:29.375rem;display:flex;flex-direction:column;background:#fff;border-radius:1.5rem;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%], .lottery-card__kinelo-header[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%]{width:100%;height:14.25rem;padding:1.25rem 1.5rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%]{background:#fcc200}.lottery-card__ganadiario-header[_ngcontent-%COMP%]{background:#1389c7}.lottery-card__kinelo-header[_ngcontent-%COMP%]{background:#9c348c}.lottery-card__rapitinka-header[_ngcontent-%COMP%]{background:#ffdc00}.lottery-card__kabala-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:10.25rem;height:3.75rem;margin-bottom:.5rem;object-fit:contain}.lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9rem;height:3rem;margin-bottom:.75rem}.lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:8rem;height:3.25rem;margin-bottom:.5rem}.lottery-card__kabala-jackpot[_ngcontent-%COMP%], .lottery-card__ganadiario-jackpot[_ngcontent-%COMP%], .lottery-card__kinelo-jackpot[_ngcontent-%COMP%], .lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{width:100%;margin-top:.625rem;display:flex;flex-direction:column;align-items:center;gap:.25rem}.lottery-card__kabala-title[_ngcontent-%COMP%], .lottery-card__ganadiario-title[_ngcontent-%COMP%], .lottery-card__kinelo-title[_ngcontent-%COMP%], .lottery-card__rapitinka-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:1.125rem;font-weight:700;line-height:1.5rem;letter-spacing:.015625rem;text-align:center;color:#1f1f1f}.lottery-card__ganadiario-title[_ngcontent-%COMP%], .lottery-card__kinelo-title[_ngcontent-%COMP%]{color:#fff}.lottery-card__rapitinka-title[_ngcontent-%COMP%]{color:#1f1f1f}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:2.5rem;font-weight:700;line-height:3rem;letter-spacing:0;text-align:center;white-space:nowrap;color:#1f1f1f}.lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%]{color:#fff}.lottery-card__rapitinka-amount[_ngcontent-%COMP%]{color:#006820}.lottery-card__kabala-body[_ngcontent-%COMP%], .lottery-card__ganadiario-body[_ngcontent-%COMP%], .lottery-card__kinelo-body[_ngcontent-%COMP%], .lottery-card__rapitinka-body[_ngcontent-%COMP%]{position:relative;width:100%;flex:1;padding:2rem 2rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#fff}.lottery-card__kabala-result[_ngcontent-%COMP%], .lottery-card__ganadiario-result[_ngcontent-%COMP%]{position:absolute;top:-1rem;left:50%;transform:translate(-50%);z-index:5}.lottery-card__kabala-results[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.75rem}.lottery-card__kabala-results[_ngcontent-%COMP%]{margin-top:.75rem}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kabala-results[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3rem;height:2rem;flex-shrink:0;object-fit:contain}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3.25rem;height:2rem;flex-shrink:0;object-fit:contain}.lottery-card__kabala-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__kabala-results-link[_ngcontent-%COMP%]{margin-top:1rem;margin-bottom:1rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__ganadiario-results[_ngcontent-%COMP%]{width:100%;min-height:6rem;margin-top:.75rem;display:flex;align-items:center;justify-content:center}.lottery-card__ganadiario-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__ganadiario-results-link[_ngcontent-%COMP%]{margin-top:.5rem;margin-bottom:1.75rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{min-height:18.25rem}.lottery-card__kinelo-header[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%]{height:11.25rem;justify-content:flex-start}.lottery-card__kinelo-body[_ngcontent-%COMP%], .lottery-card__rapitinka-body[_ngcontent-%COMP%]{min-height:7rem;padding:1.5rem 2rem;justify-content:center}.lottery-card__kinelo-jackpot[_ngcontent-%COMP%], .lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{margin-top:0}.lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin-top:.25rem}.lottery-card__card-actions[_ngcontent-%COMP%]{width:100%;margin-top:auto;display:flex;align-items:center;justify-content:center;gap:1.25rem}.lottery-card__card-actions[_ngcontent-%COMP%] > app-button[_ngcontent-%COMP%]{display:block;flex:0 0 auto}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]{flex:0 0 auto}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{display:block;width:auto}[_nghost-%COMP%]     .lottery-card__hero-center app-button button, [_nghost-%COMP%]     .lottery-card__hero-center app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 5.25rem .75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__card-actions>app-button button, [_nghost-%COMP%]     .lottery-card__card-actions>app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;white-space:nowrap}.lottery-card__how-to-play[_ngcontent-%COMP%]{text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play button, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button{display:flex;align-items:center;justify-content:center;gap:0;text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play button:before, [_nghost-%COMP%]     app-button.lottery-card__how-to-play button:after, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button:before, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button:after, [_nghost-%COMP%]     app-button.lottery-card__how-to-play svg, [_nghost-%COMP%]     app-button.lottery-card__how-to-play img, [_nghost-%COMP%]     app-button.lottery-card__how-to-play i, [_nghost-%COMP%]     app-button.lottery-card__how-to-play [class*=icon], [_nghost-%COMP%]     app-button.lottery-card__how-to-play [class*=arrow]{display:none!important;content:none!important}[_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 5.25rem .75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__rapitinka-body app-button button, [_nghost-%COMP%]     .lottery-card__rapitinka-body app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-badge{min-height:2rem;padding:.375rem .875rem;border-radius:999px;box-sizing:border-box}[_nghost-%COMP%]     .lottery-badge__text{font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:700;line-height:1rem;letter-spacing:.009375rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge{background:#ffef80}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge__text{color:#006820}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__kabala-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__ganadiario-result .lottery-badge__text{font-size:1rem;line-height:1.25rem;letter-spacing:.015625rem}[_nghost-%COMP%]     .lottery-badge__icon{width:.875rem;height:.875rem}[_nghost-%COMP%]     app-lottery-ball{display:block;flex:0 0 auto}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:2.5rem;min-width:2.5rem;height:2.5rem;min-height:2.5rem;border:.125rem solid #ededed;border-radius:999px;box-sizing:border-box;font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:700;line-height:1rem}[_nghost-%COMP%]     app-lottery-ball .lottery-ball--green{border-color:#005c1c;background:#006820;color:#fff}@media(min-width:481px)and (max-width:1024px){.lottery-card--hero[_ngcontent-%COMP%]{height:15rem}.lottery-card__hero-desktop[_ngcontent-%COMP%]{padding:1.125rem 1.25rem;grid-template-columns:24% 34% 42%;column-gap:0}.lottery-card__hero-left[_ngcontent-%COMP%]{padding-bottom:.75rem}.lottery-card__hero-logo[_ngcontent-%COMP%]{width:8.75rem;height:auto}.lottery-card__hero-center[_ngcontent-%COMP%]{padding:0}.lottery-card__hero-right[_ngcontent-%COMP%]{padding:0;justify-content:center}.lottery-card__hero-title[_ngcontent-%COMP%]{font-size:1rem;line-height:1.25rem}.lottery-card__hero-amount[_ngcontent-%COMP%]{font-size:2.5rem;line-height:3rem}.lottery-card__hero-main-balls[_ngcontent-%COMP%], .lottery-card__hero-extra-balls[_ngcontent-%COMP%]{gap:.25rem}.lottery-card__hero-main-balls[_ngcontent-%COMP%]{margin-top:1rem}.lottery-card__hero-siosi[_ngcontent-%COMP%]{padding-left:1.5rem}.lottery-card__hero-link[_ngcontent-%COMP%], .lottery-card__hero-results[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.125rem}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:2rem;min-width:2rem;height:2rem;min-height:2rem;font-size:.75rem}.lottery-card__kabala-balls[_ngcontent-%COMP%], .lottery-card__ganadiario-balls[_ngcontent-%COMP%]{gap:.25rem}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{font-size:2.25rem;line-height:2.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]{gap:.75rem}}@media(max-width:480px){.lottery-card[_ngcontent-%COMP%], .lottery-card--hero[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;height:auto;min-height:0;margin-inline:auto;padding:0;display:block;background:#fff;background-image:none;border-radius:1.25rem;box-shadow:0 .25rem 1rem #00000026;overflow:hidden}.lottery-card__hero-desktop[_ngcontent-%COMP%]{display:none}.lottery-card__tinka-mobile[_ngcontent-%COMP%]{width:100%;height:auto;display:flex;flex-direction:column;background:#fff;border-radius:1.25rem;overflow:hidden}.lottery-card__tinka-header[_ngcontent-%COMP%]{width:100%;height:13.25rem;min-height:0;padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#ffde00}.lottery-card__tinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:8.75rem;height:3.25rem;margin:0 0 .625rem;object-fit:contain}.lottery-card__tinka-header[_ngcontent-%COMP%]   app-lottery-badge[_ngcontent-%COMP%]{display:block;margin:0}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge{min-height:1.5rem;padding:.25rem .75rem;gap:.3125rem;border-radius:10rem;background:#ffef80}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge__text{font-size:.75rem;font-weight:600;line-height:1rem;letter-spacing:0;color:#006820}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge__icon{width:.75rem;height:.75rem}.lottery-card__tinka-jackpot[_ngcontent-%COMP%]{margin-top:.625rem;display:flex;flex-direction:column;align-items:center;gap:.25rem}.lottery-card__tinka-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.9375rem;font-weight:700;line-height:1.25rem;color:#1f1f1f}.lottery-card__tinka-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:2rem;font-weight:600;line-height:2.5rem;letter-spacing:0;color:#006820;white-space:nowrap}.lottery-card__tinka-body[_ngcontent-%COMP%]{position:relative;width:100%;min-height:15rem;padding:2.5rem .875rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#fff}.lottery-card__tinka-result[_ngcontent-%COMP%]{position:absolute;top:-.9375rem;left:50%;z-index:5;transform:translate(-50%)}.lottery-card__tinka-main-balls[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__tinka-extra-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__tinka-plus[_ngcontent-%COMP%]{margin-inline:.125rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:700;line-height:1rem;color:#9e9e9e}.lottery-card__tinka-boliyapa[_ngcontent-%COMP%]{position:relative;display:flex;flex-direction:column;align-items:center;gap:.125rem;transform:translateY(-.625rem)}.lottery-card__tinka-boliyapa[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.5625rem;font-weight:500;line-height:.75rem;color:#006820}.lottery-card__tinka-siosi[_ngcontent-%COMP%]{width:100%;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__tinka-siosi[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:3.25rem;height:2rem;object-fit:contain}.lottery-card__tinka-results[_ngcontent-%COMP%]{margin-top:1.125rem;margin-bottom:1.75rem;font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:600;line-height:1.25rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__tinka-body[_ngcontent-%COMP%] > .lottery-card__play-action[_ngcontent-%COMP%]{width:8.75rem;margin-right:auto;margin-left:calc(50% + .9375rem)}.lottery-card__tinka-how-to-play[_ngcontent-%COMP%]{position:absolute;left:50%;bottom:1rem;width:8.75rem;height:2.875rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border:1px solid #d92d20;border-radius:999px;transform:translate(calc(-100% - .9375rem));font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:600;line-height:1.25rem;color:#d92d20;text-decoration:none}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge{background:#fff}.lottery-card__kabala[_ngcontent-%COMP%], .lottery-card__ganadiario[_ngcontent-%COMP%], .lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{width:100%;height:auto;min-height:0;display:flex;flex-direction:column;border-radius:1.25rem;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%]{width:100%;height:13.25rem;min-height:0;padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__kabala-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:8.75rem;height:3.5rem;margin:0 0 .625rem;object-fit:contain}.lottery-card__ganadiario-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9.25rem;height:3.75rem;margin:0 0 .375rem;object-fit:contain}.lottery-card__kabala-jackpot[_ngcontent-%COMP%], .lottery-card__ganadiario-jackpot[_ngcontent-%COMP%]{margin-top:.625rem;gap:.25rem}.lottery-card__kabala-title[_ngcontent-%COMP%], .lottery-card__ganadiario-title[_ngcontent-%COMP%]{font-size:.9375rem;line-height:1.25rem}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%]{font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__kabala-body[_ngcontent-%COMP%], .lottery-card__ganadiario-body[_ngcontent-%COMP%]{width:100%;min-height:15rem;padding:2.25rem .875rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__kabala-result[_ngcontent-%COMP%], .lottery-card__ganadiario-result[_ngcontent-%COMP%]{top:-.9375rem}.lottery-card__kabala-results[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__kabala-results[_ngcontent-%COMP%]{margin-top:.75rem}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kabala-results[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3.125rem;height:1.75rem;object-fit:contain}.lottery-card__kabala-balls[_ngcontent-%COMP%], .lottery-card__ganadiario-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__kabala-results-link[_ngcontent-%COMP%], .lottery-card__ganadiario-results-link[_ngcontent-%COMP%]{margin-top:1.25rem;margin-bottom:1.75rem;font-size:.875rem;line-height:1.25rem}.lottery-card__ganadiario-results[_ngcontent-%COMP%]{min-height:5rem;margin-top:.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]{width:100%;margin-top:auto;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:1.875rem}.lottery-card__card-actions[_ngcontent-%COMP%] > app-button[_ngcontent-%COMP%]{display:block;width:8.75rem;max-width:8.75rem;flex:0 0 8.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]{width:8.75rem;max-width:8.75rem;flex:0 0 8.75rem}.lottery-card__kinelo-header[_ngcontent-%COMP%]{width:100%;height:10.5rem;min-height:0;padding:1rem 1rem .875rem;justify-content:flex-start}.lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9rem;height:2.75rem;margin:0 0 .375rem;object-fit:contain}.lottery-card__kinelo-jackpot[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kinelo-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.25rem}.lottery-card__kinelo-amount[_ngcontent-%COMP%]{margin-top:.25rem;font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__kinelo-body[_ngcontent-%COMP%]{width:100%;min-height:5.875rem;padding:1.5rem .875rem;justify-content:center}.lottery-card__rapitinka-header[_ngcontent-%COMP%]{width:100%;height:11.25rem;min-height:0;padding:1.25rem 1rem 1rem;justify-content:flex-start}.lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:7.5rem;height:3.25rem;margin:0 0 .5rem;object-fit:contain}.lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{margin-top:.25rem}.lottery-card__rapitinka-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.25rem}.lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin-top:.25rem;font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__rapitinka-body[_ngcontent-%COMP%]{width:100%;min-height:5.75rem;padding:1.5rem 1rem;justify-content:center}[_nghost-%COMP%]     app-lottery-ball{flex:0 0 auto}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:1.875rem;min-width:1.875rem;height:1.875rem;min-height:1.875rem;border-width:.0625rem;font-size:.75rem;font-weight:600;line-height:1rem}[_nghost-%COMP%]     .lottery-badge{min-height:1.5rem;padding:.25rem .75rem;gap:.3125rem;border-radius:10rem}[_nghost-%COMP%]     .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__kabala-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__ganadiario-result .lottery-badge__text{font-size:.75rem;font-weight:700;line-height:1rem;letter-spacing:0}[_nghost-%COMP%]     .lottery-badge__icon{width:.75rem;height:.75rem}[_nghost-%COMP%]     .lottery-card__card-actions>app-button button, [_nghost-%COMP%]     .lottery-card__card-actions>app-button .button{width:8.75rem;min-width:8.75rem;height:2.875rem;min-height:2.875rem;padding:0 .75rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button .button, [_nghost-%COMP%]     .lottery-card__tinka-body .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__tinka-body .lottery-card__play-action app-button .button{width:8.75rem;min-width:8.75rem;height:2.875rem;min-height:2.875rem;padding:0 2.5rem 0 .875rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}.lottery-card__play-action[_ngcontent-%COMP%]{position:relative;width:8.75rem;display:flex;align-items:center;justify-content:center}.lottery-card__play-price[_ngcontent-%COMP%]{position:absolute;top:50%;right:.75rem;z-index:2;width:auto;min-width:0;height:auto;margin:0;padding:0;display:block;transform:translateY(-50%);border-radius:0;background:transparent;font-family:"Duplet",var(--font-primary);font-size:.75rem;font-weight:600;line-height:1rem;color:#fff;white-space:nowrap;pointer-events:none}.lottery-card__how-to-play[_ngcontent-%COMP%]{width:8.75rem;min-width:8.75rem;max-width:8.75rem;display:flex;align-items:center;justify-content:center;text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play, [_nghost-%COMP%]     app-button.lottery-card__how-to-play button, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button{width:8.75rem;min-width:8.75rem;max-width:8.75rem}.lottery-card__tinka-how-to-play[_ngcontent-%COMP%]:before, .lottery-card__tinka-how-to-play[_ngcontent-%COMP%]:after{display:none!important;content:none!important}[_nghost-%COMP%]     .lottery-card__rapitinka-body app-button button, [_nghost-%COMP%]     .lottery-card__rapitinka-body app-button .button{width:12.5rem;min-width:12.5rem;height:2.875rem;min-height:2.875rem;padding:0 1rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}}']})}return e})(),G=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-banner"]],decls:5,vars:0,consts:[[1,"lottery-banner"],[1,"lottery-banner__left"],[1,"lottery-banner__title"],["label","","variant","outline-circle"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"div",0)(1,"div",1)(2,"span",2),t.\u0275\u0275text(3," Conoce los resultados de nuestras Loter\xedas "),t.\u0275\u0275elementEnd()(),t.\u0275\u0275element(4,"app-button",3),t.\u0275\u0275elementEnd())},dependencies:[d],styles:[".lottery-banner[_ngcontent-%COMP%]{width:100%;height:6.25rem;display:flex;align-items:center;justify-content:space-between;padding:1.5rem;box-sizing:border-box;border-radius:.75rem;background:linear-gradient(90deg,#153,#01954b);overflow:hidden}.lottery-banner__left[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;align-items:center;gap:.75rem}.lottery-banner__icon[_ngcontent-%COMP%]{width:2rem;height:2rem;display:block;flex-shrink:0;object-fit:contain}.lottery-banner__title[_ngcontent-%COMP%]{margin:0;color:var(--brand-white);font-family:var(--font-primary);font-size:1.25rem;font-weight:var(--font-weight-bold);line-height:1.75rem;letter-spacing:.015625rem;white-space:nowrap}.lottery-banner[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0}@media(min-width:481px)and (max-width:1024px){.lottery-banner[_ngcontent-%COMP%]{height:6.25rem;padding:1.5rem}.lottery-banner__title[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1.75rem}}@media(max-width:480px){.lottery-banner[_ngcontent-%COMP%]{width:100%;max-width:none;height:auto;min-height:5.875rem;padding:1rem;gap:.75rem;border-radius:.75rem}.lottery-banner__left[_ngcontent-%COMP%]{min-width:0;gap:.75rem}.lottery-banner__icon[_ngcontent-%COMP%]{width:2rem;height:2rem}.lottery-banner__title[_ngcontent-%COMP%]{max-width:13rem;font-size:1.25rem;line-height:1.75rem;letter-spacing:0;white-space:normal;text-align:left}.lottery-banner[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0}}"]})}return e})();const Y=["carousel"];function K(e,i){if(1&e&&(t.\u0275\u0275elementStart(0,"button",15),t.\u0275\u0275element(1,"img",17),t.\u0275\u0275elementEnd()),2&e){const r=i.$implicit;t.\u0275\u0275attribute("aria-label","Abrir "+r.name),t.\u0275\u0275advance(),t.\u0275\u0275property("src",r.image,t.\u0275\u0275sanitizeUrl)("alt",r.name)}}let q=(()=>{class e{carousel;games=[{name:"Joyas del imperio",image:"assets/images/video-loterias-card.png"},{name:"Joyas del imperio",image:"assets/images/video-loterias-card.png"},{name:"Joyas del imperio",image:"assets/images/video-loterias-card.png"},{name:"Joyas del imperio",image:"assets/images/video-loterias-card.png"},{name:"Joyas del imperio",image:"assets/images/video-loterias-card.png"}];scrollPrevious(){this.scrollCarousel(-1)}scrollNext(){this.scrollCarousel(1)}scrollCarousel(r){const n=this.carousel?.nativeElement;if(!n)return;if(window.innerWidth<768)return void n.scrollBy({left:n.clientWidth*r,behavior:"smooth"});const a=n.querySelector(".lottery-video-section__game");if(!a)return;const s=n.querySelector(".lottery-video-section__track"),g=s&&Number.parseFloat(getComputedStyle(s).gap)||0;n.scrollBy({left:(a.offsetWidth+g)*r,behavior:"smooth"})}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-video-section"]],viewQuery:function(n,o){if(1&n&&t.\u0275\u0275viewQuery(Y,5),2&n){let a;t.\u0275\u0275queryRefresh(a=t.\u0275\u0275loadQuery())&&(o.carousel=a.first)}},decls:23,vars:0,consts:[["carousel",""],[1,"lottery-video-section"],[1,"lottery-video-section__title"],[1,"lottery-video-section__card"],[1,"lottery-video-section__container"],["src","assets/images/logo-videoloterias.svg","alt","Video Loter\xedas",1,"lottery-video-section__logo"],[1,"lottery-video-section__body"],[1,"lottery-video-section__header"],[1,"lottery-video-section__subtitle"],["label","Ver m\xe1s","variant","outline"],[1,"lottery-video-section__carousel"],["type","button","aria-label","Ver juegos anteriores",1,"lottery-video-section__arrow","lottery-video-section__arrow--left",3,"click"],["src","assets/images/arrow-right.svg","alt","","aria-hidden","true",1,"lottery-video-section__arrow-icon"],[1,"lottery-video-section__viewport"],[1,"lottery-video-section__track"],["type","button",1,"lottery-video-section__game"],["type","button","aria-label","Ver m\xe1s juegos",1,"lottery-video-section__arrow","lottery-video-section__arrow--right",3,"click"],[1,"lottery-video-section__game-image",3,"src","alt"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"div",1)(1,"h2",2),t.\u0275\u0275text(2,"M\xe1s juegos para ti"),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(3,"div",3)(4,"div",4),t.\u0275\u0275element(5,"img",5),t.\u0275\u0275elementStart(6,"div",6)(7,"div",7)(8,"p",8),t.\u0275\u0275text(9," Juega y gana al instante hasta "),t.\u0275\u0275elementStart(10,"span"),t.\u0275\u0275text(11,"S/100,000"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275element(12,"app-button",9),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(13,"div",10)(14,"button",11),t.\u0275\u0275listener("click",function(){return o.scrollPrevious()}),t.\u0275\u0275element(15,"img",12),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(16,"div",13,0)(18,"div",14),t.\u0275\u0275repeaterCreate(19,K,2,3,"button",15,t.\u0275\u0275repeaterTrackByIndex),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(21,"button",16),t.\u0275\u0275listener("click",function(){return o.scrollNext()}),t.\u0275\u0275element(22,"img",12),t.\u0275\u0275elementEnd()()()()()()),2&n&&(t.\u0275\u0275advance(19),t.\u0275\u0275repeater(o.games))},dependencies:[d],styles:['@charset "UTF-8";.lottery-video-section[_ngcontent-%COMP%]{width:100%}.lottery-video-section__title[_ngcontent-%COMP%]{margin:0 0 1.5rem;color:var(--brand-black);font-family:var(--font-secondary);font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2.625rem;letter-spacing:.015625rem;text-align:center}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:2rem;box-sizing:border-box;background:var(--brand-white);border-radius:var(--lottery-card-radius);border-bottom:1.313rem solid var(--brand-yellow);box-shadow:var(--lottery-card-shadow)}.lottery-video-section__container[_ngcontent-%COMP%]{width:100%;min-width:0}.lottery-video-section__logo[_ngcontent-%COMP%]{display:block;width:6.6875rem;height:4.25rem;margin:0 auto 1.5rem;object-fit:contain}.lottery-video-section__body[_ngcontent-%COMP%]{width:100%;min-width:0}.lottery-video-section__header[_ngcontent-%COMP%]{display:flex;width:100%;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:1.5rem;padding:0;box-sizing:border-box}.lottery-video-section__subtitle[_ngcontent-%COMP%]{min-width:0;flex:1;margin:0;color:var(--brand-black);font-family:var(--font-primary);font-size:1rem;font-weight:var(--font-weight-semibold);line-height:2rem;letter-spacing:.015625rem}.lottery-video-section__subtitle[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{color:var(--brand-green);font-weight:var(--font-weight-bold)}.lottery-video-section__header[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0;margin:0}.lottery-video-section__carousel[_ngcontent-%COMP%]{position:relative;display:flex;width:100%;min-width:0;align-items:flex-start;padding:0 0 3.75rem;box-sizing:border-box}.lottery-video-section__viewport[_ngcontent-%COMP%]{width:100%;min-width:0;padding:0;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scrollbar-width:none}.lottery-video-section__viewport[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.lottery-video-section__track[_ngcontent-%COMP%]{display:flex;width:max-content;gap:1.5rem;padding:0}.lottery-video-section__game[_ngcontent-%COMP%]{display:block;width:clamp(16rem,27vw,20.9375rem);flex:0 0 auto;padding:0;overflow:hidden;background:transparent;border:0;border-radius:.875rem;cursor:pointer;scroll-snap-align:start}.lottery-video-section__game-image[_ngcontent-%COMP%]{display:block;width:100%;height:auto;aspect-ratio:335/273;object-fit:cover;border-radius:inherit}.lottery-video-section__arrow[_ngcontent-%COMP%]{position:absolute;z-index:10;bottom:0;display:flex;width:2.5rem;height:2.5rem;align-items:center;justify-content:center;padding:0;background:var(--brand-white);border:1px solid #cb2f1f;border-radius:50%;box-shadow:none;cursor:pointer}.lottery-video-section__arrow--left[_ngcontent-%COMP%]{left:0}.lottery-video-section__arrow--right[_ngcontent-%COMP%]{right:0}.lottery-video-section__arrow-icon[_ngcontent-%COMP%]{display:block;width:1rem;height:1rem;object-fit:contain}.lottery-video-section__arrow--left[_ngcontent-%COMP%]   .lottery-video-section__arrow-icon[_ngcontent-%COMP%]{transform:rotate(180deg)}@media(min-width:481px)and (max-width:1024px){.lottery-video-section[_ngcontent-%COMP%]{padding-inline:2rem;box-sizing:border-box}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:70rem;padding:1.5rem}.lottery-video-section__header[_ngcontent-%COMP%]{padding:0}.lottery-video-section__track[_ngcontent-%COMP%]{gap:1.25rem}}@media(max-width:480px){.lottery-video-section[_ngcontent-%COMP%]{padding-inline:0}.lottery-video-section__title[_ngcontent-%COMP%]{margin:0 0 1.5rem;font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2rem;letter-spacing:0;text-align:center}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:none;padding:1rem;box-sizing:border-box;border-radius:1.25rem;border-bottom:1rem solid var(--brand-yellow)}.lottery-video-section__logo[_ngcontent-%COMP%]{width:4.425625rem;height:2.8125rem;margin:0 auto 1.25rem}.lottery-video-section__header[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;padding:0}.lottery-video-section__subtitle[_ngcontent-%COMP%]{min-width:0;flex:1;margin:0;color:var(--brand-black);font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-semibold);line-height:1rem;letter-spacing:0}.lottery-video-section__subtitle[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{display:block;color:var(--brand-green);font-size:1.25rem;font-weight:var(--font-weight-bold);line-height:1.5rem}.lottery-video-section__header[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0;margin:0}.lottery-video-section__carousel[_ngcontent-%COMP%]{align-items:center;padding:0 2.75rem}.lottery-video-section__viewport[_ngcontent-%COMP%]{scroll-snap-type:x mandatory}.lottery-video-section__track[_ngcontent-%COMP%]{width:100%;gap:1rem}.lottery-video-section__game[_ngcontent-%COMP%]{width:100%;max-width:none;flex:0 0 100%;aspect-ratio:335/273;scroll-snap-align:center;scroll-snap-stop:always}.lottery-video-section__game-image[_ngcontent-%COMP%]{display:block;width:100%;height:100%;aspect-ratio:335/273;object-fit:cover;border-radius:inherit}.lottery-video-section__arrow[_ngcontent-%COMP%]{top:50%;bottom:auto;transform:translateY(-50%)}.lottery-video-section__arrow--left[_ngcontent-%COMP%]{left:-.25rem}.lottery-video-section__arrow--right[_ngcontent-%COMP%]{right:-.25rem}.lottery-video-section__arrow-icon[_ngcontent-%COMP%]{width:1rem;height:1rem}}']})}return e})(),W=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-lottery-section"]],decls:17,vars:0,consts:[["id","loterias",1,"lottery-section"],[1,"lottery-section__container"],[1,"lottery-section__title"],[1,"lottery-section__title--highlight"],[1,"lottery-section__hero"],["variant","hero"],[1,"lottery-section__cards"],["variant","kabala"],["variant","ganadiario"],["variant","kinelo"],["variant","rapitinka"],[1,"lottery-section__banner"],["id","videoloterias",1,"lottery-section__video"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"section",0)(1,"div",1)(2,"h2",2),t.\u0275\u0275text(3," Elige tu juego y prueba tu "),t.\u0275\u0275elementStart(4,"span",3),t.\u0275\u0275text(5,"suerte"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(6,"div",4),t.\u0275\u0275element(7,"app-lottery-card",5),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(8,"div",6),t.\u0275\u0275element(9,"app-lottery-card",7)(10,"app-lottery-card",8)(11,"app-lottery-card",9)(12,"app-lottery-card",10),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(13,"div",11),t.\u0275\u0275element(14,"app-lottery-banner"),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(15,"div",12),t.\u0275\u0275element(16,"app-lottery-video-section"),t.\u0275\u0275elementEnd()()())},dependencies:[J,G,q],styles:['@charset "UTF-8";.lottery-section[_ngcontent-%COMP%]{width:100%;margin-top:2rem;color:var(--brand-black)}.lottery-section__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;box-sizing:border-box}.lottery-section__title[_ngcontent-%COMP%]{margin-bottom:1.375rem;text-align:center;font-family:var(--font-secondary);font-size:var(--lottery-title-font-size);font-weight:var(--font-weight-semibold);line-height:var(--lottery-title-line-height);letter-spacing:var(--lottery-title-letter-spacing);color:var(--brand-black)}.lottery-section__title--highlight[_ngcontent-%COMP%]{color:var(--brand-green)}.lottery-section__hero[_ngcontent-%COMP%]{width:100%;max-width:70rem;height:var(--lottery-hero-height);margin:0 auto 1.5rem;background-image:url(/assets/images/bg-tinka.svg);background-repeat:no-repeat;background-position:center;background-size:100% 100%;border-radius:var(--lottery-card-radius);box-sizing:border-box}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:100%}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:100%;background:transparent;box-shadow:none}.lottery-section__cards[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto 1.875rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1.5rem;row-gap:1.5rem;align-items:stretch;box-sizing:border-box}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:flex;width:100%;min-width:0}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;min-width:0;flex:1}.lottery-section__banner[_ngcontent-%COMP%]{width:100%;max-width:var(--lottery-banner-width);margin:3rem auto 0}.lottery-section__video[_ngcontent-%COMP%]{width:100%;margin-top:1.875rem;display:flex;justify-content:center}.lottery-section[_ngcontent-%COMP%], .promotions[_ngcontent-%COMP%], .winners[_ngcontent-%COMP%], .lottery-section__video[_ngcontent-%COMP%]{scroll-margin-top:7.5rem}@media(min-width:481px)and (max-width:1024px){.lottery-section__container[_ngcontent-%COMP%]{padding-inline:2rem}.lottery-section__hero[_ngcontent-%COMP%], .lottery-section__cards[_ngcontent-%COMP%]{max-width:100%}.lottery-section__hero[_ngcontent-%COMP%]{margin-bottom:1.5rem}.lottery-section__cards[_ngcontent-%COMP%]{column-gap:1.5rem;row-gap:1.5rem}}@media(max-width:480px){.lottery-section[_ngcontent-%COMP%]{width:100%;margin-top:2.375rem}.lottery-section__container[_ngcontent-%COMP%]{width:100%;max-width:24.375rem;margin-inline:auto;padding-inline:1.4375rem;box-sizing:border-box}.lottery-section__title[_ngcontent-%COMP%]{width:100%;max-width:19rem;margin:0 auto 1.75rem;font-size:1.4375rem;font-weight:700;line-height:1.75rem;letter-spacing:0;text-align:center}.lottery-section__title--highlight[_ngcontent-%COMP%]{display:block}.lottery-section__hero[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;height:auto;margin:0 auto 1.5rem;background:transparent;background-image:none;border-radius:1.25rem}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:auto}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:auto;background:#fff;box-shadow:0 .25rem 1rem #00000026}.lottery-section__cards[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;margin:0 auto 2.5rem;display:grid;grid-template-columns:1fr;column-gap:0;row-gap:1.5rem;align-items:start}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:auto}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:auto}.lottery-section__banner[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;margin:0 auto;display:flex;align-items:center;justify-content:center}.lottery-section__banner[_ngcontent-%COMP%]   app-lottery-banner[_ngcontent-%COMP%]{display:block;width:100%;max-width:21.5rem}.lottery-section__video[_ngcontent-%COMP%]{width:100%;margin-top:2.5rem;padding:0;display:flex;justify-content:center;box-sizing:border-box}.lottery-section__video[_ngcontent-%COMP%]   app-lottery-video-section[_ngcontent-%COMP%]{display:block;width:100%;max-width:21.5rem}}']})}return e})(),Q=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-promotions"]],decls:27,vars:0,consts:[["id","promociones",1,"promotions"],[1,"promotions__container"],[1,"promotions__header"],[1,"promotions__title"],[1,"promotions__cards"],[1,"promotion-card"],[1,"promotion-card__content"],[1,"promotion-card__title"],["label","Jugar ahora","variant","danger"],[1,"promotion-card__title","promotion-card__title--large"],[1,"promotions__footer"],["label","Ver m\xe1s","variant","outline"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"section",0)(1,"div",1)(2,"div",2)(3,"h2",3),t.\u0275\u0275text(4,"Promociones"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(5,"div",4)(6,"article",5)(7,"div",6)(8,"h3",7),t.\u0275\u0275text(9," Combos"),t.\u0275\u0275element(10,"br"),t.\u0275\u0275text(11," Loteros "),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(12,"app-button",8),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(13,"article",5)(14,"div",6)(15,"h3",7),t.\u0275\u0275text(16," Suscripci\xf3n"),t.\u0275\u0275element(17,"br"),t.\u0275\u0275text(18," de loter\xedas "),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(19,"app-button",8),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(20,"article",5)(21,"div",6)(22,"h3",9),t.\u0275\u0275text(23,"3x2"),t.\u0275\u0275elementEnd(),t.\u0275\u0275element(24,"app-button",8),t.\u0275\u0275elementEnd()()(),t.\u0275\u0275elementStart(25,"div",10),t.\u0275\u0275element(26,"app-button",11),t.\u0275\u0275elementEnd()()())},dependencies:[d],styles:['@charset "UTF-8";.promotions[_ngcontent-%COMP%]{width:100%;margin-top:3rem}.promotions__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;min-height:33.25rem;margin:0 auto;padding:1.5rem 0 2rem;display:flex;flex-direction:column;gap:1.5rem;box-sizing:border-box;background:#f5f0d480;border-top-left-radius:2rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{width:100%;padding:0 1.5rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box}.promotions__title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-secondary);font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2rem;text-align:center;color:var(--brand-black)}.promotions__cards[_ngcontent-%COMP%]{width:100%;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}.promotion-card[_ngcontent-%COMP%]{position:relative;width:100%;min-width:0;aspect-ratio:1/1;border-radius:var(--lottery-card-radius);background-image:url(/assets/images/bg_promociones.svg);background-repeat:no-repeat;background-position:center;background-size:cover;box-shadow:var(--lottery-card-shadow);overflow:hidden}.promotion-card__content[_ngcontent-%COMP%]{position:absolute;inset:0;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}.promotion-card__title[_ngcontent-%COMP%]{margin:0 0 2rem;font-family:var(--font-secondary);font-size:2rem;font-weight:var(--font-weight-semibold);line-height:.98;letter-spacing:0;text-align:center;color:var(--brand-green)}.promotion-card__title--large[_ngcontent-%COMP%]{font-size:5.75rem;line-height:1;letter-spacing:.020625rem}.promotion-card[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{margin-top:0}.promotions__footer[_ngcontent-%COMP%]{width:100%;padding:0;display:flex;align-items:center;justify-content:flex-end;box-sizing:border-box}@media(min-width:481px)and (max-width:1024px){.promotions__container[_ngcontent-%COMP%]{max-width:none;min-height:0;padding:1.5rem 0 2rem 1.5rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{padding:0 1.5rem 0 0}.promotions__cards[_ngcontent-%COMP%]{display:flex;justify-content:flex-start;gap:1.5rem;padding-right:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none}.promotions__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.promotion-card[_ngcontent-%COMP%]{width:21.375rem;height:21.375rem;flex:0 0 21.375rem;aspect-ratio:auto;scroll-snap-align:start}.promotions__footer[_ngcontent-%COMP%]{padding:0 1.5rem 0 0}}@media(max-width:480px){.promotions[_ngcontent-%COMP%]{margin-top:1.5rem}.promotions__container[_ngcontent-%COMP%]{width:100%;max-width:none;min-height:0;padding:1.5rem 0 1.5rem 1.5rem;gap:1.5rem;border-top-left-radius:2rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{padding:0 1.5rem 0 0;justify-content:flex-start}.promotions__title[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;text-align:left}.promotions__cards[_ngcontent-%COMP%]{width:100%;display:flex;justify-content:flex-start;gap:1rem;padding-right:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}.promotions__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.promotion-card[_ngcontent-%COMP%]{width:15.625rem;height:15.625rem;flex:0 0 15.625rem;aspect-ratio:auto;border-radius:.625rem;scroll-snap-align:start}.promotion-card__content[_ngcontent-%COMP%]{padding:1.5rem}.promotion-card__title[_ngcontent-%COMP%]{margin-bottom:2rem;font-size:1.75rem;line-height:1}.promotion-card__title--large[_ngcontent-%COMP%]{font-size:4rem;line-height:4rem}.promotion-card[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{margin-right:auto;margin-left:auto}.promotions__footer[_ngcontent-%COMP%]{padding:0 1.5rem 0 0;justify-content:flex-end}[_nghost-%COMP%]     .promotions__footer app-button button, [_nghost-%COMP%]     .promotions__footer .button{width:6.9375rem;min-width:6.9375rem;height:2.375rem;min-height:2.375rem;padding:0}[_nghost-%COMP%]     .promotion-card app-button button, [_nghost-%COMP%]     .promotion-card .button{width:8.625rem;min-width:8.625rem;height:2.125rem;min-height:2.125rem;padding:0;font-size:.75rem;line-height:1rem}}']})}return e})(),X=(()=>{class e{variant=(0,t.input)("kabala");lottery=t.input.required();winnerName=t.input.required();prize=t.input.required();city=t.input.required();static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-winner-card"]],inputs:{variant:[1,"variant"],lottery:[1,"lottery"],winnerName:[1,"winnerName"],prize:[1,"prize"],city:[1,"city"]},decls:17,vars:2,consts:[[1,"winner-card"],[1,"winner-card__title"],[1,"winner-card__content"],[1,"winner-card__profile"],[1,"winner-card__image"],["src","assets/images/imagen_conoce.png","alt","Ganador"],[1,"winner-card__badge"],[1,"winner-card__info"],[1,"winner-card__winner"],[1,"winner-card__description"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0)(1,"p",1),t.\u0275\u0275text(2,"El d\xeda que cambi\xf3 su destino"),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(3,"div",2)(4,"div",3)(5,"div",4),t.\u0275\u0275domElement(6,"img",5),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(7,"div",6),t.\u0275\u0275text(8,"Nuevo"),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(9,"div",7)(10,"p",8)(11,"span"),t.\u0275\u0275text(12),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(13,"span"),t.\u0275\u0275text(14),t.\u0275\u0275domElementEnd()(),t.\u0275\u0275domElementStart(15,"p",9),t.\u0275\u0275text(16," \u201cGan\xf3 S/5,000 mensuales por 20 a\xf1os\u201d. Una tradici\xf3n familiar que cambi\xf3 su vida. "),t.\u0275\u0275domElementEnd()()()()),2&n&&(t.\u0275\u0275advance(12),t.\u0275\u0275textInterpolate(o.winnerName()),t.\u0275\u0275advance(2),t.\u0275\u0275textInterpolate1("Gan\xf3 ",o.prize()))},styles:[".winner-card[_ngcontent-%COMP%]{width:100%;max-width:22.25rem;height:10.75rem;padding:1rem;display:flex;flex-direction:column;gap:.5rem;box-sizing:border-box;border:.0625rem solid var(--winners-kabala-border);border-radius:1rem;background:var(--winners-kabala-background);overflow:hidden}.winner-card__title[_ngcontent-%COMP%]{margin:0;font-family:Duplet;font-weight:700;font-size:.875rem;line-height:1.25rem;letter-spacing:.015625rem;color:#646464}.winner-card__content[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;gap:.75rem;min-width:0}.winner-card__profile[_ngcontent-%COMP%]{width:3.75rem;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.125rem}.winner-card__image[_ngcontent-%COMP%]{width:3.75rem;height:3.75rem;flex-shrink:0;border-radius:6.25rem;overflow:hidden}.winner-card__image[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.winner-card__badge[_ngcontent-%COMP%]{width:3.25rem;height:1.125rem;padding:.12625rem .37875rem;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:.75rem;background:#ff7f33;color:#fff;font-family:var(--font-primary);font-size:.75rem;font-weight:400;line-height:1rem;letter-spacing:.015625rem;white-space:nowrap}.winner-card__info[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:.25rem}.winner-card__winner[_ngcontent-%COMP%]{margin:0;display:flex;align-items:center;gap:.25rem;font-family:var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;color:#004e18;white-space:nowrap}.winner-card__description[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:.75rem;font-weight:400;line-height:1rem;letter-spacing:.015625rem;color:#2f2f3a}@media(max-width:480px){.winner-card[_ngcontent-%COMP%]{width:18.75rem;max-width:18.75rem;height:10.75rem;flex:0 0 18.75rem;padding:1rem}.winner-card__title[_ngcontent-%COMP%]{font-size:1rem;line-height:1.5rem}.winner-card__content[_ngcontent-%COMP%]{gap:.625rem}.winner-card__winner[_ngcontent-%COMP%]{flex-wrap:wrap;gap:0 .25rem;font-size:1rem;line-height:1.375rem;white-space:normal}.winner-card__description[_ngcontent-%COMP%]{font-size:.6875rem;line-height:.9375rem}}"]})}return e})(),Z=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-winners"]],decls:15,vars:0,consts:[["id","ganadores",1,"winners"],[1,"winners__container"],[1,"winners__heading"],[1,"winners__title"],[1,"winners__description"],[1,"winners__actions"],["label","Ver m\xe1s","variant","outline"],[1,"winners__cards"],["variant","kabala","lottery","K\xe1bala","winnerName","H. Gan\xf3","prize","S/ 5,000","city","Lima"],["variant","tinka","lottery","Tinka","winnerName","H. Gan\xf3","prize","S/ 5,000","city","Arequipa"],["variant","ganadiario","lottery","Gana Diario","winnerName","H. Gan\xf3","prize","S/ 5,000","city","Piura"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"section",0)(1,"div",1)(2,"div",2)(3,"h2",3),t.\u0275\u0275text(4,"Conoce a quienes ya "),t.\u0275\u0275elementStart(5,"span"),t.\u0275\u0275text(6,"ganaron"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(7,"p",4),t.\u0275\u0275text(8," Miles de personas ya han ganado con La Tinka. Aqu\xed te mostramos algunos de ellos. "),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(9,"div",5),t.\u0275\u0275element(10,"app-button",6),t.\u0275\u0275elementEnd(),t.\u0275\u0275elementStart(11,"div",7),t.\u0275\u0275element(12,"app-winner-card",8)(13,"app-winner-card",9)(14,"app-winner-card",10),t.\u0275\u0275elementEnd()()())},dependencies:[d,X],styles:[".winners[_ngcontent-%COMP%]{width:100%;margin-top:var(--winners-section-margin-top)}.winners__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto}.winners__heading[_ngcontent-%COMP%]{text-align:center}.winners__title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-secondary);font-size:var(--winners-title-font-size);font-weight:var(--font-weight-semibold);line-height:var(--winners-title-line-height);letter-spacing:var(--winners-title-letter-spacing);color:var(--brand-black)}.winners__title[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{color:var(--brand-green)}.winners__description[_ngcontent-%COMP%]{margin:.5rem 0 0;text-align:center;font-family:var(--font-primary);font-size:var(--winners-description-font-size);font-weight:var(--font-weight-semibold);line-height:var(--winners-description-line-height);color:var(--brand-black)}.winners__actions[_ngcontent-%COMP%]{display:flex;justify-content:flex-end;margin-top:1rem;margin-bottom:1.5rem}.winners__cards[_ngcontent-%COMP%]{width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--winners-card-gap)}.winners__cards[_ngcontent-%COMP%]   app-winner-card[_ngcontent-%COMP%]{display:block;width:100%;min-width:0}@media(min-width:481px)and (max-width:1024px){.winners__container[_ngcontent-%COMP%]{padding-inline:2rem}}@media(max-width:480px){.winners[_ngcontent-%COMP%]{margin-top:1.5rem}.winners__container[_ngcontent-%COMP%]{max-width:none;padding:0 0 0 1.5rem;overflow:hidden}.winners__heading[_ngcontent-%COMP%]{padding-right:1.5rem}.winners__title[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;letter-spacing:0}.winners__description[_ngcontent-%COMP%]{margin-top:1rem;font-size:1rem;line-height:1.5rem}.winners__actions[_ngcontent-%COMP%]{justify-content:flex-end;padding-right:1.5rem;margin-top:1rem;margin-bottom:3rem}[_nghost-%COMP%]     .winners__actions app-button button, [_nghost-%COMP%]     .winners__actions .button{width:6.9375rem;min-width:6.9375rem;height:2.375rem;min-height:2.375rem;padding:0}.winners__cards[_ngcontent-%COMP%]{max-width:none;margin:0;padding-right:1.5rem;display:flex;justify-content:flex-start;gap:1rem;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none}.winners__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.winners__cards[_ngcontent-%COMP%]   app-winner-card[_ngcontent-%COMP%]{width:auto;flex:0 0 auto}}"]})}return e})(),tt=(()=>{class e{title=t.input.required();description=t.input.required();linkLabel=(0,t.input)("Conocer m\xe1s");variant=(0,t.input)("default");static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-contributing-card"]],inputs:{title:[1,"title"],description:[1,"description"],linkLabel:[1,"linkLabel"],variant:[1,"variant"]},decls:10,vars:3,consts:[[1,"contributing-card"],[1,"contributing-card__icon"],["src","assets/images/manos.svg","alt","Contribuci\xf3n"],[1,"contributing-card__content"],[1,"contributing-card__title"],[1,"contributing-card__description"],["href","#",1,"contributing-card__link"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0)(1,"div",1),t.\u0275\u0275domElement(2,"img",2),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(3,"div",3)(4,"h3",4),t.\u0275\u0275text(5),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(6,"p",5),t.\u0275\u0275text(7),t.\u0275\u0275domElementEnd(),t.\u0275\u0275domElementStart(8,"a",6),t.\u0275\u0275text(9),t.\u0275\u0275domElementEnd()()()),2&n&&(t.\u0275\u0275advance(5),t.\u0275\u0275textInterpolate1(" ",o.title()," "),t.\u0275\u0275advance(2),t.\u0275\u0275textInterpolate1(" ",o.description()," "),t.\u0275\u0275advance(2),t.\u0275\u0275textInterpolate1(" ",o.linkLabel()," "))},styles:[".contributing-card[_ngcontent-%COMP%]{width:100%;max-width:21.375rem;height:13.375rem;display:flex;align-items:center;gap:1rem;padding:.875rem 1.5rem;box-sizing:border-box;border-radius:1.5rem;background:var(--contributing-card-background);overflow:hidden}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex:0 0 2.875rem;border-radius:1.4375rem;overflow:hidden}.contributing-card__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:contain}.contributing-card__content[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center}.contributing-card__title[_ngcontent-%COMP%]{margin:0 0 .5rem;font-family:Duplet;font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;color:#1f1f1f}.contributing-card__description[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:var(--contributing-description-font-size);font-weight:var(--font-weight-regular);line-height:var(--contributing-description-line-height);color:#1f1f1f}.contributing-card__link[_ngcontent-%COMP%]{width:fit-content;margin-top:1rem;font-family:Duplet;font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#cb2f1f;text-decoration-line:underline;text-decoration-style:solid;text-underline-offset:0;text-decoration-thickness:auto}@media(min-width:481px)and (max-width:1024px){.contributing-card[_ngcontent-%COMP%]{width:21.375rem;max-width:21.375rem;height:13.375rem;padding:.875rem 1.5rem;gap:1rem}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex-basis:2.875rem}.contributing-card__title[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1.75rem}.contributing-card__link[_ngcontent-%COMP%]{font-size:1rem;line-height:1.5rem}}@media(max-width:480px){.contributing-card[_ngcontent-%COMP%]{width:100%;max-width:none;height:13.375rem;min-height:13.375rem;gap:1rem;padding:.875rem 1.5rem;border-radius:1.5rem;background:var(--contributing-card-background)}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex:0 0 2.875rem}.contributing-card__title[_ngcontent-%COMP%]{margin-bottom:.5rem;font-size:1.25rem;line-height:1.75rem}.contributing-card__link[_ngcontent-%COMP%]{margin-top:1rem;font-size:1rem;line-height:1.5rem}}"]})}return e})(),et=(()=>{class e{static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-contributing"]],decls:10,vars:0,consts:[[1,"contributing"],[1,"contributing__container"],[1,"contributing__title"],[1,"contributing__title--highlight"],[1,"contributing__cards"],["title","Siempre cerca de ti","description","Nuestra plataforma y puntos de venta est\xe1n contigo las 24 horas para jugar cuando lo necesites, de forma f\xe1cil y segura.","linkLabel","Conocer m\xe1s"]],template:function(n,o){1&n&&(t.\u0275\u0275elementStart(0,"section",0)(1,"div",1)(2,"h2",2),t.\u0275\u0275text(3," Cada jugada "),t.\u0275\u0275elementStart(4,"span",3),t.\u0275\u0275text(5,"contribuye"),t.\u0275\u0275elementEnd()(),t.\u0275\u0275elementStart(6,"div",4),t.\u0275\u0275element(7,"app-contributing-card",5)(8,"app-contributing-card",5)(9,"app-contributing-card",5),t.\u0275\u0275elementEnd()()())},dependencies:[tt],styles:[".contributing[_ngcontent-%COMP%]{width:100%;margin-top:var(--contributing-section-margin-top)}.contributing__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto}.contributing__title[_ngcontent-%COMP%]{margin:0 0 2rem;text-align:center;font-family:var(--font-secondary);font-size:var(--contributing-title-font-size);font-weight:var(--font-weight-bold);letter-spacing:var(--contributing-title-letter-spacing);color:var(--brand-black)}.contributing__title--highlight[_ngcontent-%COMP%]{color:var(--brand-green)}.contributing__cards[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(3,21.375rem);justify-content:space-between;align-items:stretch;gap:0}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{display:block;width:21.375rem;min-width:21.375rem}@media(min-width:481px)and (max-width:1024px){.contributing[_ngcontent-%COMP%]{margin-top:2rem}.contributing__container[_ngcontent-%COMP%]{max-width:none;padding-inline:1.5rem;box-sizing:border-box;overflow:hidden}.contributing__title[_ngcontent-%COMP%]{margin-bottom:1.5rem;font-size:2rem;line-height:2.5rem;letter-spacing:0}.contributing__cards[_ngcontent-%COMP%]{width:100%;display:flex;justify-content:flex-start;gap:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none}.contributing__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{width:21.375rem;min-width:21.375rem;flex:0 0 21.375rem;scroll-snap-align:start}}@media(max-width:480px){.contributing[_ngcontent-%COMP%]{margin-top:1.5rem}.contributing__container[_ngcontent-%COMP%]{width:100%;max-width:none;padding:0;box-sizing:border-box;overflow:hidden}.contributing__title[_ngcontent-%COMP%]{margin:0 1.5rem 1.5rem;font-size:1.5rem;line-height:2rem;letter-spacing:0}.contributing__cards[_ngcontent-%COMP%]{width:100%;margin:0;padding-inline:1.5rem;display:flex;justify-content:flex-start;gap:1.5rem;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;background:transparent;scroll-snap-type:x mandatory;scroll-padding-inline:1.5rem;scrollbar-width:none;-ms-overflow-style:none}.contributing__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{display:block;width:calc(100vw - 3rem);min-width:calc(100vw - 3rem);max-width:21.375rem;flex:0 0 calc(100vw - 3rem);scroll-snap-align:start;scroll-snap-stop:always}}"]})}return e})(),nt=(()=>{class e{message=(0,t.input)("Cargando...");static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["app-loading-overlay"]],inputs:{message:[1,"message"]},decls:5,vars:1,consts:[[1,"loading-overlay"],[1,"loading-overlay__content"],[1,"loading-overlay__spinner"]],template:function(n,o){1&n&&(t.\u0275\u0275domElementStart(0,"div",0)(1,"div",1),t.\u0275\u0275domElement(2,"div",2),t.\u0275\u0275domElementStart(3,"span"),t.\u0275\u0275text(4),t.\u0275\u0275domElementEnd()()()),2&n&&(t.\u0275\u0275advance(4),t.\u0275\u0275textInterpolate(o.message()))},styles:[".loading-overlay[_ngcontent-%COMP%]{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#0003}.loading-overlay__content[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.75rem;padding:1.5rem 2rem;border-radius:.5rem;background:#fff;box-shadow:0 10px 25px #00000026;color:#002b21;font-weight:600}.loading-overlay__spinner[_ngcontent-%COMP%]{width:22px;height:22px;border:3px solid #e5e7eb;border-top-color:#009845;border-radius:50%;animation:_ngcontent-%COMP%_loading-overlay-spin .8s linear infinite}@keyframes _ngcontent-%COMP%_loading-overlay-spin{to{transform:rotate(360deg)}}"]})}return e})();function ot(e,i){1&e&&t.\u0275\u0275element(0,"app-loading-overlay",0)}function rt(e,i){1&e&&t.\u0275\u0275element(0,"app-loading-overlay",1)}let f=(()=>{class e{router=(0,t.inject)(_.Router);authService=(0,t.inject)(b);title=(0,t.signal)("shell-root");isProcessingLogin=(0,t.signal)(!1);isLoggingOut=this.authService.isLoggingOut;ngOnInit(){console.log("ShellComponent iniciado"),console.log("URL actual:",window.location.href);const n=new URLSearchParams(window.location.search).get("pamToken");console.log("pamToken recibido:",n),n&&(this.isProcessingLogin.set(!0),this.authService.exchangePamToken(n).subscribe({next:()=>{console.log("Exchange PAM OK"),this.isProcessingLogin.set(!1),this.router.navigate(["/"],{replaceUrl:!0})},error:o=>{console.error("Error canjeando pamToken",o),this.isProcessingLogin.set(!1),this.router.navigate(["/"],{replaceUrl:!0})}}))}static \u0275fac=function(n){return new(n||e)};static \u0275cmp=t.\u0275\u0275defineComponent({type:e,selectors:[["shell-root"]],decls:10,vars:2,consts:[["message","Iniciando sesi\xf3n..."],["message","Cerrando sesi\xf3n..."]],template:function(n,o){1&n&&(t.\u0275\u0275conditionalCreate(0,ot,1,0,"app-loading-overlay",0),t.\u0275\u0275conditionalCreate(1,rt,1,0,"app-loading-overlay",1),t.\u0275\u0275element(2,"app-header")(3,"app-navigation")(4,"app-promo-banner")(5,"app-lottery-section")(6,"app-promotions")(7,"app-winners")(8,"app-contributing")(9,"app-footer")),2&n&&(t.\u0275\u0275conditional(o.isProcessingLogin()?0:-1),t.\u0275\u0275advance(),t.\u0275\u0275conditional(o.isLoggingOut()?1:-1))},dependencies:[j,T,L,I,W,Q,Z,et,nt],encapsulation:2})}return e})();const it=[{path:"",component:f},{path:"**",redirectTo:""}],lt={providers:[(0,t.provideBrowserGlobalErrorListeners)(),(0,_.provideRouter)(it,(0,_.withHashLocation)()),(0,p.provideHttpClient)((0,p.withInterceptors)([(e,i)=>{const r=(0,t.inject)(b),n=e.url.includes("/auth/login")||e.url.includes("/auth/refresh")||e.url.includes("/auth/logout")||e.url.includes("/auth/pam/token/exchange")||e.url.includes("/auth/pam/token/fast")||e.url.includes("/backfront-identity/api/v1/identity/login"),o=r.getAccessToken(),a=o&&!n?e.clone({setHeaders:{Authorization:`Bearer ${o}`}}):e;return i(a).pipe((0,l.catchError)(s=>401!==s.status||n?(0,l.throwError)(()=>s):r.refreshSession().pipe((0,l.switchMap)(g=>{const u=e.clone({setHeaders:{Authorization:`Bearer ${g.accessToken}`}});return i(u)}),(0,l.catchError)(g=>(r.clearSession(),(0,l.throwError)(()=>g))))))}]))]};(0,y.bootstrapApplication)(f,lt).catch(e=>console.error(e))}}]);
+(self.webpackChunkshell_root = self.webpackChunkshell_root || []).push([
+  [424],
+  {
+    424(mt, dt, c) {
+      var y = c(1228),
+        t = c(1913),
+        _ = c(3367),
+        p = c(8993),
+        l = c(4866);
+      const h = 'auth-session';
+      let C = (() => {
+        class e {
+          saveSession(r) {
+            localStorage.setItem(h, JSON.stringify(r));
+          }
+          getSession() {
+            const r = localStorage.getItem(h);
+            return r ? JSON.parse(r) : null;
+          }
+          clearSession() {
+            localStorage.removeItem(h);
+          }
+          hasSession() {
+            return null !== this.getSession();
+          }
+          getAccessToken() {
+            return this.getSession()?.accessToken ?? null;
+          }
+          getRefreshToken() {
+            return this.getSession()?.refreshToken ?? null;
+          }
+          getUserName() {
+            return this.getSession()?.user.name ?? null;
+          }
+          static ɵfac = function (n) {
+            return new (n || e)();
+          };
+          static ɵprov = t.ɵɵdefineInjectable({ token: e, factory: e.ɵfac, providedIn: 'root' });
+        }
+        return e;
+      })();
+      const m_auth_authBaseUrl = 'https://api.ec-qas.latinka.com.pe',
+        m_auth_pamBaseUrl = 'http://uat.pam.seekdev.com',
+        m_auth_pamFastTokenPath = '/auth/pam/token/fast',
+        m_auth_pamTokenExchangePath = '/auth/pam/token/exchange',
+        m_auth_refreshPath = '/auth/refresh',
+        m_auth_logoutPath = '/auth/logout',
+        m_auth_backfrontLoginPath = '/backfront-identity/api/v1/identity/login';
+      let b = (() => {
+        class e {
+          http = (0, t.inject)(p.HttpClient);
+          authStorage = (0, t.inject)(C);
+          authBaseUrl = m_auth_authBaseUrl;
+          pamBaseUrl = m_auth_pamBaseUrl;
+          pamFastTokenUrl = `${this.authBaseUrl}${m_auth_pamFastTokenPath}`;
+          pamTokenExchangeUrl = `${this.authBaseUrl}${m_auth_pamTokenExchangePath}`;
+          backfrontLoginUrl = `${this.pamBaseUrl}${m_auth_backfrontLoginPath}`;
+          refreshUrl = `${this.authBaseUrl}${m_auth_refreshPath}`;
+          logoutUrl = `${this.authBaseUrl}${m_auth_logoutPath}`;
+          session = (0, t.signal)(this.authStorage.getSession());
+          isLoggedIn = (0, t.computed)(() => null !== this.session());
+          currentUser = (0, t.computed)(() => this.session()?.user ?? null);
+          userName = (0, t.computed)(() => this.session()?.user.name ?? '');
+          isStartingLogin = (0, t.signal)(!1);
+          isLoggingOut = (0, t.signal)(!1);
+          getAccessToken() {
+            return this.session()?.accessToken ?? null;
+          }
+          startPamLogin() {
+            (this.isStartingLogin.set(!0),
+              this.getPamFastToken()
+                .pipe((0, l.finalize)(() => this.isStartingLogin.set(!1)))
+                .subscribe({
+                  next: (r) => {
+                    (console.log('Respuesta PAM:', r),
+                      r.redirect && window.open(r.redirect, '_blank', 'noopener,noreferrer'));
+                  },
+                  error: (r) => {
+                    console.error('Error iniciando login PAM', r);
+                  },
+                }));
+          }
+          getPamFastToken() {
+            return this.http.get(this.pamFastTokenUrl);
+          }
+          loginBackfront(r) {
+            return this.http.post(this.backfrontLoginUrl, r);
+          }
+          loginBackfrontAndExchange(r) {
+            return this.loginBackfront(r).pipe(
+              (0, l.tap)((n) => console.log('Login Backfront OK:', n)),
+              (0, l.switchMap)((n) => this.exchangePamToken(n.token)),
+            );
+          }
+          exchangePamToken(r) {
+            return this.http
+              .post(this.pamTokenExchangeUrl, { securityToken: r })
+              .pipe((0, l.tap)((o) => this.setSession(o)));
+          }
+          refreshSession() {
+            const r = this.session();
+            return r
+              ? this.http
+                  .post(this.refreshUrl, {
+                    refreshToken: r.refreshToken,
+                    username: r.user.clientId,
+                  })
+                  .pipe(
+                    (0, l.map)((o) => {
+                      const a = {
+                        ...r,
+                        accessToken: o.accessToken,
+                        refreshToken: o.refreshToken,
+                        idToken: o.idToken,
+                        tokenType: o.tokenType,
+                        expiresIn: o.expiresIn,
+                      };
+                      return (this.setSession(a), a);
+                    }),
+                  )
+              : (0, l.throwError)(() => new Error('No existe sesi\xf3n para refrescar'));
+          }
+          logout() {
+            const r = this.session();
+            r
+              ? (this.isLoggingOut.set(!0),
+                this.http
+                  .post(this.logoutUrl, { refreshToken: r.refreshToken })
+                  .pipe(
+                    (0, l.finalize)(() => {
+                      (this.clearSession(), this.isLoggingOut.set(!1));
+                    }),
+                  )
+                  .subscribe({
+                    next: () => console.log('Logout backend OK'),
+                    error: (o) => console.error('Error ejecutando logout backend', o),
+                  }))
+              : this.clearSession();
+          }
+          clearSession() {
+            (this.authStorage.clearSession(), this.session.set(null));
+          }
+          setSession(r) {
+            (this.authStorage.saveSession(r), this.session.set(r));
+          }
+          static ɵfac = function (n) {
+            return new (n || e)();
+          };
+          static ɵprov = t.ɵɵdefineInjectable({ token: e, factory: e.ɵfac, providedIn: 'root' });
+        }
+        return e;
+      })();
+      function w(e, i) {
+        if ((1 & e && (t.ɵɵdomElementStart(0, 'span'), t.ɵɵtext(1), t.ɵɵdomElementEnd()), 2 & e)) {
+          const r = t.ɵɵnextContext();
+          (t.ɵɵadvance(), t.ɵɵtextInterpolate(r.label()));
+        }
+      }
+      function M(e, i) {
+        1 & e && t.ɵɵdomElement(0, 'img', 1);
+      }
+      let d = (() => {
+        class e {
+          label = t.input.required();
+          variant = (0, t.input)('primary');
+          type = (0, t.input)('button');
+          disabled = (0, t.input)(!1);
+          static ɵfac = function (n) {
+            return new (n || e)();
+          };
+          static ɵcmp = t.ɵɵdefineComponent({
+            type: e,
+            selectors: [['app-button']],
+            inputs: {
+              label: [1, 'label'],
+              variant: [1, 'variant'],
+              type: [1, 'type'],
+              disabled: [1, 'disabled'],
+            },
+            decls: 3,
+            vars: 14,
+            consts: [
+              [1, 'button', 3, 'type', 'disabled'],
+              [
+                'src',
+                'assets/images/arrow-right.svg',
+                'alt',
+                '',
+                'aria-hidden',
+                'true',
+                1,
+                'button__icon',
+              ],
+            ],
+            template: function (n, o) {
+              (1 & n &&
+                (t.ɵɵdomElementStart(0, 'button', 0),
+                t.ɵɵconditionalCreate(1, w, 2, 1, 'span'),
+                t.ɵɵconditionalCreate(2, M, 1, 0, 'img', 1),
+                t.ɵɵdomElementEnd()),
+                2 & n &&
+                  (t.ɵɵclassProp('button--primary', 'primary' === o.variant())(
+                    'button--secondary',
+                    'secondary' === o.variant(),
+                  )('button--danger', 'danger' === o.variant())(
+                    'button--outline',
+                    'outline' === o.variant(),
+                  )('button--outline-circle', 'outline-circle' === o.variant()),
+                  t.ɵɵdomProperty('type', o.type())('disabled', o.disabled()),
+                  t.ɵɵadvance(),
+                  t.ɵɵconditional('outline-circle' !== o.variant() ? 1 : -1),
+                  t.ɵɵadvance(),
+                  t.ɵɵconditional(
+                    'outline' === o.variant() || 'outline-circle' === o.variant() ? 2 : -1,
+                  )));
+            },
+            styles: [
+              '.button[_ngcontent-%COMP%]{display:inline-flex;justify-content:center;align-items:center;width:var(--button-width);height:var(--button-height);padding:0;border:var(--button-border-width) solid var(--brand-black);border-radius:var(--button-radius);font-family:var(--font-primary);font-size:var(--button-font-size);font-weight:var(--font-weight-semibold);line-height:1;cursor:pointer;transition:opacity .2s ease}.button--secondary[_ngcontent-%COMP%]{background:var(--brand-white);color:var(--brand-green)}.button--primary[_ngcontent-%COMP%]{background:var(--brand-green);color:var(--brand-white)}.button[_ngcontent-%COMP%]:hover{opacity:.92}.button--danger[_ngcontent-%COMP%]{min-width:var(--play-button-width);max-width:var(--play-button-max-width);height:var(--play-button-height);padding:var(--play-button-padding-y) var(--play-button-padding-x);display:inline-flex;justify-content:center;align-items:center;gap:var(--play-button-gap);border:none;border-radius:var(--play-button-radius);background:var(--play-button-color);color:var(--brand-white);font-family:var(--font-primary);font-size:var(--play-button-font-size);font-weight:var(--font-weight-bold);line-height:var(--play-button-line-height);letter-spacing:var(--play-button-letter-spacing);text-align:center;white-space:nowrap;cursor:pointer}.button--outline[_ngcontent-%COMP%]{width:var(--outline-button-width);height:var(--outline-button-height);display:inline-flex;justify-content:center;align-items:center;gap:var(--outline-button-gap);border:var(--outline-button-border-width) solid #cb2f1f;border-radius:var(--outline-button-radius);background:var(--brand-white);color:#cb2f1f;font-family:var(--font-primary);font-size:var(--outline-button-font-size);font-weight:var(--font-weight-semibold);cursor:pointer}.button--outline[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.875rem;height:.875rem;object-fit:contain;flex-shrink:0}.button--outline-circle[_ngcontent-%COMP%]{width:2.75rem;height:2.75rem;min-width:2.75rem;padding:0;display:inline-flex;justify-content:center;align-items:center;border:1px solid #cb2f1f;border-radius:50%;background:var(--brand-white);color:#cb2f1f;cursor:pointer}.button--outline-circle[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.875rem;height:.875rem;object-fit:contain;flex-shrink:0}@media(max-width:480px){.button[_ngcontent-%COMP%]{width:5.75rem;height:2.25rem;font-size:.75rem}.button--danger[_ngcontent-%COMP%]{min-width:8.625rem;height:2.125rem;padding:0 1rem;font-size:.75rem;line-height:1rem}.button--outline[_ngcontent-%COMP%]{width:6.5rem;height:2.25rem;font-size:.875rem}.button--outline[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.75rem;height:.75rem}.button--outline-circle[_ngcontent-%COMP%]{width:2.25rem;height:2.25rem;min-width:2.25rem}.button--outline-circle[_ngcontent-%COMP%]   .button__icon[_ngcontent-%COMP%]{width:.75rem;height:.75rem}}',
+            ],
+          });
+        }
+        return e;
+      })();
+      function x(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵdomElementStart(0, 'div', 6)(1, 'button', 7),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.startLogin());
+            }),
+            t.ɵɵdomElement(2, 'img', 8),
+            t.ɵɵdomElementStart(3, 'span'),
+            t.ɵɵtext(4),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(5, 'a', 9),
+            t.ɵɵdomElement(6, 'img', 10),
+            t.ɵɵdomElementStart(7, 'span'),
+            t.ɵɵtext(8, 'Reg\xedstrate'),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(9, 'nav', 11)(10, 'a', 12),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(11, 'span', 13),
+            t.ɵɵdomElement(12, 'img', 14),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(13, 'span'),
+            t.ɵɵtext(14, 'Promociones'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(15, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(16, 'span', 13),
+            t.ɵɵdomElement(17, 'img', 16),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(18, 'span'),
+            t.ɵɵtext(19, 'Ayuda'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElement(20, 'img', 17),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(21, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(22, 'span', 13),
+            t.ɵɵdomElement(23, 'img', 18),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(24, 'span'),
+            t.ɵɵtext(25, 'Casino Te Apuesto'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(26, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(27, 'span', 13),
+            t.ɵɵdomElement(28, 'img', 19),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(29, 'span'),
+            t.ɵɵtext(30, 'D\xf3nde Comprar'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(31, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(32, 'span', 13),
+            t.ɵɵdomElement(33, 'img', 20),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(34, 'span'),
+            t.ɵɵtext(35, 'Cont\xe1ctanos'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(36, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(37, 'span', 13),
+            t.ɵɵdomElement(38, 'img', 21),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(39, 'span'),
+            t.ɵɵtext(40, 'Mira Tu Suerte'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(41, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(42, 'span', 13),
+            t.ɵɵdomElement(43, 'img', 22),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(44, 'span'),
+            t.ɵɵtext(45, 'Ver Resultados'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElement(46, 'img', 17),
+            t.ɵɵdomElementEnd()());
+        }
+        if (2 & e) {
+          const r = t.ɵɵnextContext();
+          (t.ɵɵadvance(4), t.ɵɵtextInterpolate(r.isStartingLogin() ? 'Espere...' : 'Ingresa'));
+        }
+      }
+      function P(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵdomElementStart(0, 'div', 23)(1, 'div', 24),
+            t.ɵɵtext(2, 'R'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(3, 'div')(4, 'p', 25),
+            t.ɵɵtext(5, 'Bienvenido'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(6, 'p', 26),
+            t.ɵɵtext(7),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(8, 'div', 27)(9, 'div', 28)(10, 'div', 29)(11, 'span'),
+            t.ɵɵtext(12, 'Saldo Disponible'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(13, 'strong'),
+            t.ɵɵtext(14, 'S/ 0.00'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(15, 'div', 29)(16, 'span'),
+            t.ɵɵtext(17, 'Bonos'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(18, 'strong'),
+            t.ɵɵtext(19, 'S/ 0.00'),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(20, 'div', 30)(21, 'button', 31),
+            t.ɵɵdomElement(22, 'img', 32),
+            t.ɵɵtext(23, ' Recargar '),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(24, 'button', 31),
+            t.ɵɵtext(25, 'Retirar'),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(26, 'nav', 33)(27, 'a', 34),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(28, 'span', 13),
+            t.ɵɵdomElement(29, 'img', 35),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(30, 'span'),
+            t.ɵɵtext(31, 'Notificaciones'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(32, 'a', 36),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(33, 'span', 13),
+            t.ɵɵdomElement(34, 'img', 37),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(35, 'span'),
+            t.ɵɵtext(36, 'Bonos'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(37, 'a', 38),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(38, 'span', 13),
+            t.ɵɵdomElement(39, 'img', 39),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(40, 'span'),
+            t.ɵɵtext(41, 'Retirar Mis Premios'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(42, 'a', 40),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(43, 'span', 13),
+            t.ɵɵdomElement(44, 'img', 14),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(45, 'span'),
+            t.ɵɵtext(46, 'Promociones'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElement(47, 'img', 17),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(48, 'a', 41),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(49, 'span', 13),
+            t.ɵɵdomElement(50, 'img', 42),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(51, 'span'),
+            t.ɵɵtext(52, 'Mis Movimientos'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(53, 'a', 43),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(54, 'span', 13),
+            t.ɵɵdomElement(55, 'img', 44),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(56, 'span'),
+            t.ɵɵtext(57, 'Mis Jugadas'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(58, 'a', 45),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(59, 'span', 13),
+            t.ɵɵdomElement(60, 'img', 44),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(61, 'span'),
+            t.ɵɵtext(62, 'Mis Suscripciones'),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(63, 'nav', 46)(64, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(65, 'span', 13),
+            t.ɵɵdomElement(66, 'img', 16),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(67, 'span'),
+            t.ɵɵtext(68, 'Ayuda'),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElement(69, 'img', 17),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(70, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(71, 'span', 13),
+            t.ɵɵdomElement(72, 'img', 18),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(73, 'span'),
+            t.ɵɵtext(74, 'Casino Te Apuesto'),
+            t.ɵɵdomElementEnd()(),
+            t.ɵɵdomElementStart(75, 'a', 15),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.close());
+            }),
+            t.ɵɵdomElementStart(76, 'span', 13),
+            t.ɵɵdomElement(77, 'img', 19),
+            t.ɵɵdomElementEnd(),
+            t.ɵɵdomElementStart(78, 'span'),
+            t.ɵɵtext(79, 'D\xf3nde Comprar'),
+            t.ɵɵdomElementEnd()()(),
+            t.ɵɵdomElementStart(80, 'button', 47),
+            t.ɵɵdomListener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.closeSession());
+            }),
+            t.ɵɵdomElement(81, 'img', 48),
+            t.ɵɵtext(82, ' Cerrar Sesi\xf3n '),
+            t.ɵɵdomElementEnd());
+        }
+        if (2 & e) {
+          const r = t.ɵɵnextContext();
+          (t.ɵɵadvance(7), t.ɵɵtextInterpolate1('Hola, ', r.userName()));
+        }
+      }
+      let v = (() => {
+          class e {
+            isOpen = (0, t.input)(!1);
+            isLoggedIn = (0, t.input)(!1);
+            userName = (0, t.input)('');
+            isStartingLogin = (0, t.input)(!1);
+            closeSidebar = (0, t.output)();
+            login = (0, t.output)();
+            logout = (0, t.output)();
+            close() {
+              this.closeSidebar.emit();
+            }
+            startLogin() {
+              this.login.emit();
+            }
+            closeSession() {
+              this.logout.emit();
+            }
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-mobile-sidebar']],
+              inputs: {
+                isOpen: [1, 'isOpen'],
+                isLoggedIn: [1, 'isLoggedIn'],
+                userName: [1, 'userName'],
+                isStartingLogin: [1, 'isStartingLogin'],
+              },
+              outputs: { closeSidebar: 'closeSidebar', login: 'login', logout: 'logout' },
+              decls: 9,
+              vars: 3,
+              consts: [
+                [1, 'mobile-sidebar'],
+                [
+                  'type',
+                  'button',
+                  'aria-label',
+                  'Cerrar men\xfa',
+                  1,
+                  'mobile-sidebar__overlay',
+                  3,
+                  'click',
+                ],
+                [1, 'mobile-sidebar__panel'],
+                [1, 'mobile-sidebar__header'],
+                ['src', 'assets/images/logo-tinka.svg', 'alt', 'Tinka'],
+                [
+                  'type',
+                  'button',
+                  'aria-label',
+                  'Cerrar men\xfa',
+                  1,
+                  'mobile-sidebar__close',
+                  3,
+                  'click',
+                ],
+                [1, 'mobile-sidebar__actions'],
+                ['type', 'button', 1, 'mobile-sidebar__button', 3, 'click'],
+                ['src', 'assets/icons/menu-login.svg', 'alt', ''],
+                ['href', '#', 1, 'mobile-sidebar__button'],
+                ['src', 'assets/icons/menu-register.svg', 'alt', ''],
+                [1, 'mobile-sidebar__menu'],
+                ['href', '#promociones', 1, 'mobile-sidebar__item', 3, 'click'],
+                [1, 'mobile-sidebar__icon'],
+                ['src', 'assets/icons/menu-promotions.svg', 'alt', ''],
+                ['href', '#', 1, 'mobile-sidebar__item', 3, 'click'],
+                ['src', 'assets/icons/menu-help.svg', 'alt', ''],
+                ['src', 'assets/icons/menu-chevron.svg', 'alt', '', 1, 'mobile-sidebar__arrow'],
+                ['src', 'assets/icons/menu-casino.svg', 'alt', ''],
+                ['src', 'assets/icons/menu-location.svg', 'alt', ''],
+                ['src', 'assets/icons/menu-contact.svg', 'alt', ''],
+                ['src', 'assets/icons/menu-luck.svg', 'alt', ''],
+                ['src', 'assets/icons/menu-results.svg', 'alt', ''],
+                [1, 'mobile-sidebar__profile'],
+                [1, 'mobile-sidebar__avatar'],
+                [1, 'mobile-sidebar__welcome'],
+                [1, 'mobile-sidebar__name'],
+                [1, 'mobile-sidebar__wallet'],
+                [1, 'mobile-sidebar__wallet-row'],
+                [1, 'mobile-sidebar__wallet-info'],
+                [1, 'mobile-sidebar__wallet-actions'],
+                ['type', 'button'],
+                ['src', 'assets/icons/menu-plus.svg', 'alt', ''],
+                [1, 'mobile-sidebar__menu', 'mobile-sidebar__menu--logged'],
+                ['href', '#', 1, 'mobile-sidebar__item', 'mobile-sidebar__item--plain', 3, 'click'],
+                ['src', 'assets/icons/menu-notifications.svg', 'alt', ''],
+                ['href', '#', 1, 'mobile-sidebar__item', 'mobile-sidebar__item--bonus', 3, 'click'],
+                ['src', 'assets/icons/menu-bonus.svg', 'alt', ''],
+                [
+                  'href',
+                  '#',
+                  1,
+                  'mobile-sidebar__item',
+                  'mobile-sidebar__item--prizes',
+                  3,
+                  'click',
+                ],
+                ['src', 'assets/icons/menu-prizes.svg', 'alt', ''],
+                [
+                  'href',
+                  '#promociones',
+                  1,
+                  'mobile-sidebar__item',
+                  'mobile-sidebar__item--promotions',
+                  3,
+                  'click',
+                ],
+                [
+                  'href',
+                  '#',
+                  1,
+                  'mobile-sidebar__item',
+                  'mobile-sidebar__item--movements',
+                  3,
+                  'click',
+                ],
+                ['src', 'assets/icons/menu-movements.svg', 'alt', ''],
+                ['href', '#', 1, 'mobile-sidebar__item', 'mobile-sidebar__item--plays', 3, 'click'],
+                ['src', 'assets/icons/menu-subscriptions.svg', 'alt', ''],
+                [
+                  'href',
+                  '#',
+                  1,
+                  'mobile-sidebar__item',
+                  'mobile-sidebar__item--subscriptions',
+                  3,
+                  'click',
+                ],
+                [1, 'mobile-sidebar__menu', 'mobile-sidebar__menu--bottom'],
+                ['type', 'button', 1, 'mobile-sidebar__logout', 3, 'click'],
+                ['src', 'assets/icons/menu-logout.svg', 'alt', ''],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0)(1, 'button', 1),
+                  t.ɵɵdomListener('click', function () {
+                    return o.close();
+                  }),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(2, 'aside', 2)(3, 'div', 3),
+                  t.ɵɵdomElement(4, 'img', 4),
+                  t.ɵɵdomElementStart(5, 'button', 5),
+                  t.ɵɵdomListener('click', function () {
+                    return o.close();
+                  }),
+                  t.ɵɵtext(6, ' \xd7 '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵconditionalCreate(7, x, 47, 1)(8, P, 83, 1),
+                  t.ɵɵdomElementEnd()()),
+                  2 & n &&
+                    (t.ɵɵclassProp('mobile-sidebar--open', o.isOpen()),
+                    t.ɵɵadvance(7),
+                    t.ɵɵconditional(o.isLoggedIn() ? 8 : 7)));
+              },
+              styles: [
+                '.mobile-sidebar[_ngcontent-%COMP%]{display:none}@media(max-width:480px){.mobile-sidebar[_ngcontent-%COMP%]{position:fixed;inset:0;z-index:1000;display:block;pointer-events:none}.mobile-sidebar--open[_ngcontent-%COMP%]{pointer-events:auto}.mobile-sidebar__overlay[_ngcontent-%COMP%]{position:absolute;inset:0;padding:0;border:0;background:#0000008c;opacity:0;transition:opacity .25s ease}.mobile-sidebar--open[_ngcontent-%COMP%]   .mobile-sidebar__overlay[_ngcontent-%COMP%]{opacity:1}.mobile-sidebar__panel[_ngcontent-%COMP%]{position:relative;z-index:1;width:21.25rem;max-width:21.25rem;height:100vh;min-height:0;padding:.9375rem 0;background:#fefefe;transform:translate(-100%);transition:transform .28s ease;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}.mobile-sidebar__panel[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.mobile-sidebar--open[_ngcontent-%COMP%]   .mobile-sidebar__panel[_ngcontent-%COMP%]{transform:translate(0)}.mobile-sidebar__header[_ngcontent-%COMP%]{width:21.25rem;height:3.3125rem;padding:0 .9375rem .9375rem;display:flex;align-items:center;justify-content:space-between;background:#fefefe;border-bottom:1px solid #e5e7eb}.mobile-sidebar__header[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:6.829375rem;height:2.3125rem;object-fit:contain}.mobile-sidebar__close[_ngcontent-%COMP%]{width:1.5rem;height:1.5rem;border:0;background:transparent;font-size:1.5rem;line-height:1;color:#6b7280;cursor:pointer}.mobile-sidebar__actions[_ngcontent-%COMP%]{width:19.25rem;margin:.9375rem auto 1.25rem;display:flex;flex-direction:column;gap:.5rem}.mobile-sidebar__button[_ngcontent-%COMP%]{width:19.25rem;height:2.75rem;padding:.75rem 1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;border-radius:.75rem;background:#006820;color:#fff;text-decoration:none;font-family:var(--font-primary);font-size:.75rem;font-weight:600;line-height:1;text-transform:uppercase}.mobile-sidebar__button[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}.mobile-sidebar__menu[_ngcontent-%COMP%]{width:19.375rem;margin:0 auto;display:flex;flex-direction:column;gap:1.25rem;padding-bottom:1.5rem}.mobile-sidebar__item[_ngcontent-%COMP%]{width:19.375rem;height:2.25rem;display:flex;align-items:center;gap:.9375rem;border-radius:.5rem;color:#374151;text-decoration:none;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.5rem;letter-spacing:.03125rem}.mobile-sidebar__icon[_ngcontent-%COMP%]{width:2.25rem;height:2.25rem;flex-shrink:0}.mobile-sidebar__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:2.25rem;height:2.25rem;object-fit:contain}.mobile-sidebar__item[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]:last-of-type{flex:1}.mobile-sidebar__arrow[_ngcontent-%COMP%]{width:1.25rem;height:1.25rem;margin-left:auto;object-fit:contain;transform:rotate(90deg)}.mobile-sidebar__profile[_ngcontent-%COMP%]{width:19.375rem;height:3rem;margin:.9375rem auto;display:flex;align-items:center;gap:.75rem}.mobile-sidebar__avatar[_ngcontent-%COMP%]{width:3rem;height:3rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:#006820;color:#fff;font-family:Segoe UI Symbol,sans-serif;font-size:1.125rem;line-height:1.75rem}.mobile-sidebar__welcome[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.5rem;letter-spacing:.03125rem;text-transform:uppercase;color:#6b7280}.mobile-sidebar__name[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:1.5rem;font-weight:700;line-height:1.5rem;letter-spacing:.03125rem;text-transform:capitalize;color:#111827}.mobile-sidebar__wallet[_ngcontent-%COMP%]{width:19.375rem;height:9rem;margin:0 auto .9375rem;padding:.75rem .9375rem;border-radius:.75rem;background:linear-gradient(115.67deg,#ffde00 1.21%,#fff 153.45%);box-shadow:0 4px 6px -4px #064e3b33,0 10px 15px -3px #064e3b33}.mobile-sidebar__wallet-row[_ngcontent-%COMP%]{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:.75rem}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:.25rem}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:400;line-height:1.25rem;color:#006820}.mobile-sidebar__wallet-info[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:1.75rem;font-weight:400;line-height:2rem;color:#006820}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]{width:17.5rem;height:3.375rem;display:grid;grid-template-columns:repeat(2,8.375rem);gap:.75rem;padding-top:.75rem}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]   button[_ngcontent-%COMP%]{height:2.625rem;padding:.6875rem 1rem;display:flex;align-items:center;justify-content:center;gap:.5rem;border:0;border-radius:.5rem;background:#fff;color:#006820;font-family:var(--font-primary);font-size:.875rem;font-weight:400;line-height:1.25rem;cursor:pointer}.mobile-sidebar__wallet-actions[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}.mobile-sidebar__menu--logged[_ngcontent-%COMP%]{gap:.5rem;margin-bottom:.9375rem}.mobile-sidebar__menu--bottom[_ngcontent-%COMP%]{gap:.5rem;padding-top:.9375rem;border-top:1px solid #e5e7eb}.mobile-sidebar__menu--logged[_ngcontent-%COMP%]   .mobile-sidebar__item[_ngcontent-%COMP%], .mobile-sidebar__menu--bottom[_ngcontent-%COMP%]   .mobile-sidebar__item[_ngcontent-%COMP%]{height:3.25rem;padding:.5rem}.mobile-sidebar__item--bonus[_ngcontent-%COMP%]{background:#e5f6eb}.mobile-sidebar__item--prizes[_ngcontent-%COMP%]{background:#eff2fb}.mobile-sidebar__item--promotions[_ngcontent-%COMP%]{background:#f5f4f7}.mobile-sidebar__item--movements[_ngcontent-%COMP%]{background:#f4f1fb}.mobile-sidebar__item--plays[_ngcontent-%COMP%]{background:#fff4dc}.mobile-sidebar__item--subscriptions[_ngcontent-%COMP%]{background:#fff0f4}.mobile-sidebar__logout[_ngcontent-%COMP%]{position:sticky;bottom:-.9375rem;width:calc(100% + 1.875rem);height:3.5rem;margin-left:-.9375rem;margin-right:-.9375rem;margin-top:.9375rem;padding:1rem;display:flex;align-items:center;justify-content:center;gap:.75rem;border:0;border-top:1px solid #e5e7eb;background:#ff1938;color:#fff;font-family:var(--font-primary);font-size:1rem;font-weight:400;line-height:1.25rem;cursor:pointer}.mobile-sidebar__logout[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:1rem;height:1rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        O = (() => {
+          class e {
+            userName = (0, t.input)('Usuario');
+            logout = (0, t.output)();
+            onLogout() {
+              this.logout.emit();
+            }
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-user-session']],
+              inputs: { userName: [1, 'userName'] },
+              outputs: { logout: 'logout' },
+              decls: 8,
+              vars: 1,
+              consts: [
+                [1, 'user-sesion'],
+                ['type', 'button', 1, 'user-sesion__button'],
+                [1, 'user-sesion__avatar'],
+                [1, 'user-sesion__name'],
+                ['type', 'button', 1, 'user-sesion__logout', 3, 'click'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0)(1, 'button', 1)(2, 'span', 2),
+                  t.ɵɵtext(3, '\u{1f464}'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(4, 'span', 3),
+                  t.ɵɵtext(5),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(6, 'button', 4),
+                  t.ɵɵdomListener('click', function () {
+                    return o.onLogout();
+                  }),
+                  t.ɵɵtext(7, 'Logout'),
+                  t.ɵɵdomElementEnd()()),
+                  2 & n && (t.ɵɵadvance(5), t.ɵɵtextInterpolate(o.userName())));
+              },
+              styles: [
+                '.user-sesion[_ngcontent-%COMP%]{display:flex;align-items:center;gap:var(--button-gap)}.user-sesion__button[_ngcontent-%COMP%], .user-sesion__logout[_ngcontent-%COMP%]{height:2.5rem;padding:0 1rem;border:1px solid #002b21;border-radius:.5rem;background:#0b6b3a;color:#fff;border:none;font-weight:600;cursor:pointer}.user-sesion__button[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem;background:#fff;color:#0b6b3a;border:1px solid #0B6B3A}.user-sesion__avatar[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center}.user-sesion__name[_ngcontent-%COMP%]{white-space:nowrap}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        E = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-hamburger-button']],
+              decls: 4,
+              vars: 0,
+              consts: [['type', 'button', 'aria-label', 'Abrir men\xfa', 1, 'hamburger-button']],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵdomElementStart(0, 'button', 0),
+                  t.ɵɵdomElement(1, 'span')(2, 'span')(3, 'span'),
+                  t.ɵɵdomElementEnd());
+              },
+              styles: [
+                '.hamburger-button[_ngcontent-%COMP%]{width:var(--button-height);height:var(--button-height);display:flex;justify-content:center;align-items:center;flex-direction:column;gap:.25rem;padding:0;background:transparent;border:none;cursor:pointer}.hamburger-button[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{width:1.5rem;height:.125rem;border-radius:999px;background:var(--brand-green)}',
+              ],
+            });
+          }
+          return e;
+        })();
+      function k(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵelementStart(0, 'app-button', 10),
+            t.ɵɵlistener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.startLogin());
+            }),
+            t.ɵɵelementEnd(),
+            t.ɵɵelement(1, 'app-button', 11));
+        }
+        if (2 & e) {
+          const r = t.ɵɵnextContext();
+          t.ɵɵproperty('label', r.isStartingLogin() ? 'Espere...' : 'Iniciar Sesi\xf3n');
+        }
+      }
+      function S(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵelementStart(0, 'app-user-session', 12),
+            t.ɵɵlistener('logout', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.logout());
+            }),
+            t.ɵɵelementEnd());
+        }
+        if (2 & e) {
+          const r = t.ɵɵnextContext();
+          t.ɵɵproperty('userName', r.userName());
+        }
+      }
+      function z(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵelementStart(0, 'app-button', 10),
+            t.ɵɵlistener('click', function () {
+              t.ɵɵrestoreView(r);
+              const o = t.ɵɵnextContext();
+              return t.ɵɵresetView(o.startLogin());
+            }),
+            t.ɵɵelementEnd(),
+            t.ɵɵelement(1, 'app-button', 11));
+        }
+        if (2 & e) {
+          const r = t.ɵɵnextContext();
+          t.ɵɵproperty('label', r.isStartingLogin() ? 'Espere...' : 'Ingresar');
+        }
+      }
+      let j = (() => {
+          class e {
+            authService = (0, t.inject)(b);
+            isMobileMenuOpen = (0, t.signal)(!1);
+            isLoggedIn = this.authService.isLoggedIn;
+            userName = this.authService.userName;
+            isStartingLogin = this.authService.isStartingLogin;
+            openMobileMenu() {
+              this.isMobileMenuOpen.set(!0);
+            }
+            closeMobileMenu() {
+              this.isMobileMenuOpen.set(!1);
+            }
+            startLogin() {
+              this.authService.startPamLogin();
+            }
+            logout() {
+              this.authService.logout();
+            }
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-header']],
+              decls: 12,
+              vars: 6,
+              consts: [
+                [1, 'header'],
+                [1, 'header__inner'],
+                [1, 'header__logo'],
+                ['src', 'assets/images/logo-tinka.svg', 'alt', 'Logo La Tinka'],
+                [1, 'header__actions'],
+                [1, 'desktop-auth-actions'],
+                [1, 'desktop-user-session', 3, 'userName'],
+                [1, 'mobile-auth-actions'],
+                [1, 'header__hamburger', 3, 'click'],
+                [
+                  3,
+                  'closeSidebar',
+                  'login',
+                  'logout',
+                  'isOpen',
+                  'isLoggedIn',
+                  'userName',
+                  'isStartingLogin',
+                ],
+                ['variant', 'secondary', 3, 'click', 'label'],
+                ['label', 'Registrarse', 'variant', 'primary'],
+                [1, 'desktop-user-session', 3, 'logout', 'userName'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵelementStart(0, 'header', 0)(1, 'div', 1)(2, 'div', 2),
+                  t.ɵɵelement(3, 'img', 3),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(4, 'div', 4)(5, 'div', 5),
+                  t.ɵɵconditionalCreate(6, k, 2, 1)(7, S, 1, 1, 'app-user-session', 6),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(8, 'div', 7),
+                  t.ɵɵconditionalCreate(9, z, 2, 1),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(10, 'app-hamburger-button', 8),
+                  t.ɵɵlistener('click', function () {
+                    return o.openMobileMenu();
+                  }),
+                  t.ɵɵelementEnd()()(),
+                  t.ɵɵelementStart(11, 'app-mobile-sidebar', 9),
+                  t.ɵɵlistener('closeSidebar', function () {
+                    return o.closeMobileMenu();
+                  })('login', function () {
+                    return o.startLogin();
+                  })('logout', function () {
+                    return o.logout();
+                  }),
+                  t.ɵɵelementEnd()()),
+                  2 & n &&
+                    (t.ɵɵadvance(6),
+                    t.ɵɵconditional(o.isLoggedIn() ? 7 : 6),
+                    t.ɵɵadvance(3),
+                    t.ɵɵconditional(o.isLoggedIn() ? -1 : 9),
+                    t.ɵɵadvance(2),
+                    t.ɵɵproperty('isOpen', o.isMobileMenuOpen())('isLoggedIn', o.isLoggedIn())(
+                      'userName',
+                      o.userName(),
+                    )('isStartingLogin', o.isStartingLogin())));
+              },
+              dependencies: [d, E, v, O],
+              styles: [
+                '@charset "UTF-8";.header[_ngcontent-%COMP%]{width:100%;height:5rem;background:var(--brand-yellow)}.header__inner[_ngcontent-%COMP%]{width:100%;max-width:90rem;height:100%;display:flex;align-items:center;justify-content:space-between;margin:0 auto;padding:0 10rem;box-sizing:border-box}.header__logo[_ngcontent-%COMP%]{display:flex;align-items:center;flex-shrink:0}.header__logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:8.8125rem;height:3rem;object-fit:contain}.header__actions[_ngcontent-%COMP%], .desktop-auth-actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:var(--button-gap)}.mobile-auth-actions[_ngcontent-%COMP%]{display:none}@media(min-width:481px)and (max-width:1024px){.header__inner[_ngcontent-%COMP%]{padding-inline:2rem}nav[_ngcontent-%COMP%], .header__nav[_ngcontent-%COMP%], .header__menu[_ngcontent-%COMP%]{gap:1rem}nav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], .header__nav[_ngcontent-%COMP%]   a[_ngcontent-%COMP%], .header__menu[_ngcontent-%COMP%]   a[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;white-space:nowrap}}@media(max-width:480px){.header[_ngcontent-%COMP%]{width:100%;height:4rem}.header__inner[_ngcontent-%COMP%]{width:100%;max-width:24.375rem;height:4rem;display:flex;align-items:center;justify-content:flex-start;margin:0 auto;padding:0 1.5rem;box-sizing:border-box}.header__logo[_ngcontent-%COMP%]{width:6.25rem;height:2.125rem;display:flex;align-items:center;flex:0 0 6.25rem}.header__logo[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:6.25rem;height:2.125rem;object-fit:contain}.header__actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:0;margin-left:2.125rem}.desktop-auth-actions[_ngcontent-%COMP%], .desktop-user-session[_ngcontent-%COMP%]{display:none}.mobile-auth-actions[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem}.mobile-auth-actions[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{display:block;width:5rem;height:2rem;flex:0 0 5rem;transform:none}.mobile-auth-actions[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]  button{width:5rem;min-width:5rem;height:2rem;min-height:2rem;padding:0;font-size:.75rem;line-height:.75rem;box-sizing:border-box}.header__hamburger[_ngcontent-%COMP%]{display:block;width:1.375rem;height:.875rem;flex:0 0 1.375rem;margin-left:.8125rem}.header__hamburger[_ngcontent-%COMP%]  button{width:1.375rem;height:.875rem;min-width:1.375rem;min-height:.875rem;padding:0}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        T = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-footer']],
+              decls: 231,
+              vars: 0,
+              consts: [
+                [1, 'footer'],
+                [1, 'footer__main'],
+                [1, 'footer__container'],
+                [1, 'footer__top'],
+                [1, 'footer__brand'],
+                [
+                  'src',
+                  'assets/images/logo-tinka-blanco.svg',
+                  'alt',
+                  'La Tinka',
+                  1,
+                  'footer__logo',
+                ],
+                [1, 'footer__menus', 'footer__menus--desktop'],
+                [1, 'footer__column'],
+                [1, 'footer__title'],
+                [1, 'footer__list'],
+                ['href', '#', 1, 'footer__link'],
+                [1, 'footer__column', 'footer__column--company'],
+                [1, 'footer__social'],
+                [1, 'footer__social-title'],
+                [1, 'footer__social-icons'],
+                ['href', '#', 'aria-label', 'Facebook', 1, 'footer__social-link'],
+                ['src', 'assets/images/facebook.svg', 'alt', ''],
+                ['href', '#', 'aria-label', 'Instagram', 1, 'footer__social-link'],
+                ['src', 'assets/images/instagram.svg', 'alt', ''],
+                ['href', '#', 'aria-label', 'TikTok', 1, 'footer__social-link'],
+                ['src', 'assets/images/tiktok.svg', 'alt', ''],
+                ['href', '#', 'aria-label', 'YouTube', 1, 'footer__social-link'],
+                ['src', 'assets/images/youtube.svg', 'alt', ''],
+                [1, 'footer__menus-mobile'],
+                [1, 'footer__accordion'],
+                [1, 'footer__accordion-title'],
+                [1, 'footer__social', 'footer__social--mobile'],
+                [1, 'footer__section'],
+                [1, 'footer__section-title'],
+                [1, 'footer__payments'],
+                [1, 'footer__payment'],
+                ['src', 'assets/images/visa.svg', 'alt', 'Visa'],
+                ['src', 'assets/images/mastercard.svg', 'alt', 'Mastercard'],
+                ['src', 'assets/images/yape.svg', 'alt', 'Yape'],
+                ['src', 'assets/images/plin.svg', 'alt', 'Plin'],
+                ['src', 'assets/images/bcp.svg', 'alt', 'BCP'],
+                ['src', 'assets/images/ibk.svg', 'alt', 'Interbank'],
+                ['src', 'assets/images/pago-efectivo.svg', 'alt', 'PagoEfectivo'],
+                ['src', 'assets/images/bbva.svg', 'alt', 'BBVA'],
+                ['src', 'assets/images/tupay.svg', 'alt', 'TuPay'],
+                ['src', 'assets/images/sip.svg', 'alt', 'SIP'],
+                [1, 'footer__section', 'footer__section--certifications'],
+                [1, 'footer__certifications'],
+                [1, 'footer__certification'],
+                [
+                  'src',
+                  'assets/images/37001.svg',
+                  'alt',
+                  'Certificaci\xf3n ISO 37001',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--37001',
+                ],
+                [
+                  'src',
+                  'assets/images/9001.svg',
+                  'alt',
+                  'Certificaci\xf3n ISO 9001',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--9001',
+                ],
+                [
+                  'src',
+                  'assets/images/icontec.svg',
+                  'alt',
+                  'ICONTEC',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--icontec',
+                ],
+                [
+                  'src',
+                  'assets/images/18.svg',
+                  'alt',
+                  'Solo para mayores de 18 a\xf1os',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--18',
+                ],
+                [
+                  'src',
+                  'assets/images/zona-segura.svg',
+                  'alt',
+                  'Zona segura',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--safe',
+                ],
+                [
+                  'src',
+                  'assets/images/wla.svg',
+                  'alt',
+                  'World Lottery Association',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--wla',
+                ],
+                [
+                  'src',
+                  'assets/images/libro-reclamaciones.png',
+                  'alt',
+                  'Libro de Reclamaciones',
+                  1,
+                  'footer__certification-image',
+                  'footer__certification-image--book',
+                ],
+                [1, 'footer__bottom'],
+                [1, 'footer__bottom-container'],
+                [1, 'footer__bottom-brands'],
+                [
+                  'src',
+                  'assets/images/logo-tinka.svg',
+                  'alt',
+                  'La Tinka',
+                  1,
+                  'footer__bottom-logo',
+                  'footer__bottom-logo--tinka',
+                ],
+                [
+                  'src',
+                  'assets/images/logo-te-apuesto.svg',
+                  'alt',
+                  'Te Apuesto',
+                  1,
+                  'footer__bottom-logo',
+                  'footer__bottom-logo--te-apuesto',
+                ],
+                [1, 'footer__copyright'],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵdomElementStart(0, 'footer', 0)(1, 'div', 1)(2, 'div', 2)(3, 'div', 3)(
+                    4,
+                    'div',
+                    4,
+                  ),
+                  t.ɵɵdomElement(5, 'img', 5),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(6, 'div', 6)(7, 'div', 7)(8, 'h3', 8),
+                  t.ɵɵtext(9, 'Informaci\xf3n'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(10, 'ul', 9)(11, 'li')(12, 'a', 10),
+                  t.ɵɵtext(13, 'Aprende a jugar'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(14, 'li')(15, 'a', 10),
+                  t.ɵɵtext(16, 'Cont\xe1ctanos'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(17, 'li')(18, 'a', 10),
+                  t.ɵɵtext(19, 'Reclama tu premio'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(20, 'li')(21, 'a', 10),
+                  t.ɵɵtext(22, ' T\xe9rminos y condiciones '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(23, 'li')(24, 'a', 10),
+                  t.ɵɵtext(25, ' Pol\xedtica de Datos Personales '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(26, 'li')(27, 'a', 10),
+                  t.ɵɵtext(28, 'Derechos ARCO'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(29, 'li')(30, 'a', 10),
+                  t.ɵɵtext(31, 'Reglamentos'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(32, 'li')(33, 'a', 10),
+                  t.ɵɵtext(34, ' Registro de Personas Prohibidas '),
+                  t.ɵɵdomElementEnd()()()(),
+                  t.ɵɵdomElementStart(35, 'div', 7)(36, 'h3', 8),
+                  t.ɵɵtext(37, 'Juegos'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(38, 'ul', 9)(39, 'li')(40, 'a', 10),
+                  t.ɵɵtext(41, 'Tinka'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(42, 'li')(43, 'a', 10),
+                  t.ɵɵtext(44, 'K\xe1bala'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(45, 'li')(46, 'a', 10),
+                  t.ɵɵtext(47, 'Gana Diario'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(48, 'li')(49, 'a', 10),
+                  t.ɵɵtext(50, 'Kinelo'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(51, 'li')(52, 'a', 10),
+                  t.ɵɵtext(53, 'Ganagol'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(54, 'li')(55, 'a', 10),
+                  t.ɵɵtext(56, 'Te Apuesto'),
+                  t.ɵɵdomElementEnd()()()(),
+                  t.ɵɵdomElementStart(57, 'div', 11)(58, 'h3', 8),
+                  t.ɵɵtext(59, 'La Tinka S.A.'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(60, 'ul', 9)(61, 'li')(62, 'a', 10),
+                  t.ɵɵtext(63, '\xbfQui\xe9nes somos?'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(64, 'li')(65, 'a', 10),
+                  t.ɵɵtext(66, 'Prop\xf3sito'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(67, 'li')(68, 'a', 10),
+                  t.ɵɵtext(69, 'Valores'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(70, 'li')(71, 'a', 10),
+                  t.ɵɵtext(72, ' Preguntas frecuentes '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(73, 'li')(74, 'a', 10),
+                  t.ɵɵtext(75, 'Juega Bien'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(76, 'li')(77, 'a', 10),
+                  t.ɵɵtext(78, ' Trabaja con nosotros '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(79, 'li')(80, 'a', 10),
+                  t.ɵɵtext(81, ' Canal de Integridad '),
+                  t.ɵɵdomElementEnd()()(),
+                  t.ɵɵdomElementStart(82, 'div', 12)(83, 'p', 13),
+                  t.ɵɵtext(84, 'Encu\xe9ntranos en:'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(85, 'div', 14)(86, 'a', 15),
+                  t.ɵɵdomElement(87, 'img', 16),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(88, 'a', 17),
+                  t.ɵɵdomElement(89, 'img', 18),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(90, 'a', 19),
+                  t.ɵɵdomElement(91, 'img', 20),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(92, 'a', 21),
+                  t.ɵɵdomElement(93, 'img', 22),
+                  t.ɵɵdomElementEnd()()()()(),
+                  t.ɵɵdomElementStart(94, 'div', 23)(95, 'details', 24)(96, 'summary', 25),
+                  t.ɵɵtext(97, 'Informaci\xf3n'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(98, 'ul', 9)(99, 'li')(100, 'a', 10),
+                  t.ɵɵtext(101, 'Aprende a jugar'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(102, 'li')(103, 'a', 10),
+                  t.ɵɵtext(104, 'Cont\xe1ctanos'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(105, 'li')(106, 'a', 10),
+                  t.ɵɵtext(107, 'Reclama tu premio'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(108, 'li')(109, 'a', 10),
+                  t.ɵɵtext(110, ' T\xe9rminos y condiciones '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(111, 'li')(112, 'a', 10),
+                  t.ɵɵtext(113, ' Pol\xedtica de Datos Personales '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(114, 'li')(115, 'a', 10),
+                  t.ɵɵtext(116, 'Derechos ARCO'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(117, 'li')(118, 'a', 10),
+                  t.ɵɵtext(119, 'Reglamentos'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(120, 'li')(121, 'a', 10),
+                  t.ɵɵtext(122, ' Registro de Personas Prohibidas '),
+                  t.ɵɵdomElementEnd()()()(),
+                  t.ɵɵdomElementStart(123, 'details', 24)(124, 'summary', 25),
+                  t.ɵɵtext(125, 'Juegos'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(126, 'ul', 9)(127, 'li')(128, 'a', 10),
+                  t.ɵɵtext(129, 'Tinka'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(130, 'li')(131, 'a', 10),
+                  t.ɵɵtext(132, 'K\xe1bala'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(133, 'li')(134, 'a', 10),
+                  t.ɵɵtext(135, 'Gana Diario'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(136, 'li')(137, 'a', 10),
+                  t.ɵɵtext(138, 'Kinelo'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(139, 'li')(140, 'a', 10),
+                  t.ɵɵtext(141, 'Ganagol'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(142, 'li')(143, 'a', 10),
+                  t.ɵɵtext(144, 'Te Apuesto'),
+                  t.ɵɵdomElementEnd()()()(),
+                  t.ɵɵdomElementStart(145, 'details', 24)(146, 'summary', 25),
+                  t.ɵɵtext(147, 'La Tinka S.A.'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(148, 'ul', 9)(149, 'li')(150, 'a', 10),
+                  t.ɵɵtext(151, '\xbfQui\xe9nes somos?'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(152, 'li')(153, 'a', 10),
+                  t.ɵɵtext(154, 'Prop\xf3sito'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(155, 'li')(156, 'a', 10),
+                  t.ɵɵtext(157, 'Valores'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(158, 'li')(159, 'a', 10),
+                  t.ɵɵtext(160, ' Preguntas frecuentes '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(161, 'li')(162, 'a', 10),
+                  t.ɵɵtext(163, 'Juega Bien'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(164, 'li')(165, 'a', 10),
+                  t.ɵɵtext(166, ' Trabaja con nosotros '),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(167, 'li')(168, 'a', 10),
+                  t.ɵɵtext(169, ' Canal de Integridad '),
+                  t.ɵɵdomElementEnd()()()(),
+                  t.ɵɵdomElementStart(170, 'div', 26)(171, 'p', 13),
+                  t.ɵɵtext(172, 'Encu\xe9ntranos en:'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(173, 'div', 14)(174, 'a', 15),
+                  t.ɵɵdomElement(175, 'img', 16),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(176, 'a', 17),
+                  t.ɵɵdomElement(177, 'img', 18),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(178, 'a', 19),
+                  t.ɵɵdomElement(179, 'img', 20),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(180, 'a', 21),
+                  t.ɵɵdomElement(181, 'img', 22),
+                  t.ɵɵdomElementEnd()()()()(),
+                  t.ɵɵdomElementStart(182, 'section', 27)(183, 'h3', 28),
+                  t.ɵɵtext(184, 'M\xe9todos de pago:'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(185, 'div', 29)(186, 'div', 30),
+                  t.ɵɵdomElement(187, 'img', 31),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(188, 'div', 30),
+                  t.ɵɵdomElement(189, 'img', 32),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(190, 'div', 30),
+                  t.ɵɵdomElement(191, 'img', 33),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(192, 'div', 30),
+                  t.ɵɵdomElement(193, 'img', 34),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(194, 'div', 30),
+                  t.ɵɵdomElement(195, 'img', 35),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(196, 'div', 30),
+                  t.ɵɵdomElement(197, 'img', 36),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(198, 'div', 30),
+                  t.ɵɵdomElement(199, 'img', 37),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(200, 'div', 30),
+                  t.ɵɵdomElement(201, 'img', 38),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(202, 'div', 30),
+                  t.ɵɵdomElement(203, 'img', 39),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(204, 'div', 30),
+                  t.ɵɵdomElement(205, 'img', 40),
+                  t.ɵɵdomElementEnd()()(),
+                  t.ɵɵdomElementStart(206, 'section', 41)(207, 'h3', 28),
+                  t.ɵɵtext(208, 'Certificaciones:'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(209, 'div', 42)(210, 'div', 43),
+                  t.ɵɵdomElement(211, 'img', 44),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(212, 'div', 43),
+                  t.ɵɵdomElement(213, 'img', 45),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(214, 'div', 43),
+                  t.ɵɵdomElement(215, 'img', 46),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(216, 'div', 43),
+                  t.ɵɵdomElement(217, 'img', 47),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(218, 'div', 43),
+                  t.ɵɵdomElement(219, 'img', 48),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(220, 'div', 43),
+                  t.ɵɵdomElement(221, 'img', 49),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(222, 'div', 43),
+                  t.ɵɵdomElement(223, 'img', 50),
+                  t.ɵɵdomElementEnd()()()()(),
+                  t.ɵɵdomElementStart(224, 'div', 51)(225, 'div', 52)(226, 'div', 53),
+                  t.ɵɵdomElement(227, 'img', 54)(228, 'img', 55),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(229, 'p', 56),
+                  t.ɵɵtext(230, 'La Tinka S.A. RUC 20506035121.'),
+                  t.ɵɵdomElementEnd()()()());
+              },
+              styles: [
+                '@charset "UTF-8";.footer[_ngcontent-%COMP%]{width:100%;max-width:90rem;margin:3.125rem auto 0;font-family:var(--font-primary);color:var(--brand-white)}.footer__main[_ngcontent-%COMP%]{width:100%;background:var(--brand-green)}.footer__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:2rem 0 2.25rem;box-sizing:border-box}.footer__top[_ngcontent-%COMP%]{display:grid;grid-template-columns:14rem minmax(0,1fr);align-items:start;column-gap:5.25rem}.footer__brand[_ngcontent-%COMP%]{min-width:0}.footer__logo[_ngcontent-%COMP%]{display:block;width:10.875rem;height:auto;object-fit:contain}.footer__menus[_ngcontent-%COMP%]{min-width:0}.footer__menus--desktop[_ngcontent-%COMP%]{display:grid;grid-template-columns:minmax(12rem,1.25fr) minmax(7rem,.75fr) minmax(12rem,1fr);column-gap:4rem}.footer__menus-mobile[_ngcontent-%COMP%]{display:none}.footer__column[_ngcontent-%COMP%]{min-width:0}.footer__title[_ngcontent-%COMP%], .footer__section-title[_ngcontent-%COMP%], .footer__social-title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-bold);line-height:1rem;letter-spacing:0;color:var(--brand-white)}.footer__title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__list[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:.25rem;margin:0;padding:0;list-style:none}.footer__list[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]{margin:0;padding:0}.footer__link[_ngcontent-%COMP%]{display:inline-block;font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-regular);line-height:.875rem;letter-spacing:0;color:var(--brand-white);text-decoration:none;transition:opacity .2s ease}.footer__link[_ngcontent-%COMP%]:hover{opacity:.8}.footer__social[_ngcontent-%COMP%]{margin-top:1.5rem}.footer__social-title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__social-icons[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.625rem}.footer__social-link[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;width:1.625rem;height:1.625rem;text-decoration:none;transition:opacity .2s ease,transform .2s ease}.footer__social-link[_ngcontent-%COMP%]:hover{opacity:.85;transform:scale(1.05)}.footer__social-link[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:contain}.footer__section[_ngcontent-%COMP%]{width:100%;margin-top:1.25rem}.footer__section--certifications[_ngcontent-%COMP%]{margin-top:2.688rem}.footer__section-title[_ngcontent-%COMP%]{margin-bottom:.75rem}.footer__payments[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(10,minmax(0,1fr));align-items:center;column-gap:2.125rem}.footer__payment[_ngcontent-%COMP%]{min-width:0;display:flex;align-items:center;justify-content:flex-start}.footer__payment[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:3.75rem;height:2rem;max-width:100%;object-fit:contain}.footer__certifications[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:5.25rem 5.25rem 5.75rem 7.75rem 9rem minmax(8rem,1fr) 8rem;align-items:center;column-gap:2.75rem}.footer__certification[_ngcontent-%COMP%]{min-width:0;min-height:4.5rem;display:flex;align-items:center;justify-content:flex-start}.footer__certification-image[_ngcontent-%COMP%]{display:block;width:auto;max-width:100%;height:auto;object-fit:contain}.footer__certification-image--37001[_ngcontent-%COMP%], .footer__certification-image--9001[_ngcontent-%COMP%]{max-height:4.375rem}.footer__certification-image--icontec[_ngcontent-%COMP%]{max-height:4rem}.footer__certification-image--18[_ngcontent-%COMP%]{max-height:3.5rem}.footer__certification-image--safe[_ngcontent-%COMP%]{max-width:8.25rem;max-height:2.5rem}.footer__certification-image--wla[_ngcontent-%COMP%]{max-width:8.938rem;max-height:3.063rem;transform:scale(1.3)}.footer__certification-image--book[_ngcontent-%COMP%]{max-width:3.5rem;max-height:2.25rem}.footer__bottom[_ngcontent-%COMP%]{width:100%;background:var(--brand-white);color:#646464}.footer__bottom-container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:1.5rem 0 .75rem;box-sizing:border-box;text-align:center}.footer__bottom-logo[_ngcontent-%COMP%]{display:block;width:auto;height:auto;object-fit:contain}.footer__bottom-brands[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:1rem}.footer__bottom-logo--tinka[_ngcontent-%COMP%]{display:block;width:6.875rem;height:2.3125rem;flex:0 0 auto;object-fit:contain}.footer__bottom-logo--te-apuesto[_ngcontent-%COMP%]{display:block;width:6.8125rem;height:1.875rem;flex:0 0 auto;padding-left:1rem;border-left:1px solid rgb(190,190,190);box-sizing:content-box;object-fit:contain}.footer__copyright[_ngcontent-%COMP%]{padding:0;border:0;color:#8c8c8c;margin:.75rem 0 0;font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-light);line-height:1rem;letter-spacing:.1rem;color:#646464}@media(min-width:481px)and (max-width:1024px){.footer[_ngcontent-%COMP%]{max-width:none}.footer__container[_ngcontent-%COMP%], .footer__bottom-container[_ngcontent-%COMP%]{max-width:none;padding-right:2rem;padding-left:2rem}.footer__top[_ngcontent-%COMP%]{grid-template-columns:11rem minmax(0,1fr);column-gap:2.5rem}.footer__menus--desktop[_ngcontent-%COMP%]{column-gap:2rem}.footer__payments[_ngcontent-%COMP%]{grid-template-columns:repeat(5,minmax(0,1fr));column-gap:1.5rem;row-gap:1rem}.footer__payment[_ngcontent-%COMP%]{justify-content:center}.footer__certifications[_ngcontent-%COMP%]{grid-template-columns:repeat(4,minmax(0,1fr));column-gap:2rem;row-gap:1.5rem}.footer__certification[_ngcontent-%COMP%]{justify-content:center}.footer__certification[_ngcontent-%COMP%]:nth-child(5){grid-column:1/2}.footer__certification[_ngcontent-%COMP%]:nth-child(6){grid-column:2/4}.footer__certification[_ngcontent-%COMP%]:nth-child(7){grid-column:4/5}}@media(max-width:480px){.footer[_ngcontent-%COMP%]{margin-top:2rem}.footer__container[_ngcontent-%COMP%]{padding:1.5rem 1rem 1.75rem}.footer__top[_ngcontent-%COMP%]{display:flex;flex-direction:column;gap:1.5rem}.footer__logo[_ngcontent-%COMP%]{width:9.5rem}.footer__menus--desktop[_ngcontent-%COMP%]{display:none}.footer__menus-mobile[_ngcontent-%COMP%]{width:100%;display:flex;flex-direction:column}.footer__accordion[_ngcontent-%COMP%]{width:100%;border:0}.footer__accordion-title[_ngcontent-%COMP%]{min-height:3.25rem;display:flex;align-items:center;justify-content:space-between;margin:0;font-family:var(--font-primary);font-size:.9375rem;font-weight:var(--font-weight-bold);line-height:1.25rem;color:var(--brand-white);list-style:none;cursor:pointer}.footer__accordion-title[_ngcontent-%COMP%]::-webkit-details-marker{display:none}.footer__accordion-title[_ngcontent-%COMP%]:after{content:"";width:.5rem;height:.5rem;border-right:.125rem solid var(--brand-white);border-bottom:.125rem solid var(--brand-white);transform:rotate(45deg);transition:transform .2s ease}.footer__accordion[open][_ngcontent-%COMP%]   .footer__accordion-title[_ngcontent-%COMP%]:after{transform:rotate(225deg)}.footer__accordion[_ngcontent-%COMP%]   .footer__list[_ngcontent-%COMP%]{gap:.5rem;padding-bottom:1rem}.footer__link[_ngcontent-%COMP%]{font-size:.75rem;line-height:1rem}.footer__social--mobile[_ngcontent-%COMP%]{margin-top:1rem}.footer__social-title[_ngcontent-%COMP%], .footer__section-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1rem}.footer__social-icons[_ngcontent-%COMP%]{gap:.75rem}.footer__social-link[_ngcontent-%COMP%]{width:2rem;height:2rem}.footer__section[_ngcontent-%COMP%]{margin-top:1.75rem}.footer__payments[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;align-items:center;column-gap:0;row-gap:1rem}.footer__payment[_ngcontent-%COMP%]{width:fit-content;min-width:0;justify-self:start}.footer__payment[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{width:3.25rem;height:1.75rem}.footer__certifications[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;column-gap:0;row-gap:1.5rem}.footer__certification[_ngcontent-%COMP%]{min-width:0;min-height:3.75rem;display:flex;align-items:center;justify-content:center;justify-self:stretch}.footer__certification[_ngcontent-%COMP%]:nth-child(1){grid-column:1/4}.footer__certification[_ngcontent-%COMP%]:nth-child(2){grid-column:4/7}.footer__certification[_ngcontent-%COMP%]:nth-child(3){grid-column:7/10}.footer__certification[_ngcontent-%COMP%]:nth-child(4){grid-column:10/13}.footer__certification[_ngcontent-%COMP%]:nth-child(5){grid-column:2/5}.footer__certification[_ngcontent-%COMP%]:nth-child(6){grid-column:5/9;transform:scale(1.1)}.footer__certification[_ngcontent-%COMP%]:nth-child(7){grid-column:9/12}.footer__certification-image--37001[_ngcontent-%COMP%], .footer__certification-image--9001[_ngcontent-%COMP%]{max-height:3.75rem}.footer__certification-image--icontec[_ngcontent-%COMP%]{max-height:3.5rem}.footer__certification-image--18[_ngcontent-%COMP%]{max-height:3.25rem}.footer__certification-image--safe[_ngcontent-%COMP%]{max-width:6.5rem;max-height:2rem}.footer__certification-image--wla[_ngcontent-%COMP%]{max-width:7rem;max-height:2rem}.footer__certification-image--book[_ngcontent-%COMP%]{max-width:5.5rem;max-height:2.5rem}.footer__bottom-container[_ngcontent-%COMP%]{padding:1.25rem 1rem .75rem}.footer__bottom-brands[_ngcontent-%COMP%]{gap:.75rem}.footer__bottom-logo--tinka[_ngcontent-%COMP%]{width:6.875rem;height:2.3125rem}.footer__bottom-logo--te-apuesto[_ngcontent-%COMP%]{width:6.8125rem;height:1.875rem;padding-left:.75rem}.footer__copyright[_ngcontent-%COMP%]{margin-top:.625rem;font-size:.625rem;line-height:1rem;letter-spacing:.075rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        L = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-navigation']],
+              decls: 18,
+              vars: 0,
+              consts: [
+                [1, 'navigation'],
+                [1, 'navigation__container'],
+                [1, 'navigation__menu'],
+                [1, 'navigation__item'],
+                ['href', '#loterias', 1, 'navigation__link', 'active'],
+                ['href', '#videoloterias', 1, 'navigation__link'],
+                ['href', '#promociones', 1, 'navigation__link'],
+                ['href', '#ganadores', 1, 'navigation__link'],
+                ['href', '#', 1, 'navigation__link'],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵdomElementStart(0, 'nav', 0)(1, 'div', 1)(2, 'ul', 2)(3, 'li', 3)(4, 'a', 4),
+                  t.ɵɵtext(5, 'Loter\xedas'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(6, 'li', 3)(7, 'a', 5),
+                  t.ɵɵtext(8, 'Videoloterias'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(9, 'li', 3)(10, 'a', 6),
+                  t.ɵɵtext(11, 'Promociones'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(12, 'li', 3)(13, 'a', 7),
+                  t.ɵɵtext(14, 'Ganadores'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(15, 'li', 3)(16, 'a', 8),
+                  t.ɵɵtext(17, 'Casino'),
+                  t.ɵɵdomElementEnd()()()()());
+              },
+              styles: [
+                '.navigation[_ngcontent-%COMP%]{width:100%;height:3.75rem;background:linear-gradient(90deg,var(--brand-green-dark),var(--brand-green-light));border-top:1px solid rgba(255,255,255,.08)}.navigation__container[_ngcontent-%COMP%]{max-width:var(--container-width);height:100%;margin:0 auto;padding:0 10rem;display:flex;align-items:center}.navigation__menu[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:space-between;margin:0;padding:0;list-style:none}.navigation__item[_ngcontent-%COMP%]{display:flex;align-items:center;height:100%}.navigation__link[_ngcontent-%COMP%]{height:3.75rem;display:flex;align-items:center;font-family:var(--font-primary);font-size:1.125rem;font-weight:var(--font-weight-bold);line-height:1;letter-spacing:.023125rem;color:var(--text-primary);text-decoration:none;white-space:nowrap;position:relative;transition:color .2s ease}.navigation__link[_ngcontent-%COMP%]:hover{color:var(--brand-yellow)}@media(min-width:481px)and (max-width:1024px){.navigation__container[_ngcontent-%COMP%]{padding:0 2rem}.navigation__menu[_ngcontent-%COMP%]{justify-content:center;gap:1.25rem}.navigation__link[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1;letter-spacing:0}}@media(max-width:480px){.navigation[_ngcontent-%COMP%]{display:none}}',
+              ],
+            });
+          }
+          return e;
+        })();
+      function D(e, i) {
+        if (
+          (1 & e &&
+            (t.ɵɵdomElementStart(0, 'div', 4)(1, 'picture', 7),
+            t.ɵɵdomElement(2, 'source', 8)(3, 'img', 9),
+            t.ɵɵdomElementEnd()()),
+          2 & e)
+        ) {
+          const r = i.$implicit;
+          (t.ɵɵadvance(2),
+            t.ɵɵattribute('srcset', r.mobileImage),
+            t.ɵɵadvance(),
+            t.ɵɵdomProperty('src', r.image, t.ɵɵsanitizeUrl)('alt', r.alt));
+        }
+      }
+      function F(e, i) {
+        if (1 & e) {
+          const r = t.ɵɵgetCurrentView();
+          (t.ɵɵdomElementStart(0, 'button', 10),
+            t.ɵɵdomListener('click', function () {
+              const o = t.ɵɵrestoreView(r).$index,
+                a = t.ɵɵnextContext();
+              return t.ɵɵresetView(a.goToSlide(o));
+            }),
+            t.ɵɵdomElementEnd());
+        }
+        if (2 & e) {
+          const r = i.$index,
+            n = t.ɵɵnextContext();
+          (t.ɵɵclassProp('active', n.currentIndex() === r),
+            t.ɵɵattribute('aria-label', 'Mostrar banner ' + (r + 1))(
+              'aria-current',
+              n.currentIndex() === r ? 'true' : null,
+            ));
+        }
+      }
+      let I = (() => {
+        class e {
+          autoplayDelay = 5e3;
+          currentIndex = (0, t.signal)(0);
+          banners = [
+            {
+              image: 'assets/images/promo-combo-lotero.png',
+              mobileImage: 'assets/images/promo-combo-lotero-mobile.png',
+              alt: 'Combo Lotero, promoci\xf3n 1',
+            },
+            {
+              image: 'assets/images/promo-combo-lotero.png',
+              mobileImage: 'assets/images/promo-combo-lotero-mobile.png',
+              alt: 'Combo Lotero, promoci\xf3n 2',
+            },
+            {
+              image: 'assets/images/promo-combo-lotero.png',
+              mobileImage: 'assets/images/promo-combo-lotero-mobile.png',
+              alt: 'Combo Lotero, promoci\xf3n 3',
+            },
+          ];
+          autoplayId = null;
+          ngOnInit() {
+            this.startAutoplay();
+          }
+          ngOnDestroy() {
+            this.stopAutoplay();
+          }
+          goToSlide(r) {
+            r < 0 || r >= this.banners.length || (this.currentIndex.set(r), this.restartAutoplay());
+          }
+          nextSlide() {
+            this.banners.length <= 1 ||
+              this.currentIndex.update((r) => (r + 1) % this.banners.length);
+          }
+          startAutoplay() {
+            this.banners.length <= 1 ||
+              null !== this.autoplayId ||
+              (this.autoplayId = setInterval(() => {
+                this.nextSlide();
+              }, this.autoplayDelay));
+          }
+          stopAutoplay() {
+            null !== this.autoplayId && (clearInterval(this.autoplayId), (this.autoplayId = null));
+          }
+          restartAutoplay() {
+            (this.stopAutoplay(), this.startAutoplay());
+          }
+          static ɵfac = function (n) {
+            return new (n || e)();
+          };
+          static ɵcmp = t.ɵɵdefineComponent({
+            type: e,
+            selectors: [['app-promo-banner']],
+            decls: 9,
+            vars: 2,
+            consts: [
+              [1, 'promo-banner'],
+              [1, 'promo-banner__background'],
+              [1, 'promo-banner__viewport'],
+              [1, 'promo-banner__track'],
+              [1, 'promo-banner__slide'],
+              [1, 'promo-banner__bullets'],
+              ['type', 'button', 1, 'promo-banner__bullet', 3, 'active'],
+              [1, 'promo-banner__picture'],
+              ['media', '(max-width: 767px)'],
+              [1, 'promo-banner__image', 3, 'src', 'alt'],
+              ['type', 'button', 1, 'promo-banner__bullet', 3, 'click'],
+            ],
+            template: function (n, o) {
+              (1 & n &&
+                (t.ɵɵdomElementStart(0, 'section', 0)(1, 'div', 1)(2, 'div', 2)(3, 'div', 3),
+                t.ɵɵrepeaterCreate(4, D, 4, 3, 'div', 4, t.ɵɵrepeaterTrackByIndex),
+                t.ɵɵdomElementEnd()()(),
+                t.ɵɵdomElementStart(6, 'div', 5),
+                t.ɵɵrepeaterCreate(7, F, 1, 4, 'button', 6, t.ɵɵrepeaterTrackByIndex),
+                t.ɵɵdomElementEnd()()),
+                2 & n &&
+                  (t.ɵɵadvance(3),
+                  t.ɵɵstyleProp('transform', 'translateX(-' + 100 * o.currentIndex() + '%)'),
+                  t.ɵɵadvance(),
+                  t.ɵɵrepeater(o.banners),
+                  t.ɵɵadvance(3),
+                  t.ɵɵrepeater(o.banners)));
+            },
+            styles: [
+              '@charset "UTF-8";.promo-banner[_ngcontent-%COMP%]{width:100%;max-width:var(--container-width);display:flex;flex-direction:column;align-items:center;margin:0 auto}.promo-banner__background[_ngcontent-%COMP%]{width:100%;height:12.5rem;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#ffee28}.promo-banner__viewport[_ngcontent-%COMP%]{width:100%;max-width:68.3125rem;overflow:hidden}.promo-banner__track[_ngcontent-%COMP%]{width:100%;display:flex;transition:transform .6s ease-in-out;will-change:transform}.promo-banner__slide[_ngcontent-%COMP%]{min-width:100%;flex:0 0 100%;display:flex;align-items:center;justify-content:center}.promo-banner__picture[_ngcontent-%COMP%]{display:block;width:100%;max-width:68.3125rem}.promo-banner__image[_ngcontent-%COMP%]{display:block;width:100%;max-width:68.3125rem;height:auto;flex-shrink:0;object-fit:contain}.promo-banner__bullets[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.75rem}.promo-banner__bullet[_ngcontent-%COMP%]{width:.5rem;height:.5rem;margin:0;padding:0;border:0;border-radius:50%;background:#d9d9d9;cursor:pointer;transition:background-color .2s ease,transform .2s ease}.promo-banner__bullet[_ngcontent-%COMP%]:hover{transform:scale(1.15)}.promo-banner__bullet.active[_ngcontent-%COMP%]{background:var(--brand-green-dark)}@media(max-width:480px){.promo-banner[_ngcontent-%COMP%]{width:100%;max-width:24.375rem}.promo-banner__background[_ngcontent-%COMP%]{width:100%;height:12.5rem}.promo-banner__viewport[_ngcontent-%COMP%]{width:100%;max-width:24.375rem}.promo-banner__slide[_ngcontent-%COMP%]{align-items:center;justify-content:flex-start;padding-left:.4375rem;box-sizing:border-box}.promo-banner__picture[_ngcontent-%COMP%]{width:calc(100% - .4375rem);max-width:23.9375rem}.promo-banner__image[_ngcontent-%COMP%]{width:100%;max-width:23.9375rem;height:auto;object-fit:contain}.promo-banner__bullets[_ngcontent-%COMP%]{margin-top:.75rem;gap:.5rem}.promo-banner__bullet[_ngcontent-%COMP%]{width:.5rem;height:.5rem}}',
+            ],
+          });
+        }
+        return e;
+      })();
+      function N(e, i) {
+        if ((1 & e && t.ɵɵdomElement(0, 'img', 1), 2 & e)) {
+          const r = t.ɵɵnextContext();
+          t.ɵɵdomProperty('src', r.icon(), t.ɵɵsanitizeUrl);
+        }
+      }
+      let V = (() => {
+          class e {
+            icon = (0, t.input)();
+            text = t.input.required();
+            variant = (0, t.input)('default');
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-badge']],
+              inputs: { icon: [1, 'icon'], text: [1, 'text'], variant: [1, 'variant'] },
+              decls: 4,
+              vars: 18,
+              consts: [
+                [1, 'lottery-badge'],
+                ['alt', '', 1, 'lottery-badge__icon', 3, 'src'],
+                [1, 'lottery-badge__text'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0),
+                  t.ɵɵconditionalCreate(1, N, 1, 1, 'img', 1),
+                  t.ɵɵdomElementStart(2, 'span', 2),
+                  t.ɵɵtext(3),
+                  t.ɵɵdomElementEnd()()),
+                  2 & n &&
+                    (t.ɵɵclassProp('lottery-badge--card', 'card' === o.variant())(
+                      'lottery-badge--card-light',
+                      'card-light' === o.variant(),
+                    )('lottery-badge--kabala', 'kabala' === o.variant())(
+                      'lottery-badge--ganadiario',
+                      'ganadiario' === o.variant(),
+                    )('lottery-badge--kinelo', 'kinelo' === o.variant())(
+                      'lottery-badge--result',
+                      'result' === o.variant(),
+                    )('lottery-badge--result-hero', 'result-hero' === o.variant())(
+                      'lottery-badge--result-purple',
+                      'result-purple' === o.variant(),
+                    ),
+                    t.ɵɵadvance(),
+                    t.ɵɵconditional(o.icon() ? 1 : -1),
+                    t.ɵɵadvance(2),
+                    t.ɵɵtextInterpolate1(' ', o.text(), ' ')));
+              },
+              styles: [
+                '@charset "UTF-8";[_nghost-%COMP%]{display:inline-flex;width:fit-content;max-width:100%}.lottery-badge[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center;width:fit-content;max-width:100%;height:1.5rem;gap:.3125rem;padding:.25rem .75rem;margin:0;box-sizing:border-box;border-radius:10rem;opacity:1}.lottery-badge__icon[_ngcontent-%COMP%]{display:block;width:.75rem;height:.75rem;flex:0 0 .75rem;object-fit:contain}.lottery-badge__text[_ngcontent-%COMP%]{display:block;font-family:var(--font-primary);font-size:1.25rem;font-weight:700;font-style:normal;line-height:1rem;letter-spacing:.009375rem;color:#1f1f1f;white-space:nowrap}.lottery-badge--kabala[_ngcontent-%COMP%]{background:#fd0}.lottery-badge--ganadiario[_ngcontent-%COMP%]{background:#def3ff}.lottery-badge--kinelo[_ngcontent-%COMP%]{background:#ffe5fb}.lottery-badge--card[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]{width:fit-content;height:1.5rem;gap:.3125rem;padding:.25rem .75rem;margin:0;border-radius:10rem}.lottery-badge--card[_ngcontent-%COMP%]{background:#fd0}.lottery-badge--card-light[_ngcontent-%COMP%]{background:#def3ff}.lottery-badge--card[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]   .lottery-badge__icon[_ngcontent-%COMP%]{width:1rem;height:1rem;filter:none}.lottery-badge--card[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--card-light[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--kabala[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--ganadiario[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--kinelo[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:700;font-style:normal;line-height:1rem;letter-spacing:.009375rem;color:#646464}.lottery-badge--result[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]{display:inline-flex;align-items:center;justify-content:center;width:fit-content;min-width:0;height:1.875rem;padding:0 .875rem;margin:0;flex-shrink:0;border-radius:999px;box-shadow:0 .1875rem .625rem #0000001a}.lottery-badge--result[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]{background:#fffffff7}.lottery-badge--result-hero[_ngcontent-%COMP%]{background:#ffef80}.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-purple[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-semibold);line-height:1;letter-spacing:0;text-align:center;white-space:nowrap}.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:var(--brand-green)}.lottery-badge--result-purple[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:#5a2f80}@media(max-width:480px){.lottery-badge--result[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%], .lottery-badge--result-hero[_ngcontent-%COMP%]   .lottery-badge__text[_ngcontent-%COMP%]{color:var(--brand-black);box-shadow:0 0 15px #00000026}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        B = (() => {
+          class e {
+            number = t.input.required();
+            variant = (0, t.input)('white');
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-ball']],
+              inputs: { number: [1, 'number'], variant: [1, 'variant'] },
+              decls: 3,
+              vars: 13,
+              consts: [
+                ['type', 'button', 1, 'lottery-ball'],
+                [1, 'lottery-ball__number'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'button', 0)(1, 'span', 1),
+                  t.ɵɵtext(2),
+                  t.ɵɵdomElementEnd()()),
+                  2 & n &&
+                    (t.ɵɵclassProp('lottery-ball--white', 'white' === o.variant())(
+                      'lottery-ball--green',
+                      'green' === o.variant(),
+                    )('lottery-ball--yellow', 'yellow' === o.variant())(
+                      'lottery-ball--blue',
+                      'blue' === o.variant(),
+                    )('lottery-ball--orange', 'orange' === o.variant())(
+                      'lottery-ball--purple',
+                      'purple' === o.variant(),
+                    ),
+                    t.ɵɵadvance(2),
+                    t.ɵɵtextInterpolate1(' ', o.number(), ' ')));
+              },
+              styles: [
+                '@charset "UTF-8";.lottery-ball[_ngcontent-%COMP%]{width:2.5rem;height:2.5rem;flex:0 0 2.5rem;display:inline-flex;justify-content:center;align-items:center;padding:0;border-radius:50%;cursor:pointer;-webkit-user-select:none;user-select:none;appearance:none;-webkit-appearance:none;box-sizing:border-box;background:transparent;transition:transform .15s ease}.lottery-ball[_ngcontent-%COMP%]:focus-visible{outline:.125rem solid var(--brand-green);outline-offset:.125rem}.lottery-ball--white[_ngcontent-%COMP%]{background:var(--brand-white);border:.125rem solid var(--lottery-ball-white-border-color)}.lottery-ball--green[_ngcontent-%COMP%]{background:var(--brand-green);border:.125rem solid var(--brand-green)}.lottery-ball--yellow[_ngcontent-%COMP%]{background:#ffdc00;border:.125rem solid #d9bb00}.lottery-ball--blue[_ngcontent-%COMP%]{background:#1389c7;border:.125rem solid #0e72a7}.lottery-ball--orange[_ngcontent-%COMP%]{background:#f79009;border:.125rem solid #dc6803}.lottery-ball--purple[_ngcontent-%COMP%]{background:#9c348c;border:.125rem solid #7c286f}.lottery-ball__number[_ngcontent-%COMP%]{display:block;font-family:var(--font-primary);font-size:.875rem;font-weight:var(--font-weight-semibold);line-height:1rem;letter-spacing:0;text-align:center}.lottery-ball--white[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--yellow[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%]{color:var(--brand-black)}.lottery-ball--green[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--blue[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--orange[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%], .lottery-ball--purple[_ngcontent-%COMP%]   .lottery-ball__number[_ngcontent-%COMP%]{color:var(--brand-white)}',
+              ],
+            });
+          }
+          return e;
+        })();
+      function U(e, i) {
+        (1 & e &&
+          (t.ɵɵelementStart(0, 'div', 5)(1, 'div', 6),
+          t.ɵɵelement(2, 'img', 7)(3, 'app-lottery-badge', 8),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(4, 'div', 9)(5, 'div', 10)(6, 'span', 11),
+          t.ɵɵtext(7, ' Pozo Millonario '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(8, 'h2', 12),
+          t.ɵɵtext(9, "S/10'653,373"),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(10, 'div', 13),
+          t.ɵɵelement(11, 'app-button', 14),
+          t.ɵɵelementStart(12, 'span', 15),
+          t.ɵɵtext(13, ' (S/ 5) '),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(14, 'a', 16),
+          t.ɵɵtext(15, ' \xbfC\xf3mo jugar? '),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(16, 'div', 17),
+          t.ɵɵelement(17, 'app-lottery-badge', 18),
+          t.ɵɵelementStart(18, 'div', 19),
+          t.ɵɵelement(19, 'app-lottery-ball', 20)(20, 'app-lottery-ball', 20)(
+            21,
+            'app-lottery-ball',
+            20,
+          )(22, 'app-lottery-ball', 20)(23, 'app-lottery-ball', 20)(24, 'app-lottery-ball', 20),
+          t.ɵɵelementStart(25, 'span', 21),
+          t.ɵɵtext(26, ' + '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(27, 'div', 22)(28, 'span', 23),
+          t.ɵɵtext(29, ' Boliyapa '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelement(30, 'app-lottery-ball', 24),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(31, 'div', 25),
+          t.ɵɵelement(32, 'img', 26),
+          t.ɵɵelementStart(33, 'div', 27),
+          t.ɵɵelement(34, 'app-lottery-ball', 20)(35, 'app-lottery-ball', 20)(
+            36,
+            'app-lottery-ball',
+            20,
+          )(37, 'app-lottery-ball', 20),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(38, 'a', 28),
+          t.ɵɵtext(39, ' Ver resultados anteriores '),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(40, 'div', 29)(41, 'div', 30),
+          t.ɵɵelement(42, 'img', 31)(43, 'app-lottery-badge', 32),
+          t.ɵɵelementStart(44, 'div', 33)(45, 'span', 34),
+          t.ɵɵtext(46, ' Pozo Millonario '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(47, 'h2', 35),
+          t.ɵɵtext(48, "S/10'653,373"),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(49, 'div', 36)(50, 'div', 37),
+          t.ɵɵelement(51, 'app-lottery-badge', 18),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(52, 'div', 38),
+          t.ɵɵelement(53, 'app-lottery-ball', 20)(54, 'app-lottery-ball', 20)(
+            55,
+            'app-lottery-ball',
+            20,
+          )(56, 'app-lottery-ball', 20)(57, 'app-lottery-ball', 20)(58, 'app-lottery-ball', 20),
+          t.ɵɵelementStart(59, 'span', 39),
+          t.ɵɵtext(60, ' + '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(61, 'div', 40)(62, 'span'),
+          t.ɵɵtext(63, 'Boliyapa'),
+          t.ɵɵelementEnd(),
+          t.ɵɵelement(64, 'app-lottery-ball', 24),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(65, 'div', 41),
+          t.ɵɵelement(66, 'img', 26),
+          t.ɵɵelementStart(67, 'div', 42),
+          t.ɵɵelement(68, 'app-lottery-ball', 20)(69, 'app-lottery-ball', 20)(
+            70,
+            'app-lottery-ball',
+            20,
+          )(71, 'app-lottery-ball', 20),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(72, 'a', 43),
+          t.ɵɵtext(73, ' Ver resultados anteriores '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(74, 'div', 13),
+          t.ɵɵelement(75, 'app-button', 14),
+          t.ɵɵelementStart(76, 'span', 15),
+          t.ɵɵtext(77, ' (S/ 5) '),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(78, 'a', 44),
+          t.ɵɵtext(79, ' \xbfC\xf3mo jugar? '),
+          t.ɵɵelementEnd()()()),
+          2 & e &&
+            (t.ɵɵadvance(19),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 19),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(6),
+            t.ɵɵproperty('number', 21),
+            t.ɵɵadvance(4),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(16),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 19),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(6),
+            t.ɵɵproperty('number', 21),
+            t.ɵɵadvance(4),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18)));
+      }
+      function A(e, i) {
+        (1 & e &&
+          (t.ɵɵelementStart(0, 'div', 1)(1, 'div', 45),
+          t.ɵɵelement(2, 'img', 46)(3, 'app-lottery-badge', 47),
+          t.ɵɵelementStart(4, 'div', 48)(5, 'span', 49),
+          t.ɵɵtext(6, ' Pozo Millonario '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(7, 'h2', 50),
+          t.ɵɵtext(8, "S/2'845,900"),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(9, 'div', 51)(10, 'div', 52),
+          t.ɵɵelement(11, 'app-lottery-badge', 18),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(12, 'div', 53),
+          t.ɵɵelement(13, 'img', 46),
+          t.ɵɵelementStart(14, 'div', 54),
+          t.ɵɵelement(15, 'app-lottery-ball', 55)(16, 'app-lottery-ball', 55)(
+            17,
+            'app-lottery-ball',
+            55,
+          )(18, 'app-lottery-ball', 55)(19, 'app-lottery-ball', 55)(20, 'app-lottery-ball', 55),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(21, 'div', 56),
+          t.ɵɵelement(22, 'img', 57),
+          t.ɵɵelementStart(23, 'div', 54),
+          t.ɵɵelement(24, 'app-lottery-ball', 55)(25, 'app-lottery-ball', 55)(
+            26,
+            'app-lottery-ball',
+            55,
+          )(27, 'app-lottery-ball', 55)(28, 'app-lottery-ball', 55)(29, 'app-lottery-ball', 55),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(30, 'a', 58),
+          t.ɵɵtext(31, ' Ver resultados anteriores '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(32, 'div', 59),
+          t.ɵɵelement(33, 'app-button', 60),
+          t.ɵɵelementStart(34, 'div', 13),
+          t.ɵɵelement(35, 'app-button', 14),
+          t.ɵɵelementStart(36, 'span', 15),
+          t.ɵɵtext(37, ' (S/ 5) '),
+          t.ɵɵelementEnd()()()()()),
+          2 & e &&
+            (t.ɵɵadvance(15),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 19),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(4),
+            t.ɵɵproperty('number', 18),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 19),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18)));
+      }
+      function H(e, i) {
+        (1 & e &&
+          (t.ɵɵelementStart(0, 'div', 2)(1, 'div', 61),
+          t.ɵɵelement(2, 'img', 62)(3, 'app-lottery-badge', 63),
+          t.ɵɵelementStart(4, 'div', 64)(5, 'span', 65),
+          t.ɵɵtext(6, ' Pozo Millonario '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(7, 'h2', 66),
+          t.ɵɵtext(8, 'S/200,000'),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(9, 'div', 67)(10, 'div', 68),
+          t.ɵɵelement(11, 'app-lottery-badge', 18),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(12, 'div', 69)(13, 'div', 70),
+          t.ɵɵelement(14, 'app-lottery-ball', 20)(15, 'app-lottery-ball', 20)(
+            16,
+            'app-lottery-ball',
+            20,
+          )(17, 'app-lottery-ball', 20),
+          t.ɵɵelementEnd()(),
+          t.ɵɵelementStart(18, 'a', 71),
+          t.ɵɵtext(19, ' Ver resultados anteriores '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(20, 'div', 59),
+          t.ɵɵelement(21, 'app-button', 60),
+          t.ɵɵelementStart(22, 'div', 13),
+          t.ɵɵelement(23, 'app-button', 14),
+          t.ɵɵelementStart(24, 'span', 15),
+          t.ɵɵtext(25, ' (S/ 5) '),
+          t.ɵɵelementEnd()()()()()),
+          2 & e &&
+            (t.ɵɵadvance(14),
+            t.ɵɵproperty('number', 29),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 12),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 13),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('number', 18)));
+      }
+      function R(e, i) {
+        1 & e &&
+          (t.ɵɵelementStart(0, 'div', 3)(1, 'div', 72),
+          t.ɵɵelement(2, 'img', 73)(3, 'app-lottery-badge', 74),
+          t.ɵɵelementStart(4, 'div', 75)(5, 'span', 76),
+          t.ɵɵtext(6, ' Juega cada 5 minutos y gana hasta '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(7, 'h2', 77),
+          t.ɵɵtext(8, "S/10'653,373"),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(9, 'div', 78)(10, 'div', 59),
+          t.ɵɵelement(11, 'app-button', 60),
+          t.ɵɵelementStart(12, 'div', 13),
+          t.ɵɵelement(13, 'app-button', 14),
+          t.ɵɵelementStart(14, 'span', 15),
+          t.ɵɵtext(15, ' (S/ 5) '),
+          t.ɵɵelementEnd()()()()());
+      }
+      function $(e, i) {
+        1 & e &&
+          (t.ɵɵelementStart(0, 'div', 4)(1, 'div', 79),
+          t.ɵɵelement(2, 'img', 80),
+          t.ɵɵelementStart(3, 'div', 81)(4, 'span', 82),
+          t.ɵɵtext(5, ' Juega cada 5 minutos y gana hasta '),
+          t.ɵɵelementEnd(),
+          t.ɵɵelementStart(6, 'h2', 83),
+          t.ɵɵtext(7, 'S/120,000'),
+          t.ɵɵelementEnd()()(),
+          t.ɵɵelementStart(8, 'div', 84),
+          t.ɵɵelement(9, 'app-button', 85),
+          t.ɵɵelementEnd()());
+      }
+      let J = (() => {
+          class e {
+            variant = (0, t.input)('hero');
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-card']],
+              inputs: { variant: [1, 'variant'] },
+              decls: 6,
+              vars: 3,
+              consts: [
+                [1, 'lottery-card'],
+                [1, 'lottery-card__kabala'],
+                [1, 'lottery-card__ganadiario'],
+                [1, 'lottery-card__kinelo'],
+                [1, 'lottery-card__rapitinka'],
+                [1, 'lottery-card__hero-desktop'],
+                [1, 'lottery-card__hero-left'],
+                [
+                  'src',
+                  'assets/images/logo-tinka.svg',
+                  'alt',
+                  'Tinka',
+                  1,
+                  'lottery-card__hero-logo',
+                ],
+                [
+                  'icon',
+                  'assets/images/ico-calendar.svg',
+                  'text',
+                  'Pr\xf3x. sorteo: Mi\xe9. 21/05',
+                ],
+                [1, 'lottery-card__hero-center'],
+                [1, 'lottery-card__hero-jackpot'],
+                [1, 'lottery-card__hero-title'],
+                [1, 'lottery-card__hero-amount'],
+                [1, 'lottery-card__play-action'],
+                ['label', 'Jugar ahora', 'variant', 'danger'],
+                [1, 'lottery-card__play-price'],
+                ['href', '#', 1, 'lottery-card__hero-link'],
+                [1, 'lottery-card__hero-right'],
+                ['variant', 'result', 'text', '\xdaltimo resultado: S\xe1b. 10 MAY'],
+                [1, 'lottery-card__hero-main-balls'],
+                ['variant', 'white', 3, 'number'],
+                [1, 'lottery-card__hero-plus'],
+                [1, 'lottery-card__hero-boliyapa'],
+                [1, 'lottery-card__hero-boliyapa-title'],
+                ['variant', 'green', 3, 'number'],
+                [1, 'lottery-card__hero-siosi'],
+                ['src', 'assets/images/si-o-si.svg', 'alt', 'S\xed o S\xed'],
+                [1, 'lottery-card__hero-extra-balls'],
+                ['href', '#', 1, 'lottery-card__hero-results'],
+                [1, 'lottery-card__tinka-mobile'],
+                [1, 'lottery-card__tinka-header'],
+                ['src', 'assets/images/logo-tinka.svg', 'alt', 'Tinka'],
+                [
+                  'variant',
+                  'card',
+                  'icon',
+                  'assets/images/ico-calendar.svg',
+                  'text',
+                  'Pr\xf3x. sorteo: Mi\xe9. 21/05',
+                ],
+                [1, 'lottery-card__tinka-jackpot'],
+                [1, 'lottery-card__tinka-title'],
+                [1, 'lottery-card__tinka-amount'],
+                [1, 'lottery-card__tinka-body'],
+                [1, 'lottery-card__tinka-result'],
+                [1, 'lottery-card__tinka-main-balls'],
+                [1, 'lottery-card__tinka-plus'],
+                [1, 'lottery-card__tinka-boliyapa'],
+                [1, 'lottery-card__tinka-siosi'],
+                [1, 'lottery-card__tinka-extra-balls'],
+                ['href', '#', 1, 'lottery-card__tinka-results'],
+                ['href', '#', 1, 'lottery-card__how-to-play', 'lottery-card__tinka-how-to-play'],
+                [1, 'lottery-card__kabala-header'],
+                ['src', 'assets/images/logo-kabala.svg', 'alt', 'K\xe1bala'],
+                [
+                  'variant',
+                  'kabala',
+                  'icon',
+                  'assets/images/ico-calendar.svg',
+                  'text',
+                  'Pr\xf3x. sorteo: Mi\xe9. 21/05',
+                ],
+                [1, 'lottery-card__kabala-jackpot'],
+                [1, 'lottery-card__kabala-title'],
+                [1, 'lottery-card__kabala-amount'],
+                [1, 'lottery-card__kabala-body'],
+                [1, 'lottery-card__kabala-result'],
+                [1, 'lottery-card__kabala-results'],
+                [1, 'lottery-card__kabala-balls'],
+                [3, 'number'],
+                [1, 'lottery-card__kabala-chauchamba'],
+                ['src', 'assets/images/logo-chau-chamba.svg', 'alt', 'Chau Chamba'],
+                ['href', '#', 1, 'lottery-card__kabala-results-link'],
+                [1, 'lottery-card__card-actions'],
+                [
+                  'label',
+                  '\xbfC\xf3mo jugar?',
+                  'variant',
+                  'outline',
+                  1,
+                  'lottery-card__how-to-play',
+                ],
+                [1, 'lottery-card__ganadiario-header'],
+                ['src', 'assets/images/logo-ganadiario.svg', 'alt', 'Gana Diario'],
+                [
+                  'variant',
+                  'ganadiario',
+                  'icon',
+                  'assets/images/ico-calendar.svg',
+                  'text',
+                  'Pr\xf3x. sorteo: Mi\xe9. 21/05',
+                ],
+                [1, 'lottery-card__ganadiario-jackpot'],
+                [1, 'lottery-card__ganadiario-title'],
+                [1, 'lottery-card__ganadiario-amount'],
+                [1, 'lottery-card__ganadiario-body'],
+                [1, 'lottery-card__ganadiario-result'],
+                [1, 'lottery-card__ganadiario-results'],
+                [1, 'lottery-card__ganadiario-balls'],
+                ['href', '#', 1, 'lottery-card__ganadiario-results-link'],
+                [1, 'lottery-card__kinelo-header'],
+                ['src', 'assets/images/logo-kinelo.svg', 'alt', 'Kinelo'],
+                [
+                  'variant',
+                  'kinelo',
+                  'icon',
+                  'assets/images/ico-calendar.svg',
+                  'text',
+                  'Pr\xf3x. sorteo: Hoy 10:30 pm',
+                ],
+                [1, 'lottery-card__kinelo-jackpot'],
+                [1, 'lottery-card__kinelo-title'],
+                [1, 'lottery-card__kinelo-amount'],
+                [1, 'lottery-card__kinelo-body'],
+                [1, 'lottery-card__rapitinka-header'],
+                ['src', 'assets/images/logo-rapitinka.svg', 'alt', 'Rapi Tinka'],
+                [1, 'lottery-card__rapitinka-jackpot'],
+                [1, 'lottery-card__rapitinka-title'],
+                [1, 'lottery-card__rapitinka-amount'],
+                [1, 'lottery-card__rapitinka-body'],
+                ['label', 'M\xe1s informaci\xf3n', 'variant', 'danger'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵelementStart(0, 'div', 0),
+                  t.ɵɵconditionalCreate(1, U, 80, 22)(2, A, 38, 12, 'div', 1)(
+                    3,
+                    H,
+                    26,
+                    4,
+                    'div',
+                    2,
+                  )(4, R, 16, 0, 'div', 3)(5, $, 10, 0, 'div', 4),
+                  t.ɵɵelementEnd()),
+                  2 & n &&
+                    (t.ɵɵclassProp('lottery-card--hero', 'hero' === o.variant()),
+                    t.ɵɵadvance(),
+                    t.ɵɵconditional(
+                      'hero' === o.variant()
+                        ? 1
+                        : 'kabala' === o.variant()
+                          ? 2
+                          : 'ganadiario' === o.variant()
+                            ? 3
+                            : 'kinelo' === o.variant()
+                              ? 4
+                              : 'rapitinka' === o.variant()
+                                ? 5
+                                : -1,
+                    )));
+              },
+              dependencies: [V, d, B],
+              styles: [
+                '@charset "UTF-8";.lottery-card[_ngcontent-%COMP%]{width:100%;min-width:0;display:flex;flex-direction:column;background:#fff;border-radius:1.5rem;box-shadow:0 .25rem 1rem #00000026;overflow:hidden;box-sizing:border-box}.lottery-card--hero[_ngcontent-%COMP%]{width:100%;height:17.5rem;display:block;padding:0;background-image:url(assets/images/bg-tinka.svg);background-repeat:no-repeat;background-position:center;background-size:cover;border-radius:1.25rem;box-shadow:0 .25rem 1rem #0000002e;overflow:hidden}.lottery-card__tinka-mobile[_ngcontent-%COMP%]{display:none}.lottery-card__hero-desktop[_ngcontent-%COMP%]{width:100%;height:100%;padding:1.5rem 1rem .5rem 2.5rem;display:grid;grid-template-columns:17rem minmax(18rem,1fr) 23rem;align-items:stretch;column-gap:1.5rem;box-sizing:border-box}.lottery-card__hero-left[_ngcontent-%COMP%]{min-width:0;height:100%;padding-bottom:1.25rem;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;box-sizing:border-box}.lottery-card__hero-logo[_ngcontent-%COMP%]{display:block;width:14.25rem;height:5.5rem;object-fit:contain;object-position:left center}.lottery-card__hero-left[_ngcontent-%COMP%]   app-lottery-badge[_ngcontent-%COMP%]{margin-left:0}[_nghost-%COMP%]     .lottery-card__hero-left .lottery-badge{background:#ffef80}[_nghost-%COMP%]     .lottery-card__hero-left .lottery-badge__text{color:#1f1f1f}.lottery-card__hero-center[_ngcontent-%COMP%]{min-width:0;height:100%;padding-top:.75rem;padding-bottom:1.625rem;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}.lottery-card__hero-jackpot[_ngcontent-%COMP%]{margin-bottom:1rem;display:flex;flex-direction:column;align-items:center;gap:.375rem}.lottery-card__hero-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;text-align:center;color:#1f1f1f}.lottery-card__hero-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:3rem;font-weight:700;line-height:3.75rem;letter-spacing:.03125rem;text-align:center;white-space:nowrap;color:#006820}.lottery-card__hero-link[_ngcontent-%COMP%]{margin-top:1.5rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem;cursor:pointer}.lottery-card__hero-right[_ngcontent-%COMP%]{min-width:0;height:100%;padding-top:1.375rem;padding-bottom:1.625rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__hero-main-balls[_ngcontent-%COMP%]{width:100%;margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__hero-extra-balls[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.5rem}.lottery-card__hero-plus[_ngcontent-%COMP%]{margin-inline:.125rem;font-family:"Duplet",var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1;color:#9e9e9e}.lottery-card__hero-boliyapa[_ngcontent-%COMP%]{position:relative;display:flex;flex-direction:column;align-items:center;gap:.25rem;transform:translateY(-.625rem)}.lottery-card__hero-boliyapa-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.75rem;font-weight:700;line-height:1rem;letter-spacing:.009375rem;color:#006820;white-space:nowrap}.lottery-card__hero-siosi[_ngcontent-%COMP%]{width:100%;margin-top:.5rem;padding-left:3.25rem;display:flex;align-items:center;justify-content:flex-start;gap:.75rem;box-sizing:border-box}.lottery-card__hero-siosi[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:3.25rem;height:2rem;object-fit:contain}.lottery-card__hero-results[_ngcontent-%COMP%]{margin-top:1.125rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem;cursor:pointer}.lottery-card__play-action[_ngcontent-%COMP%]{position:relative;display:inline-flex;align-items:center;justify-content:center;width:fit-content}.lottery-card__play-price[_ngcontent-%COMP%]{position:absolute;top:50%;right:.75rem;transform:translateY(-50%);min-width:3rem;height:2.125rem;padding-inline:.75rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:999px;background:#fff3;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:700;line-height:1.25rem;color:#fff;pointer-events:none}.lottery-card__kabala[_ngcontent-%COMP%], .lottery-card__ganadiario[_ngcontent-%COMP%], .lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{width:100%;height:100%;min-height:29.375rem;display:flex;flex-direction:column;background:#fff;border-radius:1.5rem;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%], .lottery-card__kinelo-header[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%]{width:100%;height:14.25rem;padding:1.25rem 1.5rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%]{background:#fcc200}.lottery-card__ganadiario-header[_ngcontent-%COMP%]{background:#1389c7}.lottery-card__kinelo-header[_ngcontent-%COMP%]{background:#9c348c}.lottery-card__rapitinka-header[_ngcontent-%COMP%]{background:#ffdc00}.lottery-card__kabala-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:10.25rem;height:3.75rem;margin-bottom:.5rem;object-fit:contain}.lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9rem;height:3rem;margin-bottom:.75rem}.lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:8rem;height:3.25rem;margin-bottom:.5rem}.lottery-card__kabala-jackpot[_ngcontent-%COMP%], .lottery-card__ganadiario-jackpot[_ngcontent-%COMP%], .lottery-card__kinelo-jackpot[_ngcontent-%COMP%], .lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{width:100%;margin-top:.625rem;display:flex;flex-direction:column;align-items:center;gap:.25rem}.lottery-card__kabala-title[_ngcontent-%COMP%], .lottery-card__ganadiario-title[_ngcontent-%COMP%], .lottery-card__kinelo-title[_ngcontent-%COMP%], .lottery-card__rapitinka-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:1.125rem;font-weight:700;line-height:1.5rem;letter-spacing:.015625rem;text-align:center;color:#1f1f1f}.lottery-card__ganadiario-title[_ngcontent-%COMP%], .lottery-card__kinelo-title[_ngcontent-%COMP%]{color:#fff}.lottery-card__rapitinka-title[_ngcontent-%COMP%]{color:#1f1f1f}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:2.5rem;font-weight:700;line-height:3rem;letter-spacing:0;text-align:center;white-space:nowrap;color:#1f1f1f}.lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%]{color:#fff}.lottery-card__rapitinka-amount[_ngcontent-%COMP%]{color:#006820}.lottery-card__kabala-body[_ngcontent-%COMP%], .lottery-card__ganadiario-body[_ngcontent-%COMP%], .lottery-card__kinelo-body[_ngcontent-%COMP%], .lottery-card__rapitinka-body[_ngcontent-%COMP%]{position:relative;width:100%;flex:1;padding:2rem 2rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#fff}.lottery-card__kabala-result[_ngcontent-%COMP%], .lottery-card__ganadiario-result[_ngcontent-%COMP%]{position:absolute;top:-1rem;left:50%;transform:translate(-50%);z-index:5}.lottery-card__kabala-results[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.75rem}.lottery-card__kabala-results[_ngcontent-%COMP%]{margin-top:.75rem}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kabala-results[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3rem;height:2rem;flex-shrink:0;object-fit:contain}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3.25rem;height:2rem;flex-shrink:0;object-fit:contain}.lottery-card__kabala-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__kabala-results-link[_ngcontent-%COMP%]{margin-top:1rem;margin-bottom:1rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__ganadiario-results[_ngcontent-%COMP%]{width:100%;min-height:6rem;margin-top:.75rem;display:flex;align-items:center;justify-content:center}.lottery-card__ganadiario-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__ganadiario-results-link[_ngcontent-%COMP%]{margin-top:.5rem;margin-bottom:1.75rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{min-height:18.25rem}.lottery-card__kinelo-header[_ngcontent-%COMP%], .lottery-card__rapitinka-header[_ngcontent-%COMP%]{height:11.25rem;justify-content:flex-start}.lottery-card__kinelo-body[_ngcontent-%COMP%], .lottery-card__rapitinka-body[_ngcontent-%COMP%]{min-height:7rem;padding:1.5rem 2rem;justify-content:center}.lottery-card__kinelo-jackpot[_ngcontent-%COMP%], .lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{margin-top:0}.lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin-top:.25rem}.lottery-card__card-actions[_ngcontent-%COMP%]{width:100%;margin-top:auto;display:flex;align-items:center;justify-content:center;gap:1.25rem}.lottery-card__card-actions[_ngcontent-%COMP%] > app-button[_ngcontent-%COMP%]{display:block;flex:0 0 auto}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]{flex:0 0 auto}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{display:block;width:auto}[_nghost-%COMP%]     .lottery-card__hero-center app-button button, [_nghost-%COMP%]     .lottery-card__hero-center app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 5.25rem .75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__card-actions>app-button button, [_nghost-%COMP%]     .lottery-card__card-actions>app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;color:#d92d20;white-space:nowrap}.lottery-card__how-to-play[_ngcontent-%COMP%]{text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play button, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button{display:flex;align-items:center;justify-content:center;gap:0;text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play button:before, [_nghost-%COMP%]     app-button.lottery-card__how-to-play button:after, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button:before, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button:after, [_nghost-%COMP%]     app-button.lottery-card__how-to-play svg, [_nghost-%COMP%]     app-button.lottery-card__how-to-play img, [_nghost-%COMP%]     app-button.lottery-card__how-to-play i, [_nghost-%COMP%]     app-button.lottery-card__how-to-play [class*=icon], [_nghost-%COMP%]     app-button.lottery-card__how-to-play [class*=arrow]{display:none!important;content:none!important}[_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 5.25rem .75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__rapitinka-body app-button button, [_nghost-%COMP%]     .lottery-card__rapitinka-body app-button .button{width:fit-content;min-width:0;height:3.125rem;min-height:3.125rem;padding:.75rem 1.5rem;border:1px solid #d92d20;border-radius:1.5rem;background:#d92d20;color:#fff;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:600;line-height:1.5rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-badge{min-height:2rem;padding:.375rem .875rem;border-radius:999px;box-sizing:border-box}[_nghost-%COMP%]     .lottery-badge__text{font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:700;line-height:1rem;letter-spacing:.009375rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge{background:#ffef80}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge__text{color:#006820}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__kabala-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__ganadiario-result .lottery-badge__text{font-size:1rem;line-height:1.25rem;letter-spacing:.015625rem}[_nghost-%COMP%]     .lottery-badge__icon{width:.875rem;height:.875rem}[_nghost-%COMP%]     app-lottery-ball{display:block;flex:0 0 auto}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:2.5rem;min-width:2.5rem;height:2.5rem;min-height:2.5rem;border:.125rem solid #ededed;border-radius:999px;box-sizing:border-box;font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:700;line-height:1rem}[_nghost-%COMP%]     app-lottery-ball .lottery-ball--green{border-color:#005c1c;background:#006820;color:#fff}@media(min-width:481px)and (max-width:1024px){.lottery-card--hero[_ngcontent-%COMP%]{height:15rem}.lottery-card__hero-desktop[_ngcontent-%COMP%]{padding:1.125rem 1.25rem;grid-template-columns:24% 34% 42%;column-gap:0}.lottery-card__hero-left[_ngcontent-%COMP%]{padding-bottom:.75rem}.lottery-card__hero-logo[_ngcontent-%COMP%]{width:8.75rem;height:auto}.lottery-card__hero-center[_ngcontent-%COMP%]{padding:0}.lottery-card__hero-right[_ngcontent-%COMP%]{padding:0;justify-content:center}.lottery-card__hero-title[_ngcontent-%COMP%]{font-size:1rem;line-height:1.25rem}.lottery-card__hero-amount[_ngcontent-%COMP%]{font-size:2.5rem;line-height:3rem}.lottery-card__hero-main-balls[_ngcontent-%COMP%], .lottery-card__hero-extra-balls[_ngcontent-%COMP%]{gap:.25rem}.lottery-card__hero-main-balls[_ngcontent-%COMP%]{margin-top:1rem}.lottery-card__hero-siosi[_ngcontent-%COMP%]{padding-left:1.5rem}.lottery-card__hero-link[_ngcontent-%COMP%], .lottery-card__hero-results[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.125rem}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:2rem;min-width:2rem;height:2rem;min-height:2rem;font-size:.75rem}.lottery-card__kabala-balls[_ngcontent-%COMP%], .lottery-card__ganadiario-balls[_ngcontent-%COMP%]{gap:.25rem}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%], .lottery-card__kinelo-amount[_ngcontent-%COMP%], .lottery-card__rapitinka-amount[_ngcontent-%COMP%]{font-size:2.25rem;line-height:2.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]{gap:.75rem}}@media(max-width:480px){.lottery-card[_ngcontent-%COMP%], .lottery-card--hero[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;height:auto;min-height:0;margin-inline:auto;padding:0;display:block;background:#fff;background-image:none;border-radius:1.25rem;box-shadow:0 .25rem 1rem #00000026;overflow:hidden}.lottery-card__hero-desktop[_ngcontent-%COMP%]{display:none}.lottery-card__tinka-mobile[_ngcontent-%COMP%]{width:100%;height:auto;display:flex;flex-direction:column;background:#fff;border-radius:1.25rem;overflow:hidden}.lottery-card__tinka-header[_ngcontent-%COMP%]{width:100%;height:13.25rem;min-height:0;padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#ffde00}.lottery-card__tinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:8.75rem;height:3.25rem;margin:0 0 .625rem;object-fit:contain}.lottery-card__tinka-header[_ngcontent-%COMP%]   app-lottery-badge[_ngcontent-%COMP%]{display:block;margin:0}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge{min-height:1.5rem;padding:.25rem .75rem;gap:.3125rem;border-radius:10rem;background:#ffef80}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge__text{font-size:.75rem;font-weight:600;line-height:1rem;letter-spacing:0;color:#006820}[_nghost-%COMP%]     .lottery-card__tinka-header .lottery-badge__icon{width:.75rem;height:.75rem}.lottery-card__tinka-jackpot[_ngcontent-%COMP%]{margin-top:.625rem;display:flex;flex-direction:column;align-items:center;gap:.25rem}.lottery-card__tinka-title[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.9375rem;font-weight:700;line-height:1.25rem;color:#1f1f1f}.lottery-card__tinka-amount[_ngcontent-%COMP%]{margin:0;font-family:"Yolo Text Trial",var(--font-secondary);font-size:2rem;font-weight:600;line-height:2.5rem;letter-spacing:0;color:#006820;white-space:nowrap}.lottery-card__tinka-body[_ngcontent-%COMP%]{position:relative;width:100%;min-height:15rem;padding:2.5rem .875rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box;background:#fff}.lottery-card__tinka-result[_ngcontent-%COMP%]{position:absolute;top:-.9375rem;left:50%;z-index:5;transform:translate(-50%)}.lottery-card__tinka-main-balls[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__tinka-extra-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__tinka-plus[_ngcontent-%COMP%]{margin-inline:.125rem;font-family:"Duplet",var(--font-primary);font-size:1rem;font-weight:700;line-height:1rem;color:#9e9e9e}.lottery-card__tinka-boliyapa[_ngcontent-%COMP%]{position:relative;display:flex;flex-direction:column;align-items:center;gap:.125rem;transform:translateY(-.625rem)}.lottery-card__tinka-boliyapa[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{font-family:"Duplet",var(--font-primary);font-size:.5625rem;font-weight:500;line-height:.75rem;color:#006820}.lottery-card__tinka-siosi[_ngcontent-%COMP%]{width:100%;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}.lottery-card__tinka-siosi[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{display:block;width:3.25rem;height:2rem;object-fit:contain}.lottery-card__tinka-results[_ngcontent-%COMP%]{margin-top:1.125rem;margin-bottom:1.75rem;font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:600;line-height:1.25rem;color:#d92d20;text-align:center;text-decoration:underline;text-underline-offset:.125rem}.lottery-card__tinka-body[_ngcontent-%COMP%] > .lottery-card__play-action[_ngcontent-%COMP%]{width:8.75rem;margin-right:auto;margin-left:calc(50% + .9375rem)}.lottery-card__tinka-how-to-play[_ngcontent-%COMP%]{position:absolute;left:50%;bottom:1rem;width:8.75rem;height:2.875rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border:1px solid #d92d20;border-radius:999px;transform:translate(calc(-100% - .9375rem));font-family:"Duplet",var(--font-primary);font-size:.875rem;font-weight:600;line-height:1.25rem;color:#d92d20;text-decoration:none}[_nghost-%COMP%]     .lottery-card__hero-right .lottery-badge, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge{background:#fff}.lottery-card__kabala[_ngcontent-%COMP%], .lottery-card__ganadiario[_ngcontent-%COMP%], .lottery-card__kinelo[_ngcontent-%COMP%], .lottery-card__rapitinka[_ngcontent-%COMP%]{width:100%;height:auto;min-height:0;display:flex;flex-direction:column;border-radius:1.25rem;overflow:hidden}.lottery-card__kabala-header[_ngcontent-%COMP%], .lottery-card__ganadiario-header[_ngcontent-%COMP%]{width:100%;height:13.25rem;min-height:0;padding:1.25rem 1rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__kabala-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:8.75rem;height:3.5rem;margin:0 0 .625rem;object-fit:contain}.lottery-card__ganadiario-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9.25rem;height:3.75rem;margin:0 0 .375rem;object-fit:contain}.lottery-card__kabala-jackpot[_ngcontent-%COMP%], .lottery-card__ganadiario-jackpot[_ngcontent-%COMP%]{margin-top:.625rem;gap:.25rem}.lottery-card__kabala-title[_ngcontent-%COMP%], .lottery-card__ganadiario-title[_ngcontent-%COMP%]{font-size:.9375rem;line-height:1.25rem}.lottery-card__kabala-amount[_ngcontent-%COMP%], .lottery-card__ganadiario-amount[_ngcontent-%COMP%]{font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__kabala-body[_ngcontent-%COMP%], .lottery-card__ganadiario-body[_ngcontent-%COMP%]{width:100%;min-height:15rem;padding:2.25rem .875rem 1rem;display:flex;flex-direction:column;align-items:center;box-sizing:border-box}.lottery-card__kabala-result[_ngcontent-%COMP%], .lottery-card__ganadiario-result[_ngcontent-%COMP%]{top:-.9375rem}.lottery-card__kabala-results[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__kabala-results[_ngcontent-%COMP%]{margin-top:.75rem}.lottery-card__kabala-chauchamba[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kabala-results[_ngcontent-%COMP%] > img[_ngcontent-%COMP%], .lottery-card__kabala-chauchamba[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:3.125rem;height:1.75rem;object-fit:contain}.lottery-card__kabala-balls[_ngcontent-%COMP%], .lottery-card__ganadiario-balls[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:center;gap:.375rem}.lottery-card__kabala-results-link[_ngcontent-%COMP%], .lottery-card__ganadiario-results-link[_ngcontent-%COMP%]{margin-top:1.25rem;margin-bottom:1.75rem;font-size:.875rem;line-height:1.25rem}.lottery-card__ganadiario-results[_ngcontent-%COMP%]{min-height:5rem;margin-top:.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]{width:100%;margin-top:auto;display:flex;flex-direction:row;align-items:center;justify-content:center;gap:1.875rem}.lottery-card__card-actions[_ngcontent-%COMP%] > app-button[_ngcontent-%COMP%]{display:block;width:8.75rem;max-width:8.75rem;flex:0 0 8.75rem}.lottery-card__card-actions[_ngcontent-%COMP%]   .lottery-card__play-action[_ngcontent-%COMP%]{width:8.75rem;max-width:8.75rem;flex:0 0 8.75rem}.lottery-card__kinelo-header[_ngcontent-%COMP%]{width:100%;height:10.5rem;min-height:0;padding:1rem 1rem .875rem;justify-content:flex-start}.lottery-card__kinelo-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:9rem;height:2.75rem;margin:0 0 .375rem;object-fit:contain}.lottery-card__kinelo-jackpot[_ngcontent-%COMP%]{margin-top:.5rem}.lottery-card__kinelo-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.25rem}.lottery-card__kinelo-amount[_ngcontent-%COMP%]{margin-top:.25rem;font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__kinelo-body[_ngcontent-%COMP%]{width:100%;min-height:5.875rem;padding:1.5rem .875rem;justify-content:center}.lottery-card__rapitinka-header[_ngcontent-%COMP%]{width:100%;height:11.25rem;min-height:0;padding:1.25rem 1rem 1rem;justify-content:flex-start}.lottery-card__rapitinka-header[_ngcontent-%COMP%] > img[_ngcontent-%COMP%]{width:7.5rem;height:3.25rem;margin:0 0 .5rem;object-fit:contain}.lottery-card__rapitinka-jackpot[_ngcontent-%COMP%]{margin-top:.25rem}.lottery-card__rapitinka-title[_ngcontent-%COMP%]{font-size:.875rem;line-height:1.25rem}.lottery-card__rapitinka-amount[_ngcontent-%COMP%]{margin-top:.25rem;font-size:2rem;font-weight:600;line-height:2.5rem}.lottery-card__rapitinka-body[_ngcontent-%COMP%]{width:100%;min-height:5.75rem;padding:1.5rem 1rem;justify-content:center}[_nghost-%COMP%]     app-lottery-ball{flex:0 0 auto}[_nghost-%COMP%]     app-lottery-ball .lottery-ball{width:1.875rem;min-width:1.875rem;height:1.875rem;min-height:1.875rem;border-width:.0625rem;font-size:.75rem;font-weight:600;line-height:1rem}[_nghost-%COMP%]     .lottery-badge{min-height:1.5rem;padding:.25rem .75rem;gap:.3125rem;border-radius:10rem}[_nghost-%COMP%]     .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__tinka-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__kabala-result .lottery-badge__text, [_nghost-%COMP%]     .lottery-card__ganadiario-result .lottery-badge__text{font-size:.75rem;font-weight:700;line-height:1rem;letter-spacing:0}[_nghost-%COMP%]     .lottery-badge__icon{width:.75rem;height:.75rem}[_nghost-%COMP%]     .lottery-card__card-actions>app-button button, [_nghost-%COMP%]     .lottery-card__card-actions>app-button .button{width:8.75rem;min-width:8.75rem;height:2.875rem;min-height:2.875rem;padding:0 .75rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}[_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__card-actions .lottery-card__play-action app-button .button, [_nghost-%COMP%]     .lottery-card__tinka-body .lottery-card__play-action app-button button, [_nghost-%COMP%]     .lottery-card__tinka-body .lottery-card__play-action app-button .button{width:8.75rem;min-width:8.75rem;height:2.875rem;min-height:2.875rem;padding:0 2.5rem 0 .875rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}.lottery-card__play-action[_ngcontent-%COMP%]{position:relative;width:8.75rem;display:flex;align-items:center;justify-content:center}.lottery-card__play-price[_ngcontent-%COMP%]{position:absolute;top:50%;right:.75rem;z-index:2;width:auto;min-width:0;height:auto;margin:0;padding:0;display:block;transform:translateY(-50%);border-radius:0;background:transparent;font-family:"Duplet",var(--font-primary);font-size:.75rem;font-weight:600;line-height:1rem;color:#fff;white-space:nowrap;pointer-events:none}.lottery-card__how-to-play[_ngcontent-%COMP%]{width:8.75rem;min-width:8.75rem;max-width:8.75rem;display:flex;align-items:center;justify-content:center;text-align:center}[_nghost-%COMP%]     app-button.lottery-card__how-to-play, [_nghost-%COMP%]     app-button.lottery-card__how-to-play button, [_nghost-%COMP%]     app-button.lottery-card__how-to-play .button{width:8.75rem;min-width:8.75rem;max-width:8.75rem}.lottery-card__tinka-how-to-play[_ngcontent-%COMP%]:before, .lottery-card__tinka-how-to-play[_ngcontent-%COMP%]:after{display:none!important;content:none!important}[_nghost-%COMP%]     .lottery-card__rapitinka-body app-button button, [_nghost-%COMP%]     .lottery-card__rapitinka-body app-button .button{width:12.5rem;min-width:12.5rem;height:2.875rem;min-height:2.875rem;padding:0 1rem;border-radius:999px;box-sizing:border-box;font-size:.875rem;font-weight:600;line-height:1.25rem;white-space:nowrap}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        G = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-banner']],
+              decls: 5,
+              vars: 0,
+              consts: [
+                [1, 'lottery-banner'],
+                [1, 'lottery-banner__left'],
+                [1, 'lottery-banner__title'],
+                ['label', '', 'variant', 'outline-circle'],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵelementStart(0, 'div', 0)(1, 'div', 1)(2, 'span', 2),
+                  t.ɵɵtext(3, ' Conoce los resultados de nuestras Loter\xedas '),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelement(4, 'app-button', 3),
+                  t.ɵɵelementEnd());
+              },
+              dependencies: [d],
+              styles: [
+                '.lottery-banner[_ngcontent-%COMP%]{width:100%;height:6.25rem;display:flex;align-items:center;justify-content:space-between;padding:1.5rem;box-sizing:border-box;border-radius:.75rem;background:linear-gradient(90deg,#153,#01954b);overflow:hidden}.lottery-banner__left[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;align-items:center;gap:.75rem}.lottery-banner__icon[_ngcontent-%COMP%]{width:2rem;height:2rem;display:block;flex-shrink:0;object-fit:contain}.lottery-banner__title[_ngcontent-%COMP%]{margin:0;color:var(--brand-white);font-family:var(--font-primary);font-size:1.25rem;font-weight:var(--font-weight-bold);line-height:1.75rem;letter-spacing:.015625rem;white-space:nowrap}.lottery-banner[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0}@media(min-width:481px)and (max-width:1024px){.lottery-banner[_ngcontent-%COMP%]{height:6.25rem;padding:1.5rem}.lottery-banner__title[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1.75rem}}@media(max-width:480px){.lottery-banner[_ngcontent-%COMP%]{width:100%;max-width:none;height:auto;min-height:5.875rem;padding:1rem;gap:.75rem;border-radius:.75rem}.lottery-banner__left[_ngcontent-%COMP%]{min-width:0;gap:.75rem}.lottery-banner__icon[_ngcontent-%COMP%]{width:2rem;height:2rem}.lottery-banner__title[_ngcontent-%COMP%]{max-width:13rem;font-size:1.25rem;line-height:1.75rem;letter-spacing:0;white-space:normal;text-align:left}.lottery-banner[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0}}',
+              ],
+            });
+          }
+          return e;
+        })();
+      const Y = ['carousel'];
+      function K(e, i) {
+        if (
+          (1 & e &&
+            (t.ɵɵelementStart(0, 'button', 15), t.ɵɵelement(1, 'img', 17), t.ɵɵelementEnd()),
+          2 & e)
+        ) {
+          const r = i.$implicit;
+          (t.ɵɵattribute('aria-label', 'Abrir ' + r.name),
+            t.ɵɵadvance(),
+            t.ɵɵproperty('src', r.image, t.ɵɵsanitizeUrl)('alt', r.name));
+        }
+      }
+      let q = (() => {
+          class e {
+            carousel;
+            games = [
+              { name: 'Joyas del imperio', image: 'assets/images/video-loterias-card.png' },
+              { name: 'Joyas del imperio', image: 'assets/images/video-loterias-card.png' },
+              { name: 'Joyas del imperio', image: 'assets/images/video-loterias-card.png' },
+              { name: 'Joyas del imperio', image: 'assets/images/video-loterias-card.png' },
+              { name: 'Joyas del imperio', image: 'assets/images/video-loterias-card.png' },
+            ];
+            scrollPrevious() {
+              this.scrollCarousel(-1);
+            }
+            scrollNext() {
+              this.scrollCarousel(1);
+            }
+            scrollCarousel(r) {
+              const n = this.carousel?.nativeElement;
+              if (!n) return;
+              if (window.innerWidth < 768)
+                return void n.scrollBy({ left: n.clientWidth * r, behavior: 'smooth' });
+              const a = n.querySelector('.lottery-video-section__game');
+              if (!a) return;
+              const s = n.querySelector('.lottery-video-section__track'),
+                g = (s && Number.parseFloat(getComputedStyle(s).gap)) || 0;
+              n.scrollBy({ left: (a.offsetWidth + g) * r, behavior: 'smooth' });
+            }
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-video-section']],
+              viewQuery: function (n, o) {
+                if ((1 & n && t.ɵɵviewQuery(Y, 5), 2 & n)) {
+                  let a;
+                  t.ɵɵqueryRefresh((a = t.ɵɵloadQuery())) && (o.carousel = a.first);
+                }
+              },
+              decls: 23,
+              vars: 0,
+              consts: [
+                ['carousel', ''],
+                [1, 'lottery-video-section'],
+                [1, 'lottery-video-section__title'],
+                [1, 'lottery-video-section__card'],
+                [1, 'lottery-video-section__container'],
+                [
+                  'src',
+                  'assets/images/logo-videoloterias.svg',
+                  'alt',
+                  'Video Loter\xedas',
+                  1,
+                  'lottery-video-section__logo',
+                ],
+                [1, 'lottery-video-section__body'],
+                [1, 'lottery-video-section__header'],
+                [1, 'lottery-video-section__subtitle'],
+                ['label', 'Ver m\xe1s', 'variant', 'outline'],
+                [1, 'lottery-video-section__carousel'],
+                [
+                  'type',
+                  'button',
+                  'aria-label',
+                  'Ver juegos anteriores',
+                  1,
+                  'lottery-video-section__arrow',
+                  'lottery-video-section__arrow--left',
+                  3,
+                  'click',
+                ],
+                [
+                  'src',
+                  'assets/images/arrow-right.svg',
+                  'alt',
+                  '',
+                  'aria-hidden',
+                  'true',
+                  1,
+                  'lottery-video-section__arrow-icon',
+                ],
+                [1, 'lottery-video-section__viewport'],
+                [1, 'lottery-video-section__track'],
+                ['type', 'button', 1, 'lottery-video-section__game'],
+                [
+                  'type',
+                  'button',
+                  'aria-label',
+                  'Ver m\xe1s juegos',
+                  1,
+                  'lottery-video-section__arrow',
+                  'lottery-video-section__arrow--right',
+                  3,
+                  'click',
+                ],
+                [1, 'lottery-video-section__game-image', 3, 'src', 'alt'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵelementStart(0, 'div', 1)(1, 'h2', 2),
+                  t.ɵɵtext(2, 'M\xe1s juegos para ti'),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(3, 'div', 3)(4, 'div', 4),
+                  t.ɵɵelement(5, 'img', 5),
+                  t.ɵɵelementStart(6, 'div', 6)(7, 'div', 7)(8, 'p', 8),
+                  t.ɵɵtext(9, ' Juega y gana al instante hasta '),
+                  t.ɵɵelementStart(10, 'span'),
+                  t.ɵɵtext(11, 'S/100,000'),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelement(12, 'app-button', 9),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(13, 'div', 10)(14, 'button', 11),
+                  t.ɵɵlistener('click', function () {
+                    return o.scrollPrevious();
+                  }),
+                  t.ɵɵelement(15, 'img', 12),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(16, 'div', 13, 0)(18, 'div', 14),
+                  t.ɵɵrepeaterCreate(19, K, 2, 3, 'button', 15, t.ɵɵrepeaterTrackByIndex),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(21, 'button', 16),
+                  t.ɵɵlistener('click', function () {
+                    return o.scrollNext();
+                  }),
+                  t.ɵɵelement(22, 'img', 12),
+                  t.ɵɵelementEnd()()()()()()),
+                  2 & n && (t.ɵɵadvance(19), t.ɵɵrepeater(o.games)));
+              },
+              dependencies: [d],
+              styles: [
+                '@charset "UTF-8";.lottery-video-section[_ngcontent-%COMP%]{width:100%}.lottery-video-section__title[_ngcontent-%COMP%]{margin:0 0 1.5rem;color:var(--brand-black);font-family:var(--font-secondary);font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2.625rem;letter-spacing:.015625rem;text-align:center}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;padding:2rem;box-sizing:border-box;background:var(--brand-white);border-radius:var(--lottery-card-radius);border-bottom:1.313rem solid var(--brand-yellow);box-shadow:var(--lottery-card-shadow)}.lottery-video-section__container[_ngcontent-%COMP%]{width:100%;min-width:0}.lottery-video-section__logo[_ngcontent-%COMP%]{display:block;width:6.6875rem;height:4.25rem;margin:0 auto 1.5rem;object-fit:contain}.lottery-video-section__body[_ngcontent-%COMP%]{width:100%;min-width:0}.lottery-video-section__header[_ngcontent-%COMP%]{display:flex;width:100%;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:1.5rem;padding:0;box-sizing:border-box}.lottery-video-section__subtitle[_ngcontent-%COMP%]{min-width:0;flex:1;margin:0;color:var(--brand-black);font-family:var(--font-primary);font-size:1rem;font-weight:var(--font-weight-semibold);line-height:2rem;letter-spacing:.015625rem}.lottery-video-section__subtitle[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{color:var(--brand-green);font-weight:var(--font-weight-bold)}.lottery-video-section__header[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0;margin:0}.lottery-video-section__carousel[_ngcontent-%COMP%]{position:relative;display:flex;width:100%;min-width:0;align-items:flex-start;padding:0 0 3.75rem;box-sizing:border-box}.lottery-video-section__viewport[_ngcontent-%COMP%]{width:100%;min-width:0;padding:0;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scrollbar-width:none}.lottery-video-section__viewport[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.lottery-video-section__track[_ngcontent-%COMP%]{display:flex;width:max-content;gap:1.5rem;padding:0}.lottery-video-section__game[_ngcontent-%COMP%]{display:block;width:clamp(16rem,27vw,20.9375rem);flex:0 0 auto;padding:0;overflow:hidden;background:transparent;border:0;border-radius:.875rem;cursor:pointer;scroll-snap-align:start}.lottery-video-section__game-image[_ngcontent-%COMP%]{display:block;width:100%;height:auto;aspect-ratio:335/273;object-fit:cover;border-radius:inherit}.lottery-video-section__arrow[_ngcontent-%COMP%]{position:absolute;z-index:10;bottom:0;display:flex;width:2.5rem;height:2.5rem;align-items:center;justify-content:center;padding:0;background:var(--brand-white);border:1px solid #cb2f1f;border-radius:50%;box-shadow:none;cursor:pointer}.lottery-video-section__arrow--left[_ngcontent-%COMP%]{left:0}.lottery-video-section__arrow--right[_ngcontent-%COMP%]{right:0}.lottery-video-section__arrow-icon[_ngcontent-%COMP%]{display:block;width:1rem;height:1rem;object-fit:contain}.lottery-video-section__arrow--left[_ngcontent-%COMP%]   .lottery-video-section__arrow-icon[_ngcontent-%COMP%]{transform:rotate(180deg)}@media(min-width:481px)and (max-width:1024px){.lottery-video-section[_ngcontent-%COMP%]{padding-inline:2rem;box-sizing:border-box}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:70rem;padding:1.5rem}.lottery-video-section__header[_ngcontent-%COMP%]{padding:0}.lottery-video-section__track[_ngcontent-%COMP%]{gap:1.25rem}}@media(max-width:480px){.lottery-video-section[_ngcontent-%COMP%]{padding-inline:0}.lottery-video-section__title[_ngcontent-%COMP%]{margin:0 0 1.5rem;font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2rem;letter-spacing:0;text-align:center}.lottery-video-section__card[_ngcontent-%COMP%]{width:100%;max-width:none;padding:1rem;box-sizing:border-box;border-radius:1.25rem;border-bottom:1rem solid var(--brand-yellow)}.lottery-video-section__logo[_ngcontent-%COMP%]{width:4.425625rem;height:2.8125rem;margin:0 auto 1.25rem}.lottery-video-section__header[_ngcontent-%COMP%]{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;padding:0}.lottery-video-section__subtitle[_ngcontent-%COMP%]{min-width:0;flex:1;margin:0;color:var(--brand-black);font-family:var(--font-primary);font-size:.75rem;font-weight:var(--font-weight-semibold);line-height:1rem;letter-spacing:0}.lottery-video-section__subtitle[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{display:block;color:var(--brand-green);font-size:1.25rem;font-weight:var(--font-weight-bold);line-height:1.5rem}.lottery-video-section__header[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{flex-shrink:0;margin:0}.lottery-video-section__carousel[_ngcontent-%COMP%]{align-items:center;padding:0 2.75rem}.lottery-video-section__viewport[_ngcontent-%COMP%]{scroll-snap-type:x mandatory}.lottery-video-section__track[_ngcontent-%COMP%]{width:100%;gap:1rem}.lottery-video-section__game[_ngcontent-%COMP%]{width:100%;max-width:none;flex:0 0 100%;aspect-ratio:335/273;scroll-snap-align:center;scroll-snap-stop:always}.lottery-video-section__game-image[_ngcontent-%COMP%]{display:block;width:100%;height:100%;aspect-ratio:335/273;object-fit:cover;border-radius:inherit}.lottery-video-section__arrow[_ngcontent-%COMP%]{top:50%;bottom:auto;transform:translateY(-50%)}.lottery-video-section__arrow--left[_ngcontent-%COMP%]{left:-.25rem}.lottery-video-section__arrow--right[_ngcontent-%COMP%]{right:-.25rem}.lottery-video-section__arrow-icon[_ngcontent-%COMP%]{width:1rem;height:1rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        W = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-lottery-section']],
+              decls: 17,
+              vars: 0,
+              consts: [
+                ['id', 'loterias', 1, 'lottery-section'],
+                [1, 'lottery-section__container'],
+                [1, 'lottery-section__title'],
+                [1, 'lottery-section__title--highlight'],
+                [1, 'lottery-section__hero'],
+                ['variant', 'hero'],
+                [1, 'lottery-section__cards'],
+                ['variant', 'kabala'],
+                ['variant', 'ganadiario'],
+                ['variant', 'kinelo'],
+                ['variant', 'rapitinka'],
+                [1, 'lottery-section__banner'],
+                ['id', 'videoloterias', 1, 'lottery-section__video'],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵelementStart(0, 'section', 0)(1, 'div', 1)(2, 'h2', 2),
+                  t.ɵɵtext(3, ' Elige tu juego y prueba tu '),
+                  t.ɵɵelementStart(4, 'span', 3),
+                  t.ɵɵtext(5, 'suerte'),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(6, 'div', 4),
+                  t.ɵɵelement(7, 'app-lottery-card', 5),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(8, 'div', 6),
+                  t.ɵɵelement(9, 'app-lottery-card', 7)(10, 'app-lottery-card', 8)(
+                    11,
+                    'app-lottery-card',
+                    9,
+                  )(12, 'app-lottery-card', 10),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(13, 'div', 11),
+                  t.ɵɵelement(14, 'app-lottery-banner'),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(15, 'div', 12),
+                  t.ɵɵelement(16, 'app-lottery-video-section'),
+                  t.ɵɵelementEnd()()());
+              },
+              dependencies: [J, G, q],
+              styles: [
+                '@charset "UTF-8";.lottery-section[_ngcontent-%COMP%]{width:100%;margin-top:2rem;color:var(--brand-black)}.lottery-section__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto;box-sizing:border-box}.lottery-section__title[_ngcontent-%COMP%]{margin-bottom:1.375rem;text-align:center;font-family:var(--font-secondary);font-size:var(--lottery-title-font-size);font-weight:var(--font-weight-semibold);line-height:var(--lottery-title-line-height);letter-spacing:var(--lottery-title-letter-spacing);color:var(--brand-black)}.lottery-section__title--highlight[_ngcontent-%COMP%]{color:var(--brand-green)}.lottery-section__hero[_ngcontent-%COMP%]{width:100%;max-width:70rem;height:var(--lottery-hero-height);margin:0 auto 1.5rem;background-image:url(assets/images/bg-tinka.svg);background-repeat:no-repeat;background-position:center;background-size:100% 100%;border-radius:var(--lottery-card-radius);box-sizing:border-box}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:100%}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:100%;background:transparent;box-shadow:none}.lottery-section__cards[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto 1.875rem;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:1.5rem;row-gap:1.5rem;align-items:stretch;box-sizing:border-box}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:flex;width:100%;min-width:0}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;min-width:0;flex:1}.lottery-section__banner[_ngcontent-%COMP%]{width:100%;max-width:var(--lottery-banner-width);margin:3rem auto 0}.lottery-section__video[_ngcontent-%COMP%]{width:100%;margin-top:1.875rem;display:flex;justify-content:center}.lottery-section[_ngcontent-%COMP%], .promotions[_ngcontent-%COMP%], .winners[_ngcontent-%COMP%], .lottery-section__video[_ngcontent-%COMP%]{scroll-margin-top:7.5rem}@media(min-width:481px)and (max-width:1024px){.lottery-section__container[_ngcontent-%COMP%]{padding-inline:2rem}.lottery-section__hero[_ngcontent-%COMP%], .lottery-section__cards[_ngcontent-%COMP%]{max-width:100%}.lottery-section__hero[_ngcontent-%COMP%]{margin-bottom:1.5rem}.lottery-section__cards[_ngcontent-%COMP%]{column-gap:1.5rem;row-gap:1.5rem}}@media(max-width:480px){.lottery-section[_ngcontent-%COMP%]{width:100%;margin-top:2.375rem}.lottery-section__container[_ngcontent-%COMP%]{width:100%;max-width:24.375rem;margin-inline:auto;padding-inline:1.4375rem;box-sizing:border-box}.lottery-section__title[_ngcontent-%COMP%]{width:100%;max-width:19rem;margin:0 auto 1.75rem;font-size:1.4375rem;font-weight:700;line-height:1.75rem;letter-spacing:0;text-align:center}.lottery-section__title--highlight[_ngcontent-%COMP%]{display:block}.lottery-section__hero[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;height:auto;margin:0 auto 1.5rem;background:transparent;background-image:none;border-radius:1.25rem}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:auto}.lottery-section__hero[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:auto;background:#fff;box-shadow:0 .25rem 1rem #00000026}.lottery-section__cards[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;margin:0 auto 2.5rem;display:grid;grid-template-columns:1fr;column-gap:0;row-gap:1.5rem;align-items:start}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]{display:block;width:100%;height:auto}.lottery-section__cards[_ngcontent-%COMP%]   app-lottery-card[_ngcontent-%COMP%]   .lottery-card[_ngcontent-%COMP%]{width:100%;height:auto}.lottery-section__banner[_ngcontent-%COMP%]{width:100%;max-width:21.5rem;margin:0 auto;display:flex;align-items:center;justify-content:center}.lottery-section__banner[_ngcontent-%COMP%]   app-lottery-banner[_ngcontent-%COMP%]{display:block;width:100%;max-width:21.5rem}.lottery-section__video[_ngcontent-%COMP%]{width:100%;margin-top:2.5rem;padding:0;display:flex;justify-content:center;box-sizing:border-box}.lottery-section__video[_ngcontent-%COMP%]   app-lottery-video-section[_ngcontent-%COMP%]{display:block;width:100%;max-width:21.5rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        Q = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-promotions']],
+              decls: 27,
+              vars: 0,
+              consts: [
+                ['id', 'promociones', 1, 'promotions'],
+                [1, 'promotions__container'],
+                [1, 'promotions__header'],
+                [1, 'promotions__title'],
+                [1, 'promotions__cards'],
+                [1, 'promotion-card'],
+                [1, 'promotion-card__content'],
+                [1, 'promotion-card__title'],
+                ['label', 'Jugar ahora', 'variant', 'danger'],
+                [1, 'promotion-card__title', 'promotion-card__title--large'],
+                [1, 'promotions__footer'],
+                ['label', 'Ver m\xe1s', 'variant', 'outline'],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵelementStart(0, 'section', 0)(1, 'div', 1)(2, 'div', 2)(3, 'h2', 3),
+                  t.ɵɵtext(4, 'Promociones'),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(5, 'div', 4)(6, 'article', 5)(7, 'div', 6)(8, 'h3', 7),
+                  t.ɵɵtext(9, ' Combos'),
+                  t.ɵɵelement(10, 'br'),
+                  t.ɵɵtext(11, ' Loteros '),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelement(12, 'app-button', 8),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(13, 'article', 5)(14, 'div', 6)(15, 'h3', 7),
+                  t.ɵɵtext(16, ' Suscripci\xf3n'),
+                  t.ɵɵelement(17, 'br'),
+                  t.ɵɵtext(18, ' de loter\xedas '),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelement(19, 'app-button', 8),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(20, 'article', 5)(21, 'div', 6)(22, 'h3', 9),
+                  t.ɵɵtext(23, '3x2'),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelement(24, 'app-button', 8),
+                  t.ɵɵelementEnd()()(),
+                  t.ɵɵelementStart(25, 'div', 10),
+                  t.ɵɵelement(26, 'app-button', 11),
+                  t.ɵɵelementEnd()()());
+              },
+              dependencies: [d],
+              styles: [
+                '@charset "UTF-8";.promotions[_ngcontent-%COMP%]{width:100%;margin-top:3rem}.promotions__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;min-height:33.25rem;margin:0 auto;padding:1.5rem 0 2rem;display:flex;flex-direction:column;gap:1.5rem;box-sizing:border-box;background:#f5f0d480;border-top-left-radius:2rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{width:100%;padding:0 1.5rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box}.promotions__title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-secondary);font-size:1.5rem;font-weight:var(--font-weight-semibold);line-height:2rem;text-align:center;color:var(--brand-black)}.promotions__cards[_ngcontent-%COMP%]{width:100%;min-width:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}.promotion-card[_ngcontent-%COMP%]{position:relative;width:100%;min-width:0;aspect-ratio:1/1;border-radius:var(--lottery-card-radius);background-image:url(assets/images/bg_promociones.svg);background-repeat:no-repeat;background-position:center;background-size:cover;box-shadow:var(--lottery-card-shadow);overflow:hidden}.promotion-card__content[_ngcontent-%COMP%]{position:absolute;inset:0;padding:2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;box-sizing:border-box}.promotion-card__title[_ngcontent-%COMP%]{margin:0 0 2rem;font-family:var(--font-secondary);font-size:2rem;font-weight:var(--font-weight-semibold);line-height:.98;letter-spacing:0;text-align:center;color:var(--brand-green)}.promotion-card__title--large[_ngcontent-%COMP%]{font-size:5.75rem;line-height:1;letter-spacing:.020625rem}.promotion-card[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{margin-top:0}.promotions__footer[_ngcontent-%COMP%]{width:100%;padding:0;display:flex;align-items:center;justify-content:flex-end;box-sizing:border-box}@media(min-width:481px)and (max-width:1024px){.promotions__container[_ngcontent-%COMP%]{max-width:none;min-height:0;padding:1.5rem 0 2rem 1.5rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{padding:0 1.5rem 0 0}.promotions__cards[_ngcontent-%COMP%]{display:flex;justify-content:flex-start;gap:1.5rem;padding-right:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none}.promotions__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.promotion-card[_ngcontent-%COMP%]{width:21.375rem;height:21.375rem;flex:0 0 21.375rem;aspect-ratio:auto;scroll-snap-align:start}.promotions__footer[_ngcontent-%COMP%]{padding:0 1.5rem 0 0}}@media(max-width:480px){.promotions[_ngcontent-%COMP%]{margin-top:1.5rem}.promotions__container[_ngcontent-%COMP%]{width:100%;max-width:none;min-height:0;padding:1.5rem 0 1.5rem 1.5rem;gap:1.5rem;border-top-left-radius:2rem;overflow:hidden}.promotions__header[_ngcontent-%COMP%]{padding:0 1.5rem 0 0;justify-content:flex-start}.promotions__title[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;text-align:left}.promotions__cards[_ngcontent-%COMP%]{width:100%;display:flex;justify-content:flex-start;gap:1rem;padding-right:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none}.promotions__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.promotion-card[_ngcontent-%COMP%]{width:15.625rem;height:15.625rem;flex:0 0 15.625rem;aspect-ratio:auto;border-radius:.625rem;scroll-snap-align:start}.promotion-card__content[_ngcontent-%COMP%]{padding:1.5rem}.promotion-card__title[_ngcontent-%COMP%]{margin-bottom:2rem;font-size:1.75rem;line-height:1}.promotion-card__title--large[_ngcontent-%COMP%]{font-size:4rem;line-height:4rem}.promotion-card[_ngcontent-%COMP%]   app-button[_ngcontent-%COMP%]{margin-right:auto;margin-left:auto}.promotions__footer[_ngcontent-%COMP%]{padding:0 1.5rem 0 0;justify-content:flex-end}[_nghost-%COMP%]     .promotions__footer app-button button, [_nghost-%COMP%]     .promotions__footer .button{width:6.9375rem;min-width:6.9375rem;height:2.375rem;min-height:2.375rem;padding:0}[_nghost-%COMP%]     .promotion-card app-button button, [_nghost-%COMP%]     .promotion-card .button{width:8.625rem;min-width:8.625rem;height:2.125rem;min-height:2.125rem;padding:0;font-size:.75rem;line-height:1rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        X = (() => {
+          class e {
+            variant = (0, t.input)('kabala');
+            lottery = t.input.required();
+            winnerName = t.input.required();
+            prize = t.input.required();
+            city = t.input.required();
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-winner-card']],
+              inputs: {
+                variant: [1, 'variant'],
+                lottery: [1, 'lottery'],
+                winnerName: [1, 'winnerName'],
+                prize: [1, 'prize'],
+                city: [1, 'city'],
+              },
+              decls: 17,
+              vars: 2,
+              consts: [
+                [1, 'winner-card'],
+                [1, 'winner-card__title'],
+                [1, 'winner-card__content'],
+                [1, 'winner-card__profile'],
+                [1, 'winner-card__image'],
+                ['src', 'assets/images/imagen_conoce.png', 'alt', 'Ganador'],
+                [1, 'winner-card__badge'],
+                [1, 'winner-card__info'],
+                [1, 'winner-card__winner'],
+                [1, 'winner-card__description'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0)(1, 'p', 1),
+                  t.ɵɵtext(2, 'El d\xeda que cambi\xf3 su destino'),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(3, 'div', 2)(4, 'div', 3)(5, 'div', 4),
+                  t.ɵɵdomElement(6, 'img', 5),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(7, 'div', 6),
+                  t.ɵɵtext(8, 'Nuevo'),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(9, 'div', 7)(10, 'p', 8)(11, 'span'),
+                  t.ɵɵtext(12),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(13, 'span'),
+                  t.ɵɵtext(14),
+                  t.ɵɵdomElementEnd()(),
+                  t.ɵɵdomElementStart(15, 'p', 9),
+                  t.ɵɵtext(
+                    16,
+                    ' \u201cGan\xf3 S/5,000 mensuales por 20 a\xf1os\u201d. Una tradici\xf3n familiar que cambi\xf3 su vida. ',
+                  ),
+                  t.ɵɵdomElementEnd()()()()),
+                  2 & n &&
+                    (t.ɵɵadvance(12),
+                    t.ɵɵtextInterpolate(o.winnerName()),
+                    t.ɵɵadvance(2),
+                    t.ɵɵtextInterpolate1('Gan\xf3 ', o.prize())));
+              },
+              styles: [
+                '.winner-card[_ngcontent-%COMP%]{width:100%;max-width:22.25rem;height:10.75rem;padding:1rem;display:flex;flex-direction:column;gap:.5rem;box-sizing:border-box;border:.0625rem solid var(--winners-kabala-border);border-radius:1rem;background:var(--winners-kabala-background);overflow:hidden}.winner-card__title[_ngcontent-%COMP%]{margin:0;font-family:Duplet;font-weight:700;font-size:.875rem;line-height:1.25rem;letter-spacing:.015625rem;color:#646464}.winner-card__content[_ngcontent-%COMP%]{width:100%;display:flex;align-items:center;gap:.75rem;min-width:0}.winner-card__profile[_ngcontent-%COMP%]{width:3.75rem;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:.125rem}.winner-card__image[_ngcontent-%COMP%]{width:3.75rem;height:3.75rem;flex-shrink:0;border-radius:6.25rem;overflow:hidden}.winner-card__image[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}.winner-card__badge[_ngcontent-%COMP%]{width:3.25rem;height:1.125rem;padding:.12625rem .37875rem;display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;border-radius:.75rem;background:#ff7f33;color:#fff;font-family:var(--font-primary);font-size:.75rem;font-weight:400;line-height:1rem;letter-spacing:.015625rem;white-space:nowrap}.winner-card__info[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center;gap:.25rem}.winner-card__winner[_ngcontent-%COMP%]{margin:0;display:flex;align-items:center;gap:.25rem;font-family:var(--font-primary);font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;color:#004e18;white-space:nowrap}.winner-card__description[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:.75rem;font-weight:400;line-height:1rem;letter-spacing:.015625rem;color:#2f2f3a}@media(max-width:480px){.winner-card[_ngcontent-%COMP%]{width:18.75rem;max-width:18.75rem;height:10.75rem;flex:0 0 18.75rem;padding:1rem}.winner-card__title[_ngcontent-%COMP%]{font-size:1rem;line-height:1.5rem}.winner-card__content[_ngcontent-%COMP%]{gap:.625rem}.winner-card__winner[_ngcontent-%COMP%]{flex-wrap:wrap;gap:0 .25rem;font-size:1rem;line-height:1.375rem;white-space:normal}.winner-card__description[_ngcontent-%COMP%]{font-size:.6875rem;line-height:.9375rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        Z = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-winners']],
+              decls: 15,
+              vars: 0,
+              consts: [
+                ['id', 'ganadores', 1, 'winners'],
+                [1, 'winners__container'],
+                [1, 'winners__heading'],
+                [1, 'winners__title'],
+                [1, 'winners__description'],
+                [1, 'winners__actions'],
+                ['label', 'Ver m\xe1s', 'variant', 'outline'],
+                [1, 'winners__cards'],
+                [
+                  'variant',
+                  'kabala',
+                  'lottery',
+                  'K\xe1bala',
+                  'winnerName',
+                  'H. Gan\xf3',
+                  'prize',
+                  'S/ 5,000',
+                  'city',
+                  'Lima',
+                ],
+                [
+                  'variant',
+                  'tinka',
+                  'lottery',
+                  'Tinka',
+                  'winnerName',
+                  'H. Gan\xf3',
+                  'prize',
+                  'S/ 5,000',
+                  'city',
+                  'Arequipa',
+                ],
+                [
+                  'variant',
+                  'ganadiario',
+                  'lottery',
+                  'Gana Diario',
+                  'winnerName',
+                  'H. Gan\xf3',
+                  'prize',
+                  'S/ 5,000',
+                  'city',
+                  'Piura',
+                ],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵelementStart(0, 'section', 0)(1, 'div', 1)(2, 'div', 2)(3, 'h2', 3),
+                  t.ɵɵtext(4, 'Conoce a quienes ya '),
+                  t.ɵɵelementStart(5, 'span'),
+                  t.ɵɵtext(6, 'ganaron'),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(7, 'p', 4),
+                  t.ɵɵtext(
+                    8,
+                    ' Miles de personas ya han ganado con La Tinka. Aqu\xed te mostramos algunos de ellos. ',
+                  ),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(9, 'div', 5),
+                  t.ɵɵelement(10, 'app-button', 6),
+                  t.ɵɵelementEnd(),
+                  t.ɵɵelementStart(11, 'div', 7),
+                  t.ɵɵelement(12, 'app-winner-card', 8)(13, 'app-winner-card', 9)(
+                    14,
+                    'app-winner-card',
+                    10,
+                  ),
+                  t.ɵɵelementEnd()()());
+              },
+              dependencies: [d, X],
+              styles: [
+                '.winners[_ngcontent-%COMP%]{width:100%;margin-top:var(--winners-section-margin-top)}.winners__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto}.winners__heading[_ngcontent-%COMP%]{text-align:center}.winners__title[_ngcontent-%COMP%]{margin:0;font-family:var(--font-secondary);font-size:var(--winners-title-font-size);font-weight:var(--font-weight-semibold);line-height:var(--winners-title-line-height);letter-spacing:var(--winners-title-letter-spacing);color:var(--brand-black)}.winners__title[_ngcontent-%COMP%]   span[_ngcontent-%COMP%]{color:var(--brand-green)}.winners__description[_ngcontent-%COMP%]{margin:.5rem 0 0;text-align:center;font-family:var(--font-primary);font-size:var(--winners-description-font-size);font-weight:var(--font-weight-semibold);line-height:var(--winners-description-line-height);color:var(--brand-black)}.winners__actions[_ngcontent-%COMP%]{display:flex;justify-content:flex-end;margin-top:1rem;margin-bottom:1.5rem}.winners__cards[_ngcontent-%COMP%]{width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--winners-card-gap)}.winners__cards[_ngcontent-%COMP%]   app-winner-card[_ngcontent-%COMP%]{display:block;width:100%;min-width:0}@media(min-width:481px)and (max-width:1024px){.winners__container[_ngcontent-%COMP%]{padding-inline:2rem}}@media(max-width:480px){.winners[_ngcontent-%COMP%]{margin-top:1.5rem}.winners__container[_ngcontent-%COMP%]{max-width:none;padding:0 0 0 1.5rem;overflow:hidden}.winners__heading[_ngcontent-%COMP%]{padding-right:1.5rem}.winners__title[_ngcontent-%COMP%]{font-size:1.5rem;line-height:2rem;letter-spacing:0}.winners__description[_ngcontent-%COMP%]{margin-top:1rem;font-size:1rem;line-height:1.5rem}.winners__actions[_ngcontent-%COMP%]{justify-content:flex-end;padding-right:1.5rem;margin-top:1rem;margin-bottom:3rem}[_nghost-%COMP%]     .winners__actions app-button button, [_nghost-%COMP%]     .winners__actions .button{width:6.9375rem;min-width:6.9375rem;height:2.375rem;min-height:2.375rem;padding:0}.winners__cards[_ngcontent-%COMP%]{max-width:none;margin:0;padding-right:1.5rem;display:flex;justify-content:flex-start;gap:1rem;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-ms-overflow-style:none}.winners__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.winners__cards[_ngcontent-%COMP%]   app-winner-card[_ngcontent-%COMP%]{width:auto;flex:0 0 auto}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        tt = (() => {
+          class e {
+            title = t.input.required();
+            description = t.input.required();
+            linkLabel = (0, t.input)('Conocer m\xe1s');
+            variant = (0, t.input)('default');
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-contributing-card']],
+              inputs: {
+                title: [1, 'title'],
+                description: [1, 'description'],
+                linkLabel: [1, 'linkLabel'],
+                variant: [1, 'variant'],
+              },
+              decls: 10,
+              vars: 3,
+              consts: [
+                [1, 'contributing-card'],
+                [1, 'contributing-card__icon'],
+                ['src', 'assets/images/manos.svg', 'alt', 'Contribuci\xf3n'],
+                [1, 'contributing-card__content'],
+                [1, 'contributing-card__title'],
+                [1, 'contributing-card__description'],
+                ['href', '#', 1, 'contributing-card__link'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0)(1, 'div', 1),
+                  t.ɵɵdomElement(2, 'img', 2),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(3, 'div', 3)(4, 'h3', 4),
+                  t.ɵɵtext(5),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(6, 'p', 5),
+                  t.ɵɵtext(7),
+                  t.ɵɵdomElementEnd(),
+                  t.ɵɵdomElementStart(8, 'a', 6),
+                  t.ɵɵtext(9),
+                  t.ɵɵdomElementEnd()()()),
+                  2 & n &&
+                    (t.ɵɵadvance(5),
+                    t.ɵɵtextInterpolate1(' ', o.title(), ' '),
+                    t.ɵɵadvance(2),
+                    t.ɵɵtextInterpolate1(' ', o.description(), ' '),
+                    t.ɵɵadvance(2),
+                    t.ɵɵtextInterpolate1(' ', o.linkLabel(), ' ')));
+              },
+              styles: [
+                '.contributing-card[_ngcontent-%COMP%]{width:100%;max-width:21.375rem;height:13.375rem;display:flex;align-items:center;gap:1rem;padding:.875rem 1.5rem;box-sizing:border-box;border-radius:1.5rem;background:var(--contributing-card-background);overflow:hidden}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex:0 0 2.875rem;border-radius:1.4375rem;overflow:hidden}.contributing-card__icon[_ngcontent-%COMP%]   img[_ngcontent-%COMP%]{display:block;width:100%;height:100%;object-fit:contain}.contributing-card__content[_ngcontent-%COMP%]{min-width:0;flex:1;display:flex;flex-direction:column;justify-content:center}.contributing-card__title[_ngcontent-%COMP%]{margin:0 0 .5rem;font-family:Duplet;font-size:1.25rem;font-weight:700;line-height:1.75rem;letter-spacing:.015625rem;color:#1f1f1f}.contributing-card__description[_ngcontent-%COMP%]{margin:0;font-family:var(--font-primary);font-size:var(--contributing-description-font-size);font-weight:var(--font-weight-regular);line-height:var(--contributing-description-line-height);color:#1f1f1f}.contributing-card__link[_ngcontent-%COMP%]{width:fit-content;margin-top:1rem;font-family:Duplet;font-size:1rem;font-weight:600;line-height:1.5rem;letter-spacing:0;color:#cb2f1f;text-decoration-line:underline;text-decoration-style:solid;text-underline-offset:0;text-decoration-thickness:auto}@media(min-width:481px)and (max-width:1024px){.contributing-card[_ngcontent-%COMP%]{width:21.375rem;max-width:21.375rem;height:13.375rem;padding:.875rem 1.5rem;gap:1rem}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex-basis:2.875rem}.contributing-card__title[_ngcontent-%COMP%]{font-size:1.25rem;line-height:1.75rem}.contributing-card__link[_ngcontent-%COMP%]{font-size:1rem;line-height:1.5rem}}@media(max-width:480px){.contributing-card[_ngcontent-%COMP%]{width:100%;max-width:none;height:13.375rem;min-height:13.375rem;gap:1rem;padding:.875rem 1.5rem;border-radius:1.5rem;background:var(--contributing-card-background)}.contributing-card__icon[_ngcontent-%COMP%]{width:2.875rem;height:2.875rem;flex:0 0 2.875rem}.contributing-card__title[_ngcontent-%COMP%]{margin-bottom:.5rem;font-size:1.25rem;line-height:1.75rem}.contributing-card__link[_ngcontent-%COMP%]{margin-top:1rem;font-size:1rem;line-height:1.5rem}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        et = (() => {
+          class e {
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-contributing']],
+              decls: 10,
+              vars: 0,
+              consts: [
+                [1, 'contributing'],
+                [1, 'contributing__container'],
+                [1, 'contributing__title'],
+                [1, 'contributing__title--highlight'],
+                [1, 'contributing__cards'],
+                [
+                  'title',
+                  'Siempre cerca de ti',
+                  'description',
+                  'Nuestra plataforma y puntos de venta est\xe1n contigo las 24 horas para jugar cuando lo necesites, de forma f\xe1cil y segura.',
+                  'linkLabel',
+                  'Conocer m\xe1s',
+                ],
+              ],
+              template: function (n, o) {
+                1 & n &&
+                  (t.ɵɵelementStart(0, 'section', 0)(1, 'div', 1)(2, 'h2', 2),
+                  t.ɵɵtext(3, ' Cada jugada '),
+                  t.ɵɵelementStart(4, 'span', 3),
+                  t.ɵɵtext(5, 'contribuye'),
+                  t.ɵɵelementEnd()(),
+                  t.ɵɵelementStart(6, 'div', 4),
+                  t.ɵɵelement(7, 'app-contributing-card', 5)(8, 'app-contributing-card', 5)(
+                    9,
+                    'app-contributing-card',
+                    5,
+                  ),
+                  t.ɵɵelementEnd()()());
+              },
+              dependencies: [tt],
+              styles: [
+                '.contributing[_ngcontent-%COMP%]{width:100%;margin-top:var(--contributing-section-margin-top)}.contributing__container[_ngcontent-%COMP%]{width:100%;max-width:70rem;margin:0 auto}.contributing__title[_ngcontent-%COMP%]{margin:0 0 2rem;text-align:center;font-family:var(--font-secondary);font-size:var(--contributing-title-font-size);font-weight:var(--font-weight-bold);letter-spacing:var(--contributing-title-letter-spacing);color:var(--brand-black)}.contributing__title--highlight[_ngcontent-%COMP%]{color:var(--brand-green)}.contributing__cards[_ngcontent-%COMP%]{width:100%;display:grid;grid-template-columns:repeat(3,21.375rem);justify-content:space-between;align-items:stretch;gap:0}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{display:block;width:21.375rem;min-width:21.375rem}@media(min-width:481px)and (max-width:1024px){.contributing[_ngcontent-%COMP%]{margin-top:2rem}.contributing__container[_ngcontent-%COMP%]{max-width:none;padding-inline:1.5rem;box-sizing:border-box;overflow:hidden}.contributing__title[_ngcontent-%COMP%]{margin-bottom:1.5rem;font-size:2rem;line-height:2.5rem;letter-spacing:0}.contributing__cards[_ngcontent-%COMP%]{width:100%;display:flex;justify-content:flex-start;gap:1.5rem;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;-ms-overflow-style:none}.contributing__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{width:21.375rem;min-width:21.375rem;flex:0 0 21.375rem;scroll-snap-align:start}}@media(max-width:480px){.contributing[_ngcontent-%COMP%]{margin-top:1.5rem}.contributing__container[_ngcontent-%COMP%]{width:100%;max-width:none;padding:0;box-sizing:border-box;overflow:hidden}.contributing__title[_ngcontent-%COMP%]{margin:0 1.5rem 1.5rem;font-size:1.5rem;line-height:2rem;letter-spacing:0}.contributing__cards[_ngcontent-%COMP%]{width:100%;margin:0;padding-inline:1.5rem;display:flex;justify-content:flex-start;gap:1.5rem;box-sizing:border-box;overflow-x:auto;overflow-y:hidden;background:transparent;scroll-snap-type:x mandatory;scroll-padding-inline:1.5rem;scrollbar-width:none;-ms-overflow-style:none}.contributing__cards[_ngcontent-%COMP%]::-webkit-scrollbar{display:none}.contributing__cards[_ngcontent-%COMP%]   app-contributing-card[_ngcontent-%COMP%]{display:block;width:calc(100vw - 3rem);min-width:calc(100vw - 3rem);max-width:21.375rem;flex:0 0 calc(100vw - 3rem);scroll-snap-align:start;scroll-snap-stop:always}}',
+              ],
+            });
+          }
+          return e;
+        })(),
+        nt = (() => {
+          class e {
+            message = (0, t.input)('Cargando...');
+            static ɵfac = function (n) {
+              return new (n || e)();
+            };
+            static ɵcmp = t.ɵɵdefineComponent({
+              type: e,
+              selectors: [['app-loading-overlay']],
+              inputs: { message: [1, 'message'] },
+              decls: 5,
+              vars: 1,
+              consts: [
+                [1, 'loading-overlay'],
+                [1, 'loading-overlay__content'],
+                [1, 'loading-overlay__spinner'],
+              ],
+              template: function (n, o) {
+                (1 & n &&
+                  (t.ɵɵdomElementStart(0, 'div', 0)(1, 'div', 1),
+                  t.ɵɵdomElement(2, 'div', 2),
+                  t.ɵɵdomElementStart(3, 'span'),
+                  t.ɵɵtext(4),
+                  t.ɵɵdomElementEnd()()()),
+                  2 & n && (t.ɵɵadvance(4), t.ɵɵtextInterpolate(o.message())));
+              },
+              styles: [
+                '.loading-overlay[_ngcontent-%COMP%]{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#0003}.loading-overlay__content[_ngcontent-%COMP%]{display:flex;align-items:center;gap:.75rem;padding:1.5rem 2rem;border-radius:.5rem;background:#fff;box-shadow:0 10px 25px #00000026;color:#002b21;font-weight:600}.loading-overlay__spinner[_ngcontent-%COMP%]{width:22px;height:22px;border:3px solid #e5e7eb;border-top-color:#009845;border-radius:50%;animation:_ngcontent-%COMP%_loading-overlay-spin .8s linear infinite}@keyframes _ngcontent-%COMP%_loading-overlay-spin{to{transform:rotate(360deg)}}',
+              ],
+            });
+          }
+          return e;
+        })();
+      function ot(e, i) {
+        1 & e && t.ɵɵelement(0, 'app-loading-overlay', 0);
+      }
+      function rt(e, i) {
+        1 & e && t.ɵɵelement(0, 'app-loading-overlay', 1);
+      }
+      let f = (() => {
+        class e {
+          router = (0, t.inject)(_.Router);
+          authService = (0, t.inject)(b);
+          title = (0, t.signal)('shell-root');
+          isProcessingLogin = (0, t.signal)(!1);
+          isLoggingOut = this.authService.isLoggingOut;
+          ngOnInit() {
+            (console.log('ShellComponent iniciado'),
+              console.log('URL actual:', window.location.href));
+            const n = new URLSearchParams(window.location.search).get('pamToken');
+            (console.log('pamToken recibido:', n),
+              n &&
+                (this.isProcessingLogin.set(!0),
+                this.authService.exchangePamToken(n).subscribe({
+                  next: () => {
+                    (console.log('Exchange PAM OK'),
+                      this.isProcessingLogin.set(!1),
+                      this.router.navigate(['/'], { replaceUrl: !0 }));
+                  },
+                  error: (o) => {
+                    (console.error('Error canjeando pamToken', o),
+                      this.isProcessingLogin.set(!1),
+                      this.router.navigate(['/'], { replaceUrl: !0 }));
+                  },
+                })));
+          }
+          static ɵfac = function (n) {
+            return new (n || e)();
+          };
+          static ɵcmp = t.ɵɵdefineComponent({
+            type: e,
+            selectors: [['shell-root']],
+            decls: 10,
+            vars: 2,
+            consts: [
+              ['message', 'Iniciando sesi\xf3n...'],
+              ['message', 'Cerrando sesi\xf3n...'],
+            ],
+            template: function (n, o) {
+              (1 & n &&
+                (t.ɵɵconditionalCreate(0, ot, 1, 0, 'app-loading-overlay', 0),
+                t.ɵɵconditionalCreate(1, rt, 1, 0, 'app-loading-overlay', 1),
+                t.ɵɵelement(2, 'app-header')(3, 'app-navigation')(4, 'app-promo-banner')(
+                  5,
+                  'app-lottery-section',
+                )(6, 'app-promotions')(7, 'app-winners')(8, 'app-contributing')(9, 'app-footer')),
+                2 & n &&
+                  (t.ɵɵconditional(o.isProcessingLogin() ? 0 : -1),
+                  t.ɵɵadvance(),
+                  t.ɵɵconditional(o.isLoggingOut() ? 1 : -1)));
+            },
+            dependencies: [j, T, L, I, W, Q, Z, et, nt],
+            encapsulation: 2,
+          });
+        }
+        return e;
+      })();
+      const it = [
+          { path: '', component: f },
+          { path: '**', redirectTo: '' },
+        ],
+        lt = {
+          providers: [
+            (0, t.provideBrowserGlobalErrorListeners)(),
+            (0, _.provideRouter)(it, (0, _.withHashLocation)()),
+            (0, p.provideHttpClient)(
+              (0, p.withInterceptors)([
+                (e, i) => {
+                  const r = (0, t.inject)(b),
+                    n =
+                      e.url.includes('/auth/login') ||
+                      e.url.includes('/auth/refresh') ||
+                      e.url.includes('/auth/logout') ||
+                      e.url.includes('/auth/pam/token/exchange') ||
+                      e.url.includes('/auth/pam/token/fast') ||
+                      e.url.includes('/backfront-identity/api/v1/identity/login'),
+                    o = r.getAccessToken(),
+                    a = o && !n ? e.clone({ setHeaders: { Authorization: `Bearer ${o}` } }) : e;
+                  return i(a).pipe(
+                    (0, l.catchError)((s) =>
+                      401 !== s.status || n
+                        ? (0, l.throwError)(() => s)
+                        : r.refreshSession().pipe(
+                            (0, l.switchMap)((g) => {
+                              const u = e.clone({
+                                setHeaders: { Authorization: `Bearer ${g.accessToken}` },
+                              });
+                              return i(u);
+                            }),
+                            (0, l.catchError)(
+                              (g) => (r.clearSession(), (0, l.throwError)(() => g)),
+                            ),
+                          ),
+                    ),
+                  );
+                },
+              ]),
+            ),
+          ],
+        };
+      (0, y.bootstrapApplication)(f, lt).catch((e) => console.error(e));
+    },
+  },
+]);
