@@ -1,108 +1,119 @@
 @use 'breakpoints' as bp;
 
 .lottery-banner {
-  display: flex;
+  width: 100%;
+  height: 6.25rem; // 100px
 
+  display: flex;
+  align-items: center;
   justify-content: space-between;
 
-  align-items: center;
+  padding: 1.5rem; // 24px
+  box-sizing: border-box;
 
-  width: 100%;
-
-  height: var(--lottery-banner-height);
-
-  padding: 1.5rem 2rem;
-
-  border-radius: 3.313rem;
+  border-radius: 0.75rem; // 12px
 
   background: linear-gradient(90deg,
-      #066236 0%,
-      #0B7C45 55%,
-      #0A8F52 100%);
-
-  box-shadow:
-    0 12px 28px rgba(17, 85, 51, 0.18),
-    0 2px 8px rgba(17, 85, 51, 0.1);
+      #115533 0%,
+      #01954b 100%);
 
   overflow: hidden;
 }
 
 .lottery-banner__left {
-  display: flex;
+  min-width: 0;
+  flex: 1;
 
+  display: flex;
   align-items: center;
 
-  gap: 1rem;
-
-  flex: 1;
+  gap: 0.75rem; // 12px
 }
 
 .lottery-banner__icon {
-  width: 3rem;
+  width: 2rem;
+  height: 2rem;
 
-  height: 3rem;
+  display: block;
+  flex-shrink: 0;
 
   object-fit: contain;
-
-  flex-shrink: 0;
 }
 
 .lottery-banner__title {
   margin: 0;
 
-  font-family: var(--font-primary);
-
-  font-size: 1.875rem;
-
-  font-weight: var(--font-weight-bold);
-
-  line-height: 1.15;
-
   color: var(--brand-white);
-  letter-spacing: 0.023rem;
+
+  font-family: var(--font-primary);
+  font-size: 1.25rem; // 20px
+  font-weight: var(--font-weight-bold);
+  line-height: 1.75rem; // 28px
+  letter-spacing: 0.015625rem; // 0.25px
+
+  white-space: nowrap;
 }
+
+.lottery-banner app-button {
+  flex-shrink: 0;
+}
+
+/* =======================================================
+   TABLET
+   ======================================================= */
+
+@include bp.tabletLandscape {
+  .lottery-banner {
+    height: 6.25rem;
+
+    padding: 1.5rem;
+  }
+
+  .lottery-banner__title {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* =======================================================
+   MOBILE
+   ======================================================= */
 
 @include bp.mobile {
   .lottery-banner {
     width: 100%;
-    max-width: 27rem;
-    min-height: 5.875rem;
-    height: 5.875rem;
-    padding: 0 1rem 0 1.5rem;
-    border-radius: 1.25rem;
+    max-width: none;
 
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    height: auto;
+    min-height: 5.875rem;
+
+    padding: 1rem;
+
+    gap: 0.75rem;
+
+    border-radius: 0.75rem;
   }
 
   .lottery-banner__left {
-    display: flex;
-    align-items: center;
-    gap: 1.125rem;
-    flex: 1;
     min-width: 0;
+
+    gap: 0.75rem;
   }
 
   .lottery-banner__icon {
     width: 2rem;
     height: 2rem;
-    object-fit: contain;
-    flex-shrink: 0;
   }
 
   .lottery-banner__title {
-    max-width: 12.9375rem;
-    margin: 0;
-    font-family: var(--font-primary);
-    font-size: 0.875rem;
-    font-weight: var(--font-weight-bold);
-    line-height: 1.25rem;
+    max-width: 13rem;
+
+    font-size: 1.25rem;
+    line-height: 1.75rem;
     letter-spacing: 0;
-    color: var(--brand-white);
-    text-align: center;
+
+    white-space: normal;
+    text-align: left;
   }
 
   .lottery-banner app-button {

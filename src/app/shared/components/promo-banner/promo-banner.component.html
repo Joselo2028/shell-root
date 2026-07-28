@@ -1,15 +1,33 @@
 <section class="promo-banner">
-  <div class="promo-banner__container">
-    <img
-      class="promo-banner__image promo-banner__image--desktop"
-      src="assets/images/banner-combo-lotero.svg"
-      alt="Combo Lotero"
-    />
+  <div class="promo-banner__background">
+    <div class="promo-banner__viewport">
+      <div
+        class="promo-banner__track"
+        [style.transform]="'translateX(-' + currentIndex() * 100 + '%)'"
+      >
+        @for (banner of banners; track $index) {
+          <div class="promo-banner__slide">
+            <picture class="promo-banner__picture">
+              <source media="(max-width: 767px)" [attr.srcset]="banner.mobileImage" />
 
-    <img
-      class="promo-banner__image promo-banner__image--mobile"
-      src="assets/images/banner-combo-lotero-mobile.svg"
-      alt="Combo Lotero"
-    />
+              <img class="promo-banner__image" [src]="banner.image" [alt]="banner.alt" />
+            </picture>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="promo-banner__bullets">
+    @for (banner of banners; track $index) {
+      <button
+        type="button"
+        class="promo-banner__bullet"
+        [class.active]="currentIndex() === $index"
+        [attr.aria-label]="'Mostrar banner ' + ($index + 1)"
+        [attr.aria-current]="currentIndex() === $index ? 'true' : null"
+        (click)="goToSlide($index)"
+      ></button>
+    }
   </div>
 </section>

@@ -16,7 +16,7 @@
             <span>S/100,000</span>
           </p>
 
-          <app-button label="Ver más" variant="outline"> </app-button>
+          <app-button label="Ver más" variant="outline"></app-button>
         </div>
 
         <div class="lottery-video-section__carousel">
@@ -26,7 +26,12 @@
             aria-label="Ver juegos anteriores"
             (click)="scrollPrevious()"
           >
-            ‹
+            <img
+              src="assets/images/arrow-right.svg"
+              alt=""
+              aria-hidden="true"
+              class="lottery-video-section__arrow-icon"
+            />
           </button>
 
           <div #carousel class="lottery-video-section__viewport">
@@ -53,7 +58,12 @@
             aria-label="Ver más juegos"
             (click)="scrollNext()"
           >
-            ›
+            <img
+              src="assets/images/arrow-right.svg"
+              alt=""
+              aria-hidden="true"
+              class="lottery-video-section__arrow-icon"
+            />
           </button>
         </div>
       </div>

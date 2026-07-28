@@ -1,234 +1,178 @@
 @use 'breakpoints' as bp;
 
 .winner-card {
-  position: relative;
+  width: 100%;
+  max-width: 22.25rem;
+  height: 10.75rem;
 
-  width: var(--winners-card-width);
+  padding: 1rem;
 
-  height: var(--winners-card-height);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 
-  border-radius: var(--winners-card-radius);
+  box-sizing: border-box;
 
-  border: var(--winners-card-border-width) solid transparent;
+  border: 0.0625rem solid var(--winners-kabala-border);
+  border-radius: 1rem;
+
+  background: var(--winners-kabala-background);
 
   overflow: hidden;
 }
 
-.winner-card__tag {
-  position: absolute;
+.winner-card__title {
+  margin: 0;
 
-  top: 0;
-
-  right: 0;
-
-  width: var(--winners-tag-width);
-
-  height: var(--winners-tag-height);
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  padding: var(--winners-tag-padding-y) var(--winners-tag-padding-x);
-
-  border-top-right-radius: var(--winners-tag-radius);
-
-  border-bottom-left-radius: var(--winners-tag-radius);
-
-  font-family: var(--font-primary);
-
+  font-family: 'Duplet';
+  font-weight: 700;
   font-size: 0.875rem;
+  line-height: 1.25rem;
+  letter-spacing: 0.015625rem;
+  color: #646464;
 
-  font-weight: var(--font-weight-semibold);
-
-  color: var(--brand-black);
-
-  z-index: 2;
 }
 
 .winner-card__content {
-  height: 100%;
+  width: 100%;
 
   display: flex;
-
   align-items: center;
+  gap: 0.75rem;
 
-  gap: 1rem;
+  min-width: 0;
+}
 
-  padding: 1.5rem;
+.winner-card__profile {
+  width: 3.75rem;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
 }
 
 .winner-card__image {
+  width: 3.75rem;
+  height: 3.75rem;
+
   flex-shrink: 0;
 
-  width: var(--winners-image-size);
+  border-radius: 6.25rem;
 
-  height: var(--winners-image-size);
+  overflow: hidden;
 }
 
 .winner-card__image img {
   display: block;
 
   width: 100%;
-
   height: 100%;
 
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
+.winner-card__badge {
+  width: 3.25rem;
+  height: 1.125rem;
+
+  padding: 0.12625rem 0.37875rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border-radius: 0.75rem;
+
+  background: #ff7f33;
+  color: #ffffff;
+
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.015625rem;
+
+  white-space: nowrap;
 }
 
 .winner-card__info {
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
+  min-width: 0;
   flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
 }
 
-.winner-card__name {
+.winner-card__winner {
+  margin: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+  letter-spacing: 0.015625rem;
+
+  color: #004e18;
+
+  white-space: nowrap;
+}
+
+.winner-card__description {
   margin: 0;
 
   font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0.015625rem;
 
-  font-size: var(--winners-name-font-size);
-
-  font-weight: var(--font-weight-semibold);
-
-  line-height: var(--winners-name-line-height);
-
-  color: var(--brand-green);
-}
-
-.winner-card__prize {
-  margin: 0.25rem 0 1rem;
-
-  font-family: var(--font-primary);
-
-  font-size: var(--winners-prize-font-size);
-
-  font-weight: var(--font-weight-bold);
-
-  line-height: var(--winners-prize-line-height);
-
-  color: var(--winners-prize-color);
-}
-
-.winner-card__city {
-  width: var(--winners-city-width);
-
-  height: var(--winners-city-height);
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: var(--winners-city-radius);
-
-  background: var(--winners-city-background);
-
-  color: var(--brand-white);
-
-  font-family: var(--font-primary);
-
-  font-size: var(--winners-city-font-size);
-
-  font-weight: var(--font-weight-semibold);
-
-  line-height: var(--winners-city-line-height);
-}
-
-/* =======================================================
-   VARIANTES
-   ======================================================= */
-
-.winner-card--kabala {
-  background: var(--winners-kabala-background);
-
-  border-color: var(--winners-kabala-border);
-}
-
-.winner-card--kabala .winner-card__tag {
-  background: var(--winners-kabala-border);
-}
-
-.winner-card--tinka {
-  background: var(--winners-tinka-background);
-
-  border-color: var(--winners-tinka-border);
-}
-
-.winner-card--tinka .winner-card__tag {
-  background: var(--winners-tinka-border);
-}
-
-.winner-card--ganadiario {
-  background: var(--winners-ganadiario-background);
-
-  border-color: var(--winners-ganadiario-border);
-}
-
-.winner-card--ganadiario .winner-card__tag {
-  background: var(--winners-ganadiario-border);
-
-  color: var(--brand-white);
+  color: #2f2f3a;
 }
 
 @include bp.mobile {
   .winner-card {
     width: 18.75rem;
-    height: 14.625rem;
-    border-radius: 0.875rem;
+    max-width: 18.75rem;
+    height: 10.75rem;
+
     flex: 0 0 18.75rem;
+
+    padding: 1rem;
   }
 
-  .winner-card__tag {
-    display: none;
+  .winner-card__title {
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 
   .winner-card__content {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 4.75rem 1fr;
-    align-items: center;
-    gap: 1.375rem;
-    padding: 1.75rem 1rem;
+    gap: 0.625rem;
   }
 
-  .winner-card__image {
-    width: 4.75rem;
-    height: 4.75rem;
+  .winner-card__winner {
+    flex-wrap: wrap;
+    gap: 0 0.25rem;
+
+    font-size: 1rem;
+    line-height: 1.375rem;
+
+    white-space: normal;
   }
 
-  .winner-card__info {
-    align-items: flex-start;
-  }
-
-  .winner-card__name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.875rem;
-    color: var(--brand-green);
-  }
-
-  .winner-card__prize {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.875rem;
-  }
-
-  .winner-card__city {
-    width: auto;
-    min-width: 4.75rem;
-    height: 1.375rem;
-    padding: 0 0.875rem;
-    margin-top: 1.25rem;
-    font-size: 0.75rem;
-    line-height: 1rem;
+  .winner-card__description {
+    font-size: 0.6875rem;
+    line-height: 0.9375rem;
   }
 }

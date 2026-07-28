@@ -2,18 +2,18 @@
 
 .lottery-section {
   width: 100%;
-
   margin-top: 2rem;
 
   color: var(--brand-black);
 }
 
 .lottery-section__container {
-  max-width: var(--container-width);
+  width: 100%;
+  max-width: 70rem; // 1120px
 
   margin: 0 auto;
 
-  padding: 0 var(--section-padding-inline);
+  box-sizing: border-box;
 }
 
 .lottery-section__title {
@@ -22,13 +22,9 @@
   text-align: center;
 
   font-family: var(--font-secondary);
-
   font-size: var(--lottery-title-font-size);
-
   font-weight: var(--font-weight-semibold);
-
   line-height: var(--lottery-title-line-height);
-
   letter-spacing: var(--lottery-title-letter-spacing);
 
   color: var(--brand-black);
@@ -38,35 +34,36 @@
   color: var(--brand-green);
 }
 
+/* ======================================================
+   HERO DESKTOP
+   ====================================================== */
+
 .lottery-section__hero {
-  max-width: var(--lottery-hero-width);
-
   width: 100%;
-
+  max-width: 70rem;
   height: var(--lottery-hero-height);
 
-  margin: 0 auto var(--lottery-section-gap);
+  margin: 0 auto 1.5rem;
 
   background-image: url('/assets/images/bg-tinka.svg');
-
   background-repeat: no-repeat;
-
   background-position: center;
-
   background-size: 100% 100%;
 
   border-radius: var(--lottery-card-radius);
+
+  box-sizing: border-box;
 }
 
 .lottery-section__hero app-lottery-card {
   display: block;
 
   width: 100%;
-
   height: 100%;
 }
 
 .lottery-section__hero app-lottery-card .lottery-card {
+  width: 100%;
   height: 100%;
 
   background: transparent;
@@ -74,59 +71,75 @@
   box-shadow: none;
 }
 
+/* ======================================================
+   GRID DESKTOP
+   ====================================================== */
+
 .lottery-section__cards {
-  max-width: var(--lottery-hero-width);
-
   width: 100%;
+  max-width: 70rem;
 
-  margin: 0 auto;
+  margin: 0 auto 1.875rem;
 
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
-  grid-template-columns: repeat(2, 1fr);
-
-  gap: var(--lottery-card-gap);
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
 
   align-items: stretch;
 
-  margin-bottom: 1.875rem;
+  box-sizing: border-box;
 }
 
 .lottery-section__cards app-lottery-card {
   display: flex;
+
+  width: 100%;
+  min-width: 0;
 }
 
 .lottery-section__cards app-lottery-card .lottery-card {
+  width: 100%;
+  min-width: 0;
+
   flex: 1;
 }
 
+/* ======================================================
+   BANNER
+   ====================================================== */
+
 .lottery-section__banner {
+  width: 100%;
   max-width: var(--lottery-banner-width);
 
-  width: 100%;
-
-  margin: 2rem auto 0;
+  margin: 3rem auto 0;
 }
+
+/* ======================================================
+   VIDEO
+   ====================================================== */
 
 .lottery-section__video {
   width: 100%;
 
-  display: flex;
-
-  justify-content: center;
-
   margin-top: 1.875rem;
+
+  display: flex;
+  justify-content: center;
 }
 
 .lottery-section,
 .promotions,
-.winners {
-  scroll-margin-top: 7.5rem;
-}
-
+.winners,
 .lottery-section__video {
   scroll-margin-top: 7.5rem;
 }
+
+/* ======================================================
+   TABLET LANDSCAPE
+   ====================================================== */
 
 @include bp.tabletLandscape {
   .lottery-section__container {
@@ -137,69 +150,150 @@
   .lottery-section__cards {
     max-width: 100%;
   }
+
+  .lottery-section__hero {
+    margin-bottom: 1.5rem;
+  }
+
+  .lottery-section__cards {
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+  }
 }
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
 
 @include bp.mobile {
   .lottery-section {
-    margin-top: 1.5rem;
+    width: 100%;
+
+    margin-top: 2.375rem;
   }
 
   .lottery-section__container {
-    padding: 0 1rem;
+    width: 100%;
+    max-width: 24.375rem; // 390px
+
+    margin-inline: auto;
+    padding-inline: 1.4375rem; // 23px
+
+    box-sizing: border-box;
   }
 
   .lottery-section__title {
-    margin-bottom: 1.5rem;
-    font-size: 1.4375rem;
+    width: 100%;
+    max-width: 19rem;
+
+    margin: 0 auto 1.75rem;
+
+    font-size: 1.4375rem; // 23px
     font-weight: 700;
-    line-height: 2rem;
+    line-height: 1.75rem;
     letter-spacing: 0;
+
+    text-align: center;
   }
 
+  .lottery-section__title--highlight {
+    display: block;
+  }
+
+  /*
+   * En móvil el contenedor que en desktop era hero
+   * se comporta exactamente como otra tarjeta.
+   */
   .lottery-section__hero {
     width: 100%;
-    max-width: 24.375rem;
+    max-width: 21.5rem; // 344px
     height: auto;
-    margin: 0 auto 1rem;
-    background-image: none;
+
+    margin: 0 auto 1.5rem;
+
     background: transparent;
+    background-image: none;
+
     border-radius: 1.25rem;
   }
 
   .lottery-section__hero app-lottery-card {
+    display: block;
+
+    width: 100%;
     height: auto;
   }
 
+  .lottery-section__hero app-lottery-card .lottery-card {
+    width: 100%;
+    height: auto;
+
+    background: #ffffff;
+
+    box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
   .lottery-section__cards {
-    max-width: 24.375rem;
+    width: 100%;
+    max-width: 21.5rem; // 344px
+
+    margin: 0 auto 2.5rem;
+
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+
+    column-gap: 0;
+    row-gap: 1.5rem; // 24px
+
+    align-items: start;
+  }
+
+  .lottery-section__cards app-lottery-card {
+    display: block;
+
+    width: 100%;
+    height: auto;
+  }
+
+  .lottery-section__cards app-lottery-card .lottery-card {
+    width: 100%;
+    height: auto;
   }
 
   .lottery-section__banner {
     width: 100%;
+    max-width: 21.5rem;
+
+    margin: 0 auto;
+
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 1.5rem;
+    justify-content: center;
   }
 
   .lottery-section__banner app-lottery-banner {
+    display: block;
+
     width: 100%;
-    max-width: 27rem;
+    max-width: 21.5rem;
   }
 
   .lottery-section__video {
     width: 100%;
-    margin-top: 1.5rem;
-    padding-inline: 1.5rem;
+
+    margin-top: 2.5rem;
+    padding: 0;
+
     display: flex;
     justify-content: center;
+
+    box-sizing: border-box;
   }
 
   .lottery-section__video app-lottery-video-section {
+    display: block;
+
     width: 100%;
-    max-width: 27rem;
+    max-width: 21.5rem;
   }
 }

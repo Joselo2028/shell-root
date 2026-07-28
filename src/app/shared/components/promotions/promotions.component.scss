@@ -2,127 +2,113 @@
 
 .promotions {
   width: 100%;
-
-  margin-top: 1.875rem;
+  margin-top: 3rem;
 }
 
 .promotions__container {
-  position: relative;
-
-  max-width: 94.5625rem;
+  width: 100%;
+  max-width: 70rem; // 1120px
+  min-height: 33.25rem; // 532px en desktop
 
   margin: 0 auto;
+  padding: 1.5rem 0 2rem;
 
-  padding: 1.75rem 2.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 
-  background: rgba(245, 240, 212, 0.5);
+  box-sizing: border-box;
+
+  background: rgba(245, 240, 212, 0.5); // #F5F0D480
+
+  border-top-left-radius: 2rem; // 32px
 
   overflow: hidden;
 }
 
-.promotions__ball {
-  position: absolute;
-
-  top: 0;
-
-  left: -2.5rem;
-
-  width: 6.25rem;
-
-  height: auto;
-
-  pointer-events: none;
-}
+/* ======================================================
+   TÍTULO
+   ====================================================== */
 
 .promotions__header {
-  position: relative;
+  width: 100%;
+
+  padding: 0 1.5rem;
 
   display: flex;
-
+  align-items: center;
   justify-content: center;
 
-  align-items: center;
-
-  margin-bottom: 1.875rem;
-}
-
-.promotions__header app-button {
-  position: absolute;
-
-  right: 0;
+  box-sizing: border-box;
 }
 
 .promotions__title {
   margin: 0;
 
   font-family: var(--font-secondary);
-
-  font-size: 2rem;
-
+  font-size: 1.5rem;
   font-weight: var(--font-weight-semibold);
+  line-height: 2rem;
 
-  line-height: 1;
+  text-align: center;
 
   color: var(--brand-black);
 }
 
+/* ======================================================
+   TARJETAS
+   ====================================================== */
+
 .promotions__cards {
-  display: flex;
+  width: 100%;
+  min-width: 0;
 
-  justify-content: center;
-
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
 
 .promotion-card {
   position: relative;
 
-  flex: 0 0 25.5rem;
+  width: 100%;
+  min-width: 0;
 
-  width: 25.5rem;
-
-  height: 25.5rem;
+  aspect-ratio: 1 / 1;
 
   border-radius: var(--lottery-card-radius);
 
   background-image: url('/assets/images/bg_promociones.svg');
-
   background-repeat: no-repeat;
-
   background-position: center;
-
   background-size: cover;
 
   box-shadow: var(--lottery-card-shadow);
+
+  overflow: hidden;
 }
 
 .promotion-card__content {
   position: absolute;
-
   inset: 0;
 
+  padding: 2rem;
+
   display: flex;
-
   flex-direction: column;
-
+  align-items: center;
   justify-content: center;
 
-  align-items: center;
-
-  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .promotion-card__title {
   margin: 0 0 2rem;
 
   font-family: var(--font-secondary);
-
+  font-size: 2rem;
   font-weight: var(--font-weight-semibold);
-
-  font-size: 3.235rem;
-
   line-height: 0.98;
-
   letter-spacing: 0;
 
   text-align: center;
@@ -131,10 +117,8 @@
 }
 
 .promotion-card__title--large {
-  font-size: 6.8125rem;
-
+  font-size: 5.75rem;
   line-height: 1;
-
   letter-spacing: 0.020625rem;
 }
 
@@ -142,49 +126,52 @@
   margin-top: 0;
 }
 
-@include bp.mobile {
-  .promotions {
-    margin-top: 1.5rem;
-  }
+/* ======================================================
+   BOTÓN VER MÁS
+   ====================================================== */
 
+.promotions__footer {
+  width: 100%;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  box-sizing: border-box;
+}
+
+/* ======================================================
+   TABLET
+   ====================================================== */
+
+@include bp.tabletLandscape {
   .promotions__container {
-    padding: 1.5rem 0 1.5rem 1.5rem;
-    background: rgba(245, 240, 212, 0.5);
+    max-width: none;
+    min-height: 0;
+
+    padding: 1.5rem 0 2rem 1.5rem;
+
     overflow: hidden;
   }
 
-  .promotions__ball {
-    display: none;
-  }
-
   .promotions__header {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    justify-content: initial;
-    column-gap: 0.75rem;
-    padding-right: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .promotions__title {
-    font-size: 1.5rem;
-    line-height: 2rem;
-    text-align: left;
-  }
-
-  .promotions__header app-button {
-    position: static;
-    justify-self: end;
+    padding: 0 1.5rem 0 0;
   }
 
   .promotions__cards {
+    display: flex;
     justify-content: flex-start;
-    gap: 1rem;
+
+    gap: 1.5rem;
+
+    padding-right: 1.5rem;
+
     overflow-x: auto;
     overflow-y: hidden;
-    padding-right: 1.5rem;
-    padding-bottom: 0;
+
+    scroll-snap-type: x proximity;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
@@ -194,10 +181,90 @@
   }
 
   .promotion-card {
-    flex: 0 0 15.625rem;
+    width: 21.375rem;
+    height: 21.375rem;
+
+    flex: 0 0 21.375rem;
+
+    aspect-ratio: auto;
+
+    scroll-snap-align: start;
+  }
+
+  .promotions__footer {
+    padding: 0 1.5rem 0 0;
+  }
+}
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
+
+@include bp.mobile {
+  .promotions {
+    margin-top: 1.5rem;
+  }
+
+  .promotions__container {
+    width: 100%;
+    max-width: none;
+    min-height: 0;
+
+    padding: 1.5rem 0 1.5rem 1.5rem;
+
+    gap: 1.5rem;
+
+    border-top-left-radius: 2rem;
+
+    overflow: hidden;
+  }
+
+  .promotions__header {
+    padding: 0 1.5rem 0 0;
+
+    justify-content: flex-start;
+  }
+
+  .promotions__title {
+    font-size: 1.5rem;
+    line-height: 2rem;
+
+    text-align: left;
+  }
+
+  .promotions__cards {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+
+    gap: 1rem;
+
+    padding-right: 1.5rem;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .promotions__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .promotion-card {
     width: 15.625rem;
     height: 15.625rem;
+
+    flex: 0 0 15.625rem;
+
+    aspect-ratio: auto;
+
     border-radius: 0.625rem;
+
+    scroll-snap-align: start;
   }
 
   .promotion-card__content {
@@ -205,13 +272,10 @@
   }
 
   .promotion-card__title {
+    margin-bottom: 2rem;
+
     font-size: 1.75rem;
     line-height: 1;
-  }
-
-  .promotion-card app-button {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .promotion-card__title--large {
@@ -219,12 +283,24 @@
     line-height: 4rem;
   }
 
-  :host ::ng-deep .promotions__header app-button button,
-  :host ::ng-deep .promotions__header .button {
+  .promotion-card app-button {
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .promotions__footer {
+    padding: 0 1.5rem 0 0;
+
+    justify-content: flex-end;
+  }
+
+  :host ::ng-deep .promotions__footer app-button button,
+  :host ::ng-deep .promotions__footer .button {
     width: 6.9375rem;
     min-width: 6.9375rem;
     height: 2.375rem;
     min-height: 2.375rem;
+
     padding: 0;
   }
 
@@ -234,7 +310,9 @@
     min-width: 8.625rem;
     height: 2.125rem;
     min-height: 2.125rem;
+
     padding: 0;
+
     font-size: 0.75rem;
     line-height: 1rem;
   }

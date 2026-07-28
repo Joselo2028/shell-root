@@ -1,5 +1,9 @@
 @use 'breakpoints' as bp;
 
+/* =======================================================
+   SECCIÓN GENERAL
+   ======================================================= */
+
 .lottery-video-section {
   width: 100%;
 }
@@ -7,48 +11,51 @@
 .lottery-video-section__title {
   margin: 0 0 1.5rem;
 
-  text-align: center;
+  color: var(--brand-black);
 
   font-family: var(--font-secondary);
-
-  font-size: 1.75rem;
-
+  font-size: 1.5rem;
   font-weight: var(--font-weight-semibold);
-
   line-height: 2.625rem;
-
   letter-spacing: 0.015625rem;
 
-  color: var(--brand-black);
+  text-align: center;
 }
+
+/* =======================================================
+   TARJETA PRINCIPAL
+   ======================================================= */
 
 .lottery-video-section__card {
   width: 100%;
-
-  max-width: 79.5rem;
+  max-width: 70rem;
 
   margin: 0 auto;
+  padding: 2rem;
+
+  box-sizing: border-box;
 
   background: var(--brand-white);
 
   border-radius: var(--lottery-card-radius);
-
-  box-shadow: var(--lottery-card-shadow);
-
   border-bottom: 1.313rem solid var(--brand-yellow);
 
-  padding: 2rem;
+  box-shadow: var(--lottery-card-shadow);
 }
 
 .lottery-video-section__container {
   width: 100%;
+  min-width: 0;
 }
+
+/* =======================================================
+   LOGO
+   ======================================================= */
 
 .lottery-video-section__logo {
   display: block;
 
   width: 6.6875rem;
-
   height: 4.25rem;
 
   margin: 0 auto 1.5rem;
@@ -56,40 +63,48 @@
   object-fit: contain;
 }
 
+/* =======================================================
+   CONTENIDO
+   ======================================================= */
+
 .lottery-video-section__body {
   width: 100%;
+  min-width: 0;
 }
+
+/* =======================================================
+   CABECERA INTERNA
+   ======================================================= */
 
 .lottery-video-section__header {
   display: flex;
 
-  justify-content: space-between;
+  width: 100%;
 
   align-items: center;
+  justify-content: space-between;
+
+  gap: 1.5rem;
 
   margin-bottom: 1.5rem;
-}
+  padding: 0;
 
-.lottery-video-section__header app-button {
-  margin-right: var(--lottery-video-padding-right);
+  box-sizing: border-box;
 }
 
 .lottery-video-section__subtitle {
-  margin-left: var(--lottery-video-padding-left);
-
+  min-width: 0;
   flex: 1;
 
-  font-family: var(--font-primary);
-
-  font-size: 1.25rem;
-
-  font-weight: var(--font-weight-semibold);
-
-  line-height: 2rem;
-
-  letter-spacing: 0.015625rem;
+  margin: 0;
 
   color: var(--brand-black);
+
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 2rem;
+  letter-spacing: 0.015625rem;
 }
 
 .lottery-video-section__subtitle span {
@@ -98,21 +113,46 @@
   font-weight: var(--font-weight-bold);
 }
 
+.lottery-video-section__header app-button {
+  flex-shrink: 0;
+
+  margin: 0;
+}
+
+/* =======================================================
+   CARRUSEL
+   ======================================================= */
+
 .lottery-video-section__carousel {
   position: relative;
-  width: 100%;
+
   display: flex;
-  align-items: center;
-  padding-inline: 3.5rem;
+
+  width: 100%;
+  min-width: 0;
+
+  align-items: flex-start;
+
+  /*
+   * Reserva espacio debajo de las tarjetas para las flechas.
+   * Los círculos permanecen abajo, como estaban originalmente.
+   */
+  padding: 0 0 3.75rem;
+
+  box-sizing: border-box;
 }
 
 .lottery-video-section__viewport {
   width: 100%;
+  min-width: 0;
+
+  padding: 0;
+
   overflow-x: auto;
   overflow-y: hidden;
+
   scroll-behavior: smooth;
   scrollbar-width: none;
-  padding-inline: 0;
 }
 
 .lottery-video-section__viewport::-webkit-scrollbar {
@@ -121,65 +161,78 @@
 
 .lottery-video-section__track {
   display: flex;
-  gap: 1.5rem;
+
   width: max-content;
-  padding-block: 0.25rem;
+
+  gap: 1.5rem;
+  padding: 0;
 }
 
+/* =======================================================
+   TARJETAS DE JUEGO
+   ======================================================= */
+
 .lottery-video-section__game {
+  display: block;
+
   width: clamp(16rem, 27vw, 20.9375rem);
   flex: 0 0 auto;
-  display: block;
+
   padding: 0;
+
   overflow: hidden;
-  cursor: pointer;
+
   background: transparent;
+
   border: 0;
   border-radius: 0.875rem;
+
+  cursor: pointer;
+
   scroll-snap-align: start;
 }
 
 .lottery-video-section__game-image {
   display: block;
+
   width: 100%;
   height: auto;
+
   aspect-ratio: 335 / 273;
+
   object-fit: cover;
+
   border-radius: inherit;
 }
+
+/* =======================================================
+   FLECHAS INFERIORES
+   ======================================================= */
 
 .lottery-video-section__arrow {
   position: absolute;
   z-index: 10;
-  top: 50%;
+
+  bottom: 0;
 
   display: flex;
+
+  width: 2.5rem;
+  height: 2.5rem;
+
   align-items: center;
   justify-content: center;
 
-  width: 3rem;
-  height: 3rem;
+  padding: 0;
 
-  transform: translateY(-50%);
+  background: var(--brand-white);
 
-  border: 0;
+  border: 1px solid #cb2f1f;
   border-radius: 50%;
 
-  background: #e8f4ec;
-  color: var(--brand-green);
+  box-shadow: none;
 
   cursor: pointer;
-
-  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
-
-  transition: transform .2s ease;
-
-  font-size: 2rem;
-  font-weight: 600;
-}
-
-.lottery-video-section__arrow:hover {
-  transform: translateY(-50%) scale(1.05);
 }
 
 .lottery-video-section__arrow--left {
@@ -190,29 +243,82 @@
   right: 0;
 }
 
+/*
+ * El SVG se centra dentro del círculo.
+ * Al usar una imagen ya no dependemos del line-height
+ * ni del centrado irregular de los caracteres ‹ y ›.
+ */
+.lottery-video-section__arrow-icon {
+  display: block;
+
+  width: 1rem;
+  height: 1rem;
+
+  object-fit: contain;
+}
+
+/*
+ * Se reutiliza arrow-right.svg para la flecha izquierda.
+ */
+.lottery-video-section__arrow--left .lottery-video-section__arrow-icon {
+  transform: rotate(180deg);
+}
+
+/* =======================================================
+   TABLET LANDSCAPE
+   ======================================================= */
+
 @include bp.tabletLandscape {
   .lottery-video-section {
     padding-inline: 2rem;
+
+    box-sizing: border-box;
   }
 
   .lottery-video-section__card {
+    width: 100%;
+    max-width: 70rem;
+
     padding: 1.5rem;
+  }
+
+  .lottery-video-section__header {
+    padding: 0;
+  }
+
+  .lottery-video-section__track {
+    gap: 1.25rem;
   }
 }
 
+/* =======================================================
+   MOBILE
+   ======================================================= */
+
 @include bp.mobile {
+  .lottery-video-section {
+    padding-inline: 0;
+  }
+
   .lottery-video-section__title {
     margin: 0 0 1.5rem;
+
     font-size: 1.5rem;
     font-weight: var(--font-weight-semibold);
     line-height: 2rem;
     letter-spacing: 0;
+
     text-align: center;
   }
 
   .lottery-video-section__card {
     width: 100%;
+    max-width: none;
+
     padding: 1rem;
+
+    box-sizing: border-box;
+
     border-radius: 1.25rem;
     border-bottom: 1rem solid var(--brand-yellow);
   }
@@ -220,20 +326,31 @@
   .lottery-video-section__logo {
     width: 4.425625rem;
     height: 2.8125rem;
+
     margin: 0 auto 1.25rem;
   }
 
   .lottery-video-section__header {
     display: flex;
+
     align-items: center;
     justify-content: space-between;
+
     gap: 1rem;
+
     margin-bottom: 1rem;
+    padding: 0;
   }
 
   .lottery-video-section__subtitle {
-    margin-left: 0;
+    min-width: 0;
     flex: 1;
+
+    margin: 0;
+
+    color: var(--brand-black);
+
+    font-family: var(--font-primary);
     font-size: 0.75rem;
     font-weight: var(--font-weight-semibold);
     line-height: 1rem;
@@ -242,28 +359,28 @@
 
   .lottery-video-section__subtitle span {
     display: block;
+
+    color: var(--brand-green);
+
     font-size: 1.25rem;
+    font-weight: var(--font-weight-bold);
     line-height: 1.5rem;
   }
 
   .lottery-video-section__header app-button {
-    margin-right: 0;
     flex-shrink: 0;
+
+    margin: 0;
   }
 
-  :host ::ng-deep .lottery-video-section__header app-button button,
-  :host ::ng-deep .lottery-video-section__header .button {
-    width: 6rem;
-    min-width: 6rem;
-    height: 2rem;
-    min-height: 2rem;
-    padding: 0;
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-
+  /*
+   * En móvil las flechas vuelven a los costados,
+   * centradas verticalmente respecto de la imagen.
+   */
   .lottery-video-section__carousel {
-    padding-inline: 2.75rem;
+    align-items: center;
+
+    padding: 0 2.75rem;
   }
 
   .lottery-video-section__viewport {
@@ -272,6 +389,7 @@
 
   .lottery-video-section__track {
     width: 100%;
+
     gap: 1rem;
   }
 
@@ -293,15 +411,17 @@
     height: 100%;
 
     aspect-ratio: 335 / 273;
+
     object-fit: cover;
 
     border-radius: inherit;
   }
 
   .lottery-video-section__arrow {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.75rem;
+    top: 50%;
+    bottom: auto;
+
+    transform: translateY(-50%);
   }
 
   .lottery-video-section__arrow--left {
@@ -310,5 +430,10 @@
 
   .lottery-video-section__arrow--right {
     right: -0.25rem;
+  }
+
+  .lottery-video-section__arrow-icon {
+    width: 1rem;
+    height: 1rem;
   }
 }

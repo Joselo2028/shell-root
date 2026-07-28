@@ -1,50 +1,75 @@
 @use 'breakpoints' as bp;
 
+/* =======================================================
+   FOOTER GENERAL
+   ======================================================= */
+
 .footer {
   width: 100%;
-  margin-top: 3.125rem;
+  max-width: 90rem;
+
+  margin: 3.125rem auto 0;
+
+  font-family: var(--font-primary);
+
+  color: var(--brand-white);
+}
+
+.footer__main {
+  width: 100%;
+
   background: var(--brand-green);
-  color: var(--text-primary);
 }
 
 .footer__container {
-  max-width: var(--container-width);
+  width: 100%;
+  max-width: 70rem;
+
   margin: 0 auto;
-  padding: 3rem 7.5rem;
+  padding: 2rem 0 2.25rem;
+
+  box-sizing: border-box;
 }
 
 /* =======================================================
-   TOP
+   CABECERA DEL FOOTER
    ======================================================= */
 
 .footer__top {
-  max-width: var(--footer-content-width);
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 3rem;
-}
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  align-items: start;
 
-.footer__left {
-  flex: 1;
-  display: flex;
-  align-items: flex-start;
-  gap: var(--footer-column-gap);
+  column-gap: 5.25rem;
 }
 
 .footer__brand {
-  flex: 0 0 auto;
+  min-width: 0;
 }
+
+.footer__logo {
+  display: block;
+
+  width: 10.875rem;
+  height: auto;
+
+  object-fit: contain;
+}
+
+/* =======================================================
+   MENÚS DE ESCRITORIO
+   ======================================================= */
 
 .footer__menus {
-  flex: 1;
-  display: flex;
-  gap: var(--footer-column-gap);
+  min-width: 0;
 }
 
-.footer__menus-desktop {
-  display: flex;
+.footer__menus--desktop {
+  display: grid;
+  grid-template-columns:
+    minmax(12rem, 1.25fr) minmax(7rem, 0.75fr) minmax(12rem, 1fr);
+
+  column-gap: 4rem;
 }
 
 .footer__menus-mobile {
@@ -52,194 +77,161 @@
 }
 
 .footer__column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  min-width: 0;
 }
 
-.footer__column--info {
-  width: 10rem;
-  flex: 0 0 10rem;
-}
+.footer__title,
+.footer__section-title,
+.footer__social-title {
+  margin: 0;
 
-.footer__column--games {
-  width: 7.375rem;
-  flex: 0 0 7.375rem;
-}
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-bold);
+  line-height: 1rem;
+  letter-spacing: 0;
 
-.footer__column--tinka {
-  width: 10.3125rem;
-  flex: 0 0 10.3125rem;
-}
-
-.footer__column--legal {
-  width: 14.625rem;
-  flex: 0 0 14.625rem;
+  color: var(--brand-white);
 }
 
 .footer__title {
-  margin: 0 0 0.375rem 0;
-  letter-spacing: 0.009rem;
-  font-family: var(--font-primary);
-  font-size: 0.9375rem;
-  font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  margin-bottom: 0.75rem;
 }
 
 .footer__list {
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.375rem;
-  letter-spacing: 0.016rem;
+
+  gap: 0.25rem;
+
+  margin: 0;
+  padding: 0;
+
   list-style: none;
 }
 
-.footer__item {
+.footer__list li {
   margin: 0;
   padding: 0;
 }
 
 .footer__link {
+  display: inline-block;
+
   font-family: var(--font-primary);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: var(--font-weight-regular);
-  line-height: 1.25rem;
-  color: var(--text-primary);
+  line-height: 0.875rem;
+  letter-spacing: 0;
+
+  color: var(--brand-white);
+
   text-decoration: none;
+
   transition: opacity 0.2s ease;
-
-  &:hover {
-    opacity: 0.8;
-  }
 }
 
-.footer__right {
-  flex: 0 0 13.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-self: stretch;
-}
-
-.footer__social {
-  margin-top: 0.375rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.footer__social-icons {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.footer__responsible {
-  margin-top: auto;
-}
-
-/* =======================================================
-   MEDIOS DE PAGO
-   ======================================================= */
-
-.footer__payments {
-  margin-top: 1.563rem;
-  background: var(--brand-white);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.875rem;
-  height: 4.25rem;
-  flex-wrap: wrap;
-  border-radius: 0.625rem;
-}
-
-/* =======================================================
-   COPYRIGHT
-   ======================================================= */
-
-.footer__copyright {
-  margin-top: 2.5rem;
-  text-align: center;
-
-  .footer__copyright-company {
-    font-family: var(--font-primary);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-light);
-    letter-spacing: 0.125rem;
-    line-height: 2rem;
-  }
-
-  .footer__copyright-disclaimer {
-    font-family: var(--font-primary);
-    font-size: 0.75rem;
-    font-weight: var(--font-weight-regular);
-    letter-spacing: 0.025rem;
-    line-height: 1.25rem;
-  }
-}
-
-/* =======================================================
-   PLACEHOLDERS
-   ======================================================= */
-
-.box {
-  min-height: 3.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.box--logo {
-  width: 10.875rem;
-  height: 3.125rem;
-}
-
-.box--menu {
-  width: 8.75rem;
-  height: 11.25rem;
-}
-
-.box--icon {
-  width: 3rem;
-  height: 3rem;
+.footer__link:hover {
+  opacity: 0.8;
 }
 
 /* =======================================================
    REDES SOCIALES
    ======================================================= */
 
+.footer__social {
+  margin-top: 1.5rem;
+}
+
 .footer__social-title {
-  margin: 0;
-  font-family: var(--font-primary);
-  font-size: 0.875rem;
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.016rem;
-  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.footer__social-icons {
+  display: flex;
+  align-items: center;
+
+  gap: 0.625rem;
 }
 
 .footer__social-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+
+  width: 1.625rem;
+  height: 1.625rem;
+
   text-decoration: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
 
-  &:hover {
-    opacity: 0.85;
-    transform: scale(1.05);
-  }
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
 
-  img {
-    display: block;
-    width: 2rem;
-    height: 2rem;
-  }
+.footer__social-link:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.footer__social-link img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+/* =======================================================
+   SECCIONES INFERIORES
+   ======================================================= */
+
+.footer__section {
+  width: 100%;
+
+  margin-top: 1.25rem;
+}
+
+.footer__section--certifications {
+  margin-top: 2.688rem;
+}
+
+.footer__section-title {
+  margin-bottom: 0.75rem;
+}
+
+/* =======================================================
+   MÉTODOS DE PAGO
+   ======================================================= */
+
+.footer__payments {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  align-items: center;
+
+  column-gap: 2.125rem;
+}
+
+.footer__payment {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer__payment img {
+  display: block;
+
+  width: 3.75rem;
+  height: 2rem;
+
+  max-width: 100%;
+
+  object-fit: contain;
 }
 
 /* =======================================================
@@ -247,211 +239,230 @@
    ======================================================= */
 
 .footer__certifications {
-  max-width: 62.8125rem;
-  height: 11.25rem;
-  margin: 2rem auto 0;
-  display: flex;
+  width: 100%;
+
+  display: grid;
+  grid-template-columns:
+    5.25rem 5.25rem 5.75rem 7.75rem 9rem minmax(8rem, 1fr) 8rem;
+
   align-items: center;
-  justify-content: space-between;
+
+  column-gap: 2.75rem;
 }
 
-.footer__cert {
+.footer__certification {
+  min-width: 0;
+  min-height: 4.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.footer__certification-image {
   display: block;
-  flex-shrink: 0;
+
   width: auto;
+  max-width: 100%;
+  height: auto;
+
   object-fit: contain;
 }
 
-.footer__cert--iso9001 {
-  height: 5.8125rem;
+.footer__certification-image--37001,
+.footer__certification-image--9001 {
+  max-height: 4.375rem;
 }
 
-.footer__cert--iso37001 {
-  height: 5.8125rem;
+.footer__certification-image--icontec {
+  max-height: 4rem;
 }
 
-.footer__cert--iqnet {
-  height: 5.625rem;
+.footer__certification-image--18 {
+  max-height: 3.5rem;
 }
 
-.footer__cert--wla {
-  height: 3.4375rem;
-  width: auto;
+.footer__certification-image--safe {
+  max-width: 8.25rem;
+  max-height: 2.5rem;
 }
 
-.footer__cert--zona {
-  height: 1.8125rem;
+.footer__certification-image--wla {
+  max-width: 8.938rem;
+  max-height: 3.063rem;
+  transform: scale(1.3);
 }
 
-.footer__cert--18 {
-  height: 2.625rem;
-}
-
-.footer__cert--libro {
-  height: 3.125rem;
+.footer__certification-image--book {
+  max-width: 3.5rem;
+  max-height: 2.25rem;
 }
 
 /* =======================================================
-   TABLET LANDSCAPE 30.0625rem - 64rem
+   FRANJA INFERIOR BLANCA
+   ======================================================= */
+
+.footer__bottom {
+  width: 100%;
+
+  background: var(--brand-white);
+  color: rgba(100, 100, 100, 1);
+}
+
+.footer__bottom-container {
+  width: 100%;
+  max-width: 70rem;
+
+  margin: 0 auto;
+  padding: 1.5rem 0 0.75rem;
+
+  box-sizing: border-box;
+
+  text-align: center;
+}
+
+
+.footer__bottom-logo {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+}
+
+.footer__bottom-brands {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 1rem;
+}
+
+/* Logo La Tinka */
+.footer__bottom-logo--tinka {
+  display: block;
+
+  width: 6.875rem;
+  /* 110px */
+  height: 2.3125rem;
+  /* 37px */
+
+  flex: 0 0 auto;
+
+  object-fit: contain;
+}
+
+/* Logo Te Apuesto y línea divisoria */
+.footer__bottom-logo--te-apuesto {
+  display: block;
+
+  width: 6.8125rem;
+  /* 109px */
+  height: 1.875rem;
+  /* 30px */
+
+  flex: 0 0 auto;
+
+  padding-left: 1rem;
+
+  border-left: 1px solid rgba(190, 190, 190, 1);
+
+  box-sizing: content-box;
+  object-fit: contain;
+}
+
+.footer__copyright {
+  margin: 0.75rem 0 0;
+  padding: 0;
+
+  border: 0;
+
+  font-family: var(--font-primary);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-light);
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+
+  color: rgba(140, 140, 140, 1);
+}
+
+.footer__copyright {
+  margin: 0.75rem 0 0;
+
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-light);
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+
+  color: rgba(100, 100, 100, 1);
+}
+
+/* =======================================================
+   TABLET LANDSCAPE
    ======================================================= */
 
 @include bp.tabletLandscape {
-  .footer__container {
-    padding: 2rem;
-  }
-
-  .footer__top,
-  .footer__left,
-  .footer__menus {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  .footer {
     max-width: none;
-    gap: 0;
   }
 
-  .footer__brand {
-    margin-bottom: 1.5rem;
+  .footer__container,
+  .footer__bottom-container {
+    max-width: none;
+
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 
-  .footer__menus-desktop {
-    display: none;
+  .footer__top {
+    grid-template-columns: 11rem minmax(0, 1fr);
+
+    column-gap: 2.5rem;
   }
 
-  .footer__menus-mobile {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .footer__column,
-  .footer__column--info,
-  .footer__column--games,
-  .footer__column--tinka,
-  .footer__column--legal {
-    width: 100%;
-    flex: initial;
-  }
-
-  .footer__title {
-    min-height: 3.4375rem;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    cursor: pointer;
-    font-size: 0.9375rem;
-    font-weight: var(--font-weight-bold);
-    line-height: 1.25rem;
-    color: var(--brand-white);
-    white-space: nowrap;
-  }
-
-  .footer__title::-webkit-details-marker {
-    display: none;
-  }
-
-  .footer__title::after {
-    content: '';
-    width: 0.5625rem;
-    height: 0.5625rem;
-    border-right: 2px solid var(--brand-white);
-    border-bottom: 2px solid var(--brand-white);
-    transform: rotate(45deg);
-    transition: transform 0.2s ease;
-  }
-
-  .footer__column[open] .footer__title::after {
-    transform: rotate(225deg);
-  }
-
-  .footer__list {
-    display: flex;
-    padding-bottom: 1rem;
-    gap: 0.5rem;
-  }
-
-  .footer__link {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
-  .footer__social {
-    margin-top: 0.75rem;
-    gap: 1rem;
-  }
-
-  .footer__social-title {
-    font-size: 0.9375rem;
-    line-height: 1.25rem;
-  }
-
-  .footer__social-icons {
-    gap: 0.75rem;
-  }
-
-  .footer__social-link,
-  .footer__social-link img {
-    width: 2rem;
-    height: 2rem;
+  .footer__menus--desktop {
+    column-gap: 2rem;
   }
 
   .footer__payments {
-    display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    column-gap: 1.5rem;
+    row-gap: 1rem;
+  }
+
+  .footer__payment {
     justify-content: center;
-    align-items: center;
-    column-gap: 1.375rem;
-    row-gap: 1.125rem;
-    height: auto;
-    min-height: 7.25rem;
-    margin-top: 1.5rem;
-    padding: 1.25rem 1.5rem;
-    border-radius: 1rem;
-  }
-
-  .footer__payments .box {
-    min-height: auto;
-  }
-
-  .footer__payments img {
-    max-height: 1.625rem;
-    max-width: 5.75rem;
   }
 
   .footer__certifications {
-    max-width: 100%;
-    height: auto;
-    margin-top: 1.75rem;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
-    align-items: center;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
     column-gap: 2rem;
-    row-gap: 1.75rem;
+    row-gap: 1.5rem;
   }
 
-  .footer__cert {
-    justify-self: center;
-    align-self: center;
+  .footer__certification {
+    justify-content: center;
   }
 
-  .footer__cert:nth-child(5) {
+  .footer__certification:nth-child(5) {
     grid-column: 1 / 2;
   }
 
-  .footer__cert:nth-child(6) {
+  .footer__certification:nth-child(6) {
     grid-column: 2 / 4;
   }
 
-  .footer__cert:nth-child(7) {
+  .footer__certification:nth-child(7) {
     grid-column: 4 / 5;
   }
 }
 
 /* =======================================================
-   MOBILE <= 30rem
+   MOBILE
    ======================================================= */
 
 @include bp.mobile {
@@ -463,200 +474,245 @@
     padding: 1.5rem 1rem 1.75rem;
   }
 
-  .footer__top,
-  .footer__left,
-  .footer__menus {
+  .footer__top {
     display: flex;
     flex-direction: column;
-    width: 100%;
-    max-width: none;
-    gap: 0;
+
+    gap: 1.5rem;
   }
 
-  .footer__brand {
-    margin-bottom: 1.5rem;
+  .footer__logo {
+    width: 9.5rem;
   }
 
-  .box--logo,
-  .box--logo img {
-    width: 10.875rem;
-    height: auto;
-  }
-
-  .footer__menus-desktop {
+  .footer__menus--desktop {
     display: none;
   }
 
   .footer__menus-mobile {
+    width: 100%;
+
     display: flex;
     flex-direction: column;
-    width: 100%;
   }
 
-  .footer__column,
-  .footer__column--info,
-  .footer__column--games,
-  .footer__column--tinka,
-  .footer__column--legal {
+  .footer__accordion {
     width: 100%;
-    flex: initial;
+
     border: 0;
   }
 
-  .footer__title {
-    min-height: 3.4375rem;
-    margin: 0;
+  .footer__accordion-title {
+    min-height: 3.25rem;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
-    list-style: none;
-    cursor: pointer;
+
+    margin: 0;
+
+    font-family: var(--font-primary);
     font-size: 0.9375rem;
     font-weight: var(--font-weight-bold);
     line-height: 1.25rem;
+
     color: var(--brand-white);
+
+    list-style: none;
+    cursor: pointer;
   }
 
-  .footer__title::-webkit-details-marker {
+  .footer__accordion-title::-webkit-details-marker {
     display: none;
   }
 
-  .footer__title::after {
+  .footer__accordion-title::after {
     content: '';
-    width: 0.5625rem;
-    height: 0.5625rem;
-    border-right: 2px solid var(--brand-white);
-    border-bottom: 2px solid var(--brand-white);
+
+    width: 0.5rem;
+    height: 0.5rem;
+
+    border-right: 0.125rem solid var(--brand-white);
+    border-bottom: 0.125rem solid var(--brand-white);
+
     transform: rotate(45deg);
+
     transition: transform 0.2s ease;
   }
 
-  .footer__column[open] .footer__title::after {
+  .footer__accordion[open] .footer__accordion-title::after {
     transform: rotate(225deg);
   }
 
-  .footer__list {
-    display: flex;
-    padding-bottom: 1rem;
+  .footer__accordion .footer__list {
     gap: 0.5rem;
+
+    padding-bottom: 1rem;
   }
 
   .footer__link {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  .footer__social--mobile {
+    margin-top: 1rem;
+  }
+
+  .footer__social-title,
+  .footer__section-title {
     font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
-
-  .footer__social {
-    margin-top: 0.75rem;
-    gap: 1rem;
-  }
-
-  .footer__social-title {
-    font-size: 0.9375rem;
-    line-height: 1.25rem;
+    line-height: 1rem;
   }
 
   .footer__social-icons {
     gap: 0.75rem;
   }
 
-  .footer__social-link,
-  .footer__social-link img {
+  .footer__social-link {
     width: 2rem;
     height: 2rem;
   }
 
+  .footer__section {
+    margin-top: 1.75rem;
+  }
+
   .footer__payments {
+    width: 100%;
+
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    justify-items: center;
+    grid-template-columns: repeat(4, auto);
+
+    justify-content: space-between;
     align-items: center;
-    height: auto;
-    min-height: 6.875rem;
-    margin-top: 1.5rem;
-    padding: 0.875rem 0.75rem;
-    column-gap: 0.625rem;
+
+    column-gap: 0;
     row-gap: 1rem;
-    border-radius: 1rem;
   }
 
-  .footer__payments .box {
-    min-height: auto;
+  .footer__payment {
+    width: fit-content;
+    min-width: 0;
+
+    justify-self: start;
   }
 
-  .footer__payments img {
-    max-height: 1.5rem;
-    max-width: 3.4375rem;
+  .footer__payment img {
+    width: 3.25rem;
+    height: 1.75rem;
   }
 
   .footer__certifications {
-    max-width: 100%;
-    height: auto;
-    margin-top: 1.75rem;
+    width: 100%;
+
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+
     align-items: center;
-    column-gap: 1.25rem;
-    row-gap: 1.75rem;
+
+    column-gap: 0;
+    row-gap: 1.5rem;
   }
 
-  .footer__cert {
-    justify-self: center;
-    align-self: center;
+  .footer__certification {
+    min-width: 0;
+    min-height: 3.75rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    justify-self: stretch;
   }
 
-  .footer__cert:nth-child(5) {
-    grid-column: 1 / 2;
+  /* Primera fila: cuatro certificaciones */
+
+  .footer__certification:nth-child(1) {
+    grid-column: 1 / 4;
   }
 
-  .footer__cert:nth-child(6) {
-    grid-column: 2 / 4;
+  .footer__certification:nth-child(2) {
+    grid-column: 4 / 7;
   }
 
-  .footer__cert:nth-child(7) {
-    grid-column: 4 / 5;
+  .footer__certification:nth-child(3) {
+    grid-column: 7 / 10;
   }
 
-  .footer__cert--iso9001,
-  .footer__cert--iso37001 {
-    height: 4.125rem;
+  .footer__certification:nth-child(4) {
+    grid-column: 10 / 13;
   }
 
-  .footer__cert--iqnet {
-    height: 4.125rem;
+  /* Segunda fila: tres certificaciones centradas */
+
+  .footer__certification:nth-child(5) {
+    grid-column: 2 / 5;
   }
 
-  .footer__cert--18 {
-    height: 3.625rem;
+  .footer__certification:nth-child(6) {
+    grid-column: 5 / 9;
+    transform: scale(1.1);
   }
 
-  .footer__cert--zona {
-    height: 2.125rem;
+  .footer__certification:nth-child(7) {
+    grid-column: 9 / 12;
   }
 
-  .footer__cert--wla {
-    height: 2.125rem;
+  .footer__certification-image--37001,
+  .footer__certification-image--9001 {
+    max-height: 3.75rem;
   }
 
-  .footer__cert--libro {
-    height: 2.875rem;
+  .footer__certification-image--icontec {
+    max-height: 3.5rem;
+  }
+
+  .footer__certification-image--18 {
+    max-height: 3.25rem;
+  }
+
+  .footer__certification-image--safe {
+    max-width: 6.5rem;
+    max-height: 2rem;
+  }
+
+  .footer__certification-image--wla {
+    max-width: 7rem;
+    max-height: 2rem;
+  }
+
+  .footer__certification-image--book {
+    max-width: 5.5rem;
+    max-height: 2.5rem;
+  }
+
+  .footer__bottom-container {
+    padding: 1.25rem 1rem 0.75rem;
+  }
+
+  .footer__bottom-brands {
+    gap: 0.75rem;
+  }
+
+  .footer__bottom-logo--tinka {
+    width: 6.875rem;
+    height: 2.3125rem;
+  }
+
+  .footer__bottom-logo--te-apuesto {
+    width: 6.8125rem;
+    height: 1.875rem;
+
+    padding-left: 0.75rem;
   }
 
   .footer__copyright {
-    margin-top: 1.75rem;
+    margin-top: 0.625rem;
+
+    font-size: 0.625rem;
+    line-height: 1rem;
+    letter-spacing: 0.075rem;
   }
 
-  .footer__copyright .footer__copyright-company {
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    letter-spacing: 0.125rem;
-  }
-
-  .footer__copyright .footer__copyright-disclaimer {
-    margin-top: 1rem;
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    letter-spacing: 0;
-  }
 }

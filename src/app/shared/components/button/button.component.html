@@ -6,10 +6,13 @@
   [class.button--secondary]="variant() === 'secondary'"
   [class.button--danger]="variant() === 'danger'"
   [class.button--outline]="variant() === 'outline'"
+  [class.button--outline-circle]="variant() === 'outline-circle'"
 >
-  <span>{{ label() }}</span>
+  @if (variant() !== 'outline-circle') {
+    <span>{{ label() }}</span>
+  }
 
-  @if (variant() === 'outline') {
-    <img class="button__icon" src="assets/images/arrow-right.svg" alt="" />
+  @if (variant() === 'outline' || variant() === 'outline-circle') {
+    <img class="button__icon" src="assets/images/arrow-right.svg" alt="" aria-hidden="true" />
   }
 </button>

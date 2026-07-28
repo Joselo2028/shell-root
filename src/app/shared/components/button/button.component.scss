@@ -83,29 +83,22 @@
 
 .button--outline {
   width: var(--outline-button-width);
-
   height: var(--outline-button-height);
 
   display: inline-flex;
-
   justify-content: center;
-
   align-items: center;
-
   gap: var(--outline-button-gap);
 
-  border: var(--outline-button-border-width) solid var(--brand-green);
-
+  border: var(--outline-button-border-width) solid #cb2f1f;
   border-radius: var(--outline-button-radius);
 
   background: var(--brand-white);
 
-  color: var(--brand-green);
+  color: #cb2f1f;
 
   font-family: var(--font-primary);
-
   font-size: var(--outline-button-font-size);
-
   font-weight: var(--font-weight-semibold);
 
   cursor: pointer;
@@ -113,10 +106,40 @@
 
 .button--outline .button__icon {
   width: 0.875rem;
-
   height: 0.875rem;
 
   object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+.button--outline-circle {
+  width: 2.75rem;
+  height: 2.75rem;
+
+  min-width: 2.75rem;
+
+  padding: 0;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #cb2f1f;
+  border-radius: 50%;
+
+  background: var(--brand-white);
+  color: #cb2f1f;
+
+  cursor: pointer;
+}
+
+.button--outline-circle .button__icon {
+  width: 0.875rem;
+  height: 0.875rem;
+
+  object-fit: contain;
+  flex-shrink: 0;
 }
 
 @include bp.mobile {
@@ -141,6 +164,17 @@
   }
 
   .button--outline .button__icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .button--outline-circle {
+    width: 2.25rem;
+    height: 2.25rem;
+    min-width: 2.25rem;
+  }
+
+  .button--outline-circle .button__icon {
     width: 0.75rem;
     height: 0.75rem;
   }

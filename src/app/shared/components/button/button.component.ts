@@ -8,7 +8,9 @@ import { Component, input } from '@angular/core';
 export class ButtonComponent {
   readonly label = input.required<string>();
 
-  readonly variant = input<'primary' | 'secondary' | 'danger' | 'outline'>('primary');
+  readonly variant = input<'primary' | 'secondary' | 'danger' | 'outline' | 'outline-circle'>(
+    'primary',
+  );
 
   readonly type = input<'button' | 'submit'>('button');
 

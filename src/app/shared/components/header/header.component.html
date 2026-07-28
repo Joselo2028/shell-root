@@ -1,11 +1,12 @@
-<header class="w-full h-20 bg-[#FFDE00]">
-  <div class="mx-auto flex h-full max-w-[1512px] items-center justify-between px-[160px]">
-    <div>
+<header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
       <img src="assets/images/logo-tinka.svg" alt="Logo La Tinka" />
     </div>
 
-    <div class="flex items-center" style="gap: var(--button-gap)">
-      <div class="desktop-auth-actions flex items-center" style="gap: var(--button-gap)">
+    <div class="header__actions">
+      <!-- Acciones de escritorio -->
+      <div class="desktop-auth-actions">
         @if (!isLoggedIn()) {
           <app-button
             [label]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
@@ -14,7 +15,7 @@
           >
           </app-button>
 
-          <app-button label="Registrarme" variant="primary"></app-button>
+          <app-button label="Registrarse" variant="primary"> </app-button>
         } @else {
           <app-user-session
             class="desktop-user-session"
@@ -25,7 +26,22 @@
         }
       </div>
 
-      <app-hamburger-button (click)="openMobileMenu()"></app-hamburger-button>
+      <!-- Acciones exclusivas de móvil -->
+      <div class="mobile-auth-actions">
+        @if (!isLoggedIn()) {
+          <app-button
+            [label]="isStartingLogin() ? 'Espere...' : 'Ingresar'"
+            variant="secondary"
+            (click)="startLogin()"
+          >
+          </app-button>
+
+          <app-button label="Registrarse" variant="primary"> </app-button>
+        }
+      </div>
+
+      <app-hamburger-button class="header__hamburger" (click)="openMobileMenu()">
+      </app-hamburger-button>
     </div>
   </div>
 
@@ -37,5 +53,6 @@
     (closeSidebar)="closeMobileMenu()"
     (login)="startLogin()"
     (logout)="logout()"
-  ></app-mobile-sidebar>
+  >
+  </app-mobile-sidebar>
 </header>

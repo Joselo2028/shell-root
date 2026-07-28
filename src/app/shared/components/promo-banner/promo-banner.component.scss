@@ -1,54 +1,183 @@
 @use 'breakpoints' as bp;
 
+/* ======================================================
+   BANNER GENERAL
+   ====================================================== */
+
 .promo-banner {
   width: 100%;
+  max-width: var(--container-width); // 90rem
 
-  padding: 0;
-}
-
-.promo-banner__container {
-  max-width: var(--container-width);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   margin: 0 auto;
+}
 
-  padding: 0 1.5rem;
+/* ======================================================
+   FONDO DEL BANNER
+   ====================================================== */
+
+.promo-banner__background {
+  width: 100%;
+  height: 12.5rem; // 200px
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background: #ffee28;
+}
+
+/* ======================================================
+   CARRUSEL
+   ====================================================== */
+
+.promo-banner__viewport {
+  width: 100%;
+  max-width: 68.3125rem; // 1093px
+
+  overflow: hidden;
+}
+
+.promo-banner__track {
+  width: 100%;
+
+  display: flex;
+
+  transition: transform 600ms ease-in-out;
+  will-change: transform;
+}
+
+.promo-banner__slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.promo-banner__picture {
+  display: block;
+
+  width: 100%;
+  max-width: 68.3125rem;
 }
 
 .promo-banner__image {
   display: block;
 
   width: 100%;
+  max-width: 68.3125rem;
   height: auto;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
 }
 
-.promo-banner__image--mobile {
-  display: none;
+/* ======================================================
+   INDICADORES
+   ====================================================== */
+
+.promo-banner__bullets {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+
+  margin-top: 0.75rem; // 12px
 }
+
+.promo-banner__bullet {
+  width: 0.5rem;
+  height: 0.5rem;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: #d9d9d9;
+
+  cursor: pointer;
+
+  transition:
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.promo-banner__bullet:hover {
+  transform: scale(1.15);
+}
+
+.promo-banner__bullet.active {
+  background: var(--brand-green-dark);
+}
+
+/* ======================================================
+   MOBILE
+   ====================================================== */
 
 @include bp.mobile {
-
-  .promo-banner__container {
-
-    max-width: 100%;
-
-    padding: 0;
-
-  }
-
-  .promo-banner__image--desktop {
-
-    display: none;
-
-  }
-
-  .promo-banner__image--mobile {
-
-    display: block;
-
+  .promo-banner {
     width: 100%;
+    max-width: 24.375rem; // 390px
+  }
 
+  /*
+   * El fondo móvil conserva los 200px
+   * indicados en el diseño.
+   */
+  .promo-banner__background {
+    width: 100%;
+    height: 12.5rem; // 200px
+  }
+
+  .promo-banner__viewport {
+    width: 100%;
+    max-width: 24.375rem; // 390px
+  }
+
+  .promo-banner__slide {
+    align-items: center;
+    justify-content: flex-start;
+
+    /*
+     * En el SVG la imagen comienza aproximadamente
+     * a 7px del borde izquierdo.
+     */
+    padding-left: 0.4375rem; // 7px
+
+    box-sizing: border-box;
+  }
+
+  .promo-banner__picture {
+    width: calc(100% - 0.4375rem);
+    max-width: 23.9375rem; // 383px
+  }
+
+  .promo-banner__image {
+    width: 100%;
+    max-width: 23.9375rem; // 383px
     height: auto;
 
+    object-fit: contain;
   }
 
+  .promo-banner__bullets {
+    margin-top: 0.75rem; // 12px
+    gap: 0.5rem;
+  }
+
+  .promo-banner__bullet {
+    width: 0.5rem; // 8px
+    height: 0.5rem; // 8px
+  }
 }
