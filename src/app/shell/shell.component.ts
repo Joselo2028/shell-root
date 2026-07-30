@@ -6,8 +6,6 @@ import {
   HeaderComponent,
   LotterySectionComponent,
   NavigationComponent,
-  PromoBannerComponent,
-  PromotionsComponent,
 } from '@shared/components';
 import { ContributingComponent } from '@shared/components/contributing/contributing.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
@@ -19,9 +17,7 @@ import { WinnersComponent } from '@shared/components/winners/winners.component';
     HeaderComponent,
     FooterComponent,
     NavigationComponent,
-    PromoBannerComponent,
     LotterySectionComponent,
-    PromotionsComponent,
     WinnersComponent,
     ContributingComponent,
     LoadingOverlayComponent,
