@@ -1,58 +1,7 @@
-<header class="header">
-  <div class="header__inner">
-    <div class="header__logo">
-      <img src="assets/images/logo-tinka.svg" alt="Logo La Tinka" />
-    </div>
-
-    <div class="header__actions">
-      <!-- Acciones de escritorio -->
-      <div class="desktop-auth-actions">
-        @if (!isLoggedIn()) {
-          <app-button
-            [label]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
-            variant="secondary"
-            (click)="startLogin()"
-          >
-          </app-button>
-
-          <app-button label="Registrarse" variant="primary"> </app-button>
-        } @else {
-          <app-user-session
-            class="desktop-user-session"
-            [userName]="userName()"
-            (logout)="logout()"
-          >
-          </app-user-session>
-        }
-      </div>
-
-      <!-- Acciones exclusivas de móvil -->
-      <div class="mobile-auth-actions">
-        @if (!isLoggedIn()) {
-          <app-button
-            [label]="isStartingLogin() ? 'Espere...' : 'Ingresar'"
-            variant="secondary"
-            (click)="startLogin()"
-          >
-          </app-button>
-
-          <app-button label="Registrarse" variant="primary"> </app-button>
-        }
-      </div>
-
-      <app-hamburger-button class="header__hamburger" (click)="openMobileMenu()">
-      </app-hamburger-button>
-    </div>
-  </div>
-
-  <app-mobile-sidebar
-    [isOpen]="isMobileMenuOpen()"
-    [isLoggedIn]="isLoggedIn()"
-    [userName]="userName()"
-    [isStartingLogin]="isStartingLogin()"
-    (closeSidebar)="closeMobileMenu()"
-    (login)="startLogin()"
-    (logout)="logout()"
-  >
-  </app-mobile-sidebar>
-</header>
+<tk-header
+  [loggedIn]="isLoggedIn()"
+  [loginLabel]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
+  registerLabel="Registrarse"
+  (login)="startLogin()"
+>
+</tk-header>
