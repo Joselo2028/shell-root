@@ -20,19 +20,8 @@ export const environment = {
   },
 
   auth: {
-    /**
-     * MODO PROXY LOCAL
-     * Deja estas activas para trabajar normal sin error CORS.
-     */
-    authBaseUrl: '/api-auth',
-    pamBaseUrl: '/api-pam',
-
-    /**
-     * MODO URL REAL QA
-     * Comenta las 2 de arriba y descomenta estas 2 para generar el error CORS.
-     */
-    // authBaseUrl: 'https://api.ec-qas.latinka.com.pe',
-    // pamBaseUrl: 'http://uat.pam.seekdev.com',
+    authBaseUrl: 'URL_API_PRODUCCION',
+    pamBaseUrl: 'URL_PAM_PRODUCCION',
 
     pamFastTokenPath: '/auth/pam/token/fast',
     pamTokenExchangePath: '/auth/pam/token/exchange',

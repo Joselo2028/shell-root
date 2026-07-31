@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap, switchMap, finalize, throwError, map } from 'rxjs';
 
 import {
@@ -26,9 +26,13 @@ export class AuthService {
   private readonly pamBaseUrl = environment.auth.pamBaseUrl;
 
   private readonly pamFastTokenUrl = `${this.authBaseUrl}${environment.auth.pamFastTokenPath}`;
+
   private readonly pamTokenExchangeUrl = `${this.authBaseUrl}${environment.auth.pamTokenExchangePath}`;
+
   private readonly backfrontLoginUrl = `${this.pamBaseUrl}${environment.auth.backfrontLoginPath}`;
+
   private readonly refreshUrl = `${this.authBaseUrl}${environment.auth.refreshPath}`;
+
   private readonly logoutUrl = `${this.authBaseUrl}${environment.auth.logoutPath}`;
 
   private readonly session = signal<AuthSession | null>(this.authStorage.getSession());
@@ -36,6 +40,7 @@ export class AuthService {
   readonly isLoggedIn = computed(() => this.session() !== null);
   readonly currentUser = computed(() => this.session()?.user ?? null);
   readonly userName = computed(() => this.session()?.user.name ?? '');
+
   readonly isStartingLogin = signal(false);
   readonly isLoggingOut = signal(false);
 
@@ -46,17 +51,32 @@ export class AuthService {
   startPamLogin(): void {
     this.isStartingLogin.set(true);
 
-    this.getPamFastToken()
+    /*
+     * Se obtiene dinámicamente el dominio y la ruta donde se está ejecutando
+     * actualmente el shell.
+     *
+     * Ejemplos:
+     * - Local: http://localhost:4200
+     * - QA: https://www.ec-qas.latinka.com.pe
+     * - Producción: el dominio real donde se publique el shell
+     *
+     * No usamos window.location.href porque podría contener query parameters
+     * como ?token=..., que no deben volver a enviarse en el parámetro where.
+     */
+    const where = window.location.origin + window.location.pathname;
+
+    this.getPamFastToken(where)
       .pipe(finalize(() => this.isStartingLogin.set(false)))
       .subscribe({
         next: (response) => {
           console.log('Respuesta PAM:', response);
 
-          if (response.redirect) {
-            // TODO: Para producción volver a usar window.location.href
-            // window.location.href = response.redirect;
-            window.open(response.redirect, '_blank', 'noopener,noreferrer');
+          if (!response.redirect) {
+            console.error('La respuesta de PAM no contiene la URL de redirección');
+            return;
           }
+
+          window.location.href = response.redirect;
         },
         error: (error) => {
           console.error('Error iniciando login PAM', error);
@@ -64,8 +84,10 @@ export class AuthService {
       });
   }
 
-  getPamFastToken(): Observable<PamFastTokenResponse> {
-    return this.http.get<PamFastTokenResponse>(this.pamFastTokenUrl);
+  getPamFastToken(where: string): Observable<PamFastTokenResponse> {
+    const params = new HttpParams().set('operatorId', '1').set('where', where);
+
+    return this.http.get<PamFastTokenResponse>(this.pamFastTokenUrl, { params });
   }
 
   loginBackfront(request: BackfrontLoginRequest): Observable<BackfrontLoginResponse> {
@@ -80,7 +102,9 @@ export class AuthService {
   }
 
   exchangePamToken(securityToken: string): Observable<AuthSession> {
-    const body: PamTokenExchangeRequest = { securityToken };
+    const body: PamTokenExchangeRequest = {
+      securityToken,
+    };
 
     return this.http
       .post<AuthSession>(this.pamTokenExchangeUrl, body)
@@ -111,6 +135,7 @@ export class AuthService {
         };
 
         this.setSession(updatedSession);
+
         return updatedSession;
       }),
     );
@@ -139,8 +164,12 @@ export class AuthService {
         }),
       )
       .subscribe({
-        next: () => console.log('Logout backend OK'),
-        error: (error) => console.error('Error ejecutando logout backend', error),
+        next: () => {
+          console.log('Logout backend OK');
+        },
+        error: (error) => {
+          console.error('Error ejecutando logout backend', error);
+        },
       });
   }
 
