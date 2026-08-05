@@ -1,0 +1,25 @@
+import { Component, input } from '@angular/core';
+
+type LotteryBadgeVariant =
+  | 'default'
+  | 'card'
+  | 'card-light'
+  | 'kabala'
+  | 'ganadiario'
+  | 'kinelo'
+  | 'result'
+  | 'result-hero'
+  | 'result-purple';
+
+@Component({
+  selector: 'app-lottery-badge',
+  templateUrl: './lottery-badge.component.html',
+  styleUrl: './lottery-badge.component.scss',
+})
+export class LotteryBadgeComponent {
+  readonly icon = input<string>();
+
+  readonly text = input.required<string>();
+
+  readonly variant = input<LotteryBadgeVariant>('default');
+}

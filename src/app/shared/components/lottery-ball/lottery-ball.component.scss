@@ -1,0 +1,111 @@
+.lottery-ball {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  flex: 0 0 2.5rem;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+  user-select: none;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  box-sizing: border-box;
+
+  background: transparent;
+
+  transition: transform 0.15s ease;
+}
+
+.lottery-ball:focus-visible {
+  outline: 0.125rem solid var(--brand-green);
+  outline-offset: 0.125rem;
+}
+
+/* ======================================================
+   BOLILLA BLANCA
+   40 × 40 px
+   Borde de 2 px
+   ====================================================== */
+
+.lottery-ball--white {
+  background: var(--brand-white);
+
+  border: 0.125rem solid var(--lottery-ball-white-border-color);
+}
+
+/* ======================================================
+   BOLILLA VERDE
+   40 × 40 px
+   ====================================================== */
+
+.lottery-ball--green {
+  background: var(--brand-green);
+
+  border: 0.125rem solid var(--brand-green);
+}
+
+/* ======================================================
+   RESTO DE VARIANTES
+   Se mantienen preparadas para otros juegos
+   ====================================================== */
+
+.lottery-ball--yellow {
+  background: #ffdc00;
+
+  border: 0.125rem solid #d9bb00;
+}
+
+.lottery-ball--blue {
+  background: #1389c7;
+
+  border: 0.125rem solid #0e72a7;
+}
+
+.lottery-ball--orange {
+  background: #f79009;
+
+  border: 0.125rem solid #dc6803;
+}
+
+.lottery-ball--purple {
+  background: #9c348c;
+
+  border: 0.125rem solid #7c286f;
+}
+
+/* ======================================================
+   NÚMERO
+   ====================================================== */
+
+.lottery-ball__number {
+  display: block;
+
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1rem;
+  letter-spacing: 0;
+
+  text-align: center;
+}
+
+.lottery-ball--white .lottery-ball__number,
+.lottery-ball--yellow .lottery-ball__number {
+  color: var(--brand-black);
+}
+
+.lottery-ball--green .lottery-ball__number,
+.lottery-ball--blue .lottery-ball__number,
+.lottery-ball--orange .lottery-ball__number,
+.lottery-ball--purple .lottery-ball__number {
+  color: var(--brand-white);
+}

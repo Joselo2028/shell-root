@@ -1,0 +1,14 @@
+<button
+  type="button"
+  class="lottery-ball"
+  [class.lottery-ball--white]="variant() === 'white'"
+  [class.lottery-ball--green]="variant() === 'green'"
+  [class.lottery-ball--yellow]="variant() === 'yellow'"
+  [class.lottery-ball--blue]="variant() === 'blue'"
+  [class.lottery-ball--orange]="variant() === 'orange'"
+  [class.lottery-ball--purple]="variant() === 'purple'"
+>
+  <span class="lottery-ball__number">
+    {{ number() }}
+  </span>
+</button>

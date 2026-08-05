@@ -33,4 +33,8 @@ export class HeaderComponent {
   logout(): void {
     this.authService.logout();
   }
+
+  goToLegacy(): void {
+    this.authService.redirectToLegacy();
+  }
 }

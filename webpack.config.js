@@ -16,9 +16,6 @@ const moduleFederationConfig = withModuleFederationPlugin({
     }),
   },
 });
-
-// Permite que Webpack detecte automáticamente la URL
-// (localhost en desarrollo y GitHub Pages en producción)
 moduleFederationConfig.output.publicPath = 'auto';
 
 module.exports = moduleFederationConfig;

@@ -19,12 +19,21 @@ export const environment = {
   },
 
   auth: {
-    /*
-     * En desarrollo local estas rutas pasan por el proxy configurado
-     * para el servidor de Angular.
+    /**
+     * MODO PROXY LOCAL
+     * Deja estas activas para trabajar normal sin error CORS.
      */
     authBaseUrl: '/api-auth',
     pamBaseUrl: '/api-pam',
+
+    /**
+     * MODO URL REAL QA
+     * Comenta las 2 de arriba y descomenta estas 2 para generar el error CORS.
+     */
+    // authBaseUrl: 'https://api.ec-qas.latinka.com.pe',
+    //pamBaseUrl: 'http://uat.pam.seekdev.com',
+
+    pamMeSecurityTokenPath: '/auth/pam/token/me/security',
 
     pamFastTokenPath: '/auth/pam/token/fast',
     pamTokenExchangePath: '/auth/pam/token/exchange',
@@ -32,5 +41,7 @@ export const environment = {
     logoutPath: '/auth/logout',
 
     backfrontLoginPath: '/backfront-identity/api/v1/identity/login',
+
+    legacyBaseUrl: 'http://190.12.81.36/p/',
   },
 };

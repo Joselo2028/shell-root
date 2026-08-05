@@ -3,18 +3,18 @@
     "target": "https://api.ec-qas.latinka.com.pe",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {
       "^/api-auth": ""
-    }
+    },
+    "logLevel": "debug"
   },
   "/api-pam": {
     "target": "http://uat.pam.seekdev.com",
     "secure": false,
     "changeOrigin": true,
-    "logLevel": "debug",
     "pathRewrite": {
       "^/api-pam": ""
-    }
+    },
+    "logLevel": "debug"
   }
 }

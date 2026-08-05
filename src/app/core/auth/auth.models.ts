@@ -77,3 +77,7 @@ export interface AuthRefreshResponse {
 export interface LogoutRequest {
   refreshToken: string;
 }
+
+export interface PamMeSecurityTokenResponse {
+  token: string;
+}

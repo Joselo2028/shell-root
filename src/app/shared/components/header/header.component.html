@@ -5,3 +5,13 @@
   (login)="startLogin()"
 >
 </tk-header>
+@if (isLoggedIn()) {
+  <button
+    type="button"
+    style="position: absolute; top: 0; right: 0"
+    background-color="green"
+    (click)="goToLegacy()"
+  >
+    Ir a Legacy
+  </button>
+}

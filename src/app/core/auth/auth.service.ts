@@ -11,6 +11,7 @@ import {
   PamFastTokenResponse,
   PamTokenExchangeRequest,
   RefreshRequest,
+  PamMeSecurityTokenResponse,
 } from './auth.models';
 import { AuthStorageService } from './auth-storage.service';
 import { environment } from '@environments/environment';
@@ -26,21 +27,19 @@ export class AuthService {
   private readonly pamBaseUrl = environment.auth.pamBaseUrl;
 
   private readonly pamFastTokenUrl = `${this.authBaseUrl}${environment.auth.pamFastTokenPath}`;
-
   private readonly pamTokenExchangeUrl = `${this.authBaseUrl}${environment.auth.pamTokenExchangePath}`;
-
   private readonly backfrontLoginUrl = `${this.pamBaseUrl}${environment.auth.backfrontLoginPath}`;
-
   private readonly refreshUrl = `${this.authBaseUrl}${environment.auth.refreshPath}`;
-
   private readonly logoutUrl = `${this.authBaseUrl}${environment.auth.logoutPath}`;
+
+  private readonly pamMeSecurityTokenUrl = `${this.authBaseUrl}${environment.auth.pamMeSecurityTokenPath}`;
+  private readonly legacyBaseUrl = environment.auth.legacyBaseUrl;
 
   private readonly session = signal<AuthSession | null>(this.authStorage.getSession());
 
   readonly isLoggedIn = computed(() => this.session() !== null);
   readonly currentUser = computed(() => this.session()?.user ?? null);
   readonly userName = computed(() => this.session()?.user.name ?? '');
-
   readonly isStartingLogin = signal(false);
   readonly isLoggingOut = signal(false);
 
@@ -51,19 +50,9 @@ export class AuthService {
   startPamLogin(): void {
     this.isStartingLogin.set(true);
 
-    /*
-     * Se obtiene dinámicamente el dominio y la ruta donde se está ejecutando
-     * actualmente el shell.
-     *
-     * Ejemplos:
-     * - Local: http://localhost:4200
-     * - QA: https://www.ec-qas.latinka.com.pe
-     * - Producción: el dominio real donde se publique el shell
-     *
-     * No usamos window.location.href porque podría contener query parameters
-     * como ?token=..., que no deben volver a enviarse en el parámetro where.
-     */
     const where = window.location.origin + window.location.pathname;
+
+    console.log('WHERE enviado a PAM:', where);
 
     this.getPamFastToken(where)
       .pipe(finalize(() => this.isStartingLogin.set(false)))
@@ -102,9 +91,7 @@ export class AuthService {
   }
 
   exchangePamToken(securityToken: string): Observable<AuthSession> {
-    const body: PamTokenExchangeRequest = {
-      securityToken,
-    };
+    const body: PamTokenExchangeRequest = { securityToken };
 
     return this.http
       .post<AuthSession>(this.pamTokenExchangeUrl, body)
@@ -135,10 +122,33 @@ export class AuthService {
         };
 
         this.setSession(updatedSession);
-
         return updatedSession;
       }),
     );
+  }
+
+  getPamMeSecurityToken(): Observable<PamMeSecurityTokenResponse> {
+    return this.http.get<PamMeSecurityTokenResponse>(this.pamMeSecurityTokenUrl);
+  }
+
+  redirectToLegacy(path: string = ''): void {
+    if (!this.isLoggedIn()) {
+      console.error('No existe una sesión activa.');
+      return;
+    }
+
+    this.getPamMeSecurityToken().subscribe({
+      next: ({ token }) => {
+        const redirectUrl = new URL(path, this.legacyBaseUrl);
+
+        redirectUrl.searchParams.set('token', token);
+
+        window.location.href = redirectUrl.toString();
+      },
+      error: (error) => {
+        console.error('Error obteniendo el token de PAM', error);
+      },
+    });
   }
 
   logout(): void {
@@ -164,12 +174,8 @@ export class AuthService {
         }),
       )
       .subscribe({
-        next: () => {
-          console.log('Logout backend OK');
-        },
-        error: (error) => {
-          console.error('Error ejecutando logout backend', error);
-        },
+        next: () => console.log('Logout backend OK'),
+        error: (error) => console.error('Error ejecutando logout backend', error),
       });
   }
 
