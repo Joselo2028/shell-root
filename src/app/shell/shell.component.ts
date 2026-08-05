@@ -1,13 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '@core/auth/auth.service';
 
-import {
-  FooterComponent,
-  HeaderComponent,
-  LotterySectionComponent,
-  NavigationComponent,
-} from '@shared/components';
+import { FooterComponent, HeaderComponent, NavigationComponent } from '@shared/components';
 
 import { ContributingComponent } from '@shared/components/contributing/contributing.component';
 import { LoadingOverlayComponent } from '@shared/components/loading-overlay/loading-overlay.component';
@@ -19,7 +14,7 @@ import { WinnersComponent } from '@shared/components/winners/winners.component';
     HeaderComponent,
     FooterComponent,
     NavigationComponent,
-    LotterySectionComponent,
+    RouterOutlet,
     WinnersComponent,
     ContributingComponent,
     LoadingOverlayComponent,
@@ -35,6 +30,10 @@ export class ShellComponent implements OnInit {
 
   readonly isProcessingLogin = signal(false);
   readonly isLoggingOut = this.authService.isLoggingOut;
+
+  goToKabala(): void {
+    this.router.navigate(['/jugar/kabala']);
+  }
 
   ngOnInit(): void {
     console.log('ShellComponent iniciado');

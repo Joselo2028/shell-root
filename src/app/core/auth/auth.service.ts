@@ -42,6 +42,7 @@ export class AuthService {
   readonly userName = computed(() => this.session()?.user.name ?? '');
   readonly isStartingLogin = signal(false);
   readonly isLoggingOut = signal(false);
+  readonly isRedirectingToLegacy = signal(false);
 
   getAccessToken(): string | null {
     return this.session()?.accessToken ?? null;
@@ -137,20 +138,31 @@ export class AuthService {
       return;
     }
 
-    this.getPamMeSecurityToken().subscribe({
-      next: ({ token }) => {
-        const redirectUrl = new URL(path, this.legacyBaseUrl);
+    if (this.isRedirectingToLegacy()) {
+      return;
+    }
 
-        redirectUrl.searchParams.set('token', token);
+    this.isRedirectingToLegacy.set(true);
 
-        window.location.href = redirectUrl.toString();
-      },
-      error: (error) => {
-        console.error('Error obteniendo el token de PAM', error);
-      },
-    });
+    console.log('Redireccionando a Legacy:', this.isRedirectingToLegacy());
+
+    // Le damos tiempo al navegador para pintar "Redireccionando..."
+    setTimeout(() => {
+      this.getPamMeSecurityToken().subscribe({
+        next: ({ token }) => {
+          const redirectUrl = new URL(path, this.legacyBaseUrl);
+
+          redirectUrl.searchParams.set('token', token);
+
+          window.location.href = redirectUrl.toString();
+        },
+        error: (error) => {
+          console.error('Error obteniendo el token de PAM', error);
+          this.isRedirectingToLegacy.set(false);
+        },
+      });
+    }, 100);
   }
-
   logout(): void {
     const currentSession = this.session();
 

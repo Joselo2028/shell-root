@@ -7,6 +7,7 @@ import { AuthService } from '../../../core/auth/auth.service';
   selector: 'app-header',
   imports: [TkHeaderComponent],
   templateUrl: './header.component.html',
+  styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);
@@ -17,6 +18,7 @@ export class HeaderComponent {
   userName = this.authService.userName;
 
   isStartingLogin = this.authService.isStartingLogin;
+  isRedirectingToLegacy = this.authService.isRedirectingToLegacy;
 
   openMobileMenu(): void {
     this.isMobileMenuOpen.set(true);
@@ -31,6 +33,7 @@ export class HeaderComponent {
   }
 
   logout(): void {
+    console.log('Entró al logout del HeaderComponent');
     this.authService.logout();
   }
 

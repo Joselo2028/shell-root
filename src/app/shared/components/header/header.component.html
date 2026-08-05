@@ -1,17 +1,21 @@
-<tk-header
-  [loggedIn]="isLoggedIn()"
-  [loginLabel]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
-  registerLabel="Registrarse"
-  (login)="startLogin()"
->
-</tk-header>
-@if (isLoggedIn()) {
-  <button
-    type="button"
-    style="position: absolute; top: 0; right: 0"
-    background-color="green"
-    (click)="goToLegacy()"
+<div class="header-wrapper">
+  <tk-header
+    [loggedIn]="isLoggedIn()"
+    [loginLabel]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
+    registerLabel="Registrarse"
+    (login)="startLogin()"
+    (logout)="logout()"
   >
-    Ir a Legacy
-  </button>
-}
+  </tk-header>
+
+  @if (isLoggedIn()) {
+    <button
+      type="button"
+      class="legacy-demo-button"
+      [disabled]="isRedirectingToLegacy()"
+      (click)="goToLegacy()"
+    >
+      {{ isRedirectingToLegacy() ? 'Redireccionando...' : 'Ir a Legacy' }}
+    </button>
+  }
+</div>
