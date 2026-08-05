@@ -1,39 +1,40 @@
 import { Component, inject, signal } from '@angular/core';
-import { TkHeaderComponent } from '@kindryl/tinka-ui';
+import { TkAsideComponent, TkHeaderComponent } from '@kindryl/tinka-ui';
 
 import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-header',
-  imports: [TkHeaderComponent],
+  imports: [TkHeaderComponent, TkAsideComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   private readonly authService = inject(AuthService);
 
-  isMobileMenuOpen = signal(false);
+  readonly isAsideOpen = signal(false);
 
-  isLoggedIn = this.authService.isLoggedIn;
-  userName = this.authService.userName;
+  readonly isLoggedIn = this.authService.isLoggedIn;
+  readonly userName = this.authService.userName;
 
-  isStartingLogin = this.authService.isStartingLogin;
-  isRedirectingToLegacy = this.authService.isRedirectingToLegacy;
+  readonly isStartingLogin = this.authService.isStartingLogin;
+  readonly isRedirectingToLegacy = this.authService.isRedirectingToLegacy;
 
-  openMobileMenu(): void {
-    this.isMobileMenuOpen.set(true);
+  openAside(): void {
+    this.isAsideOpen.set(true);
   }
 
-  closeMobileMenu(): void {
-    this.isMobileMenuOpen.set(false);
+  closeAside(): void {
+    this.isAsideOpen.set(false);
   }
 
   startLogin(): void {
+    this.closeAside();
     this.authService.startPamLogin();
   }
 
   logout(): void {
-    console.log('Entró al logout del HeaderComponent');
+    this.closeAside();
     this.authService.logout();
   }
 

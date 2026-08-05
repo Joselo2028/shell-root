@@ -4,7 +4,7 @@
     [loginLabel]="isStartingLogin() ? 'Espere...' : 'Iniciar Sesión'"
     registerLabel="Registrarse"
     (login)="startLogin()"
-    (logout)="logout()"
+    (menuClick)="openAside()"
   >
   </tk-header>
 
@@ -18,4 +18,33 @@
       {{ isRedirectingToLegacy() ? 'Redireccionando...' : 'Ir a Legacy' }}
     </button>
   }
+
+  <div
+    class="aside-wrapper"
+    [class.aside-wrapper--open]="isAsideOpen()"
+    [attr.aria-hidden]="!isAsideOpen()"
+  >
+    <button
+      type="button"
+      class="aside-wrapper__overlay"
+      aria-label="Cerrar menú"
+      (click)="closeAside()"
+    ></button>
+
+    <div class="aside-wrapper__panel">
+      <tk-aside
+        [mode]="isLoggedIn() ? 'logged-in' : 'guest'"
+        [userName]="userName()"
+        [userInitial]="userName().charAt(0).toUpperCase() || 'U'"
+        [guestPrimaryLabel]="isStartingLogin() ? 'ESPERE...' : 'INGRESA'"
+        guestPrimaryHref="#"
+        guestSecondaryHref="#"
+        logoutHref="#"
+        (closePanel)="closeAside()"
+        (login)="startLogin()"
+        (logout)="logout()"
+      >
+      </tk-aside>
+    </div>
+  </div>
 </div>

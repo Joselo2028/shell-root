@@ -57,3 +57,74 @@ tk-header {
   outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
+
+.aside-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.aside-wrapper--open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.aside-wrapper__overlay {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  background: rgb(0 0 0 / 55%);
+
+  opacity: 0;
+  cursor: pointer;
+
+  transition: opacity 250ms ease;
+}
+
+.aside-wrapper--open .aside-wrapper__overlay {
+  opacity: 1;
+}
+
+.aside-wrapper__panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 21.25rem;
+  max-width: 90vw;
+  height: 100vh;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  transform: translateX(-100%);
+  transition: transform 280ms ease;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.aside-wrapper__panel::-webkit-scrollbar {
+  display: none;
+}
+
+.aside-wrapper--open .aside-wrapper__panel {
+  transform: translateX(0);
+}
+
+.aside-wrapper__panel tk-aside {
+  display: block;
+  width: 100%;
+  min-height: 100%;
+}
